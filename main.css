@@ -1,0 +1,470 @@
+@import url('https://rsms.me/inter/inter.css');
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system,
+        BlinkMacSystemFont,
+        Inter var,
+        "Inter V",
+        "Inter",
+        'Segoe UI',
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        'Open Sans',
+        'Helvetica Neue',
+        sans-serif, ;
+}
+
+body {
+    font-size: 15px;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url(toolbar-bg.jpg) no-repeat #f9fbfd;
+    background-position-y: -30px;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: -100px;
+    justify-content: center;
+    max-width: 900px;
+}
+
+header {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .06);
+}
+
+header>div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.popups {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+    background: #fafafaaa;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popups .popup {
+    background: #fff;
+    z-index: 120;
+    padding: 20px;
+    border-radius: 7px;
+    border: 1px solid #eee;
+    box-shadow: 0 15px 40px rgba(100, 100, 100, .1);
+    text-align: center;
+    min-width: 250px;
+}
+
+input {
+    border-radius: 3px;
+    border: 1px solid #eee;
+    padding: 7px;
+    outline: none;
+    border-bottom: 1.5px solid #aaa;
+}
+
+input:focus {
+    border-bottom: 2px solid rgb(0, 89, 255);
+}
+
+button {
+    border-radius: 3px;
+    border: 1px solid #eee;
+    padding: 7px;
+    outline: none;
+    border-bottom: 1.5px solid #aaa;
+    background: #f7f7f7;
+    transition: .15s;
+}
+
+button:hover {
+    background: rgb(0, 89, 255);
+    color: #fff;
+    transition: .15s;
+    border-color: rgb(0, 89, 255);
+    border-bottom-color: rgb(2, 70, 196);
+}
+
+.popup input {
+    width: 250px;
+}
+
+.incorrect {
+    background: rgb(249, 35, 92);
+    padding: 7px 10px;
+    border-radius: 100px;
+    color: #fff;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #fff;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: calc(100vw - 100px);
+    overflow-x: hidden;
+    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .03);
+}
+
+.box .character {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    height: 40px;
+    transition: .2s;
+    border-radius: 7px;
+    padding-inline: 3px;
+}
+
+.box .character:first-child {
+    width: 32px;
+    padding-left: 5px;
+}
+
+.box .character:last-child {
+    width: 30px;
+    padding-right: 5px;
+}
+
+.msgRef {
+    justify-content: flex-end;
+}
+
+main {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+body {
+    padding: 50px;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.character.correct {
+    background: #9affb7;
+}
+
+.character.incorrectChar {
+    background: #ff9ab2;
+}
+
+.character.active {
+    background: #9aebff55;
+    flex-direction: column;
+    position: relative;
+    margin-left: 10px;
+    padding-inline: 7px;
+    border-radius: 7px 7px 0 0;
+}
+
+.character.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    height: 3px;
+    background: rgb(0, 89, 255);
+    animation: blink .9s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#playerNameOp {
+    border: none;
+    font-size: 1.2em;
+    font-weight: 500;
+    padding: 0;
+}
+
+.nameArea {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nameArea svg {
+    opacity: .3;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.restart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 5px;
+    border: none;
+    background: none;
+}
+
+.restart:hover {
+    background: rgba(0, 0, 0, .0373);
+}
+
+.main {
+    display: flex;
+    gap: 50px;
+    background: #f9fbfd;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 50px;
+    height: 100%;
+}
+
+.main>[class*=meta-] {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main>.meta-1 {
+    width: 500px !important;
+    gap: 10px;
+}
+
+.main>.meta-2 {
+    width: 380px !important;
+}
+
+.completionOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.graphset {
+    width: 100%;
+    height: 100%;
+}
+
+.graph {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    --size: 100%;
+}
+
+.graph .graph-content {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: var(--size);
+    height: var(--size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 7px;
+    z-index: 2;
+}
+
+.graph svg {
+    width: var(--size);
+    height: var(--size);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.graph #chart-score {
+    transition: stroke-dashoffset 1s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    animation: prog .8s linear;
+}
+
+.graph-content .score {
+    font-size: 3em;
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+}
+
+.graph-content .subscore {
+    font-size: 1.3em;
+}
+
+@keyframes prog {
+    from {
+        stroke-dashoffset: 301;
+    }
+}
+
+.completeTHeading {
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+}
+
+.green {
+    color: #56FE99;
+}
+
+.red {
+    color: #f93562;
+}
+
+.graph svg.low #chart-score {
+    stroke: #ff496c;
+}
+
+.graph svg.low #chart-background {
+    stroke: #fcb4c2;
+}
+
+.toolbar {
+    list-style-type: none;
+    margin: 0;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 7px;
+    padding: 5px;
+    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .06);
+}
+
+.toolbarItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    --hover-outer: rgba(0, 0, 0, .0373);
+    --hover-inner: black;
+}
+
+.toolbarItem button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: 7px;
+}
+
+.toolbarItem button svg {
+    width: 22px;
+    height: 22px;
+}
+
+.toolbarItem button:hover {
+    background: var(--hover-outer);
+}
+
+.toolbarItem button:hover svg *[fill] {
+    fill: var(--hover-inner);
+}
+
+.toolbarItem button:hover svg *[stroke] {
+    stroke: var(--hover-inner);
+}
+
+.meta-2 .imgGroup img {
+    width: 100%;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.meta-2 .imgGroup {
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+}
+
+.meta-2 .imgGroup caption {
+    position: absolute;
+    margin: 5px;
+    left: 0;
+    bottom: 0;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: #00000077;
+    font-size: 13px;
+    backdrop-filter: blur(5px);
+    transition: .3s;
+}
+
+.meta-2 h2 {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.meta-2 .imgGroup img:hover {
+    transform: scale(1.5) translateY(-50px);
+    transition: .3s;
+    bottom: 10px;
+    border-radius: 3px;
+    z-index: 99;
+}
+
+.meta-2 .imgGroup img:hover+caption {
+    opacity: 0;
+    transition: .2s;
+    z-index: 100;
+}
+
+.meta-2 p {
+    overflow-y: auto;
+}
