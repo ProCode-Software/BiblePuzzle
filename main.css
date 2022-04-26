@@ -273,6 +273,13 @@ body {
     justify-content: center;
     padding: 30px 50px;
     height: 100%;
+    animation: popup .4s linear;
+}
+@keyframes popup {
+    from {
+        transform: translateY(100px);
+            opacity: 0;
+    }
 }
 
 .main>[class*=meta-] {
