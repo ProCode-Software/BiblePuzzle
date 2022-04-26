@@ -426,6 +426,7 @@ body {
 }
 .toolbarItem button.active {
     background: var(--hover-outer);
+    --hover-inner: #fff !important;
 }
 
 .toolbarItem button:hover svg *[fill] {

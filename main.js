@@ -89,24 +89,6 @@ extract(refSplit, refContainer)
 let backspaceAllowed = true
 let incorrectChars = 0;
 let keyboardLock = true
-let narrator = false;
-
-function distinguishKeyName(key) {
-    switch (key) {
-        case ' ': 
-            return 'space';
-            break;
-        case ' ':
-            return 'space';
-            break;
-    }
-}
-
-
-
-const spokenText = new SpeechSynthesisUtterance();
-const narrVoices = window.speechSynthesis.getVoices();
-spokenText.voice = narrVoices[1];
 
 let countedKeys = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()-=+-_`~[]\\|}{;\':"<>?/., '
 countedKeys = countedKeys.split('')
@@ -114,7 +96,6 @@ countedKeys = countedKeys.split('')
 function startTyping(ct, array) {
     let activeCharNum = 0;
     ct.children[activeCharNum].classList.add('active')
-    speak(`Type the ${distinguishKeyName(array[activeCharNum])} key`)
     window.onkeydown = (e) => {
         if (!keyboardLock) {
             if (activeCharNum > 0) {
@@ -135,7 +116,6 @@ function startTyping(ct, array) {
                     if (activeCharNum !== array.length) {
                         ct.children[activeCharNum].classList.add('active')
                     }
-                    speak(`Type the ${distinguishKeyName(array[activeCharNum])} key`)
                 } else {
                     ct.children[activeCharNum].classList.add('incorrectChar')
                     ct.children[activeCharNum].classList.remove('active')
@@ -286,35 +266,14 @@ const lightTheme = () => {
 function toggleDarkTheme() {
     if (document.body.classList.contains('dark')) {
         lightTheme()
+        document.querySelector('.nightBtn').classList.remove('active')
     } else {
         darkTheme()
+        document.querySelector('.nightBtn').classList.add('active')
     }
 }
-if (localStorage.getItem('theme', 'dark')) {
-    darkTheme()
-} else if (localStorage.getItem('theme', 'light')) {
-    lightTheme()
-} else {
-    lightTheme()
-}
-/**
- * 
- * @param {Event} e 
- */
-function toggleNarrator(e) {
-    if (!narrator) {
-        narrator = true;
-        speak('Narrator is on')
-        if (e.target.classList.contains('actionBtn')) { e.target.classList.add('active') }
-    }
-    else {
-        speak('Narrator is off'); narrator = false;
-        if (e.target.classList.contains('actionBtn')) { e.target.classList.remove('active') }
-    }
-}
-function speak(text) {
-    if (narrator) {
-        spokenText.text = text
-        window.speechSynthesis.speak(spokenText);
+function clearProgress() {
+    if (window.confirm('Are you sure you want to clear your progress? You may get a different verse.') == true) {
+        location.reload()
     }
 }
