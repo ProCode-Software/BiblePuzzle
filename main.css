@@ -1,19 +1,8 @@
 @import url('https://rsms.me/inter/inter.css');
+
 * {
     box-sizing: border-box;
-    font-family: 'Inter', -apple-system,
-        BlinkMacSystemFont,
-        Inter var,
-        "Inter V",
-        "Inter",
-        'Segoe UI',
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        'Open Sans',
-        'Helvetica Neue',
-        sans-serif, ;
+    font-family: 'Inter var', 'Inter', 'Inter V', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', system-ui, sans-serif;
 }
 
 body {
@@ -21,19 +10,23 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background: url(toolbar-bg.jpg) no-repeat #f9fbfd;
-    background-position-y: -30px;
+    background: url(toolbar-bg.jpg) no-repeat 100% #f9fbfd;
+    background-size: cover 130px;
+    background-position-y: top;
     user-select: none;
     display: flex;
     justify-content: center;
+    --accent: #0059ff;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     margin-top: -100px;
-    justify-content: center;
+
     max-width: 900px;
+    justify-content: space-evenly;
+    padding-block: 70px;
 }
 
 header {
@@ -42,9 +35,10 @@ header {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
+    padding: 15px 20px;
     border-radius: 10px;
-    background: #fff;
+    background: #ffffffc1;
+    backdrop-filter: blur(20px);
     box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .06);
 }
 
@@ -89,7 +83,7 @@ input {
 }
 
 input:focus {
-    border-bottom: 2px solid rgb(0, 89, 255);
+    border-bottom: 2px solid var(--accent);
 }
 
 button {
@@ -102,11 +96,12 @@ button {
     transition: .15s;
 }
 
+
 button:hover {
-    background: rgb(0, 89, 255);
+    background: var(--accent);
     color: #fff;
     transition: .15s;
-    border-color: rgb(0, 89, 255);
+    border-color: var(--accent);
     border-bottom-color: rgb(2, 70, 196);
 }
 
@@ -196,7 +191,7 @@ body {
     width: 100%;
     left: 0;
     height: 3px;
-    background: rgb(0, 89, 255);
+    background: var(--accent);
     animation: blink .9s infinite;
 }
 
@@ -218,7 +213,28 @@ body {
     border: none;
     font-size: 1.2em;
     font-weight: 500;
-    padding: 0;
+    padding: 7px;
+    background: none;
+    border-radius: 5px;
+    transition: .2s;
+}
+
+#playerNameOp:hover {
+    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .16);
+    background: #ffffff88;
+    transition: .2s;
+    width: 300px;
+    text-overflow: ellipsis;
+}
+
+#playerNameOp:focus {
+    border-bottom: 3px solid var(--accent);
+    border-radius: 5px 5px 3px 3px;
+    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .25);
+    background: #ffffff88;
+    transition: .2s;
+    width: 300px;
+    text-overflow: ellipsis;
 }
 
 .nameArea {
@@ -326,7 +342,7 @@ body {
     transition: stroke-dashoffset 1s;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
-    animation: prog .8s linear;
+    animation: prog .8s cubic-bezier(0.19, -0.18, 0.44, 0.96);
 }
 
 .graph-content .score {
@@ -371,7 +387,7 @@ body {
 .toolbar {
     list-style-type: none;
     margin: 0;
-    border: 1px solid #eee;
+    border: 1px solid rgb(100, 100, 100, .2);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -379,7 +395,8 @@ body {
     padding: 0;
     gap: 7px;
     padding: 5px;
-    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .06);
+    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .16);
+    background: #ffffff77;
 }
 
 .toolbarItem {
@@ -407,6 +424,9 @@ body {
 .toolbarItem button:hover {
     background: var(--hover-outer);
 }
+.toolbarItem button.active {
+    background: var(--hover-outer);
+}
 
 .toolbarItem button:hover svg *[fill] {
     fill: var(--hover-inner);
@@ -420,6 +440,7 @@ body {
     width: 100%;
     border-radius: 10px;
     transition: .3s;
+    box-shadow: 0 10px 20px rgba(100, 100, 100, .16);
 }
 
 .meta-2 .imgGroup {
@@ -467,4 +488,100 @@ body {
 
 .meta-2 p {
     overflow-y: auto;
+    font-size: 15px;
+}
+
+.meta-1 .playAgain {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: var(--accent);
+    text-decoration: none;
+    margin: 20px;
+    transition: .15s;
+}
+
+.meta-1 .playAgain:hover {
+    opacity: .6;
+    transition: .15s;
+}
+
+.meta-1 {
+    position: relative;
+}
+
+body.dark, body.dark .main {
+    background-color: #1f2637;
+    color: #fff;
+    --accent: #0088ff;
+}
+
+body.dark header {
+    background-color: #2f374ac1;
+}
+
+body.dark .box,
+body.dark .main [class*=meta-] {
+    background-color: #2f374ac1;
+}
+
+body.dark .box {
+    box-shadow: 0 7px 20px -4px rgb(0 0 0 / 8%)
+}
+
+input {
+    color: inherit;
+}
+
+body.dark .toolbar {
+    box-shadow: 0 7px 20px -4px rgb(0 0 0 / 16%);
+    background: #22283677;
+    border-color: #00000025;
+    color: #fff;
+}
+
+body.dark * {
+    color: #fff;
+}
+
+body.dark #playerNameOp:hover {
+    box-shadow: 0 7px 20px -4px rgb(0 0 0 / 16%);
+    background: #22283688;
+}
+body.dark #playerNameOp:focus {
+    background: #22283688;
+    box-shadow: 0 7px 20px -4px rgb(0 0 0 / 25%);
+}
+body.dark .character.correct {
+    background: #56FE99aa;
+}
+body.dark .character.incorrectChar {
+    background: #ff9ab2aa;
+}
+body.dark .character.active {
+    background: #9aebffaa;
+}
+body.dark .character.active::after {
+    background: #136377;
+}
+body.dark .graph svg.low #chart-background {
+    stroke: #f94a6d66;
+}
+body.dark .meta-2 .imgGroup img {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .16);
+}
+body.dark .popups {
+    background: #2a324788;
+}
+body.dark .popups .popup {
+    border: 1px solid #0001;
+    background: #1f2637;
+    box-shadow: 0 15px 40px rgb(0 0 0 / 2%);
+}
+body.dark .popup button, body.dark .popup input {
+    background: #2f374ac1;
+    border-color: rgb(117, 117, 117, .2);
+}
+body.dark .popup button:hover {
+    background: var(--accent);
 }

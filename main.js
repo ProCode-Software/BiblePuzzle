@@ -73,7 +73,7 @@ const extract = (array, outputEl) => {
         el.className = 'character'
         if (char == ' ') {
             txt = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: .4;">
-<path d="M2.75 10V13C2.75 13.8284 3.42157 14.5 4.25 14.5H19.75C20.5784 14.5 21.25 13.8284 21.25 13V10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.75 10V13C2.75 13.8284 3.42157 14.5 4.25 14.5H19.75C20.5784 14.5 21.25 13.8284 21.25 13V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `
             el.style.alignItems = 'flex-end'
@@ -89,6 +89,24 @@ extract(refSplit, refContainer)
 let backspaceAllowed = true
 let incorrectChars = 0;
 let keyboardLock = true
+let narrator = false;
+
+function distinguishKeyName(key) {
+    switch (key) {
+        case ' ': 
+            return 'space';
+            break;
+        case ' ':
+            return 'space';
+            break;
+    }
+}
+
+
+
+const spokenText = new SpeechSynthesisUtterance();
+const narrVoices = window.speechSynthesis.getVoices();
+spokenText.voice = narrVoices[1];
 
 let countedKeys = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()-=+-_`~[]\\|}{;\':"<>?/., '
 countedKeys = countedKeys.split('')
@@ -96,6 +114,7 @@ countedKeys = countedKeys.split('')
 function startTyping(ct, array) {
     let activeCharNum = 0;
     ct.children[activeCharNum].classList.add('active')
+    speak(`Type the ${distinguishKeyName(array[activeCharNum])} key`)
     window.onkeydown = (e) => {
         if (!keyboardLock) {
             if (activeCharNum > 0) {
@@ -116,6 +135,7 @@ function startTyping(ct, array) {
                     if (activeCharNum !== array.length) {
                         ct.children[activeCharNum].classList.add('active')
                     }
+                    speak(`Type the ${distinguishKeyName(array[activeCharNum])} key`)
                 } else {
                     ct.children[activeCharNum].classList.add('incorrectChar')
                     ct.children[activeCharNum].classList.remove('active')
@@ -252,5 +272,49 @@ function completeTest() {
 }
 
 startTyping(verseContainer, verseSplit)
-/* incorrectChars = 28
-completeTest() */
+
+const darkTheme = () => {
+    document.body.classList.remove('light')
+    document.body.classList.add('dark')
+    localStorage.setItem('theme', 'dark')
+}
+const lightTheme = () => {
+    document.body.classList.remove('dark')
+    document.body.classList.add('light')
+    localStorage.setItem('theme', 'light')
+}
+function toggleDarkTheme() {
+    if (document.body.classList.contains('dark')) {
+        lightTheme()
+    } else {
+        darkTheme()
+    }
+}
+if (localStorage.getItem('theme', 'dark')) {
+    darkTheme()
+} else if (localStorage.getItem('theme', 'light')) {
+    lightTheme()
+} else {
+    lightTheme()
+}
+/**
+ * 
+ * @param {Event} e 
+ */
+function toggleNarrator(e) {
+    if (!narrator) {
+        narrator = true;
+        speak('Narrator is on')
+        if (e.target.classList.contains('actionBtn')) { e.target.classList.add('active') }
+    }
+    else {
+        speak('Narrator is off'); narrator = false;
+        if (e.target.classList.contains('actionBtn')) { e.target.classList.remove('active') }
+    }
+}
+function speak(text) {
+    if (narrator) {
+        spokenText.text = text
+        window.speechSynthesis.speak(spokenText);
+    }
+}

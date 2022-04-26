@@ -43,7 +43,7 @@
                         </button>
                     </li>
                     <li class="toolbarItem" style="--hover-outer: rgb(0, 213, 255); --hover-inner: white;">
-                        <button class="actionBtn" title="Enable dictation">
+                        <button class="actionBtn" title="Enable dictation" onclick="toggleNarrator(event)">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -58,7 +58,7 @@
                             </svg>
                         </button>
                     </li>
-                    <li class="toolbarItem" style="--hover-outer: rgb(27, 29, 49); --hover-inner: rgb(255, 204, 0);">
+                    <li class="toolbarItem" style="--hover-outer: rgb(27, 29, 49); --hover-inner: rgb(255, 204, 0);" onclick="toggleDarkTheme()">
                         <button class="actionBtn" title="Toggle night mode">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -119,6 +119,7 @@
 
                     </div>
                 </div>
+                <a href="javascript:location.reload()" class="playAgain">Play again!</a>
             </div>
             <div class="meta-2">
                 
