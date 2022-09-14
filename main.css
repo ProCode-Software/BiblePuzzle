@@ -10,7 +10,7 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background: url(toolbar-bg.jpg) no-repeat 100% #f9fbfd;
+    background: #f9fbfd;
     background-size: cover 130px;
     background-position-y: top;
     user-select: none;
@@ -275,10 +275,11 @@ body {
     height: 100%;
     animation: popup .4s linear;
 }
+
 @keyframes popup {
     from {
         transform: translateY(100px);
-            opacity: 0;
+        opacity: 0;
     }
 }
 
@@ -431,6 +432,7 @@ body {
 .toolbarItem button:hover {
     background: var(--hover-outer);
 }
+
 .toolbarItem button.active {
     background: var(--hover-outer);
     --hover-inner: #fff !important;
@@ -518,7 +520,8 @@ body {
     position: relative;
 }
 
-body.dark, body.dark .main {
+body.dark,
+body.dark .main {
     background-color: #1f2637;
     color: #fff;
     --accent: #0088ff;
@@ -556,40 +559,52 @@ body.dark #playerNameOp:hover {
     box-shadow: 0 7px 20px -4px rgb(0 0 0 / 16%);
     background: #22283688;
 }
+
 body.dark #playerNameOp:focus {
     background: #22283688;
     box-shadow: 0 7px 20px -4px rgb(0 0 0 / 25%);
 }
+
 body.dark .character.correct {
     background: #56FE99aa;
 }
+
 body.dark .character.incorrectChar {
     background: #ff9ab2aa;
 }
+
 body.dark .character.active {
     background: #9aebffaa;
 }
+
 body.dark .character.active::after {
     background: #136377;
 }
+
 body.dark .graph svg.low #chart-background {
     stroke: #f94a6d66;
 }
+
 body.dark .meta-2 .imgGroup img {
     box-shadow: 0 10px 20px rgba(0, 0, 0, .16);
 }
+
 body.dark .popups {
     background: #2a324788;
 }
+
 body.dark .popups .popup {
     border: 1px solid #0001;
     background: #1f2637;
     box-shadow: 0 15px 40px rgb(0 0 0 / 2%);
 }
-body.dark .popup button, body.dark .popup input {
+
+body.dark .popup button,
+body.dark .popup input {
     background: #2f374ac1;
     border-color: rgb(117, 117, 117, .2);
 }
+
 body.dark .popup button:hover {
     background: var(--accent);
 }
