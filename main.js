@@ -58,6 +58,12 @@ const randomVerses = [
         ref: 'Romans 5:8',
         imageURL: 'https://i1.wp.com/www.busyandlovingit.com/wp-content/uploads/2016/03/Romans-5_8.jpg',
         source: 'Busy and Loving It!'
+    },
+    {
+        verse: 'In reply Jesus declared, "I tell you the truth, no one can see the kingdom of God unless he is born again."',
+        ref: 'John 3:3',
+        imageURL: 'https://biblia.com/bible/images/640x480/Jn3.3?extension=png&fallbackOnFailure=false',
+        source: 'Faithlife'
     }
 ]
 
