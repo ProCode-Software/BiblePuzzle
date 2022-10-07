@@ -53,6 +53,12 @@ const randomVerses = [
         imageURL: 'https://votd.olivetree.com/03_31_NIV.jpg',
         source: 'OliveTree'
     },
+    {
+        verse: 'But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.',
+        ref: 'Romans 5:8',
+        imageURL: 'https://i1.wp.com/www.busyandlovingit.com/wp-content/uploads/2016/03/Romans-5_8.jpg',
+        source: 'Busy and Loving It!'
+    }
 ]
 
 let random = Math.floor(Math.random() * randomVerses.length);
