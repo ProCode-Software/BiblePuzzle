@@ -107,6 +107,7 @@ countedKeys = countedKeys.split('')
 
 function startTyping(ct, array) {
     let activeCharNum = 0;
+    document.title = `BiblePuzzle | ${reference}`
     ct.children[activeCharNum].classList.add('active')
     window.onkeydown = (e) => {
         if (!keyboardLock) {
