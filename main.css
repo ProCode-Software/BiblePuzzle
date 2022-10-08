@@ -73,10 +73,11 @@ header>div {
 
 input {
     border-radius: 3px;
-    border: 1px solid #eee;
-    padding: 7px;
+    border: 1px solid hwb(0 93% 7%);
+    padding: 10px;
     outline: none;
     border-bottom: 1.5px solid #aaa;
+    font-size: inherit;
 }
 
 input:focus {
