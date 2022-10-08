@@ -139,12 +139,11 @@ button:hover {
     align-items: center;
     justify-content: flex-start;
     background: #fff;
-    width: 100%;
+    background: rgba(232, 238, 241, 0.2);
+    border-radius: 20px;
     padding: 20px;
-    border-radius: 10px;
     max-width: calc(100vw - 100px);
     overflow-x: hidden;
-    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .03);
 }
 
 .box .character {
