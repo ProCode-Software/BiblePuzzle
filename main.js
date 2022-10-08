@@ -53,6 +53,18 @@ const randomVerses = [
         imageURL: 'https://votd.olivetree.com/03_31_NIV.jpg',
         source: 'OliveTree'
     },
+    {
+        verse: 'But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.',
+        ref: 'Romans 5:8',
+        imageURL: 'https://i1.wp.com/www.busyandlovingit.com/wp-content/uploads/2016/03/Romans-5_8.jpg',
+        source: 'Busy and Loving It!'
+    },
+    {
+        verse: 'In reply Jesus declared, "I tell you the truth, no one can see the kingdom of God unless he is born again."',
+        ref: 'John 3:3',
+        imageURL: 'https://biblia.com/bible/images/640x480/Jn3.3?extension=png&fallbackOnFailure=false',
+        source: 'Faithlife'
+    }
 ]
 
 let random = Math.floor(Math.random() * randomVerses.length);
