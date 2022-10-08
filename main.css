@@ -157,6 +157,7 @@ button:hover {
     transition: .2s;
     border-radius: 7px;
     padding-inline: 3px;
+    min-width: 40px;
 }
 
 .box .character:first-child {
