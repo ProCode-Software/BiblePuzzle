@@ -83,12 +83,14 @@ input:focus {
 button {
     border-radius: 7px;
     border: none;
-    padding: 7px;
+    padding: 6px 18px;
     outline: none;
     background: #F9FAFF;
     transition: .15s;
     color: #787980;
     font-size: inherit;
+    font-weight: 500;
+    height: 42px;
 }
 
 
