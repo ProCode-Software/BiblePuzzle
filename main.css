@@ -219,20 +219,23 @@ main {
 }
 
 .character.correct {
-    background: #9affb7;
+    background: #D5FFE6;
+    color: #398B64;
 }
 
 .character.incorrectChar {
-    background: #ff9ab2;
+    background: #FFE9EC;
+    color: #AB0F34;
 }
 
 .character.active {
-    background: #9aebff55;
+    background: #E7F5FF;
     flex-direction: column;
     position: relative;
     margin-left: 10px;
     padding-inline: 7px;
     border-radius: 7px 7px 0 0;
+    color: #1A5BA8;
 }
 
 .character.active::after {
