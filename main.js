@@ -185,9 +185,9 @@ let percent;
 const popups = document.querySelector('.popups')
 function askForName() {
     popups.querySelectorAll('.popup').forEach(el => el.style.display = 'none')
-    const namePopup = popups.querySelector('.namePopup')
+    const namePopup = popups.querySelector('form.namePopup')
     namePopup.style.display = ''
-    namePopup.querySelector('form').addEventListener('submit', () => {
+    namePopup.addEventListener('submit', () => {
         keyboardLock = false;
         popups.style.display = 'none'
         username = namePopup.querySelector('#playerName').value
