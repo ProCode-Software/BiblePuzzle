@@ -67,6 +67,9 @@ header>div {
     padding: 0px;
     gap: 20px;
 }
+.popup-header, .popup-body, .popup-footer {
+    padding: 15px;
+}
 
 input {
     border-radius: 3px;
