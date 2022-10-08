@@ -277,3 +277,9 @@ function clearProgress() {
         location.reload()
     }
 }
+function createModal(config) {
+
+}
+createModal({
+    title: 'Hello, world'
+})
