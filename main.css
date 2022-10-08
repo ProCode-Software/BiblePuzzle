@@ -13,7 +13,7 @@ body {
     background: #fff;
     user-select: none;
     -webkit-user-select: none;
-    --accent: #0059ff;
+    --accent: #0056F5;
     width: 100%;
 }
 
@@ -75,20 +75,31 @@ header>div {
 }
 
 input {
-    border-radius: 3px;
-    border: 1px solid hwb(0 93% 7%);
+    border-radius: 8px;
+    border: 2px solid rgba(232, 238, 241, 0.6);
     padding: 10px;
     outline: none;
-    border-bottom: 1.5px solid #aaa;
     font-size: inherit;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    transition: .15s;
 }
 
+input:focus, input:hover {
+    background: #F9FAFF;
+    border-color: #F9FAFF;
+    transition: .15s;
+    outline: none;
+}
 input:focus {
-    border-bottom: 2px solid var(--accent);
+    border-radius: 8px 8px 4px 4px;
+    border-bottom: 3.5px solid var(--accent);
+    transition: .15s;
 }
 
 button {
-    border-radius: 7px;
+    border-radius: 8px;
     border: none;
     padding: 6px 18px;
     outline: none;
