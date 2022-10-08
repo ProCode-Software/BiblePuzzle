@@ -80,11 +80,22 @@
     </div>
     <div class="popups">
         <form class="namePopup popup nameForm" action="javascript:void(0)">
-            <p>What's your name?</p>
-            <input type="text" name="name" id="playerName" placeholder="Player name">
-            <br>
-            <br>
-            <button type="submit">OK, let's play</button>
+            <div class="popup-header">
+                <div class="popup-title">Welcome to BiblePuzzle!</div>
+                <div class="sideButtons"></div>
+            </div>
+            <div class="popup-body">
+                <div class="inputCt">
+                    <label for="playerName">Display name</label>
+                    <input type="text" name="name" id="playerName" placeholder="Player name">
+                </div>
+            </div>
+            <div class="popup-footer">
+                <div class="sideAction"></div>
+                <div class="btnActions">
+                    <button type="submit">OK, let's play</button>
+                </div>
+            </div>
         </form>
     </div>
     <div class="completionOverlay">
