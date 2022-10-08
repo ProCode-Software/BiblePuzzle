@@ -60,7 +60,7 @@ header>div {
     border: 1px solid rgba(232, 238, 241, 0.3);
     box-shadow: 0 15px 40px rgba(100, 100, 100, .5);
     text-align: center;
-    min-width: 250px;
+    width: 450px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -72,6 +72,7 @@ header>div {
 .popup-body,
 .popup-footer {
     padding: 15px;
+    width: 100%;
 }
 
 input {
@@ -86,12 +87,14 @@ input {
     transition: .15s;
 }
 
-input:focus, input:hover {
+input:focus,
+input:hover {
     background: #F9FAFF;
     border-color: #F9FAFF;
     transition: .15s;
     outline: none;
 }
+
 input:focus {
     border-radius: 8px 8px 4px 4px;
     border-bottom: 3.5px solid var(--accent);
@@ -121,7 +124,7 @@ button:hover {
 }
 
 .popup input {
-    width: 250px;
+    width: 100%;
 }
 
 .incorrect {
@@ -177,6 +180,42 @@ main {
     align-items: center;
 }
 
+.inputCt {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.popup-header {
+    border-bottom: 1px solid rgba(232, 238, 241, 0.3);
+    width: 100%;
+    text-align: left;
+    font-weight: 550;
+    padding: 20px 14px 20px 22px;
+    font-size: 1.1em;
+}
+
+.popup-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    gap: 15px;
+    width: 100%;
+    border-top: 1px solid rgba(232, 238, 241, 0.3);
+}
+
+.popup-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 22px;
+    gap: 24px;
+}
 
 .character.correct {
     background: #9affb7;
