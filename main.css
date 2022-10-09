@@ -779,3 +779,12 @@ a {
 a:hover, a:active {
     color: inherit;
 }
+.popup {
+    animation: popupIn .3s;
+}
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        transform: scale(.4);
+    }
+}
