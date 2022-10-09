@@ -38,8 +38,28 @@
                     <span>0:00</span>
                 </div>
                 <ul class="toolbar">
+                    <li class="toolbarItem">
+                        <a href="https://github.com/ProCode-Software/BiblePuzzle/wiki/How-to-play" target="_blank">
+                            <button class="actionBtn helpBtn" title="Help & directions">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.76221 9.48781C9.76221 9.11981 9.85296 8.75747 10.0264 8.43291C10.1999 8.10836 10.4508 7.83159 10.7568 7.62714C11.0627 7.42268 11.4145 7.29685 11.7806 7.26078C12.1469 7.2247 12.5164 7.27951 12.8564 7.42035C13.1964 7.56117 13.4964 7.78368 13.7299 8.06816C13.9634 8.35263 14.1231 8.6903 14.1949 9.05124C14.2666 9.41218 14.2483 9.78529 14.1415 10.1374C14.0644 10.3913 13.9431 10.6287 13.7839 10.8389C13.7821 10.8413 13.7812 10.8425 13.713 10.9167C13.6784 10.9543 13.558 11.0694 13.5189 11.1023C13.4418 11.1671 13.4044 11.1929 13.3297 11.2445L12.5186 11.8038C12.1115 12.0845 11.8684 12.5475 11.8684 13.042"
+                                        stroke="black" stroke-width="1.5" stroke-linecap="square"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M11.9289 16.75C12.4587 16.75 12.8882 16.3205 12.8882 15.7907C12.8882 15.2608 12.4587 14.8313 11.9289 14.8313C11.399 14.8313 10.9695 15.2608 10.9695 15.7907C10.9695 16.3205 11.399 16.75 11.9289 16.75Z"
+                                        fill="black" />
+                                    <path
+                                        d="M12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25Z"
+                                        stroke="black" stroke-width="1.75" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+
+                            </button></a>
+                    </li>
                     <li class="toolbarItem" onclick="clearProgress()">
-                        <button class="actionBtn" title="Restart the game. Your progress will not be saved.">
+                        <button class="actionBtn" title="Clear progress">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -63,7 +83,7 @@
                         </button>
                     </li>
                     <li class="toolbarItem">
-                        <button class="actionBtn nightBtn" title="Your stats" onclick="toggleDarkTheme()">
+                        <button class="actionBtn statsBtn" title="Your stats">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2.75 21H21.25" stroke="black" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round" />
                                 <rect x="4" y="7.5" width="6" height="10" rx="2" stroke="black" stroke-width="1.75" stroke-linecap="round"
@@ -74,7 +94,7 @@
                         </button>
                     </li>
                     <li class="toolbarItem">
-                        <button class="actionBtn nightBtn" title="BiblePuzzle settings">
+                        <button class="actionBtn settingsBtn" title="BiblePuzzle settings">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -85,26 +105,6 @@
                                     fill="black" />
                             </svg>
                         </button>
-                    </li>
-                    <li class="toolbarItem">
-                        <a href="https://github.com/ProCode-Software/BiblePuzzle/wiki/How-to-play" target="_blank">
-                            <button class="actionBtn" title="Help & directions">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M9.76221 9.48781C9.76221 9.11981 9.85296 8.75747 10.0264 8.43291C10.1999 8.10836 10.4508 7.83159 10.7568 7.62714C11.0627 7.42268 11.4145 7.29685 11.7806 7.26078C12.1469 7.2247 12.5164 7.27951 12.8564 7.42035C13.1964 7.56117 13.4964 7.78368 13.7299 8.06816C13.9634 8.35263 14.1231 8.6903 14.1949 9.05124C14.2666 9.41218 14.2483 9.78529 14.1415 10.1374C14.0644 10.3913 13.9431 10.6287 13.7839 10.8389C13.7821 10.8413 13.7812 10.8425 13.713 10.9167C13.6784 10.9543 13.558 11.0694 13.5189 11.1023C13.4418 11.1671 13.4044 11.1929 13.3297 11.2445L12.5186 11.8038C12.1115 12.0845 11.8684 12.5475 11.8684 13.042"
-                                        stroke="black" stroke-width="1.5" stroke-linecap="square"
-                                        stroke-linejoin="round" />
-                                    <path
-                                        d="M11.9289 16.75C12.4587 16.75 12.8882 16.3205 12.8882 15.7907C12.8882 15.2608 12.4587 14.8313 11.9289 14.8313C11.399 14.8313 10.9695 15.2608 10.9695 15.7907C10.9695 16.3205 11.399 16.75 11.9289 16.75Z"
-                                        fill="black" />
-                                    <path
-                                        d="M12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25Z"
-                                        stroke="black" stroke-width="1.75" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-
-                            </button></a>
                     </li>
                 </ul>
             </div>
