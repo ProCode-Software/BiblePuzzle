@@ -23,7 +23,7 @@ body {
 
 .container {
     display: grid;
-    grid-template-rows: 60px calc(100vh - 90px) 30px;
+    grid-template-rows: 60px calc(100vh - (60px + 45px)) 45px;
 }
 
 header {
