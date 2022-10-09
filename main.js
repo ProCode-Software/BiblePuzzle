@@ -6,12 +6,6 @@ const randomVerses = [
         source: 'The Bible on Twitter'
     },
     {
-        verse: 'CEO, entrepreneur, born in 1964, Jeffrey, Jeffrey Bezos. CEO, entrepreneur, born in 1964, Jeffrey, Jeffrey Bezos. Come on, Jeffrey, you can do it! Pave the way, put your back into it! Tell us why, show us how! Look at where you came from, look at you! now Zuckerberg and Gates and Buffett. Amateurs can ****** suck it. **** their wives, drink their blood, come on, Jeff, get \'em!',
-        ref: 'Bo Burnham',
-        imageURL: 'https://s.yimg.com/ny/api/res/1.2/ie.Mu5hHUr0N2x7NFkgqsw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTcyMC43Mzg0NjE1Mzg0NjE2/http://globalfinance.zenfs.com/en_us/Finance/US_AFTP_SILICONALLEY_H_LIVE/Jeff_Bezos_uses_a_simple-c0aea3aa644620cb5a0017be005a6100',
-        source: 'Yahoo Finnance'
-    },
-    {
         verse: 'If you declare with your mouth, "Jesus is Lord," and believe in your heart that God raised him from the dead, you will be saved. For it is with your heart that you believe and are justified, and it is with your mouth that you profess your faith and are saved.',
         ref: 'Romans 10:9-10',
         imageURL: 'https://d347bo4ltvvnaz.cloudfront.net/images/ScriptureArt_0117_-_Romans_10_9_157x157.jpg',
