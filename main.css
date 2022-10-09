@@ -112,15 +112,19 @@ button {
     font-size: inherit;
     font-weight: 500;
     height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+button svg {
+    display: flex;
 }
 
 
 button:hover {
-    background: var(--accent);
-    color: #fff;
+    background: #F4F6FB;
     transition: .15s;
-    border-color: var(--accent);
-    border-bottom-color: rgb(2, 70, 196);
 }
 
 .popup input {
@@ -193,8 +197,29 @@ main {
     width: 100%;
     text-align: left;
     font-weight: 550;
-    padding: 20px 14px 20px 22px;
+    padding: 9px 14px 9px 22px;
     font-size: 1.1em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.popup-header .sideButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.popup-header .sideButtons button {
+    padding: 6px;
+    width: 42px;
+    height: 42px;
+    background: none;
+}
+.popup-header .sideButtons button:hover {
+    background: #F4F6FB;
 }
 
 .popup-footer {
