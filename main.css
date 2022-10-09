@@ -15,6 +15,7 @@ body {
     -webkit-user-select: none;
     width: 100%;
 }
+
 :root {
     --accent: #0056F5;
 }
@@ -119,6 +120,7 @@ button {
     justify-content: center;
     flex-direction: row;
 }
+
 button svg {
     display: flex;
 }
@@ -145,27 +147,34 @@ button:hover {
     justify-content: baseline;
     font-weight: 500;
 }
+
 svg [fill] {
     fill: currentColor;
 }
+
 svg [stroke] {
     stroke: currentColor;
 }
+
 .statTag svg [fill] {
     fill: var(--fg-color);
 }
+
 .statTag svg [stroke] {
     stroke: var(--fg-color);
 }
+
 .statTag .icon {
     width: 20px;
     height: 20px;
     margin-right: 6px;
 }
+
 .statTag.incorrect {
     --bg-color: #FFECF2;
     --fg-color: #CB1556;
 }
+
 .statTag.time {
     --bg-color: #EEF4FF;
     --fg-color: #0054CC;
@@ -239,18 +248,21 @@ main {
     align-items: center;
     gap: 10px;
 }
+
 .popup-header .sideButtons {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
 }
+
 .popup-header .sideButtons button {
     padding: 6px;
     width: 42px;
     height: 42px;
     background: none;
 }
+
 .popup-header .sideButtons button:hover {
     background: #F4F6FB;
 }
@@ -547,6 +559,7 @@ main {
     background: var(--accent);
     color: #fff;
 }
+
 .meta-2 .imgGroup img {
     width: 100%;
     border-radius: 10px;
@@ -708,4 +721,37 @@ body.dark .popup input {
 
 body.dark .popup button:hover {
     background: var(--accent);
+}
+
+footer {
+    border-top: 1px solid rgba(232, 238, 241, 0.4);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 20px;
+    gap: 10px;
+}
+
+footer>ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+}
+
+footer .footerLink {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10px;
+    gap: 3px;
+    border-radius: 7px;
+    transition: .15s;
+}
+footer .footerLink:hover {
+    background: rgba(232, 238, 241, 0.4);
+    transition: .15s;
 }
