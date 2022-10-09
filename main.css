@@ -13,8 +13,10 @@ body {
     background: #fff;
     user-select: none;
     -webkit-user-select: none;
-    --accent: #0056F5;
     width: 100%;
+}
+:root {
+    --accent: #0056F5;
 }
 
 .container {
