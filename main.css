@@ -504,24 +504,17 @@ main {
 .toolbar {
     list-style-type: none;
     margin: 0;
-    border: 1px solid rgb(100, 100, 100, .2);
     border-radius: 12px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0;
-    gap: 7px;
-    padding: 5px;
-    box-shadow: 0 7px 20px -4px rgba(100, 100, 100, .16);
-    background: #ffffff77;
+    gap: 10px;
+    height: 100%;
 }
 
 .toolbarItem {
     display: flex;
     align-items: center;
     justify-content: center;
-    --hover-outer: rgba(0, 0, 0, .0373);
-    --hover-inner: black;
 }
 
 .toolbarItem button {
@@ -531,30 +524,25 @@ main {
     background: none;
     border: none;
     border-radius: 7px;
+    color: #000;
+    width: 40px;
+    height: 40px;
+    padding: 6px;
 }
 
 .toolbarItem button svg {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
 }
 
 .toolbarItem button:hover {
-    background: var(--hover-outer);
+    background: rgba(232, 238, 241, 0.25);
 }
 
 .toolbarItem button.active {
-    background: var(--hover-outer);
-    --hover-inner: #fff !important;
+    background: var(--accent);
+    color: #fff;
 }
-
-.toolbarItem button:hover svg *[fill] {
-    fill: var(--hover-inner);
-}
-
-.toolbarItem button:hover svg *[stroke] {
-    stroke: var(--hover-inner);
-}
-
 .meta-2 .imgGroup img {
     width: 100%;
     border-radius: 10px;
