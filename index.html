@@ -16,7 +16,13 @@
                 <img src="assets/logo.svg" alt="BiblePuzzle" style="height: 80%;">
                 <input type="text" name="name" id="playerNameOp" placeholder="Player name" style="display: none;">
             </div>
-            <div class="stats">
+            <div class="sideStats">
+                <div class="statTag incorrect">
+                    <span>0</span> incorrect character<span>s</span>
+                </div>
+                <div class="statTag time">
+                    <span>0:00</span>
+                </div>
                 <ul class="toolbar">
                     <li class="toolbarItem" style="--hover-outer: rgb(249, 35, 92); --hover-inner: white;"
                         onclick="clearProgress()">
@@ -63,7 +69,6 @@
                             </button></a>
                     </li>
                 </ul>
-                <div class="incorrect"><span>0</span> incorrect character<span>s</span></div>
             </div>
         </header>
         <main>
