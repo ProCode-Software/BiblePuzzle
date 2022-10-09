@@ -772,3 +772,10 @@ footer .footerLink:hover {
     color: #fff;
     background: var(--accent-text);
 }
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+    color: inherit;
+}
