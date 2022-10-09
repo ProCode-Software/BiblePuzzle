@@ -18,6 +18,7 @@ body {
 
 :root {
     --accent: #0056F5;
+    --accent-text: #004FE1;
 }
 
 .container {
@@ -754,4 +755,12 @@ footer .footerLink {
 footer .footerLink:hover {
     background: rgba(232, 238, 241, 0.4);
     transition: .15s;
+}
+.btn-primary {
+    color: #fff;
+    background: var(--accent);
+}
+.btn-primary:hover {
+    color: #fff;
+    background: var(--accent-text);
 }
