@@ -131,11 +131,42 @@ button:hover {
     width: 100%;
 }
 
-.incorrect {
-    background: rgb(249, 35, 92);
-    padding: 7px 10px;
-    border-radius: 100px;
-    color: #fff;
+.statTag {
+    --bg-color: #fafafa;
+    --fg-color: #303030;
+    background: var(--bg-color);
+    color: var(--fg-color);
+    padding: 8px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+    font-weight: 500;
+}
+svg [fill] {
+    fill: currentColor;
+}
+svg [stroke] {
+    stroke: currentColor;
+}
+.statTag svg [fill] {
+    fill: var(--fg-color);
+}
+.statTag svg [stroke] {
+    stroke: var(--fg-color);
+}
+.statTag .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+}
+.statTag.incorrect {
+    --bg-color: #FFECF2;
+    --fg-color: #CB1556;
+}
+.statTag.time {
+    --bg-color: #EEF4FF;
+    --fg-color: #0054CC;
 }
 
 .box {
