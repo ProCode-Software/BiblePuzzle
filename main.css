@@ -732,6 +732,9 @@ footer {
     align-items: center;
     padding: 8px 20px;
     gap: 10px;
+    height: 100%;
+    width: 100%;
+    margin: 0;
 }
 
 footer>ul {
