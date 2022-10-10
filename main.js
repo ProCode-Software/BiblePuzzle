@@ -208,7 +208,7 @@ if (!preloadedUserName) {
 document.querySelector('#playerNameOp').addEventListener('focus', () => keyboardLock = true)
 document.querySelector('#playerNameOp').addEventListener('blur', (e) => { keyboardLock = false; localStorage.setItem('username', e.target.value); username = e.target.value })
 function completeTest() {
-    document.querySelector('.completionOverlay').style.display = 'block'
+    document.querySelector('.panel #completion').style.display = 'block'
     const total = (verse.length + reference.length)
     percent = (total - incorrectChars) / total * 100
 

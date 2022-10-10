@@ -115,19 +115,45 @@
         <main>
             <div class="msgText box"></div>
             <div class="msgRef box"></div>
+            <aside class="panel">
+                <div class="panelView" id="completion">
+                    <div class="completeTHeading panelTitle">You completed the test!</div>
+                    <div class="group">
+                        <div class="graphset">
+                            <div class="graph score">
+                                <div class="graph-content">
+                                    <div class="score">97%</div>
+                                    <div class="subscore">
+                                        121/126
+                                    </div>
+                                </div>
+                                <svg width="350" height="350" viewBox="0 0 350 350" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #12FF8D;">
+                                    <circle cx="175" cy="175" r="167.5" stroke="#12FF8D" stroke-width="15" id="chart-score" />
+                                </svg>
+                            </div>
+                        </div>
+                        <a href="javascript:location.reload()" class="playAgain">Play again!</a>
+                    </div>
+                    <div class="group">
+                    
+                    </div>
+                </div>
+            </aside>
         </main>
         <footer>
             <ul class="footerLeft">
                 <li class="footerLink" id="footerVerseRef">Verse</li>
-                <li class="footerLink" id="footerVerseRef"><a href="https://github.com/ProCode-Software" target="_blank">Created by
+                <li class="footerLink" id="footerVerseRef"><a href="https://github.com/ProCode-Software"
+                        target="_blank">Created by
                         ProCode-Software</a>
                 </li>
             </ul>
             <ul class="footerRight">
-                <li class="footerLink" id="footerVerseRef" target="_blank"><a href="https://github.com/ProCode-Software">Release notes</a>
+                <li class="footerLink" id="footerVerseRef" target="_blank"><a
+                        href="https://github.com/ProCode-Software">Release notes</a>
                 </li>
-                <li class="footerLink" id="footerVerseRef"><a
-                        href="https://github.com/ProCode-Software/BiblePuzzle" target="_blank">GitHub</a>
+                <li class="footerLink" id="footerVerseRef"><a href="https://github.com/ProCode-Software/BiblePuzzle"
+                        target="_blank">GitHub</a>
                 </li>
             </ul>
         </footer>
@@ -160,36 +186,7 @@
             </div>
         </form>
     </div>
-    <div class="completionOverlay">
-        <div class="main">
-            <div class="meta-1">
-                <h1 class="completeTHeading">You completed the test!</h1>
-                <div class="graphset">
-                    <div class="graph score">
-                        <div class="graph-content">
-                            <div class="score">97%</div>
-                            <div class="subscore">
-                                121/126
-                            </div>
-                        </div>
-
-                        <svg width="112" height="112" viewBox="0 0 112 112" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="56" cy="56" r="48" stroke="#9AFFB7" stroke-width="15" id="chart-background"
-                                stroke-linecap="round" />
-                            <circle cx="56" cy="56" r="48" stroke="#56FE99" stroke-width="15" id="chart-score"
-                                stroke-linecap="round" />
-                        </svg>
-
-                    </div>
-                </div>
-                <a href="javascript:location.reload()" class="playAgain">Play again!</a>
-            </div>
-            <div class="meta-2">
-
-            </div>
-        </div>
-        <script src="main.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
