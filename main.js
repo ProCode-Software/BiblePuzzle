@@ -208,18 +208,19 @@ if (!preloadedUserName) {
 document.querySelector('#playerNameOp').addEventListener('focus', () => keyboardLock = true)
 document.querySelector('#playerNameOp').addEventListener('blur', (e) => { keyboardLock = false; localStorage.setItem('username', e.target.value); username = e.target.value })
 function completeTest() {
-    document.querySelector('.panel #completion').style.display = 'block'
+    const panelView = getPanelView('completion')
+    panelView.style.display = 'flex'
     const total = (verse.length + reference.length)
     percent = (total - incorrectChars) / total * 100
 
-    const scoreText = document.querySelector('.graph-content .score')
-    const subscoreText = document.querySelector('.graph-content .subscore')
+    const scoreText = panelView.querySelector('.graph-content .score')
+    const subscoreText = panelView.querySelector('.graph-content .subscore')
 
     subscoreText.innerHTML = `<span class="${Math.round(percent) >= 50 ? 'green' : 'red'}" style="font-weight: 600">${(verse.length + reference.length) - incorrectChars}</span>/${verse.length + reference.length}`
     scoreText.textContent = `${Math.round(percent)}%`
 
 
-    const circle = document.querySelector('circle#chart-score');
+    const circle = panelView.querySelector('circle#chart-score');
     const radius = circle.r.baseVal.value;
     const circumference = radius * 2 * Math.PI;
 
@@ -233,7 +234,7 @@ function completeTest() {
 
     setProgress(percent);
 
-    const completeHeading = document.querySelector('.completeTHeading')
+    const completeHeading = panelView.querySelector('.panelTitle')
 
     if (Math.round(percent) >= 50) {
         completeHeading.textContent = `Congratulations, you completed the test${username !== null ? ', ' + username : ''}!`
@@ -241,8 +242,10 @@ function completeTest() {
         completeHeading.textContent = `Nice try${username !== null ? ', ' + username : ''}!`
         circle.parentElement.classList.add('low')
     }
-    const verseMeta = document.querySelector('.meta-2')
+    const verseMeta = panelView.querySelector('.verseDescription')
 
+    const vGroup = document.createElement('div')
+    vGroup.className = 'verseTextGroup'
     const refLab = document.createElement('h2')
     refLab.append(document.createTextNode(reference))
 
@@ -259,9 +262,22 @@ function completeTest() {
         .source}`))
 
     imgGroup.append(img, cap)
+    vGroup.append(refLab, verseLab)
 
 
-    verseMeta.append(refLab, verseLab, imgGroup)
+    window.onresize = () => {checkChartSize()}
+    checkChartSize()
+    function checkChartSize() {
+        const graphSet = panelView.querySelector('.graph.score')
+
+        graphSet.style.width = '100%'
+        const size = graphSet.getBoundingClientRect()
+
+        graphSet.style.height = size.width + 'px'
+    }
+
+
+    verseMeta.append(vGroup, imgGroup)
 }
 
 startTyping(verseContainer, verseSplit)
@@ -296,3 +312,35 @@ function createModal(config) {
 createModal({
     title: 'Hello, world'
 })
+
+/**
+ * 
+ * @param {boolean} showPanel 
+ * @param {string} viewId 
+ */
+function showPanel(showPanel, viewId) {
+    const panel = document.querySelector('main aside.panel')
+
+    panel.style.display = (showPanel == true ? 'block' : 'none')
+
+    if (viewId) {
+        panel.querySelectorAll('.panelView').forEach(view => view.style.display = 'none')
+
+        panel.querySelector(`.panelView#${viewId}`).style.display = (showPanel == true ? 'block' : 'none');
+    }
+}
+/**
+ * 
+ * @param {string} viewId Panel view id
+ * @returns {Element} The panel view element
+ */
+function getPanelView(viewId) {
+    const panel = document.querySelector('main aside.panel')
+
+    return panel.querySelector(`.panelView#${viewId}`)
+}
+
+
+showPanel(true, 'completion')
+percent = 20
+completeTest()

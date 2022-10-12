@@ -513,6 +513,7 @@ main {
 .graph svg {
     color: #56FE99;
 }
+
 .graph svg.low {
     color: #ff496c;
 }
@@ -808,10 +809,71 @@ a:active {
 main {
     position: relative;
 }
+
 .panelView {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: flex-start;
     height: 100%;
+}
+
+.panel .graph.score {
+    width: 350px;
+}
+
+.panel .scoreGroup {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.scoreGroup .graphset {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel .panelTitle {
+    font-size: 1.6em;
+    font-weight: 550;
+    text-align: left;
+}
+
+.panelView#completion {
+    padding: 30px;
+}
+
+.graph .graph-content {
+    padding: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 40px rgba(232, 238, 241, 0.7);
+    border-radius: 50%;
+    width: 75%;
+    height: 75%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+.graph.score {
+    position: relative;
+}
+.graph svg circle {
+    stroke-linecap: round;
+    width: 100%;
+    height: 100%;
+}
+.panel .group.verseDescription {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.verseDescription img {
+    width: 100%;
 }
