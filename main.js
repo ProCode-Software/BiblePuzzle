@@ -342,5 +342,5 @@ function getPanelView(viewId) {
 
 
 showPanel(true, 'completion')
-percent = 20
+incorrectChars = 15
 completeTest()

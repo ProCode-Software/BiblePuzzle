@@ -423,7 +423,7 @@ main {
     gap: 10px;
 }
 
-.main>.meta-2 {
+.main>#completion {
     width: 380px !important;
 }
 
@@ -563,20 +563,20 @@ main {
     color: #fff;
 }
 
-.meta-2 .imgGroup img {
+#completion .imgGroup img {
     width: 100%;
     border-radius: 10px;
     transition: .3s;
     box-shadow: 0 10px 20px rgba(100, 100, 100, .16);
 }
 
-.meta-2 .imgGroup {
+#completion .imgGroup {
     border-radius: 6px;
     position: relative;
     display: flex;
 }
 
-.meta-2 .imgGroup caption {
+#completion .imgGroup caption {
     position: absolute;
     margin: 5px;
     left: 0;
@@ -594,12 +594,12 @@ main {
     transition: .3s;
 }
 
-.meta-2 h2 {
+#completion h2 {
     margin-bottom: 0;
     font-weight: 600;
 }
 
-.meta-2 .imgGroup img:hover {
+#completion .imgGroup img:hover {
     transform: scale(1.5) translateY(-50px);
     transition: .3s;
     bottom: 10px;
@@ -607,13 +607,13 @@ main {
     z-index: 99;
 }
 
-.meta-2 .imgGroup img:hover+caption {
+#completion .imgGroup img:hover+caption {
     opacity: 0;
     transition: .2s;
     z-index: 100;
 }
 
-.meta-2 p {
+#completion p {
     overflow-y: auto;
     font-size: 15px;
 }
@@ -699,7 +699,7 @@ body.dark .character.active::after {
 }
 
 
-body.dark .meta-2 .imgGroup img {
+body.dark #completion .imgGroup img {
     box-shadow: 0 10px 20px rgba(0, 0, 0, .16);
 }
 
@@ -876,4 +876,8 @@ main {
 }
 .verseDescription img {
     width: 100%;
+}
+.panelView {
+    max-height: 100%;
+    overflow-y: auto;
 }
