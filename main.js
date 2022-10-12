@@ -265,7 +265,7 @@ function completeTest() {
     vGroup.append(refLab, verseLab)
 
 
-    window.onresize = () => {checkChartSize()}
+    window.onresize = () => { checkChartSize() }
     checkChartSize()
     function checkChartSize() {
         const graphSet = panelView.querySelector('.graph.score')
@@ -340,7 +340,9 @@ function getPanelView(viewId) {
     return panel.querySelector(`.panelView#${viewId}`)
 }
 
-
-showPanel(true, 'completion')
-incorrectChars = 15
-completeTest()
+function devTest() {
+    showPanel(true, 'completion')
+    incorrectChars = 15
+    completeTest()
+}
+// devTest()
