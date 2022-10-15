@@ -246,7 +246,8 @@ function completeTest() {
 
     const vGroup = document.createElement('div')
     vGroup.className = 'verseTextGroup'
-    const refLab = document.createElement('h2')
+    const refLab = document.createElement('div')
+    refLab.classList.add('panel-heading', 'verseReferenceLb')
     refLab.append(document.createTextNode(reference))
 
     const verseLab = document.createElement('p')
@@ -277,7 +278,7 @@ function completeTest() {
     }
 
 
-    verseMeta.append(vGroup, imgGroup)
+    verseMeta.append(imgGroup, vGroup)
 }
 
 startTyping(verseContainer, verseSplit)
@@ -345,4 +346,4 @@ function devTest() {
     incorrectChars = 15
     completeTest()
 }
-// devTest()
+devTest()

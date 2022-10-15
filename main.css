@@ -861,23 +861,44 @@ main {
     transform: translate(-50%, -50%);
     margin: 0;
 }
+
 .graph.score {
     position: relative;
 }
+
 .graph svg circle {
     stroke-linecap: round;
     width: 100%;
     height: 100%;
 }
+
 .panel .group.verseDescription {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-.verseDescription img {
+    gap: 20px;
     width: 100%;
 }
+
+.verseDescription img {}
+
 .panelView {
     max-height: 100%;
     overflow-y: auto;
+}
+
+.verseTextGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.panel .panel-heading {
+    font-size: 1.3em;
+    font-weight: 550;
+    display: block;
+}
+.verseTextGroup p {
+    margin: 0;
+    line-height: 150%;
 }
