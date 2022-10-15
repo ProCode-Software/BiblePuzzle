@@ -492,7 +492,7 @@ main {
 
 @keyframes prog {
     from {
-        stroke-dashoffset: 301;
+        stroke-dashoffset: 1024;
     }
 }
 
@@ -515,7 +515,7 @@ main {
 }
 
 .graph svg.low {
-    color: #ff496c;
+    color: #ff496c !important;
 }
 
 .toolbar {
@@ -567,7 +567,7 @@ main {
     width: 100%;
     border-radius: 10px;
     transition: .3s;
-    box-shadow: 0 10px 20px rgba(100, 100, 100, .16);
+    box-shadow: 0 10px 20px rgba(118, 125, 131, 0.4);
 }
 
 #completion .imgGroup {
@@ -600,10 +600,10 @@ main {
 }
 
 #completion .imgGroup img:hover {
-    transform: scale(1.5) translateY(-50px);
+    transform: scale(1.5) translate(50px, -50px);
     transition: .3s;
     bottom: 10px;
-    border-radius: 3px;
+    border-radius: 5px;
     z-index: 99;
 }
 
@@ -804,6 +804,7 @@ a:active {
     box-shadow: -10px 0px 60px rgba(232, 238, 241, 0.5);
     max-width: 500px;
     min-width: 400px;
+    z-index: 50;
 }
 
 main {

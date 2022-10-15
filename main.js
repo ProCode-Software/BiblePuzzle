@@ -343,7 +343,7 @@ function getPanelView(viewId) {
 
 function devTest() {
     showPanel(true, 'completion')
-    incorrectChars = 15
+    incorrectChars = 100
     completeTest()
 }
 devTest()
