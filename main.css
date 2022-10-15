@@ -814,7 +814,7 @@ main {
 .panelView {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     align-items: flex-start;
     height: 100%;
 }
@@ -902,4 +902,36 @@ main {
 .verseTextGroup p {
     margin: 0;
     line-height: 150%;
+}
+main .top-notice .notice-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f7fa;
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.03em;
+    color: #333c43;
+    margin-inline: 15px;
+    border-radius: 10px;
+    transition: .2s;
+}
+main .top-notice {
+    padding-inline: 30px;
+    width: 100%;
+}
+.top-notice .notice-main:hover {
+    transition: .2s;
+    background: rgb(233, 239, 242);
+}
+#completion .finalPlayControls {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.finalPlayControls button {
+    width: 100%;
+    cursor: pointer;
 }
