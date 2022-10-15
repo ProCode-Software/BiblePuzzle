@@ -267,7 +267,6 @@ function completeTest() {
 
 
     window.onresize = () => { checkChartSize() }
-    checkChartSize()
     function checkChartSize() {
         const graphSet = panelView.querySelector('.graph.score')
 
@@ -279,6 +278,8 @@ function completeTest() {
 
 
     verseMeta.append(imgGroup, vGroup)
+
+    checkChartSize()
 }
 
 startTyping(verseContainer, verseSplit)
@@ -319,8 +320,8 @@ createModal({
  * @param {boolean} showPanel 
  * @param {string} viewId 
  */
-function showPanel(showPanel, viewId) {
-    const panel = document.querySelector('main aside.panel')
+function showPanel(showPanel, viewId, lightDismiss) {
+    const panel = document.querySelector('main aside.panel-ct')
 
     panel.style.display = (showPanel == true ? 'block' : 'none')
 
@@ -336,7 +337,7 @@ function showPanel(showPanel, viewId) {
  * @returns {Element} The panel view element
  */
 function getPanelView(viewId) {
-    const panel = document.querySelector('main aside.panel')
+    const panel = document.querySelector('main aside.panel-ct')
 
     return panel.querySelector(`.panelView#${viewId}`)
 }

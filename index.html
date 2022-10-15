@@ -121,55 +121,57 @@
             </div>
             <div class="msgText box"></div>
             <div class="msgRef box"></div>
-            <aside class="panel" style="display: none;">
-                <div class="panelView" id="completion">
-                    <div class="completeTHeading panelTitle">You completed the test!
-                    </div>
-                    <div class="group scoreGroup">
-                        <div class="graphset">
-                            <div class="graph score">
-                                <div class="graph-content">
-                                    <div class="score">97%</div>
-                                    <div class="subscore">
-                                        121/126
+            <aside class="panel-ct" style="display: none;">
+                <div class="panel">
+                    <div class="panelView" id="completion">
+                        <div class="completeTHeading panelTitle">You completed the test!
+                        </div>
+                        <div class="group scoreGroup">
+                            <div class="graphset">
+                                <div class="graph score">
+                                    <div class="graph-content">
+                                        <div class="score">97%</div>
+                                        <div class="subscore">
+                                            121/126
+                                        </div>
                                     </div>
+                                    <svg width="350" height="350" viewBox="0 0 350 350" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="175" cy="175" r="167.5" stroke="#12FF8D" stroke-width="15"
+                                            id="chart-score" />
+                                    </svg>
                                 </div>
-                                <svg width="350" height="350" viewBox="0 0 350 350" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="175" cy="175" r="167.5" stroke="#12FF8D" stroke-width="15"
-                                        id="chart-score" />
-                                </svg>
                             </div>
                         </div>
-                    </div>
-                    <div class="group finalPlayControls">
-                        <button class="btn-primary playAgainBtn" title="Play again">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M17.8336 6.16637C16.6147 4.94747 15.0446 4.14099 13.3439 3.86019C11.6431 3.5794 9.89713 3.83839 8.35112 4.6008C6.8051 5.36321 5.53673 6.59074 4.72415 8.11098C3.91156 9.63122 3.59558 11.3678 3.82058 13.0768C4.04558 14.7859 4.80026 16.3815 5.97862 17.6396C7.15699 18.8978 8.69984 19.7552 10.3905 20.0915C12.0812 20.4278 13.8347 20.226 15.4048 19.5146C16.975 18.8032 18.2828 17.6178 19.1447 16.125"
-                                    stroke="black" stroke-width="1.75" stroke-linecap="square"
-                                    stroke-linejoin="round" />
-                                <path
-                                    d="M21.25 9V4.41421C21.25 3.52331 20.1729 3.07714 19.5429 3.70711L17.25 6L14.9571 8.29289C14.3271 8.92286 14.7733 10 15.6642 10H20.25C20.8023 10 21.25 9.55228 21.25 9Z"
-                                    fill="black" />
-                            </svg>
-                        </button>
-                        <button class="openStatsBtn" title="View stats">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2.75 21H21.25" stroke="black" stroke-width="1.75" stroke-linecap="square"
-                                    stroke-linejoin="round" />
-                                <rect x="4" y="7.5" width="6" height="10" rx="2" stroke="black" stroke-width="1.75"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <rect x="14" y="2.5" width="6" height="15" rx="2" stroke="black" stroke-width="1.75"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="br"></div>
-                    <div class="group verseDescription">
+                        <div class="group finalPlayControls">
+                            <button class="btn-primary playAgainBtn" title="Play again">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M17.8336 6.16637C16.6147 4.94747 15.0446 4.14099 13.3439 3.86019C11.6431 3.5794 9.89713 3.83839 8.35112 4.6008C6.8051 5.36321 5.53673 6.59074 4.72415 8.11098C3.91156 9.63122 3.59558 11.3678 3.82058 13.0768C4.04558 14.7859 4.80026 16.3815 5.97862 17.6396C7.15699 18.8978 8.69984 19.7552 10.3905 20.0915C12.0812 20.4278 13.8347 20.226 15.4048 19.5146C16.975 18.8032 18.2828 17.6178 19.1447 16.125"
+                                        stroke="black" stroke-width="1.75" stroke-linecap="square"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M21.25 9V4.41421C21.25 3.52331 20.1729 3.07714 19.5429 3.70711L17.25 6L14.9571 8.29289C14.3271 8.92286 14.7733 10 15.6642 10H20.25C20.8023 10 21.25 9.55228 21.25 9Z"
+                                        fill="black" />
+                                </svg>
+                            </button>
+                            <button class="openStatsBtn" title="View stats">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.75 21H21.25" stroke="black" stroke-width="1.75" stroke-linecap="square"
+                                        stroke-linejoin="round" />
+                                    <rect x="4" y="7.5" width="6" height="10" rx="2" stroke="black" stroke-width="1.75"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <rect x="14" y="2.5" width="6" height="15" rx="2" stroke="black" stroke-width="1.75"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="br"></div>
+                        <div class="group verseDescription">
 
+                        </div>
                     </div>
                 </div>
             </aside>
