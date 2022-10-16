@@ -114,10 +114,10 @@
         </header>
         <main>
             <div class="top-notice">
-                <div class="notice-main">
+                <!-- <div class="notice-main">
                     <div class="text">This game is being updated indev. Currently, name-changing has been disabled.
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="msgText box"></div>
             <div class="msgRef box"></div>
@@ -144,7 +144,7 @@
                             </div>
                         </div>
                         <div class="group finalPlayControls">
-                            <button class="btn-primary playAgainBtn" title="Play again">
+                            <button class="btn-primary playAgainBtn" title="Play again" onclick="playAgain()">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -156,7 +156,7 @@
                                         fill="black" />
                                 </svg>
                             </button>
-                            <button class="openStatsBtn" title="View stats">
+                            <button class="openStatsBtn" title="View stats" onclick="showStats()">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2.75 21H21.25" stroke="black" stroke-width="1.75" stroke-linecap="square"
@@ -172,6 +172,10 @@
                         <div class="group verseDescription">
 
                         </div>
+                    </div>
+                    <div class="panelView" id="stats">
+                        <div class="panelTitle">Stats</div>
+                        <p>Here are your stats!</p>
                     </div>
                 </div>
             </aside>

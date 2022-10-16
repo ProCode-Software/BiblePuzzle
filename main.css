@@ -476,7 +476,7 @@ main {
     transition: stroke-dashoffset 1s;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
-    animation: prog .8s cubic-bezier(0.19, -0.18, 0.44, 0.96);
+    animation: prog .8s ease-in-out;
 }
 
 .graph-content .score {
@@ -806,13 +806,14 @@ a:active {
     min-width: 400px;
     z-index: 50;
 }
+
 .panel-ct {
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(255,255,255, .5);
+    background: rgba(255, 255, 255, .5);
 }
 
 main {
@@ -907,10 +908,12 @@ main {
     font-weight: 550;
     display: block;
 }
+
 .verseTextGroup p {
     margin: 0;
     line-height: 150%;
 }
+
 main .top-notice .notice-main {
     display: flex;
     align-items: center;
@@ -924,14 +927,17 @@ main .top-notice .notice-main {
     border-radius: 10px;
     transition: .2s;
 }
+
 main .top-notice {
     padding-inline: 30px;
     width: 100%;
 }
+
 .top-notice .notice-main:hover {
     transition: .2s;
     background: rgb(233, 239, 242);
 }
+
 #completion .finalPlayControls {
     display: flex;
     width: 100%;
@@ -939,7 +945,29 @@ main .top-notice {
     align-items: center;
     gap: 10px;
 }
+
 .finalPlayControls button {
     width: 100%;
     cursor: pointer;
+}
+
+.panel-ct {
+    animation: panelCt .3s ease-in-out;
+    overflow-x: hidden;
+}
+
+.panel {
+    animation: panel .3s;
+}
+
+@keyframes panelCt {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes panel {
+    from {
+        transform: translateX(50px);
+    }
 }

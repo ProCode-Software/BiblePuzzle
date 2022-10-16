@@ -108,6 +108,7 @@ countedKeys = countedKeys.split('')
 function startTyping(ct, array) {
     let activeCharNum = 0;
     document.title = `BiblePuzzle | ${reference}`
+    document.querySelector('footer #footerVerseRef').textContent = reference
     ct.children[activeCharNum].classList.add('active')
     window.onkeydown = (e) => {
         if (!keyboardLock) {
@@ -208,6 +209,7 @@ if (!preloadedUserName) {
 document.querySelector('#playerNameOp').addEventListener('focus', () => keyboardLock = true)
 document.querySelector('#playerNameOp').addEventListener('blur', (e) => { keyboardLock = false; localStorage.setItem('username', e.target.value); username = e.target.value })
 function completeTest() {
+    showPanel(true, 'completion', true)
     const panelView = getPanelView('completion')
     panelView.style.display = 'flex'
     const total = (verse.length + reference.length)
@@ -319,6 +321,7 @@ createModal({
  * 
  * @param {boolean} showPanel 
  * @param {string} viewId 
+ * @param {boolean} lightDismiss
  */
 function showPanel(showPanel, viewId, lightDismiss) {
     const panel = document.querySelector('main aside.panel-ct')
@@ -326,25 +329,34 @@ function showPanel(showPanel, viewId, lightDismiss) {
     panel.style.display = (showPanel == true ? 'block' : 'none')
 
     if (viewId) {
-        panel.querySelectorAll('.panelView').forEach(view => view.style.display = 'none')
+        panel.querySelectorAll('.panel .panelView').forEach(view => view.style.display = 'none')
 
         panel.querySelector(`.panelView#${viewId}`).style.display = (showPanel == true ? 'block' : 'none');
+
+        panel.addEventListener('click', (e) => {
+            if (lightDismiss) {
+                if (!document.elementsFromPoint(e.x, e.y).includes(panel.querySelector('.panel'))) {
+                    panel.style.display = 'none'
+                }
+            }
+        })
     }
 }
 /**
- * 
+ * Returns a panel view
  * @param {string} viewId Panel view id
  * @returns {Element} The panel view element
  */
 function getPanelView(viewId) {
-    const panel = document.querySelector('main aside.panel-ct')
+    const panel = document.querySelector('main aside.panel-ct .panel')
 
     return panel.querySelector(`.panelView#${viewId}`)
 }
 
-function devTest() {
-    showPanel(true, 'completion')
-    incorrectChars = 100
-    completeTest()
+function playAgain() {
+    location.reload()
 }
-devTest()
+
+function showStats() {
+    showPanel(true, 'stats', true)
+}
