@@ -854,7 +854,7 @@ main {
     text-align: left;
 }
 
-.panelView#completion {
+.panelView {
     padding: 30px;
 }
 

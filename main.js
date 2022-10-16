@@ -98,8 +98,39 @@ const extract = (array, outputEl) => {
 extract(verseSplit, verseContainer)
 extract(refSplit, refContainer)
 
+const timer = {
+    start: () => {
+        timer.isOn = true
+        function advance() {
+            if (timer.isOn) {
+                setTimeout(() => {
+                    if (timer.seconds == 60) {
+                        timer.minutes++
+                        timer.seconds = 0;
+                    }
+                    else { timer.seconds++ }
+                    document.querySelector('.statTag.time > span').textContent = `${timer.minutes}:${timer.seconds < 10 ? 0 : ''}${timer.seconds}`
+                    advance()
+                }, 1000);
+            }
+        }
+        advance()
+    },
+    pause: () => {
+        timer.isOn = false
+    },
+    reset: () => {
+        timer.isOn = false
+        timer.seconds = 0;
+        timer.minutes = 0;
+    },
+    seconds: 0,
+    minutes: 0,
+    isOn: false,
+}
 let backspaceAllowed = true
 let incorrectChars = 0;
+let charactersTyped = 0;
 let keyboardLock = true
 
 let countedKeys = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()-=+-_`~[]\\|}{;\':"<>?/., '
@@ -360,3 +391,14 @@ function playAgain() {
 function showStats() {
     showPanel(true, 'stats', true)
 }
+
+document.querySelector('.toolbar .statsBtn').addEventListener('click', () => {
+    const e = document.querySelector('.toolbar .statsBtn')
+    if (e.classList.contains('active')) {
+        showPanel(false, 'stats')
+        e.classList.remove('active')
+    } else {
+        e.classList.add('active')
+        showPanel(true, 'stats', true)
+    }
+})
