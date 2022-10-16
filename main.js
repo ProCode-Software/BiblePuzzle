@@ -143,6 +143,9 @@ function startTyping(ct, array) {
     ct.children[activeCharNum].classList.add('active')
     window.onkeydown = (e) => {
         if (!keyboardLock) {
+            if (activeCharNum == 0) {
+                timer.start()
+            }
             if (activeCharNum > 0) {
                 ct.children[activeCharNum - 1].style.borderTopRightRadius = '0px'
                 ct.children[activeCharNum - 1].style.borderBottomRightRadius = '0px'
