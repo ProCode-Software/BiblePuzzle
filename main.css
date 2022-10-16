@@ -971,3 +971,11 @@ main .top-notice {
         transform: translateX(50px);
     }
 }
+#completion .testStats {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+#completion .testStats .statCell {
+    
+}

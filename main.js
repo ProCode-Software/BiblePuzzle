@@ -144,7 +144,9 @@ function startTyping(ct, array) {
     window.onkeydown = (e) => {
         if (!keyboardLock) {
             if (activeCharNum == 0) {
-                timer.start()
+                if (!timer.isOn) {
+                    timer.start()
+                }
             }
             if (activeCharNum > 0) {
                 ct.children[activeCharNum - 1].style.borderTopRightRadius = '0px'
@@ -190,6 +192,7 @@ function startTyping(ct, array) {
                 if (ct == refContainer) {
                     completeTest()
                     keyboardLock = true
+                    timer.pause()
                 } else {
                     startTyping(refContainer, refSplit)
                 }
@@ -405,3 +408,4 @@ document.querySelector('.toolbar .statsBtn').addEventListener('click', () => {
         showPanel(true, 'stats', true)
     }
 })
+completeTest()
