@@ -973,9 +973,30 @@ main .top-notice {
 }
 #completion .testStats {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: row;
+    width: 100%;
+    gap: 10px;
 }
 #completion .testStats .statCell {
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    text-align: center;
+    width: 100%;
+}
+.statCell .cellKey {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #6F767A;
+}
+.statCell .cellVal {
+    font-weight: 500;
+    font-size: 24px;
+}
+.testStats .divider {
+    height: 60%;
+    width: 1px;
+    background: rgba(232, 238, 241, 0.4);
 }
