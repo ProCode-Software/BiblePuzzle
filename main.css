@@ -1000,3 +1000,6 @@ main .top-notice {
     width: 1px;
     background: rgba(232, 238, 241, 0.4);
 }
+.statCell#incChars .cellVal {
+    color: #DD1948;
+}

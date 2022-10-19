@@ -127,6 +127,9 @@ const timer = {
     seconds: 0,
     minutes: 0,
     isOn: false,
+    time: () => { 
+        return `${timer.minutes}:${timer.seconds < 10 ? 0 : ''}${timer.seconds}` 
+    }
 }
 let backspaceAllowed = true
 let incorrectChars = 0;
@@ -245,12 +248,16 @@ if (!preloadedUserName) {
 }
 document.querySelector('#playerNameOp').addEventListener('focus', () => keyboardLock = true)
 document.querySelector('#playerNameOp').addEventListener('blur', (e) => { keyboardLock = false; localStorage.setItem('username', e.target.value); username = e.target.value })
+
 function completeTest() {
     showPanel(true, 'completion', true)
     const panelView = getPanelView('completion')
     panelView.style.display = 'flex'
+
     const total = (verse.length + reference.length)
     percent = (total - incorrectChars) / total * 100
+
+    const time = timer.time()
 
     const scoreText = panelView.querySelector('.graph-content .score')
     const subscoreText = panelView.querySelector('.graph-content .subscore')
@@ -303,6 +310,11 @@ function completeTest() {
 
     imgGroup.append(img, cap)
     vGroup.append(refLab, verseLab)
+
+    const typingFinalStats = panelView.querySelector('.testStats')
+
+    typingFinalStats.querySelector('#totalTime .cellVal').textContent = time
+    typingFinalStats.querySelector('#incChars .cellVal').textContent = incorrectChars
 
 
     window.onresize = () => { checkChartSize() }
