@@ -109,7 +109,7 @@ const timer = {
                         timer.seconds = 0;
                     }
                     else { timer.seconds++ }
-                    document.querySelector('.statTag.time > span').textContent = `${timer.minutes}:${timer.seconds < 10 ? 0 : ''}${timer.seconds}`
+                    document.querySelector('.statTag.time > span').textContent = `${timer.getTime()}`
                     advance()
                 }, 1000);
             }
@@ -127,7 +127,7 @@ const timer = {
     seconds: 0,
     minutes: 0,
     isOn: false,
-    time: () => { 
+    getTime: () => { 
         return `${timer.minutes}:${timer.seconds < 10 ? 0 : ''}${timer.seconds}` 
     }
 }
@@ -144,11 +144,41 @@ function startTyping(ct, array) {
     document.title = `BiblePuzzle | ${reference}`
     document.querySelector('footer #footerVerseRef').textContent = reference
     ct.children[activeCharNum].classList.add('active')
+
+    const cpsTest = {
+        cps: 0,
+        isSampling: undefined,
+        allTests: [],
+
+        reset: () => {
+
+        },
+        start: () => {
+            2
+        },
+        average: () => {
+            cpsTest.allTests.
+        }
+    }
+    let cps = 0
+    let allCps = []
+    let cpsSampleOver = undefined
     window.onkeydown = (e) => {
         if (!keyboardLock) {
+            if (cpsSampleOver == false) {
+                cps++
+            }
+            setTimeout(() => {
+                cpsSampleOver = true
+                allCps.push(cps)
+                console.log(cps);
+                cps = 0
+                cpsSampleOver = false
+            }, 1000)
             if (activeCharNum == 0) {
                 if (!timer.isOn) {
                     timer.start()
+                    cpsSampleOver = false
                 }
             }
             if (activeCharNum > 0) {
@@ -257,7 +287,7 @@ function completeTest() {
     const total = (verse.length + reference.length)
     percent = (total - incorrectChars) / total * 100
 
-    const time = timer.time()
+    const time = timer.getTime()
 
     const scoreText = panelView.querySelector('.graph-content .score')
     const subscoreText = panelView.querySelector('.graph-content .subscore')
