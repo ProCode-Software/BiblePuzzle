@@ -150,14 +150,28 @@ function startTyping(ct, array) {
         isSampling: undefined,
         allTests: [],
 
-        reset: () => {
-
+        stop: () => {
+            cpsTest.isSampling = false;
+            cpsTest.allTests.push(cps)
+            console.log(cpsTest.allTests);
+            cps = 0;
+            cpsTest.isSampling = undefined
         },
         start: () => {
-            2
+            cpsTest.isSampling = true
+            if (cpsTest.isSampling == true) {
+                setTimeout(() => {
+                    cpsTest.stop()
+                }, 1000)
+            }
         },
         average: () => {
-            cpsTest.allTests.
+            let init = 0
+            const sum = cpsTest.allTests.reduce((prev, curr) => prev + curr, init
+            )
+            const mean = sum / cpsTest.allTests.length
+
+            return mean
         }
     }
     let cps = 0
@@ -165,7 +179,7 @@ function startTyping(ct, array) {
     let cpsSampleOver = undefined
     window.onkeydown = (e) => {
         if (!keyboardLock) {
-            if (cpsSampleOver == false) {
+            if (cpsTest.isSampling == true) {
                 cps++
             }
             setTimeout(() => {
@@ -178,7 +192,7 @@ function startTyping(ct, array) {
             if (activeCharNum == 0) {
                 if (!timer.isOn) {
                     timer.start()
-                    cpsSampleOver = false
+                    cpsTest.start()
                 }
             }
             if (activeCharNum > 0) {
