@@ -179,6 +179,7 @@ function startTyping(ct, array) {
     let allCps = []
     let cpsSampleOver = undefined
     window.onkeydown = (e) => {
+        charactersTyped++
         if (!keyboardLock) {
             if (cpsTest.isSampling == true) {
                 cps++
@@ -299,7 +300,7 @@ function completeTest() {
     const panelView = getPanelView('completion')
     panelView.style.display = 'flex'
 
-    const total = (verse.length + reference.length)
+    const total = (charactersTyped)
     percent = (total - incorrectChars) / total * 100
 
     const time = timer.getTime()
