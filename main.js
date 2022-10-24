@@ -156,6 +156,7 @@ function startTyping(ct, array) {
             console.log(cpsTest.allTests);
             cps = 0;
             cpsTest.isSampling = undefined
+            cpsTest.start()
         },
         start: () => {
             cpsTest.isSampling = true
