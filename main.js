@@ -104,7 +104,7 @@ const timer = {
         function advance() {
             if (timer.isOn) {
                 setTimeout(() => {
-                    if (timer.seconds == 60) {
+                    if (timer.seconds == 59) {
                         timer.minutes++
                         timer.seconds = 0;
                     }
