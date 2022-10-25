@@ -266,6 +266,9 @@ function startTyping(ct, array) {
             }
         }
     }
+    window.addEventListener('blur', () => {
+        timer.pause()
+    })
 }
 let percent;
 
