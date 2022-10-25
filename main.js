@@ -311,7 +311,7 @@ function completeTest() {
     const scoreText = panelView.querySelector('.graph-content .score')
     const subscoreText = panelView.querySelector('.graph-content .subscore')
 
-    subscoreText.innerHTML = `<span class="${Math.round(percent) >= 50 ? 'green' : 'red'}" style="font-weight: 600">${(verse.length + reference.length) - incorrectChars}</span>/${verse.length + reference.length}`
+    subscoreText.innerHTML = `<span class="${Math.round(percent) >= 50 ? 'green' : 'red'}" style="font-weight: 600">${(charactersTyped) - incorrectChars}</span>/${charactersTyped}`
     scoreText.textContent = `${Math.round(percent)}%`
 
 
