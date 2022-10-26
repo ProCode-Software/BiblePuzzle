@@ -458,6 +458,9 @@ function playAgain() {
 function showStats() {
     showPanel(true, 'stats', true)
 }
+function showHelpPanel() {
+    showPanel(true, 'help', true)
+}
 
 document.querySelector('.toolbar .statsBtn').addEventListener('click', () => {
     const e = document.querySelector('.toolbar .statsBtn')
@@ -467,6 +470,16 @@ document.querySelector('.toolbar .statsBtn').addEventListener('click', () => {
     } else {
         e.classList.add('active')
         showPanel(true, 'stats', true)
+    }
+})
+document.querySelector('.toolbar .helpBtn').addEventListener('click', () => {
+    const e = document.querySelector('.toolbar .helpBtn')
+    if (e.classList.contains('active')) {
+        showPanel(false, 'help')
+        e.classList.remove('active')
+    } else {
+        e.classList.add('active')
+        showPanel(true, 'help', true)
     }
 })
 completeTest()
