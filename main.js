@@ -482,4 +482,3 @@ document.querySelector('.toolbar .helpBtn').addEventListener('click', () => {
         showPanel(true, 'help', true)
     }
 })
-completeTest()
