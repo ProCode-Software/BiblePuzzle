@@ -19,6 +19,7 @@ body {
 :root {
     --accent: #0056F5;
     --accent-text: #004FE1;
+    --subtitle: #6F767A;
 }
 
 .container {
@@ -120,6 +121,7 @@ button {
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    gap: 10px;
 }
 
 button svg {
@@ -971,6 +973,7 @@ main .top-notice {
         transform: translateX(50px);
     }
 }
+
 #completion .testStats {
     display: flex;
     align-items: center;
@@ -978,6 +981,7 @@ main .top-notice {
     width: 100%;
     gap: 10px;
 }
+
 #completion .testStats .statCell {
     display: flex;
     flex-direction: column;
@@ -986,20 +990,98 @@ main .top-notice {
     text-align: center;
     width: 100%;
 }
+
 .statCell .cellKey {
     font-size: 13px;
     text-transform: uppercase;
-    color: #6F767A;
+    color: var(--subtitle);
 }
+
 .statCell .cellVal {
     font-weight: 500;
     font-size: 24px;
 }
+
 .testStats .divider {
     height: 60%;
     width: 1px;
     background: rgba(232, 238, 241, 0.4);
 }
+
 .statCell#incChars .cellVal {
     color: #DD1948;
+}
+.addToJournalBtn {
+    width: fit-content;
+    padding-inline: 14px;
+    max-width: 100%;
+}
+.hr {
+    background: rgba(232, 238, 241, 0.4);
+    width: 100%;
+    margin-block: 3px;
+    height: 1px;
+}
+.vDivider {
+    height: 60%;
+    width: 1px;
+    background: rgba(232, 238, 241, 0.4);
+}
+.panelGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+.panelGroupTitle {
+    font-size: 1.35em;
+    font-weight: 500;
+}
+
+.columnView {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+    width: 100%;
+    margin-block: 8px;
+}
+.columnView .columnViewItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-inline: 10px;
+    text-align: center;
+    gap: 10px;
+}
+.lgColumnKey {
+    color: var(--subtitle);
+    font-size: 1em;
+}
+.lgColumnValue {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+.inlineTableView {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.inlineTableRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 7px;
+}
+#stats .inlineTableLeft {
+    font-size: 15px;
+}
+#stats .inlineTableRight {
+    font-size: 16px;
+    font-weight: 500;
 }

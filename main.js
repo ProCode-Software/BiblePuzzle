@@ -67,6 +67,13 @@ const randomVerses = [
     }
 ]
 
+const systemIcons = {
+    "bookmark": `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.85388 5.75V20.75L12 15.1253L19.1461 20.75V5.75C19.1461 4.36929 18.0268 3.25 16.6461 3.25H7.35388C5.97317 3.25 4.85388 4.36929 4.85388 5.75Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+</svg>
+`
+}
+
 let random = Math.floor(Math.random() * randomVerses.length);
 
 let verse = `${randomVerses[random].verse} `
@@ -127,8 +134,8 @@ const timer = {
     seconds: 0,
     minutes: 0,
     isOn: false,
-    getTime: () => { 
-        return `${timer.minutes}:${timer.seconds < 10 ? 0 : ''}${timer.seconds}` 
+    getTime: () => {
+        return `${timer.minutes}:${timer.seconds < 10 ? 0 : ''}${timer.seconds}`
     }
 }
 let backspaceAllowed = true
@@ -357,8 +364,12 @@ function completeTest() {
     cap.append(document.createTextNode(`Source: ${randomVerses[random]
         .source}`))
 
+
+    const addToJournalBtn = createButtonElement('default', 'Add to journal', systemIcons.bookmark)
+    addToJournalBtn.classList.add('addToJournalBtn')
+
     imgGroup.append(img, cap)
-    vGroup.append(refLab, verseLab)
+    vGroup.append(refLab, verseLab, addToJournalBtn)
 
     const typingFinalStats = panelView.querySelector('.testStats')
 
@@ -429,7 +440,7 @@ function showPanel(showPanel, viewId, lightDismiss) {
     if (viewId) {
         panel.querySelectorAll('.panel .panelView').forEach(view => view.style.display = 'none')
 
-        panel.querySelector(`.panelView#${viewId}`).style.display = (showPanel == true ? 'block' : 'none');
+        panel.querySelector(`.panelView#${viewId}`).style.display = (showPanel == true ? 'flex' : 'none');
 
         panel.addEventListener('click', (e) => {
             if (lightDismiss) {
@@ -461,6 +472,9 @@ function showStats() {
 function showHelpPanel() {
     showPanel(true, 'help', true)
 }
+function showSettingsPanel() {
+    showPanel(true, 'settings', true)
+}
 
 document.querySelector('.toolbar .statsBtn').addEventListener('click', () => {
     const e = document.querySelector('.toolbar .statsBtn')
@@ -470,6 +484,16 @@ document.querySelector('.toolbar .statsBtn').addEventListener('click', () => {
     } else {
         e.classList.add('active')
         showPanel(true, 'stats', true)
+    }
+})
+document.querySelector('.toolbar .settingsBtn').addEventListener('click', () => {
+    const e = document.querySelector('.toolbar .settingsBtn')
+    if (e.classList.contains('active')) {
+        showPanel(false, 'settings')
+        e.classList.remove('active')
+    } else {
+        e.classList.add('active')
+        showPanel(true, 'settings', true)
     }
 })
 document.querySelector('.toolbar .helpBtn').addEventListener('click', () => {
@@ -482,3 +506,16 @@ document.querySelector('.toolbar .helpBtn').addEventListener('click', () => {
         showPanel(true, 'help', true)
     }
 })
+
+function createButtonElement(style, text, icon) {
+    /**@param {'primary'|'dangerous'|'default'|'actionButton'} style */
+
+    const button = document.createElement('button')
+    button.className = `btn${style !== 'default' ? `-${style}` : ''}`
+    button.innerHTML = `
+    ${icon ? icon : ''}
+    ${text}
+    `
+
+    return button
+}
