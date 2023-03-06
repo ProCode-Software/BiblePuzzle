@@ -1,3 +1,5 @@
+remote_theme: ProCode-Software/biblepuzzle-docs-theme
+
 # How to play
 BiblePuzzle is a game just like Typing.com, but with Bible verses. It is easy to get started with. Just go to <https://procode-software.github.io/BiblePuzzle>
 
