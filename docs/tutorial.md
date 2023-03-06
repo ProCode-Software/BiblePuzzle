@@ -67,4 +67,4 @@ Sorry for the problems with the game. This is the first release.
 
 Good luck!
 
-remote_theme: ProCode-Software/biblepuzzle-docs-theme
+
