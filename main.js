@@ -519,3 +519,4 @@ function createButtonElement(style, text, icon) {
 
     return button
 }
+// max 8 trouble keys. Minimum 2 mistakes to go onto trouble keys and the 8 highest ones are shown

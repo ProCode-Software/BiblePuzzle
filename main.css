@@ -20,6 +20,9 @@ body {
     --accent: #0056F5;
     --accent-text: #004FE1;
     --subtitle: #6F767A;
+    --text-red: #DD1948;
+    --red: #F92457;
+    --text-green: #0CE563;
 }
 
 .container {
@@ -109,7 +112,7 @@ input:focus {
 button {
     border-radius: 8px;
     border: none;
-    padding: 6px 18px;
+    padding: 6px 12px;
     outline: none;
     background: #F9FAFF;
     transition: .15s;
@@ -825,7 +828,7 @@ main {
 .panelView {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     align-items: flex-start;
     height: 100%;
 }
@@ -902,7 +905,7 @@ main {
 .verseTextGroup {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 10px;
 }
 
 .panel .panel-heading {
@@ -1009,24 +1012,29 @@ main .top-notice {
 }
 
 .statCell#incChars .cellVal {
-    color: #DD1948;
+    color: var(--text-red);
 }
+
 .addToJournalBtn {
     width: fit-content;
     padding-inline: 14px;
     max-width: 100%;
 }
+
 .hr {
     background: rgba(232, 238, 241, 0.4);
     width: 100%;
     margin-block: 3px;
     height: 1px;
+    flex-shrink: 0;
 }
+
 .vDivider {
     height: 60%;
     width: 1px;
     background: rgba(232, 238, 241, 0.4);
 }
+
 .panelGroup {
     display: flex;
     flex-direction: column;
@@ -1034,9 +1042,10 @@ main .top-notice {
     gap: 10px;
     width: 100%;
 }
+
 .panelGroupTitle {
-    font-size: 1.35em;
-    font-weight: 500;
+    font-size: 1.3em;
+    font-weight: 550;
 }
 
 .columnView {
@@ -1047,6 +1056,7 @@ main .top-notice {
     width: 100%;
     margin-block: 8px;
 }
+
 .columnView .columnViewItem {
     display: flex;
     flex-direction: column;
@@ -1056,20 +1066,24 @@ main .top-notice {
     text-align: center;
     gap: 10px;
 }
+
 .lgColumnKey {
     color: var(--subtitle);
     font-size: 1em;
 }
+
 .lgColumnValue {
     font-size: 1.5em;
     font-weight: 500;
 }
+
 .inlineTableView {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
 }
+
 .inlineTableRow {
     display: flex;
     flex-direction: row;
@@ -1078,10 +1092,134 @@ main .top-notice {
     width: 100%;
     margin: 7px;
 }
+
 #stats .inlineTableLeft {
     font-size: 15px;
 }
+
 #stats .inlineTableRight {
     font-size: 16px;
     font-weight: 500;
+}
+
+.subDesc {
+    color: var(--subtitle);
+}
+
+.table {
+    width: 100%;
+    gap: 8px;
+    font-size: 15px;
+}
+
+tr {
+    width: 100%;
+}
+
+td,
+th {
+    padding: 12px 8px;
+    font-size: inherit;
+}
+
+th {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: left;
+}
+
+.compactActionBtn {
+    display: inline-flex;
+    gap: 8px;
+    padding: 4px;
+    height: auto;
+    color: #000;
+    background: none;
+}
+
+.compactActionBtn svg {
+    display: flex;
+}
+
+.flex-cell {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+}
+
+.gradeTable th {
+    padding-block: 3px;
+}
+
+.fallbackGradeText,
+.fallbackTKText {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+* {
+    line-height: 140%;
+}
+
+.troubleKeyChart {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 100%;
+    gap: 10px;
+    /** chart height */
+    height: 140px;
+    padding-block: 10px;
+}
+
+.tkChartCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    height: 100%;
+    max-width: 90px;
+}
+
+.tkChartSymbol {
+    width: 100%;
+    color: #fff;
+    background: var(--red);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: 500;
+    padding-top: 5px;
+    transition: .2s;
+}
+
+.tkChartCaption {
+    font-weight: 500;
+    font-size: 1.12em;
+    color: var(--text-red);
+}
+
+button svg {
+    width: 22px;
+    height: 22px;
+}
+
+.hidden {
+    display: none;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.text-green {
+    color: var(--text-green);
 }
