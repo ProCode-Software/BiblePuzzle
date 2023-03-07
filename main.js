@@ -520,3 +520,45 @@ function createButtonElement(style, text, icon) {
     return button
 }
 // max 8 trouble keys. Minimum 2 mistakes to go onto trouble keys and the 8 highest ones are shown
+
+const changeDisplayNameButton = createButtonElement('primary', 'Edit')
+const settingsValues = {
+    displayName: '',
+    darkMode: false,
+
+}
+const settingsModel = [
+    {
+        id: "personalization",
+        name: "Personalization",
+        settings: [
+            {
+                type: 'input',
+                title: 'Display name',
+                description: 'We will refer to you using your display name. Leave blank to disable.',
+                value: settingsValues.displayName
+            },
+            {
+                type: 'toggle',
+                title: 'Dark mode',
+                value: settingsValues.darkMode
+            },
+            {
+                title: 'Theme color',
+                type: 'etc',
+                block: null 
+            }
+        ]
+    },
+    {
+        id: "typing",
+        name: "Typing",
+        settings: [
+            {
+                type: 'toggle',
+                title: 'Dark mode',
+                value: settingsValues.darkMode
+            }
+        ]
+    },
+]
