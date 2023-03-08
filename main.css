@@ -1290,3 +1290,6 @@ body {
 .btn-dangerous:hover {
     background: var(--text-red);
 }
+.setting button {
+    width: 100%;
+}
