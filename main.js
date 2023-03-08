@@ -516,16 +516,20 @@ function createButtonElement(style, text, icon) {
     ${icon ? icon : ''}
     ${text}
     `
-
     return button
 }
 // max 8 trouble keys. Minimum 2 mistakes to go onto trouble keys and the 8 highest ones are shown
 
-const changeDisplayNameButton = createButtonElement('primary', 'Edit')
+const backupButton = createButtonElement('default', 'Edit')
+const restoreButton = createButtonElement('default', 'Edit')
+const resetButton = createButtonElement('dangerous', 'Edit')
+
 const settingsValues = {
     displayName: '',
     darkMode: false,
-
+    backSpacing: true,
+    mobileKeyboard: false,
+    themeColor: 0
 }
 const settingsModel = [
     {
@@ -546,7 +550,7 @@ const settingsModel = [
             {
                 title: 'Theme color',
                 type: 'etc',
-                block: null 
+                block: null
             }
         ]
     },
@@ -556,9 +560,92 @@ const settingsModel = [
         settings: [
             {
                 type: 'toggle',
-                title: 'Dark mode',
-                value: settingsValues.darkMode
-            }
+                title: 'Allow backspacing',
+                value: settingsValues.backSpacing,
+                description: 'Enable for a more natural typing experience.'
+            },
+            {
+                type: 'toggle',
+                title: 'Touch keyboard',
+                value: settingsValues.backSpacing,
+                description: 'Show touch keyboard button. Best for mobile users.'
+            },
+        ]
+    },
+    {
+        id: "backupRestore",
+        name: "Backup & Restore",
+        settings: [
+            {
+                type: 'button',
+                title: 'Export data',
+                button: backupButton,
+                description: 'Save a backup file to import on another device.'
+            },
+            {
+                type: 'button',
+                title: 'Import data',
+                button: restoreButton,
+                description: 'If you have a backup, import it here to bring your grades and settings here.'
+            },
+            {
+                type: 'button',
+                title: 'Factory reset',
+                button: resetButton,
+                description: 'Reset all data, including stats and settings.',
+                dangerous: true
+            },
         ]
     },
 ]
+
+const settingsPanel = getPanelView('settings')
+settingsModel.forEach(category => {
+    const ctView = document.createElement('div')
+    ctView.className = 'panelGroup'
+    ctView.classList.add(`${category.id}View`)
+    ctView.innerHTML = `
+    <div class="panelGroupTitle">${category.name}</div>
+    `
+
+    category.settings.forEach(s => {
+        const setEl = document.createElement('div')
+        setEl.className = 'setting'
+
+        if (s.type == 'etc' || s.type == 'input') {
+            setEl.classList.add('vertical')
+        }
+        setEl.innerHTML = `
+            <div class="textGroup">
+                <div class="settingTitle">${s.title}</div>
+                <div class="settingDescription">${s.description}</div>
+            </div>
+        `
+        if (!s.description) setEl.querySelector('.settingDescription').remove()
+
+        let valueEl;
+        switch (s.type) {
+            case 'etc':
+                valueEl = s.block
+                break;
+            case s.type = 'button':
+                setEl.append(s.button)
+                break;
+            case 'toggle':
+                valueEl = document.createElement('div')
+                valueEl.className = 'toggleSwitch'
+                break;
+            case 'input':
+                valueEl = document.createElement('input')
+                break;
+            default:
+                console.error('invalid setting type');
+                break;
+        }
+        if (valueEl) setEl.append(valueEl)
+
+        ctView.append(setEl)
+    })
+
+    settingsPanel.append(ctView)
+})
