@@ -71,6 +71,28 @@ const systemIcons = {
     "bookmark": `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4.85388 5.75V20.75L12 15.1253L19.1461 20.75V5.75C19.1461 4.36929 18.0268 3.25 16.6461 3.25H7.35388C5.97317 3.25 4.85388 4.36929 4.85388 5.75Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
 </svg>
+`,
+    download: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.5 15.5625V18.0625C4.5 19.1671 5.39543 20.0625 6.5 20.0625H17.5C18.6046 20.0625 19.5 19.1671 19.5 18.0625V15.5625" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M12 3.9375V13.7079M7.40332 9.84356L12 14.4375L16.5967 9.84356" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>
+`,
+    reload: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.8336 6.16637C16.6147 4.94747 15.0446 4.14099 13.3439 3.86019C11.6431 3.5794 9.89713 3.83839 8.35112 4.6008C6.8051 5.36321 5.53673 6.59074 4.72415 8.11098C3.91156 9.63122 3.59558 11.3678 3.82058 13.0768C4.04558 14.7859 4.80026 16.3815 5.97862 17.6396C7.15699 18.8978 8.69984 19.7552 10.3905 20.0915C12.0812 20.4278 13.8347 20.226 15.4048 19.5146C16.975 18.8032 18.2828 17.6178 19.1447 16.125" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M21.25 9V4.41421C21.25 3.52331 20.1729 3.07714 19.5429 3.70711L17.25 6L14.9571 8.29289C14.3271 8.92286 14.7733 10 15.6642 10H20.25C20.8023 10 21.25 9.55228 21.25 9Z" fill="currentColor"/>
+</svg>
+`,
+    upload: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.5 15.5625V18.0625C4.5 19.1671 5.39543 20.0625 6.5 20.0625H17.5C18.6046 20.0625 19.5 19.1671 19.5 18.0625V15.5625" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+<path d="M12 14.4375V4.66713M7.40332 8.53144L12 3.9375L16.5967 8.53144" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>
+`,
+    delete: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.5901 1.55728H12.4099C12.802 1.55727 13.1476 1.55725 13.4337 1.58063C13.738 1.60548 14.0512 1.66107 14.3555 1.81614C14.8024 2.04384 15.1657 2.40717 15.3934 2.85406C15.5485 3.1584 15.6041 3.4716 15.6289 3.77583C15.6523 4.06193 15.6523 4.40749 15.6523 4.79959L15.6523 4.83807H21.125V6.58807H2.875V4.83807H8.34772L8.34772 4.79966C8.34771 4.40754 8.34769 4.06195 8.37107 3.77583C8.39592 3.4716 8.45151 3.1584 8.60658 2.85406C8.83428 2.40717 9.19761 2.04384 9.6445 1.81614C9.94884 1.66107 10.262 1.60548 10.5663 1.58063C10.8524 1.55725 11.198 1.55727 11.5901 1.55728ZM10.0977 4.83807H13.9023V4.83228C13.9023 4.39781 13.9016 4.12457 13.8847 3.91834C13.8687 3.72232 13.8426 3.66506 13.8342 3.64854C13.7742 3.53094 13.6786 3.43533 13.561 3.37541C13.5445 3.36699 13.4872 3.34083 13.2912 3.32481C13.085 3.30796 12.8118 3.30728 12.3773 3.30728H11.6227C11.1882 3.30728 10.915 3.30796 10.7088 3.32481C10.5128 3.34083 10.4555 3.36699 10.439 3.37541C10.3214 3.43533 10.2258 3.53094 10.1658 3.64854C10.1574 3.66506 10.1313 3.72232 10.1153 3.91834C10.0984 4.12457 10.0977 4.39781 10.0977 4.83228V4.83807Z" fill="currentColor"/>
+<path d="M10.8975 17.0458V10.247H9.14746V17.0458H10.8975Z" fill="currentColor"/>
+<path d="M14.8527 17.0458V10.247H13.1027V17.0458H14.8527Z" fill="currentColor"/>
+<path d="M6.56153 18.3677V8.335H4.81152V18.4023C4.81151 18.9329 4.8115 19.3832 4.84168 19.7526C4.87335 20.1402 4.94256 20.5151 5.12488 20.873C5.40052 21.4139 5.84034 21.8537 6.3813 22.1294C6.73912 22.3117 7.11406 22.3809 7.50168 22.4126C7.87107 22.4428 8.32135 22.4427 8.85191 22.4427H15.148C15.6786 22.4427 16.1288 22.4428 16.4982 22.4126C16.8858 22.3809 17.2608 22.3117 17.6186 22.1294C18.1596 21.8537 18.5994 21.4139 18.875 20.873C19.0573 20.5151 19.1266 20.1402 19.1582 19.7526C19.1884 19.3832 19.1884 18.933 19.1884 18.4025V8.335H17.4384V18.3677C17.4384 18.9422 17.4377 19.3205 17.414 19.6101C17.3912 19.8895 17.3514 20.0085 17.3158 20.0785C17.2079 20.2902 17.0358 20.4623 16.8241 20.5701C16.7541 20.6058 16.6351 20.6456 16.3557 20.6684C16.0661 20.6921 15.6879 20.6927 15.1134 20.6927H8.88653C8.31203 20.6927 7.93379 20.6921 7.64418 20.6684C7.36479 20.6456 7.24579 20.6058 7.17579 20.5701C6.9641 20.4623 6.792 20.2902 6.68414 20.0785C6.64847 20.0085 6.6087 19.8895 6.58587 19.6101C6.56221 19.3205 6.56153 18.9422 6.56153 18.3677Z" fill="currentColor"/>
+</svg>
 `
 }
 
@@ -520,9 +542,9 @@ function createButtonElement(style, text, icon) {
 }
 // max 8 trouble keys. Minimum 2 mistakes to go onto trouble keys and the 8 highest ones are shown
 
-const backupButton = createButtonElement('default', 'Edit')
-const restoreButton = createButtonElement('default', 'Edit')
-const resetButton = createButtonElement('dangerous', 'Edit')
+const backupButton = createButtonElement('default', 'Create backup', systemIcons.download)
+const restoreButton = createButtonElement('default', 'Import data', systemIcons.upload)
+const resetButton = createButtonElement('dangerous', 'Reset all data', systemIcons.reload)
 
 const settingsValues = {
     displayName: '',
@@ -612,6 +634,10 @@ settingsModel.forEach(category => {
         const setEl = document.createElement('div')
         setEl.className = 'setting'
 
+        let settingId = s.title.replaceAll(' ', '')
+
+        setEl.id = settingId
+
         if (s.type == 'etc' || s.type == 'input') {
             setEl.classList.add('vertical')
         }
@@ -637,6 +663,7 @@ settingsModel.forEach(category => {
                 break;
             case 'input':
                 valueEl = document.createElement('input')
+                valueEl.id = `${settingId}Input`
                 break;
             default:
                 console.error('invalid setting type');
@@ -649,3 +676,4 @@ settingsModel.forEach(category => {
 
     settingsPanel.append(ctView)
 })
+showSettingsPanel()

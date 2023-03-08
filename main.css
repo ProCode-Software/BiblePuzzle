@@ -1223,3 +1223,70 @@ button svg {
 .text-green {
     color: var(--text-green);
 }
+
+.setting {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    padding-block: 9px;
+}
+
+.setting:not(.vertical) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+.settingTitle {
+    font-size: 15px;
+    font-weight: 500;
+}
+.settingDescription {
+    color: var(--subtitle);
+    font-size: 14px;
+}
+.textGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.toggleSwitch {
+    width: 40px;
+    border-radius: 30px;
+    background: #F9FAFF;
+    height: 24px;
+    flex-shrink: 0;
+    position: relative;
+    transition: .2s;
+}
+.toggleSwitch::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #787980;
+    border-radius: 50%;
+    left: 5px;
+    transition: left .2s;
+}
+.toggleSwitch.on:after {
+    left: calc(100% - 12px - 5px);
+    background: #fff;
+}
+.toggleSwitch.on {
+    background: var(--accent);
+}
+body {
+    color: #242527;
+}
+.btn-dangerous {
+    color: #fff;
+    background: var(--red);
+}
+.btn-dangerous:hover {
+    background: var(--text-red);
+}
