@@ -95,6 +95,17 @@ const systemIcons = {
 </svg>
 `
 }
+let settingsValues = {
+    displayName: '',
+    darkMode: false,
+    backSpacing: true,
+    mobileKeyboard: false,
+    themeColor: 0
+}
+
+if (!localStorage.getItem('userSettings')) {
+    localStorage.setItem('userSettings', JSON.stringify(settingsValues))
+}
 
 let random = Math.floor(Math.random() * randomVerses.length);
 
@@ -312,20 +323,19 @@ function askForName() {
         popups.style.display = 'none'
         username = namePopup.querySelector('#playerName').value
         document.querySelector('#playerNameOp').value = username;
-        localStorage.setItem('username', username)
+        settingsValues.displayName = username
+        updateSettings()
     })
 }
-const preloadedUserName = localStorage.getItem('username')
+const preloadedUserName = getSettings().displayName
 let username = preloadedUserName
 if (!preloadedUserName) {
     askForName()
 } else {
-    document.querySelector('#playerNameOp').value = preloadedUserName;
+    settingsValues.displayName = preloadedUserName
     popups.style.display = 'none'
     keyboardLock = false
 }
-document.querySelector('#playerNameOp').addEventListener('focus', () => keyboardLock = true)
-document.querySelector('#playerNameOp').addEventListener('blur', (e) => { keyboardLock = false; localStorage.setItem('username', e.target.value); username = e.target.value })
 
 function completeTest() {
     showPanel(true, 'completion', true)
@@ -546,13 +556,6 @@ const backupButton = createButtonElement('default', 'Create backup', systemIcons
 const restoreButton = createButtonElement('default', 'Import data', systemIcons.upload)
 const resetButton = createButtonElement('dangerous', 'Reset all data', systemIcons.reload)
 
-const settingsValues = {
-    displayName: '',
-    darkMode: false,
-    backSpacing: true,
-    mobileKeyboard: false,
-    themeColor: 0
-}
 const settingsModel = [
     {
         id: "personalization",
@@ -562,12 +565,12 @@ const settingsModel = [
                 type: 'input',
                 title: 'Display name',
                 description: 'We will refer to you using your display name. Leave blank to disable.',
-                value: settingsValues.displayName
+                value: "displayName"
             },
             {
                 type: 'toggle',
                 title: 'Dark mode',
-                value: settingsValues.darkMode
+                value: "darkMode"
             },
             {
                 title: 'Theme color',
@@ -583,13 +586,14 @@ const settingsModel = [
             {
                 type: 'toggle',
                 title: 'Allow backspacing',
-                value: settingsValues.backSpacing,
+                value: "backSpacing",
                 description: 'Enable for a more natural typing experience.'
             },
             {
                 type: 'toggle',
                 title: 'Touch keyboard',
-                value: settingsValues.backSpacing,
+                value: "mobileKeyboard",
+                
                 description: 'Show touch keyboard button. Best for mobile users.'
             },
         ]
@@ -660,6 +664,21 @@ settingsModel.forEach(category => {
             case 'toggle':
                 valueEl = document.createElement('div')
                 valueEl.className = 'toggleSwitch'
+
+                if (getSettings()[s.value] == true) {
+                    valueEl.classList.add('on')
+                }
+                valueEl.addEventListener('click', () => {
+                    settingsValues[s.value] = (settingsValues[s.value] == true ? false : true)
+                    if (settingsValues[s.value] == true) {
+                        valueEl.classList.add('on')
+                    } else {
+                        if (valueEl.classList.contains('on')) {
+                            valueEl.classList.remove('on')
+                        }
+                    }
+                    updateSettings()
+                })
                 break;
             case 'input':
                 valueEl = document.createElement('input')
@@ -676,4 +695,10 @@ settingsModel.forEach(category => {
 
     settingsPanel.append(ctView)
 })
-showSettingsPanel()
+
+function updateSettings() {
+    localStorage.setItem('userSettings', JSON.stringify(settingsValues))
+}
+function getSettings() {
+    return JSON.parse(localStorage.getItem('userSettings'))
+}

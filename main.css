@@ -120,6 +120,7 @@ button {
     font-size: inherit;
     font-weight: 500;
     height: 42px;
+    min-width: fit-content;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1236,7 +1237,7 @@ button svg {
 .setting:not(.vertical) {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    width: 100%;
     gap: 15px;
 }
 .settingTitle {
@@ -1251,12 +1252,13 @@ button svg {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    width: 100%;
 }
 
 .toggleSwitch {
     width: 40px;
     border-radius: 30px;
-    background: #F9FAFF;
+    background: #F7F8FD;
     height: 24px;
     flex-shrink: 0;
     position: relative;
@@ -1269,10 +1271,15 @@ button svg {
     transform: translateY(-50%);
     width: 12px;
     height: 12px;
-    background: #787980;
+    background: #D1D2D6;
     border-radius: 50%;
     left: 5px;
     transition: left .2s;
+}
+.toggleSwitch:hover::after {
+    width: 14px;
+    height: 14px;
+    transition: .2s;
 }
 .toggleSwitch.on:after {
     left: calc(100% - 12px - 5px);
