@@ -458,6 +458,8 @@ createModal({
     title: 'Hello, world'
 })
 
+
+let currentPanel;
 /**
  * 
  * @param {boolean} showPanel 
@@ -474,10 +476,20 @@ function showPanel(showPanel, viewId, lightDismiss) {
 
         panel.querySelector(`.panelView#${viewId}`).style.display = (showPanel == true ? 'flex' : 'none');
 
+        if (showPanel == true) {
+            currentPanel = viewId
+            keyboardLock = true
+        } else {
+            currentPanel = ''
+            keyboardLock = false
+        }
+
         panel.addEventListener('click', (e) => {
             if (lightDismiss) {
                 if (!document.elementsFromPoint(e.x, e.y).includes(panel.querySelector('.panel'))) {
                     panel.style.display = 'none'
+                    currentPanel = ''
+                    keyboardLock = false
                 }
             }
         })
@@ -683,6 +695,13 @@ settingsModel.forEach(category => {
             case 'input':
                 valueEl = document.createElement('input')
                 valueEl.id = `${settingId}Input`
+
+                valueEl.value = getSettings()[s.value]
+
+                valueEl.onchange = () => {
+                    settingsValues[s.value] = valueEl.value
+                    updateSettings()
+                }
                 break;
             default:
                 console.error('invalid setting type');
