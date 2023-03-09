@@ -319,21 +319,23 @@ function startTyping(ct, array) {
                 }
             }
             if (e.key == 'Backspace') {
-                if (activeCharNum > 0) {
-                    activeCharNum--
-                    ct.children[activeCharNum].classList.remove('incorrectChar')
-                    ct.children[activeCharNum].classList.add('active')
-                    ct.children[activeCharNum].classList.remove('correct')
-                    ct.children[activeCharNum + 1].classList.remove('active')
-                    ct.children[activeCharNum - 1].style.borderTopRightRadius = ''
-                    ct.children[activeCharNum - 1].style.borderBottomRightRadius = ''
-                    ct.children[activeCharNum].style.borderTopRightRadius = ''
-                    ct.children[activeCharNum].style.borderBottomRightRadius = ''
-                    try {
-                        ct.children[activeCharNum - 5].scrollIntoView({
-                            inline: "start", behavior: "smooth"
-                        })
-                    } catch (e) { }
+                if (backspaceAllowed) {
+                    if (activeCharNum > 0) {
+                        activeCharNum--
+                        ct.children[activeCharNum].classList.remove('incorrectChar')
+                        ct.children[activeCharNum].classList.add('active')
+                        ct.children[activeCharNum].classList.remove('correct')
+                        ct.children[activeCharNum + 1].classList.remove('active')
+                        ct.children[activeCharNum - 1].style.borderTopRightRadius = ''
+                        ct.children[activeCharNum - 1].style.borderBottomRightRadius = ''
+                        ct.children[activeCharNum].style.borderTopRightRadius = ''
+                        ct.children[activeCharNum].style.borderBottomRightRadius = ''
+                        try {
+                            ct.children[activeCharNum - 5].scrollIntoView({
+                                inline: "start", behavior: "smooth"
+                            })
+                        } catch (e) { }
+                    }
                 }
             }
         }
@@ -771,6 +773,8 @@ function checkSettings() {
     } else {
         tkBtn.style.display = 'none'
     }
+
+    backspaceAllowed = getSettings().backSpacing
 }
 
 checkSettings()
