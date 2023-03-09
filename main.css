@@ -14,9 +14,7 @@ body {
     user-select: none;
     -webkit-user-select: none;
     width: 100%;
-}
 
-:root {
     --accent: #0056F5;
     --accent-text: #004FE1;
     --subtitle: #6F767A;
@@ -103,7 +101,9 @@ input:hover {
     outline: none;
 }
 
-input:focus {
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus {
     border-radius: 8px 8px 4px 4px;
     border-bottom: 3.5px solid var(--accent);
     transition: .15s;
@@ -1240,14 +1240,17 @@ button svg {
     width: 100%;
     gap: 15px;
 }
+
 .settingTitle {
     font-size: 15px;
     font-weight: 500;
 }
+
 .settingDescription {
     color: var(--subtitle);
     font-size: 14px;
 }
+
 .textGroup {
     display: flex;
     flex-direction: column;
@@ -1264,6 +1267,7 @@ button svg {
     position: relative;
     transition: .2s;
 }
+
 .toggleSwitch::after {
     content: '';
     position: absolute;
@@ -1276,25 +1280,133 @@ button svg {
     left: 5px;
     transition: left .2s;
 }
+
 .toggleSwitch:hover::after {
     width: 14px;
     height: 14px;
     transition: .2s;
 }
+
 .toggleSwitch.on:after {
     left: calc(100% - 12px - 5px);
     background: #fff;
 }
+
 .toggleSwitch.on {
     background: var(--accent);
 }
+
 body {
     color: #242527;
 }
+
 .btn-dangerous {
     color: #fff;
     background: var(--red);
 }
+
 .btn-dangerous:hover {
     background: var(--text-red);
+}
+
+.accentColorSelectionCt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.accentColorCircle {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.accentColorCircle:checked::after {
+    content: url("data:image/svg+xml,%3Csvg width='17' height='17' viewBox='0 0 17 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14.8333 4.66333L6.99044 12.5062L2.5 8.01578' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    animation: checkMark .2s;
+}
+
+@keyframes checkMark {
+    from {
+        transform: scale(.2);
+        opacity: .2;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.touchKeyboardBtn {
+    background: rgb(44, 52, 62);
+    color: #fff;
+    padding: 16px;
+    height: initial;
+    font-size: 1.05em;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    height: 60px;
+    box-shadow: 0 6px 20px rgba(118, 125, 131, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.touchKeyboardBtn:hover {
+    background: rgb(29, 34, 40);
+    padding: 17px 20px;
+}
+
+.touchKeyboardBtn:hover .tkLabel {
+    display: flex;
+    animation: tkLabel .2s ease-in-out;
+}
+
+.touchKeyboardBtn:hover .tkIcn {
+    width: 26px;
+    height: 26px;
+    transition: .2s;
+}
+
+.touchKeyboardBtn .tkIcn {
+    width: 28px;
+    height: 28px;
+}
+
+.tkLabel {
+    display: none;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+@keyframes tkLabel {
+    0% {
+        max-width: 10px;
+    }
+
+    99% {
+        max-width: 150px;
+    }
+
+    100% {
+        max-width: none;
+    }
 }

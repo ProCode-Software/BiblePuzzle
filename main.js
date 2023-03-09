@@ -95,12 +95,44 @@ const systemIcons = {
 </svg>
 `
 }
+
+const accentColors = [
+    '#FF2F61', '#FFC120', '#75FF20', '#14C7FF', '#0056F5', '#FF00E5', '#2C343E'
+]
+function createAccentColorSelectionBlock() {
+    const container = document.createElement('div')
+    container.className = 'accentColorSelectionCt'
+
+    accentColors.forEach(color => {
+        const colorEl = document.createElement('input')
+        colorEl.type = 'radio'
+        colorEl.name = 'accentColor'
+        colorEl.value = color
+        colorEl.style.background = color
+        colorEl.className = 'accentColorCircle'
+        colorEl.setAttribute('data-color', accentColors.indexOf(color))
+        container.append(colorEl)
+        const index = accentColors.indexOf(color)
+
+        console.log(settingsValues.themeColor);
+        if (getSettings().themeColor == index) { colorEl.checked = true }
+
+        colorEl.addEventListener('click', () => {
+            settingsValues.themeColor = index
+            updateSettings()
+            console.log(settingsValues.themeColor);
+        })
+    })
+
+    return container
+}
+
 let settingsValues = {
     displayName: '',
     darkMode: false,
     backSpacing: true,
     mobileKeyboard: false,
-    themeColor: 0
+    themeColor: 4
 }
 
 if (!localStorage.getItem('userSettings')) {
@@ -587,7 +619,7 @@ const settingsModel = [
             {
                 title: 'Theme color',
                 type: 'etc',
-                block: null
+                block: createAccentColorSelectionBlock()
             }
         ]
     },
@@ -605,7 +637,7 @@ const settingsModel = [
                 type: 'toggle',
                 title: 'Touch keyboard',
                 value: "mobileKeyboard",
-                
+
                 description: 'Show touch keyboard button. Best for mobile users.'
             },
         ]
@@ -691,6 +723,7 @@ settingsModel.forEach(category => {
                     }
                     updateSettings()
                 })
+
                 break;
             case 'input':
                 valueEl = document.createElement('input')
@@ -717,7 +750,19 @@ settingsModel.forEach(category => {
 
 function updateSettings() {
     localStorage.setItem('userSettings', JSON.stringify(settingsValues))
+
+    checkSettings()
 }
 function getSettings() {
     return JSON.parse(localStorage.getItem('userSettings'))
 }
+function checkSettings() {
+    document.body.style.setProperty('--accent', accentColors[getSettings().themeColor])
+
+    if (getSettings().darkMode == true) {
+        darkTheme()
+    } else {
+        lightTheme()
+    }
+}
+checkSettings()
