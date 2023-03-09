@@ -753,6 +753,7 @@ function updateSettings() {
 
     checkSettings()
 }
+const tkBtn = document.querySelector('.touchKeyboardBtn')
 function getSettings() {
     return JSON.parse(localStorage.getItem('userSettings'))
 }
@@ -764,5 +765,12 @@ function checkSettings() {
     } else {
         lightTheme()
     }
+
+    if (getSettings().mobileKeyboard == true) {
+        tkBtn.style.display = 'flex'
+    } else {
+        tkBtn.style.display = 'none'
+    }
 }
+
 checkSettings()
