@@ -1269,25 +1269,23 @@ button svg {
     flex-shrink: 0;
     position: relative;
     transition: .2s;
+    display: inline-flex;
+    align-items: center;
 }
 
 .toggleSwitch::after {
     content: '';
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     width: 12px;
     height: 12px;
     background: #D1D2D6;
     border-radius: 50%;
     left: 5px;
-    transition: left .2s;
+    transition: .2s;
 }
 
 .toggleSwitch:hover::after {
-    width: 14px;
-    height: 14px;
-    transition: .2s;
+    transform: scale(1.2);
 }
 
 .toggleSwitch.on:after {
@@ -1468,4 +1466,9 @@ body.dark .graph-content {
     opacity: 0;
     position: absolute;
     top: 0;
+    pointer-events: none;
+    width: 40%;
+}
+.compactActionBtn:not(:hover) {
+    background: none !important;
 }

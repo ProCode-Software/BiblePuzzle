@@ -132,6 +132,26 @@ let settingsValues = {
     mobileKeyboard: false,
     themeColor: 4
 }
+let stats = {
+    bestVerse: 1, // Based on score.
+    versesCompleted: 0,
+    totalCharactersTyped: 0, // correct characters
+    avgCPS: 0,
+    gradebook: [ // max grades: 10
+        /* {
+            date: new Date(),
+            verse: '',
+            grade: 0.0,
+            incorrect: 0
+        } */
+    ],
+    troubleKeys: [
+        /* {
+            key: 'a',
+            timesIncorrect: 0
+        } */
+    ]
+}
 
 if (!localStorage.getItem('userSettings')) {
     localStorage.setItem('userSettings', JSON.stringify(settingsValues))
