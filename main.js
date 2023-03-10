@@ -801,7 +801,7 @@ function checkSettings() {
             tkInp.focus()
         })
 
-        tkInp.addEventListener('keyup', () => {
+        tkInp.addEventListener('input', () => {
             try {
                 currentCt.children[currentChar - 5].scrollIntoView({
                     inline: "start", behavior: "smooth"
