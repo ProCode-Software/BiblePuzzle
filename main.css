@@ -646,62 +646,43 @@ main {
 body.dark,
 body.dark .main {
     background-color: #1f2637;
-    color: #fff;
-    --accent: #0088ff;
+    color: #fcfcfc;
+    --accent: #4882ED;
 }
 
 body.dark header {
-    background-color: #2f374ac1;
+    /* background-color: #2f374ac1; */
 }
 
 body.dark .box,
 body.dark .main [class*=meta-] {
-    background-color: #2f374ac1;
+    background: rgba(84, 90, 109, 0.2);
 }
-
-body.dark .box {
-    box-shadow: 0 7px 20px -4px rgb(0 0 0 / 8%)
-}
-
 input {
     color: inherit;
-}
-
-body.dark .toolbar {
-    box-shadow: 0 7px 20px -4px rgb(0 0 0 / 16%);
-    background: #22283677;
-    border-color: #00000025;
-    color: #fff;
 }
 
 body.dark * {
     color: #fff;
 }
 
-body.dark #playerNameOp:hover {
-    box-shadow: 0 7px 20px -4px rgb(0 0 0 / 16%);
-    background: #22283688;
-}
-
-body.dark #playerNameOp:focus {
-    background: #22283688;
-    box-shadow: 0 7px 20px -4px rgb(0 0 0 / 25%);
-}
-
 body.dark .character.correct {
-    background: #56FE99aa;
+    background: #B3F1CC;
+    color: #518069;
 }
 
 body.dark .character.incorrectChar {
-    background: #ff9ab2aa;
+    background: #EBB0B7;
+    color: #905858;
 }
 
 body.dark .character.active {
-    background: #9aebffaa;
+    background: #A9D5E8;
+    color: #46768B;
 }
 
 body.dark .character.active::after {
-    background: #136377;
+    background: rgb(0, 116, 182, .3);
 }
 
 
@@ -710,13 +691,13 @@ body.dark #completion .imgGroup img {
 }
 
 body.dark .popups {
-    background: #2a324788;
+    background: rgb(0, 0, 0, .3);
 }
 
 body.dark .popups .popup {
     border: 1px solid #0001;
     background: #1f2637;
-    box-shadow: 0 15px 40px rgb(0 0 0 / 2%);
+    box-shadow: 0 15px 40px rgb(0 0 0 / 30%);
 }
 
 body.dark .popup button,

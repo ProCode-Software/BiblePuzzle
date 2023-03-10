@@ -340,12 +340,6 @@ function startTyping(ct, array) {
             }
         }
     }
-    window.addEventListener('blur', () => {
-        timer.pause()
-    })
-    window.addEventListener('focus', () => {
-        timer.start()
-    })
 }
 let percent;
 
