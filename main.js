@@ -153,6 +153,8 @@ let stats = {
     ]
 }
 
+const tkInp = document.querySelector('.touckKeyboardInp')
+
 if (!localStorage.getItem('userSettings')) {
     localStorage.setItem('userSettings', JSON.stringify(settingsValues))
 }
@@ -271,6 +273,12 @@ function startTyping(ct, array) {
     let allCps = []
     let cpsSampleOver = undefined
     window.onkeydown = (e) => {
+        type(e)
+    }
+    tkInp.addEventListener('input', (e) => {
+        type(e)
+    })
+    function type(e) {
         charactersTyped++
         if (!keyboardLock) {
             if (cpsTest.isSampling == true) {
@@ -781,7 +789,6 @@ function updateSettings() {
     checkSettings()
 }
 const tkBtn = document.querySelector('.touchKeyboardBtn')
-const tkInp = document.querySelector('.touckKeyboardInp')
 function getSettings() {
     return JSON.parse(localStorage.getItem('userSettings'))
 }
@@ -806,7 +813,7 @@ function checkSettings() {
                 currentCt.children[currentChar - 5].scrollIntoView({
                     inline: "start", behavior: "smooth"
                 })
-            } catch (e) {}
+            } catch (e) { }
         })
     } else {
         tkBtn.style.display = 'none'
