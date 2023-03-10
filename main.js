@@ -224,12 +224,15 @@ let backspaceAllowed = true
 let incorrectChars = 0;
 let charactersTyped = 0;
 let keyboardLock = true
+let currentCt;
+let currentChar = 0;
 
 let countedKeys = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()-=+-_`~[]\\|}{;\':"<>?/., '
 countedKeys = countedKeys.split('')
 
 function startTyping(ct, array) {
     let activeCharNum = 0;
+    currentCt = ct
     document.title = `BiblePuzzle | ${reference}`
     document.querySelector('footer #footerVerseRef').textContent = reference
     ct.children[activeCharNum].classList.add('active')
@@ -301,6 +304,7 @@ function startTyping(ct, array) {
                     ct.children[activeCharNum].classList.add('correct')
                     ct.children[activeCharNum].classList.remove('active')
                     activeCharNum++
+                    currentChar = activeCharNum
                     if (activeCharNum !== array.length) {
                         ct.children[activeCharNum].classList.add('active')
                     }
@@ -309,6 +313,7 @@ function startTyping(ct, array) {
                     ct.children[activeCharNum].classList.remove('active')
                     activeCharNum++
                     incorrectChars++
+                    currentChar = activeCharNum
                     document.querySelectorAll('.incorrect span')[0].textContent = incorrectChars
                     if (incorrectChars == 1) {
                         document.querySelectorAll('.incorrect span')[1].textContent = ''
@@ -321,6 +326,7 @@ function startTyping(ct, array) {
                 }
                 // const d = document.createElement('div')
                 try {
+                    // from here
                     ct.children[activeCharNum - 5].scrollIntoView({
                         inline: "start", behavior: "smooth"
                     })
@@ -775,6 +781,7 @@ function updateSettings() {
     checkSettings()
 }
 const tkBtn = document.querySelector('.touchKeyboardBtn')
+const tkInp = document.querySelector('.touckKeyboardInp')
 function getSettings() {
     return JSON.parse(localStorage.getItem('userSettings'))
 }
@@ -789,6 +796,18 @@ function checkSettings() {
 
     if (getSettings().mobileKeyboard == true) {
         tkBtn.style.display = 'flex'
+
+        tkBtn.addEventListener('click', () => {
+            tkInp.focus()
+        })
+
+        tkInp.addEventListener('keyup', () => {
+            try {
+                currentCt.children[currentChar - 5].scrollIntoView({
+                    inline: "start", behavior: "smooth"
+                })
+            } catch (e) {}
+        })
     } else {
         tkBtn.style.display = 'none'
     }
