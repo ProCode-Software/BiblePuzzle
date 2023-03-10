@@ -97,7 +97,7 @@ const systemIcons = {
 }
 
 const accentColors = [
-    '#FF2F61', '#FFC120', '#75FF20', '#14C7FF', '#0056F5', '#FF00E5', '#2C343E'
+    'red', 'gold', 'green', 'turquoise', 'blue', 'magenta', 'black'
 ]
 function createAccentColorSelectionBlock() {
     const container = document.createElement('div')
@@ -108,7 +108,7 @@ function createAccentColorSelectionBlock() {
         colorEl.type = 'radio'
         colorEl.name = 'accentColor'
         colorEl.value = color
-        colorEl.style.background = color
+        colorEl.style.background = `var(--${color}-accent)`
         colorEl.className = 'accentColorCircle'
         colorEl.setAttribute('data-color', accentColors.indexOf(color))
         container.append(colorEl)
@@ -727,6 +727,7 @@ settingsModel.forEach(category => {
             case 'input':
                 valueEl = document.createElement('input')
                 valueEl.id = `${settingId}Input`
+                valueEl.type = 'text'
 
                 valueEl.value = getSettings()[s.value]
 
@@ -757,7 +758,7 @@ function getSettings() {
     return JSON.parse(localStorage.getItem('userSettings'))
 }
 function checkSettings() {
-    document.body.style.setProperty('--accent', accentColors[getSettings().themeColor])
+    document.body.style.setProperty('--accent', `var(--${accentColors[getSettings().themeColor]}-accent)`)
 
     if (getSettings().darkMode == true) {
         darkTheme()
