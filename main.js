@@ -114,13 +114,11 @@ function createAccentColorSelectionBlock() {
         container.append(colorEl)
         const index = accentColors.indexOf(color)
 
-        console.log(settingsValues.themeColor);
         if (getSettings().themeColor == index) { colorEl.checked = true }
 
         colorEl.addEventListener('click', () => {
             settingsValues.themeColor = index
             updateSettings()
-            console.log(settingsValues.themeColor);
         })
     })
 
@@ -157,10 +155,9 @@ const extract = (array, outputEl) => {
         el.className = 'character'
         if (char == ' ') {
             txt = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: .4;">
-<path d="M2.75 10V13C2.75 13.8284 3.42157 14.5 4.25 14.5H19.75C20.5784 14.5 21.25 13.8284 21.25 13V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.75 10V13C2.75 13.8284 3.42157 14.5 4.25 14.5H19.75C20.5784 14.5 21.25 13.8284 21.25 13V10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `
-            el.style.alignItems = 'flex-end'
             el.style.paddingBottom = '5px'
         }
         el.innerHTML = txt
@@ -431,8 +428,12 @@ function completeTest() {
     const addToJournalBtn = createButtonElement('default', 'Add to journal', systemIcons.bookmark)
     addToJournalBtn.classList.add('addToJournalBtn')
 
+
     imgGroup.append(img, cap)
     vGroup.append(refLab, verseLab, addToJournalBtn)
+
+    // until implemented: coming soon
+    addToJournalBtn.remove()
 
     const typingFinalStats = panelView.querySelector('.testStats')
 

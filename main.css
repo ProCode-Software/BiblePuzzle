@@ -393,6 +393,9 @@ main {
     border-radius: 7px;
     color: #1A5BA8;
 }
+.character:not(.active):has(svg) {
+    padding-top: 10px;
+}
 
 .character.active::after {
     content: '';
@@ -1414,4 +1417,10 @@ body.dark .statTag.time {
 body.dark .statTag.incorrect {
     --bg-color: #FF9BB3;
     --fg-color: #4B2028;
+}
+body.dark .toggleSwitch:not(.on) {
+    background: #495461;
+}
+body.dark .toggleSwitch:not(.on)::after {
+    background: #C8D4E2;
 }
