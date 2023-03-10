@@ -76,26 +76,34 @@ body.dark .btn {
     border-color: #384657;
 }
 
+body.dark .btn:hover {
+    background: #2e3947;
+}
+
 body.dark input:focus {
     border-bottom-color: var(--accent);
 }
 
 body.dark .touchKeyboardBtn {
-    background: rgb(62, 70, 80);
+    background: rgb(58, 72, 89);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
+
 body.dark .character.correct {
     background: #B3F1CC;
     color: #518069;
 }
+
 body.dark .character.incorrectChar {
     background: #EBB0B7;
     color: #905858;
 }
+
 body.dark .character.active {
     background: #A9D5E8;
     color: #46768B;
 }
+
 body.dark .character.active::after {
     background: rgb(0, 116, 182, .3);
 }
@@ -141,9 +149,9 @@ header>div {
     padding: 0px;
     border-radius: 18px;
     border: 1px solid rgba(var(--border-color), 0.3);
-    box-shadow: 0 15px 40px rgba(100, 100, 100, .5);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .3);
     text-align: center;
-    width: 450px;
+    width: 500px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -347,11 +355,10 @@ main {
     padding: 6px;
     width: 42px;
     height: 42px;
-    background: none;
 }
 
-.popup-header .sideButtons button:hover {
-    background: #F4F6FB;
+.popup-header .sideButtons button:not(:hover) {
+    background: none;
 }
 
 .popup-footer {
@@ -393,6 +400,7 @@ main {
     border-radius: 7px;
     color: #1A5BA8;
 }
+
 .character:not(.active):has(svg) {
     padding-top: 10px;
 }
@@ -585,19 +593,19 @@ main {
 }
 
 .green {
-    color: #56FE99;
+    color: var(--text-green);
 }
 
 .red {
-    color: #f93562;
+    color: var(--text-red);
 }
 
 .graph svg {
-    color: #56FE99;
+    color: var(--green);
 }
 
 .graph svg.low {
-    color: #ff496c !important;
+    color: var(--red) !important;
 }
 
 .toolbar {
@@ -669,8 +677,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-    background: #00000077;
+    border-radius: 8px;
+    background: #00000091;
     font-size: 13px;
     backdrop-filter: blur(5px);
     transition: .3s;
@@ -862,7 +870,6 @@ main {
 
 .graph .graph-content {
     padding: 30px;
-    background: #FFFFFF;
     box-shadow: 0px 0px 40px rgba(var(--border-color), 0.7);
     border-radius: 50%;
     width: 80%;
@@ -1410,17 +1417,50 @@ body {
 body.dark .btn {
     color: #D3DAE5;
 }
+
 body.dark .statTag.time {
     --bg-color: #9BBDFF;
     --fg-color: #20324B;
 }
+
 body.dark .statTag.incorrect {
     --bg-color: #FF9BB3;
     --fg-color: #4B2028;
 }
+
 body.dark .toggleSwitch:not(.on) {
     background: #495461;
 }
+
 body.dark .toggleSwitch:not(.on)::after {
     background: #C8D4E2;
+}
+
+body.dark .popup {
+    background: #1F2637;
+}
+
+.actionBtn {
+    padding: 6px;
+    width: 42px;
+    height: 42px;
+}
+
+.popup .popup-footer button {
+    height: 45px !important;
+    min-width: 140px !important;
+    border-radius: 10px !important;
+}
+
+.popup .btnActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+body.dark #completion .imgGroup img {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+body.dark .graph-content {
+    box-shadow: 0px 0px 40px rgba(0, 0,0, 0.3);
 }
