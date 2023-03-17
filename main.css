@@ -1482,7 +1482,7 @@ body[dir="rtl"] button.touchKeyboardBtn {
     left: 20px;
     right: revert;
 }
-@media screen and (max-width:450px) {
+@media screen and (max-width: 450px) {
     .panel {
         max-width: none;
         min-width: none;
