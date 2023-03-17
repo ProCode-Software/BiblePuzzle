@@ -1473,3 +1473,12 @@ body.dark .graph-content {
 .compactActionBtn:not(:hover) {
     background: none !important;
 }
+
+body[dir="rtl"] .panel {
+    left: 0;
+    right: revert;
+}
+body[dir="rtl"] button.touchKeyboardBtn {
+    left: 20px;
+    right: revert;
+}
