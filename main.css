@@ -238,7 +238,8 @@ button:hover {
     border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: baseline;
+    justify-content: center;
+    gap: 6px;
     font-weight: 500;
 }
 
@@ -261,7 +262,6 @@ svg [stroke] {
 .statTag .icon {
     width: 20px;
     height: 20px;
-    margin-right: 6px;
 }
 
 .statTag.incorrect {
