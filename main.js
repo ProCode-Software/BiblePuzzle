@@ -64,7 +64,20 @@ const randomVerses = [
         ref: 'John 3:3',
         imageURL: 'https://biblia.com/bible/images/640x480/Jn3.3?extension=png&fallbackOnFailure=false',
         source: 'Faithlife'
+    },
+    {
+        verse: 'And the God of all grace, who called you to his eternal glory in Christ, after you have suffered a little while, will himself restore you and make you strong, firm and steadfast.',
+        ref: '1 Peter 5:10',
+        imageURL: 'https://imageproxy.youversionapi.com/320x320/https://s3.amazonaws.com/static-youversionapi-com/images/base/68496/1280x1280.jpg',
+        source: 'YouVersion'
+    },
+    {
+        verse: 'If we claim to have fellowship with him and yet walk in the darkness, we lie and do not live out the truth. But if we walk in the light, as he is in the light, we have fellowship with one another, and the blood of Jesus, his Son, purifies us from all sin.',
+        ref: '1 John 1:6-7',
+        imageURL: 'https://imageproxy.youversionapi.com/640x640/https://s3-us-west-2.amazonaws.com/mushroom-verse-images-prod/180536297-1679020452821.jpg',
+        source: 'ProCode Software'
     }
+    
 ]
 
 const systemIcons = {
