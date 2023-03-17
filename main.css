@@ -665,6 +665,7 @@ main {
     border-radius: 6px;
     position: relative;
     display: flex;
+    min-width: 100px;
 }
 
 #completion .imgGroup caption {
