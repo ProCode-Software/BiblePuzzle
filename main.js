@@ -76,8 +76,19 @@ const randomVerses = [
         ref: '1 John 1:6-7',
         imageURL: 'https://imageproxy.youversionapi.com/640x640/https://s3-us-west-2.amazonaws.com/mushroom-verse-images-prod/180536297-1679020452821.jpg',
         source: 'ProCode Software'
+    },
+    {
+        verse: 'In him we have redemption through his blood, the forgiveness of sins, in accordance with the riches of God’s grace that he lavished on us. With all wisdom and understanding,',
+        ref: 'Ephesians 1:7-8',
+        imageURL: 'https://imageproxy.youversionapi.com/640x640/https://s3-us-west-2.amazonaws.com/mushroom-verse-images-prod/180536297-1679276686270.jpg',
+        source: 'ProCode Software'
+    },
+    {
+        verse: 'Consequently, you are no longer foreigners and strangers, but fellow citizens with God’s people and also members of his household, built on the foundation of the apostles and prophets, with Christ Jesus himself as the chief cornerstone.',
+        ref: 'Ephesians 2:19-20',
+        imageURL: 'https://imageproxy.youversionapi.com/640x640/https://s3-us-west-2.amazonaws.com/mushroom-verse-images-prod/180536297-1679276615769.jpg',
+        source: 'ProCode Software'
     }
-    
 ]
 
 const systemIcons = {
