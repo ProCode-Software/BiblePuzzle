@@ -416,6 +416,7 @@ main {
     background: rgb(0, 117, 224, .3);
     animation: blink .9s infinite;
     transform: translateX(-50%);
+    border-radius: 100px;
 }
 
 @keyframes blink {
