@@ -1490,3 +1490,22 @@ body[dir="rtl"] button.touchKeyboardBtn {
         width: 100%;
     }
 }
+.settingTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.textTag {
+    display: inline-flex;
+    padding: 3px 7px;
+    font-size: 0.9em;
+    border-radius: 7px;
+}
+.textTag.beta {
+    background: #14c7ff36;
+    color: #117899;
+}
+body.dark .textTag.beta {
+    background: #93d4e9;
+    color: #14586e;
+}
