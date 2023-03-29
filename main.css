@@ -1502,10 +1502,10 @@ body[dir="rtl"] button.touchKeyboardBtn {
     border-radius: 7px;
 }
 .textTag.beta {
-    background: #14c7ff36;
-    color: #117899;
+    background: #14c7ff17;
+    color: #13aad9;
 }
 body.dark .textTag.beta {
-    background: #93d4e9;
-    color: #14586e;
+    background: #77c5df;
+    color: #275564;
 }
