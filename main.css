@@ -1458,12 +1458,15 @@ body.dark .popup {
     align-items: center;
     gap: 15px;
 }
+
 body.dark #completion .imgGroup img {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
+
 body.dark .graph-content {
-    box-shadow: 0px 0px 40px rgba(0, 0,0, 0.3);
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.3);
 }
+
 .touckKeyboardInp {
     opacity: 0;
     position: absolute;
@@ -1471,6 +1474,7 @@ body.dark .graph-content {
     pointer-events: none;
     width: 40%;
 }
+
 .compactActionBtn:not(:hover) {
     background: none !important;
 }
@@ -1479,10 +1483,12 @@ body[dir="rtl"] .panel {
     left: 0;
     right: revert;
 }
+
 body[dir="rtl"] button.touchKeyboardBtn {
     left: 20px;
     right: revert;
 }
+
 @media screen and (max-width: 450px) {
     .panel {
         max-width: none;
@@ -1490,21 +1496,25 @@ body[dir="rtl"] button.touchKeyboardBtn {
         width: 100%;
     }
 }
+
 .settingTitle {
     display: flex;
     align-items: center;
     gap: 8px;
 }
+
 .textTag {
     display: inline-flex;
     padding: 3px 7px;
     font-size: 0.9em;
     border-radius: 7px;
 }
+
 .textTag.beta {
     background: #14c7ff17;
     color: #13aad9;
 }
+
 body.dark .textTag.beta {
     background: #77c5df;
     color: #275564;
