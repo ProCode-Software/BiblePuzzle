@@ -80,7 +80,7 @@ let stats = {
     troubleKeys: [
         /* {
             key: 'a',
-            timesIncorrect: 0
+            incorrectHistory: [3,4,0,2,6,0,0,1] //each are verses. number of how many times incorrect in a verse. every verse is here, including ones with 0 incorrect.
         } */
     ]
 }
@@ -243,6 +243,8 @@ function startTyping(ct, array) {
                 if (e.key == array[activeCharNum]) {
                     ct.children[activeCharNum].classList.add('correct')
                     ct.children[activeCharNum].classList.remove('active')
+                    stats.totalCharactersTyped++
+                    updateStats()
                     activeCharNum++
                     currentChar = activeCharNum
                     if (activeCharNum !== array.length) {
@@ -275,6 +277,8 @@ function startTyping(ct, array) {
             if (activeCharNum == array.length) {
                 if (ct == refContainer) {
                     completeTest()
+                    stats.versesCompleted++
+                    updateStats()
                     keyboardLock = true
                     timer.pause()
                 } else {
@@ -760,5 +764,6 @@ function checkSettings() {
 
     backspaceAllowed = getSettings().backSpacing
 }
+function updateStats() { }
 
 checkSettings()
