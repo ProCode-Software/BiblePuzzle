@@ -334,6 +334,17 @@ if (!preloadedUserName) {
     popups.style.display = 'none'
     keyboardLock = false
 }
+/**
+ * 
+ * @param {boolean} showOrHide true to show popup
+ * @param {string} popupId query selector of the popup
+ */
+function showPopup(showOrHide, popupId) {
+    popups.querySelectorAll('.popup').forEach(el => el.style.display = 'none')
+    popups.style.display = (showOrHide == true ? 'flex' : 'none')
+
+    popups.querySelector(popupId).style.display = (showOrHide == true ? 'flex' : 'none')
+}
 
 function completeTest() {
     showPanel(true, 'completion', true)
@@ -767,3 +778,11 @@ function checkSettings() {
 function updateStats() { }
 
 checkSettings()
+
+const verseBtn = document.querySelector('#footerVerseRef')
+verseBtn.addEventListener('dblclick', () => {
+    showPopup(true, '.verseListPopup')
+
+    const verseList = document.querySelector('.pverseList')
+    
+})
