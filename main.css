@@ -1594,3 +1594,40 @@ body.dark .textTag.beta {
     background: hsl(123, 100%, 94%);
     color: hsl(123, 87%, 41%);
 }
+.developerPanel {
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 40px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 9px;
+    background: #FFFFFF;
+    border: 1px solid rgba(232, 238, 241, 0.4);
+    box-shadow: 0px 4px 8px -2px rgba(199, 208, 213, 0.09), 0px 10px 20px rgba(224, 229, 232, 0.16);
+    border-radius: 15px;
+    gap: 8px;
+}
+.devCmdPromptFrame {
+    position: relative;
+    width: 100%;
+}
+.devInputFrame {
+    width: 100%;
+}
+.devCmdInput {
+    width: 100%;
+    border: none;
+    height: 45px;
+    padding-inline: 14px;
+}
+.devCmdsBtn {
+    color: inherit;
+    background: none;
+}
+.developerPanel .sep {
+    height: 32px;
+    flex-shrink: 0;
+    width: 1px;
+    background: rgba(var(--border-color), 0.4);
+}
