@@ -141,6 +141,7 @@ header>div {
     display: flex;
     align-items: center;
     justify-content: center;
+    display: none;
 }
 
 .popups .popup {
@@ -1445,6 +1446,7 @@ body.dark .popup {
     padding: 6px;
     width: 42px;
     height: 42px;
+    flex-shrink: 0;
 }
 
 .popup .popup-footer button {
@@ -1509,6 +1511,7 @@ body[dir="rtl"] button.touchKeyboardBtn {
     padding: 3px 7px;
     font-size: 0.9em;
     border-radius: 7px;
+    font-weight: 500;
 }
 
 .textTag.beta {
@@ -1519,4 +1522,75 @@ body[dir="rtl"] button.touchKeyboardBtn {
 body.dark .textTag.beta {
     background: #77c5df;
     color: #275564;
+}
+
+.pverseList {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.verseListItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    transition: .15s;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.verseTD {
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.verseListItTitle {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.verseListItMain {
+    font-size: 14px;
+    color: var(--subtitle);
+}
+
+.verseListItem:hover {
+    background: rgba(var(--border-color), 0.2);
+}
+
+.verseListPopup .popup-body {
+    padding-inline: 14px;
+}
+
+.verseListItem .addToJournalBtn {
+    display: none;
+}
+
+.verseListItem:hover .addToJournalBtn {
+    display: flex;
+    animation: fadeIn .15s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+.verseListItem .addToJournalBtn {
+    background: transparent;
+}
+.verseListItem .addToJournalBtn:hover {
+    background: rgba(var(--border-color), 0.3);
+}
+.textTag.dev {
+    background: hsl(123, 100%, 94%);
+    color: hsl(123, 87%, 41%);
 }

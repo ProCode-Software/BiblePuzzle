@@ -780,9 +780,17 @@ function updateStats() { }
 checkSettings()
 
 const verseBtn = document.querySelector('#footerVerseRef')
-verseBtn.addEventListener('dblclick', () => {
-    showPopup(true, '.verseListPopup')
-})
+verseBtn.addEventListener('click', function (evt) {
+    let throttle = false
+
+    if (!throttle && evt.detail === 3) {
+        showPopup(true, '.verseListPopup')
+        throttle = true;
+        setTimeout(function () {
+            throttle = false;
+        }, 1000);
+    }
+});
 
 const verseList = document.querySelector('.pverseList')
 for (let vx of randomVerses) {
@@ -793,6 +801,33 @@ for (let vx of randomVerses) {
             <div class="verseListItTitle">${vx.ref}</div>
             <div class="verseListItMain">${vx.verse}</div>
         </div>
-        <button class="addToJournalBtn">${systemIcons.bookmark}</button>
+        <button class="addToJournalBtn actionBtn">${systemIcons.bookmark}</button>
         `
+}
+document.querySelector('.nameArea').addEventListener('click', function (evt) {
+    let throttle = false
+
+    if (!throttle && evt.detail === 7) {
+        toggleDeveloperMode(true)
+        throttle = true;
+        setTimeout(function () {
+            throttle = false;
+        }, 1500);
+    }
+});
+function toggleDeveloperMode(onOrOff) {
+    if (onOrOff == true) {
+        if (sessionStorage.getItem('developerMode') == 'true') {
+            alert('Developer mode is already on.')
+        } else {
+            sessionStorage.setItem('developerMode', 'true')
+            alert('Developer mode has been enabled.\nWarning: This tool is intended for developer use only and only use if you know what you\'re doing.')
+        }
+    } else {
+        sessionStorage.removeItem('developerMode')
+        alert('Developer mode has been disabled. Reload to take effect.')
+    }
+}
+if (sessionStorage.getItem('developerMode') == 'true') {
+    document.querySelector('.nameArea').innerHTML += `<div class="textTag dev">DEV</div>`
 }
