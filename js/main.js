@@ -782,7 +782,17 @@ checkSettings()
 const verseBtn = document.querySelector('#footerVerseRef')
 verseBtn.addEventListener('dblclick', () => {
     showPopup(true, '.verseListPopup')
-
-    const verseList = document.querySelector('.pverseList')
-    
 })
+
+const verseList = document.querySelector('.pverseList')
+for (let vx of randomVerses) {
+    const vxItem = document.createElement('li')
+    vxItem.className = 'verseListItem'
+    verseList.append(vxItem)
+    vxItem.innerHTML = `<div class="verseTD">
+            <div class="verseListItTitle">${vx.ref}</div>
+            <div class="verseListItMain">${vx.verse}</div>
+        </div>
+        <button class="addToJournalBtn">${systemIcons.bookmark}</button>
+        `
+}
