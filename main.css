@@ -1631,3 +1631,6 @@ body.dark .textTag.beta {
     width: 1px;
     background: rgba(var(--border-color), 0.4);
 }
+::placeholder {
+    color: var(--subtitle);
+}
