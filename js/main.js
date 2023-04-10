@@ -620,13 +620,26 @@ const settingsModel = [
                 value: "mobileKeyboard",
 
                 description: 'Show touch keyboard button. Best for mobile users.'
-            },
+            }
+        ]
+    },
+    {
+        id: "accessibility",
+        name: "Accessibility",
+        settings: [
             {
                 type: 'toggle',
                 title: 'Narrator <div class="textTag beta" title="This feature is experimental and is still receiving updates and new features that may be unfinished.">Beta</div>',
                 value: "narrator",
 
                 description: 'Give spoken feedback while typing.'
+            },
+            {
+                type: 'slider',
+                title: 'Text size',
+                value: "textSize",
+
+                description: 'Set the text scale of the verse while typing'
             },
         ]
     },
@@ -837,6 +850,7 @@ window.addEventListener('keyup', (e) => {
         if (e.key == '/') {
             document.querySelector('.developerPanel').style.display = 'flex'
             document.querySelector('.devCmdInput').focus()
+            document.querySelector('.devCmdInput').value = '/'
         }
     }
 })
