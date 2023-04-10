@@ -1636,12 +1636,12 @@ body.dark .textTag.beta {
 }
 .developerPanel {
     display: none;
-    animation: devFloatIn .2s linear;
+    animation: devFloatIn .2s ease-in-out;
 }
 @keyframes devFloatIn {
     from {
         opacity: 0;
-        transform: translateY(60px);
+        transform: translateY(70px);
     }
     to {
         opacity: 1;
