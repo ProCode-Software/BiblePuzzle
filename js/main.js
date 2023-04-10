@@ -63,6 +63,7 @@ let settingsValues = {
     mobileKeyboard: false,
     themeColor: 4,
     narrator: false,
+    textSize: 17
 }
 let stats = {
     bestVerse: 1, // Based on score.
@@ -359,7 +360,7 @@ function completeTest() {
     const scoreText = panelView.querySelector('.graph-content .score')
     const subscoreText = panelView.querySelector('.graph-content .subscore')
 
-    subscoreText.innerHTML = `<span class="${Math.round(percent) >= 50 ? 'green' : 'red'}" style="font-weight: 600">${(charactersTyped) - incorrectChars}</span>/${charactersTyped}`
+    subscoreText.innerHTML = `<span class="${Math.round(percent) >= 75 ? 'green' : (Math.round(percent) >= 50 ? 'orange' : 'red')}" style="font-weight: 600">${(charactersTyped) - incorrectChars}</span>/${charactersTyped}`
     scoreText.textContent = `${Math.round(percent)}%`
 
 
@@ -379,8 +380,11 @@ function completeTest() {
 
     const completeHeading = panelView.querySelector('.panelTitle')
 
-    if (Math.round(percent) >= 50) {
+    if (Math.round(percent) >= 75) {
         completeHeading.textContent = `Congratulations, you completed the test${username !== null ? ', ' + username : ''}!`
+    } else if (Math.round(percent) < 75 && Math.round(percent) >= 50) {
+        completeHeading.textContent = `Good job${username !== null ? ', ' + username : ''}!`
+        circle.parentElement.classList.add('avg')
     } else {
         completeHeading.textContent = `Nice try${username !== null ? ', ' + username : ''}!`
         circle.parentElement.classList.add('low')
@@ -638,6 +642,8 @@ const settingsModel = [
                 type: 'slider',
                 title: 'Text size',
                 value: "textSize",
+                min: 10,
+                max: 30,
 
                 description: 'Set the text scale of the verse while typing'
             },
@@ -687,7 +693,7 @@ settingsModel.forEach(category => {
 
         setEl.id = settingId
 
-        if (s.type == 'etc' || s.type == 'input') {
+        if (s.type == 'etc' || s.type == 'input' || s.type == 'slider') {
             setEl.classList.add('vertical')
         }
         setEl.innerHTML = `
@@ -735,6 +741,22 @@ settingsModel.forEach(category => {
 
                 valueEl.onchange = () => {
                     settingsValues[s.value] = valueEl.value
+                    updateSettings()
+                }
+                break;
+            case 'slider':
+                valueEl = document.createElement('input')
+                valueEl.id = `${settingId}Input`
+                valueEl.type = 'range'
+
+                valueEl.value = getSettings()[s.value]
+                valueEl.min = s.min
+                valueEl.max = s.max
+                valueEl.title = valueEl.value
+
+                valueEl.onchange = () => {
+                    settingsValues[s.value] = valueEl.value
+                    valueEl.title = valueEl.value
                     updateSettings()
                 }
                 break;
@@ -853,4 +875,10 @@ window.addEventListener('keyup', (e) => {
             document.querySelector('.devCmdInput').value = '/'
         }
     }
+})
+document.querySelectorAll('input[type="range"]').forEach(slider => {
+    slider.addEventListener('input', () => {
+        const valPercent = (slider.value / slider.max) * 100;
+        slider.style.setProperty('background', `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`, 'important')
+    })
 })

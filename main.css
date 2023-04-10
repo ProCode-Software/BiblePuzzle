@@ -602,6 +602,9 @@ main {
 .red {
     color: var(--text-red);
 }
+.orange {
+    color: var(--text-orange);
+}
 
 .graph svg {
     color: var(--green);
@@ -609,6 +612,9 @@ main {
 
 .graph svg.low {
     color: var(--red) !important;
+}
+.graph svg.avg {
+    color: var(--orange) !important;
 }
 
 .toolbar {
@@ -1647,4 +1653,29 @@ body.dark .textTag.beta {
         opacity: 1;
         transform: translateY(0%);
     }
+}
+input[type="range"] {
+    --slider-bg: rgba(var(--border-color), 0.6);
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    height: 5px;
+    background: var(--slider-bg) !important;
+    border: none !important;
+    padding: 0 !important;
+    outline: none;
+}
+::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 5px;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 14px;
+    width: 14px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    border: none;
 }
