@@ -13,6 +13,11 @@ const developerCommands = [
         params: ['incorrectChars:number']
     },
     {
+        cmd: 'setsetting',
+        desc: 'Sets a setting',
+        params: ['setting:string', 'value:settingValue']
+    },
+    {
         cmd: 'togglecpsview',
         desc: 'Toggles the characters/sec counter'
     },

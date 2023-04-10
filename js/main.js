@@ -831,3 +831,12 @@ function toggleDeveloperMode(onOrOff) {
 if (sessionStorage.getItem('developerMode') == 'true') {
     document.querySelector('.nameArea').innerHTML += `<div class="textTag dev">DEV</div>`
 }
+
+window.addEventListener('keyup', (e) => {
+    if (sessionStorage.getItem('developerMode') == 'true') {
+        if (e.key == '/') {
+            document.querySelector('.developerPanel').style.display = 'flex'
+            document.querySelector('.devCmdInput').focus()
+        }
+    }
+})
