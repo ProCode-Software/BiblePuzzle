@@ -281,7 +281,6 @@ function startTyping(ct, array) {
                     stats.versesCompleted++
                     updateStats()
                     keyboardLock = true
-                    timer.pause()
                 } else {
                     startTyping(refContainer, refSplit)
                 }
@@ -348,6 +347,7 @@ function showPopup(showOrHide, popupId) {
 }
 
 function completeTest() {
+    timer.pause()
     showPanel(true, 'completion', true)
     const panelView = getPanelView('completion')
     panelView.style.display = 'flex'
@@ -749,38 +749,25 @@ settingsModel.forEach(category => {
                 valueEl = document.createElement('div')
                 valueEl.className = 'sliderCt'
 
-                const valueElB = document.createElement('input')
-                valueElB.id = `${settingId}Input`
-                valueElB.type = 'range'
-                const ctx = document.createElement('div')
-                ctx.className = 'sliderMainCt'
-
-                ctx.append(valueElB)
-
-                console.log(valueElB);
-                valueEl.append(ctx)
-
-                valueElB.value = getSettings()[s.value]
-                valueElB.min = s.min
-                valueElB.max = s.max
-                valueElB.title = valueEl.value
-
                 valueEl.innerHTML = `
                 <div class="sliderMainCt">
 ${s.minLabel}
-                ${valueEl.innerHTML}
+                <input type="range" id="${settingId}Input" min="${s.min}" max="${s.max}">
                 ${s.maxLabel}
                 </div>
                 <input type="number" class="sliderValueSimInp">
                 `
+
+                const valueElB = valueEl.querySelector('input[type="range"]')
+
+                valueElB.value = getSettings()[s.value]
+                valueElB.title = valueElB.value
 
                 valueElB.addEventListener('input', () => {
                     settingsValues[s.value] = valueElB.value
                     valueElB.title = valueElB.value
                     valueEl.querySelector('.sliderValueSimInp').value = valueElB.value
                     updateSettings()
-
-                    console.log(valueElB.value);
                 })
 
                 valueEl.querySelector('.sliderValueSimInp').min = s.min
@@ -864,7 +851,9 @@ for (let vx of randomVerses) {
     const vxItem = document.createElement('li')
     vxItem.className = 'verseListItem'
     verseList.append(vxItem)
-    vxItem.innerHTML = `<div class="verseTD">
+    vxItem.innerHTML = `
+    <img src="${vx.imageURL}" class="verseListImg" alt="${vx.ref}">
+    <div class="verseTD">
             <div class="verseListItTitle">${vx.ref}</div>
             <div class="verseListItMain">${vx.verse}</div>
         </div>
@@ -912,7 +901,6 @@ document.querySelectorAll('input[type="range"]').forEach(slider => {
     function updateSlider() {
         const valPercent = ((slider.value / (slider.max - slider.min)) * 100) - (slider.min == 10 ? 50 : 0);
         slider.style.setProperty('background', `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`, 'important')
-        console.log(valPercent);
     }
     slider.addEventListener('input', updateSlider)
     updateSlider()

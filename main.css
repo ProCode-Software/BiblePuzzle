@@ -602,6 +602,7 @@ main {
 .red {
     color: var(--text-red);
 }
+
 .orange {
     color: var(--text-orange);
 }
@@ -613,6 +614,7 @@ main {
 .graph svg.low {
     color: var(--red) !important;
 }
+
 .graph svg.avg {
     color: var(--orange) !important;
 }
@@ -1545,11 +1547,10 @@ body.dark .textTag.beta {
 .verseListItem {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 12px;
     transition: .15s;
     border-radius: 10px;
-    gap: 10px;
+    gap: 15px;
 }
 
 .verseTD {
@@ -1587,19 +1588,28 @@ body.dark .textTag.beta {
 }
 
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
+
 .verseListItem .addToJournalBtn {
     background: transparent;
 }
+
 .verseListItem .addToJournalBtn:hover {
-    background: rgba(var(--border-color), 0.3);
+    background: rgba(var(--border-color), 0.4);
 }
+
 .textTag.dev {
     background: hsl(123, 100%, 94%);
     color: hsl(123, 87%, 41%);
 }
+
 .developerPanel {
     position: absolute;
     bottom: 20px;
@@ -1614,46 +1624,56 @@ body.dark .textTag.beta {
     border-radius: 15px;
     gap: 8px;
 }
+
 .devCmdPromptFrame {
     position: relative;
     width: 100%;
 }
+
 .devInputFrame {
     width: 100%;
 }
+
 .devCmdInput {
     width: 100%;
     border: none;
     height: 45px;
     padding-inline: 14px;
 }
+
 .devCmdsBtn {
     color: inherit;
     background: none;
 }
+
 .developerPanel .sep {
     height: 32px;
     flex-shrink: 0;
     width: 1px;
     background: rgba(var(--border-color), 0.4);
 }
+
 ::placeholder {
     color: var(--subtitle);
 }
+
 .developerPanel {
     display: none;
     animation: devFloatIn .2s ease-in-out;
 }
+
 @keyframes devFloatIn {
     from {
         opacity: 0;
         transform: translateY(70px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0%);
     }
 }
+
 input[type="range"] {
     --slider-bg: rgba(var(--border-color), 0.6);
     appearance: none;
@@ -1666,10 +1686,12 @@ input[type="range"] {
     outline: none;
     margin-block: 7px;
 }
+
 ::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     height: 5px;
 }
+
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 16px;
@@ -1680,21 +1702,43 @@ input[type="range"]::-webkit-slider-thumb {
     margin-top: -6px;
     border: none;
 }
+
 .sliderMainCt {
     display: flex;
     align-items: center;
     width: 100%;
     gap: 10px;
 }
+
 .sliderMainCt input[type='range'] {
     width: 100%;
 }
+
 .sliderCt {
     display: flex;
     align-items: center;
     width: 100%;
     gap: 10px;
 }
+
 .sliderValueSimInp {
     width: 17%;
+}
+
+.verseListImg {
+    width: 60px;
+    border-radius: 8px;
+    display: none;transition: .3s;
+    background: #fff;
+}
+
+.verseListItem:hover .verseListImg {
+    display: block;
+    animation: fadeIn .15s ease-in-out;
+}
+.verseListImg:hover {
+    transform: scale(3) translateX(40%);
+    z-index: 9999;
+    border-radius: 5px;
+    box-shadow: 0 8px 20px rgba(118, 125, 131, 0.2);
 }
