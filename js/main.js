@@ -644,7 +644,8 @@ const settingsModel = [
                 value: "textSize",
                 min: 10,
                 max: 30,
-
+                minLabel: 'a',
+                maxLabel: 'A',
                 description: 'Set the text scale of the verse while typing'
             },
         ]
@@ -745,20 +746,51 @@ settingsModel.forEach(category => {
                 }
                 break;
             case 'slider':
-                valueEl = document.createElement('input')
-                valueEl.id = `${settingId}Input`
-                valueEl.type = 'range'
+                valueEl = document.createElement('div')
+                valueEl.className = 'sliderCt'
 
-                valueEl.value = getSettings()[s.value]
-                valueEl.min = s.min
-                valueEl.max = s.max
-                valueEl.title = valueEl.value
+                const valueElB = document.createElement('input')
+                valueElB.id = `${settingId}Input`
+                valueElB.type = 'range'
+                const ctx = document.createElement('div')
+                ctx.className = 'sliderMainCt'
 
-                valueEl.onchange = () => {
-                    settingsValues[s.value] = valueEl.value
-                    valueEl.title = valueEl.value
+                ctx.append(valueElB)
+
+                console.log(valueElB);
+                valueEl.append(ctx)
+
+                valueElB.value = getSettings()[s.value]
+                valueElB.min = s.min
+                valueElB.max = s.max
+                valueElB.title = valueEl.value
+
+                valueEl.innerHTML = `
+                <div class="sliderMainCt">
+${s.minLabel}
+                ${valueEl.innerHTML}
+                ${s.maxLabel}
+                </div>
+                <input type="number" class="sliderValueSimInp">
+                `
+
+                valueElB.addEventListener('input', () => {
+                    settingsValues[s.value] = valueElB.value
+                    valueElB.title = valueElB.value
+                    valueEl.querySelector('.sliderValueSimInp').value = valueElB.value
                     updateSettings()
-                }
+
+                    console.log(valueElB.value);
+                })
+
+                valueEl.querySelector('.sliderValueSimInp').min = s.min
+                valueEl.querySelector('.sliderValueSimInp').max = s.max
+
+                valueEl.querySelector('.sliderValueSimInp').addEventListener('input', () => {
+                    valueElB.value = valueEl.querySelector('.sliderValueSimInp').value
+                })
+
+                valueEl.querySelector('.sliderValueSimInp').value = valueElB.value
                 break;
             default:
                 console.error('invalid setting type');
@@ -877,8 +909,12 @@ window.addEventListener('keyup', (e) => {
     }
 })
 document.querySelectorAll('input[type="range"]').forEach(slider => {
-    slider.addEventListener('input', () => {
-        const valPercent = (slider.value / slider.max) * 100;
+    function updateSlider() {
+        const valPercent = ((slider.value / (slider.max - slider.min)) * 100) - (slider.min == 10 ? 50 : 0);
         slider.style.setProperty('background', `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`, 'important')
-    })
+        console.log(valPercent);
+    }
+    slider.addEventListener('input', updateSlider)
+    updateSlider()
 })
+showSettingsPanel()

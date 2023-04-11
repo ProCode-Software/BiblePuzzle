@@ -1664,6 +1664,7 @@ input[type="range"] {
     border: none !important;
     padding: 0 !important;
     outline: none;
+    margin-block: 7px;
 }
 ::-webkit-slider-runnable-track {
     -webkit-appearance: none;
@@ -1678,4 +1679,22 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
     margin-top: -6px;
     border: none;
+}
+.sliderMainCt {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+.sliderMainCt input[type='range'] {
+    width: 100%;
+}
+.sliderCt {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+.sliderValueSimInp {
+    width: 17%;
 }
