@@ -71,26 +71,36 @@ let settingsValues = {
     boldText: false,
     capsLockNotif: true
 }
-let stats = {
-    bestVerse: 1, // Based on score.
-    versesCompleted: 0,
-    totalCharactersTyped: 0, // correct characters
-    avgCPS: 0,
-    gradebook: [ // max grades: 10
-        /* {
-            date: new Date(),
-            verse: '',
-            grade: 0.0,
-            incorrect: 0
-        } */
-    ],
-    troubleKeys: [
-        /* {
-            key: 'a',
-            incorrectHistory: [3,4,0,2,6,0,0,1] //each are verses. number of how many times incorrect in a verse. every verse is here, including ones with 0 incorrect.
-        } */
-    ]
+
+let stats;
+const loadedStats = JSON.parse(localStorage.getItem('userStats'))
+if (loadedStats) {
+    stats = loadedStats
+} else {
+    stats = {
+        bestVerse: 1, // Based on score.
+        versesCompleted: 0,
+        totalCharactersTyped: 0, // correct characters
+        avgCPS: 0,
+        gradebook: [ // max grades: 10
+            /* {
+                date: new Date(),
+                verse: '',
+                grade: 0.0,
+                incorrect: 0,
+                avgCPS: 0
+            } */
+        ],
+        troubleKeys: [
+            /* {
+                key: 'a',
+                incorrectHistory: [3,4,0,2,6,0,0,1] //each are verses. number of how many times incorrect in a verse. every verse is here, including ones with 0 incorrect.
+            } */
+        ]
+    }
+    localStorage.setItem('userStats', stats)
 }
+console.log(stats);
 
 const tkInp = document.querySelector('.touckKeyboardInp')
 
@@ -310,6 +320,11 @@ function startTyping(ct, array) {
                         } catch (e) { }
                     }
                 }
+            }
+            if (e.getModifierState('CapsLock')) {
+                document.querySelector('.capsLockWarning').style.display = 'flex'
+            } else {
+                document.querySelector('.capsLockWarning').style.display = 'none'
             }
         }
     }

@@ -670,7 +670,7 @@ main {
     width: 100%;
     border-radius: 10px;
     transition: .3s;
-    box-shadow: 0 10px 20px rgba(118, 125, 131, 0.4);
+    box-shadow: 0 10px 20px rgba(var(--border-color), 1);
 }
 
 #completion .imgGroup {
@@ -1797,12 +1797,14 @@ body.dark .sliderLabel {
 body.dark input[type="range"]::-webkit-slider-thumb:not(:hover) {
     background-color: #1f2637;
     border: 1px solid rgba(var(--border-color), 0.2) !important;
-    box-shadow: 0 3px 12px rgba(0,0,0, 0.55);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.55);
 }
+
 .boldTextEnabled .character {
     font-weight: bold !important;
 }
-.capsLockWarning {
+
+.typingWarning {
     background: #000;
     color: #fff;
     display: flex;
@@ -1811,57 +1813,73 @@ body.dark input[type="range"]::-webkit-slider-thumb:not(:hover) {
     border-radius: 120px;
     padding: 14px 24px;
     width: 350px;
-    box-shadow: 0 10px 20px rgba(var(--border-color), 0.3);
+    box-shadow: 0 10px 20px rgba(var(--border-color), 0.4);
     overflow: hidden;
-    animation: capsLockWarning .3s;
-    transform-origin: center;
+    animation: capsLockWarning .3s cubic-bezier(0.07, 0.42, 0.05, 0.96);
+    transform-origin: center center;
     margin-inline: 50px;
     max-width: 100%;
 
     display: none;
 }
-.capsLockWarning.vertical {
+
+.typingWarning {
     width: auto;
 }
-.clWarnTitl {
+
+.TWWarnTitl {
     font-size: 1.1em;
     font-weight: 600;
 }
-.ClWarnIcon {
+
+.TWWarnIcon {
+    color: var(--orange);
+}
+
+.typingWarning svg {
     width: 36px;
     height: 36px;
-    color: var(--orange);
     flex-shrink: 0;
 }
-.clWarnDescription {
+
+.TWWarnDescription {
     font-size: .95em;
 }
-.CLWarningTextCt {
+
+.TWWarningTextCt {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
-.capsLockWarning.vertical .CLWarningTextCt {
+
+.typingWarning .TWWarningTextCt {
     flex-direction: row;
     gap: 15px;
     align-items: center;
 }
-.capsLockWarning.vertical .CLWarningTextCt, .capsLockWarning.vertical .clWarnDescription {
+
+.typingWarning .TWWarningTextCt,
+.typingWarning .TWWarnDescription {
     font-size: 1.02em !important;
 }
-.capsLockWarning.vertical .ClWarnIcon {
+
+.typingWarning .TWWarnIcon {
     width: 32px;
     height: 32px;
 }
+
 @keyframes capsLockWarning {
     from {
-        transform: scale(.8);
-        padding-block: 8px;
+        transform: scale(.84);
+        /* 
+        padding-block: 8px; */
     }
+
     to {
         transform: scale(1);
     }
 }
-body.dark .capsLockWarning {
-        box-shadow: 0 10px 20px rgba(0,0,0, 0.3);
+
+body.dark .typingWarning {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
