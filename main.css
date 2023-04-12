@@ -292,13 +292,13 @@ svg [stroke] {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
-    height: 40px;
-    width: 40px !important;
+    font-size: var(--text-size);
+    height: calc(var(--text-size) + 22px) !important;
+    width: calc(var(--text-size) + 22px) !important;
     transition: .2s;
     border-radius: 7px;
     padding-inline: 3px;
-    min-width: 40px;
+    min-width: calc(var(--text-size) + 22px) !important;
     font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
     font-weight: normal;
 }
@@ -647,7 +647,7 @@ main {
     width: 42px;
     height: 42px;
     padding: 6px;
-    color: inherit;
+    color: inherit !important;
 }
 
 .toolbarItem button svg {
@@ -661,7 +661,7 @@ main {
 
 .toolbarItem button.active {
     background: var(--accent);
-    color: #fff;
+    color: #fff !important;
 }
 
 #completion .imgGroup img {
@@ -1266,6 +1266,10 @@ button svg {
     font-size: 14px;
 }
 
+.actionBtn:hover {
+    background: #F9FAFF;
+}
+
 .textGroup {
     display: flex;
     flex-direction: column;
@@ -1454,7 +1458,16 @@ body.dark .popup {
     padding: 6px;
     width: 42px;
     height: 42px;
+    background: none;
     flex-shrink: 0;
+}
+
+body.dark .actionBtn {
+    color: #D3DAE5;
+}
+
+body.dark .actionBtn:hover {
+    background: #384657;
 }
 
 .popup .popup-footer button {
@@ -1694,13 +1707,26 @@ input[type="range"] {
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 16px;
-    width: 16px;
+    height: 18px;
+    width: 18px;
     background-color: var(--accent);
+    background-color: #fff;
+    border: 1px solid rgba(var(--border-color), 0.4) !important;
+    box-shadow: 0 3px 12px rgba(var(--border-color), 0.55);
     border-radius: 50%;
     cursor: pointer;
-    margin-top: -6px;
+    margin-top: -7px;
     border: none;
+    transition: background .1s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: var(--accent);
+    border: none !important;
+    margin-top: -6px;
+    box-shadow: none;
+    width: 16px;
+    height: 16px;
 }
 
 .sliderMainCt {
@@ -1728,7 +1754,8 @@ input[type="range"]::-webkit-slider-thumb {
 .verseListImg {
     width: 60px;
     border-radius: 8px;
-    display: none;transition: .3s;
+    display: none;
+    transition: .3s;
     background: #fff;
 }
 
@@ -1736,9 +1763,103 @@ input[type="range"]::-webkit-slider-thumb {
     display: block;
     animation: fadeIn .15s ease-in-out;
 }
+
 .verseListImg:hover {
     transform: scale(3) translateX(40%);
     z-index: 9999;
     border-radius: 5px;
     box-shadow: 0 8px 20px rgba(118, 125, 131, 0.2);
+}
+
+.sliderLabel {
+    color: var(--subtitle);
+    opacity: .55;
+    display: flex;
+    align-items: center;
+}
+
+.sliderLabel svg {
+    color: inherit;
+    display: flex;
+}
+
+.spaceBarSymbol {
+    width: calc(var(--text-size) + 1px);
+    height: calc(var(--text-size) + 1px);
+}
+
+body.dark .sliderLabel {
+    opacity: 1;
+}
+
+body.dark input[type="range"]::-webkit-slider-thumb:not(:hover) {
+    background-color: #1f2637;
+    border: 1px solid rgba(var(--border-color), 0.2) !important;
+    box-shadow: 0 3px 12px rgba(0,0,0, 0.55);
+}
+.boldTextEnabled .character {
+    font-weight: bold !important;
+}
+.capsLockWarning {
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-radius: 120px;
+    padding: 14px 24px;
+    width: 350px;
+    box-shadow: 0 10px 20px rgba(var(--border-color), 0.3);
+    overflow: hidden;
+    animation: capsLockWarning .3s;
+    transform-origin: center;
+    margin-inline: 50px;
+    max-width: 100%;
+
+    display: none;
+}
+.capsLockWarning.vertical {
+    width: auto;
+}
+.clWarnTitl {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.ClWarnIcon {
+    width: 36px;
+    height: 36px;
+    color: var(--orange);
+    flex-shrink: 0;
+}
+.clWarnDescription {
+    font-size: .95em;
+}
+.CLWarningTextCt {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.capsLockWarning.vertical .CLWarningTextCt {
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+.capsLockWarning.vertical .CLWarningTextCt, .capsLockWarning.vertical .clWarnDescription {
+    font-size: 1.02em !important;
+}
+.capsLockWarning.vertical .ClWarnIcon {
+    width: 32px;
+    height: 32px;
+}
+@keyframes capsLockWarning {
+    from {
+        transform: scale(.8);
+        padding-block: 8px;
+    }
+    to {
+        transform: scale(1);
+    }
+}
+body.dark .capsLockWarning {
+        box-shadow: 0 10px 20px rgba(0,0,0, 0.3);
 }

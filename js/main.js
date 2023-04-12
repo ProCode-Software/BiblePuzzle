@@ -24,7 +24,11 @@ const systemIcons = {
 <path d="M14.8527 17.0458V10.247H13.1027V17.0458H14.8527Z" fill="currentColor"/>
 <path d="M6.56153 18.3677V8.335H4.81152V18.4023C4.81151 18.9329 4.8115 19.3832 4.84168 19.7526C4.87335 20.1402 4.94256 20.5151 5.12488 20.873C5.40052 21.4139 5.84034 21.8537 6.3813 22.1294C6.73912 22.3117 7.11406 22.3809 7.50168 22.4126C7.87107 22.4428 8.32135 22.4427 8.85191 22.4427H15.148C15.6786 22.4427 16.1288 22.4428 16.4982 22.4126C16.8858 22.3809 17.2608 22.3117 17.6186 22.1294C18.1596 21.8537 18.5994 21.4139 18.875 20.873C19.0573 20.5151 19.1266 20.1402 19.1582 19.7526C19.1884 19.3832 19.1884 18.933 19.1884 18.4025V8.335H17.4384V18.3677C17.4384 18.9422 17.4377 19.3205 17.414 19.6101C17.3912 19.8895 17.3514 20.0085 17.3158 20.0785C17.2079 20.2902 17.0358 20.4623 16.8241 20.5701C16.7541 20.6058 16.6351 20.6456 16.3557 20.6684C16.0661 20.6921 15.6879 20.6927 15.1134 20.6927H8.88653C8.31203 20.6927 7.93379 20.6921 7.64418 20.6684C7.36479 20.6456 7.24579 20.6058 7.17579 20.5701C6.9641 20.4623 6.792 20.2902 6.68414 20.0785C6.64847 20.0085 6.6087 19.8895 6.58587 19.6101C6.56221 19.3205 6.56153 18.9422 6.56153 18.3677Z" fill="currentColor"/>
 </svg>
-`
+`,
+    settings: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 8.125C9.8599 8.125 8.12501 9.8599 8.12501 12C8.12501 14.1401 9.8599 15.875 12 15.875C14.1401 15.875 15.875 14.1401 15.875 12C15.875 9.8599 14.1401 8.125 12 8.125Z" fill="black"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.125C11.2475 2.125 10.5137 2.20932 9.80782 2.36938C9.46743 2.44657 9.20547 2.71867 9.14126 3.06174L8.81921 4.78236C8.69229 5.46048 7.9905 5.86566 7.33976 5.63652L5.69061 5.05581C5.36177 4.94001 4.99556 5.03048 4.75847 5.2861C3.76486 6.35733 3.00537 7.65042 2.56289 9.08388C2.46005 9.41702 2.56481 9.77941 2.82952 10.0063L4.15897 11.1458C4.68278 11.5948 4.68278 12.4052 4.15897 12.8542L2.82952 13.9937C2.56481 14.2206 2.46005 14.583 2.56289 14.9161C3.00537 16.3496 3.76486 17.6427 4.75847 18.7139C4.99556 18.9695 5.36177 19.06 5.69062 18.9442L7.33976 18.3635C7.99049 18.1343 8.69229 18.5395 8.81921 19.2176L9.14126 20.9383C9.20547 21.2813 9.46743 21.5534 9.80783 21.6306C10.5137 21.7907 11.2475 21.875 12 21.875C12.7525 21.875 13.4863 21.7907 14.1922 21.6306C14.5326 21.5534 14.7945 21.2813 14.8587 20.9383L15.1808 19.2176C15.3077 18.5395 16.0095 18.1343 16.6603 18.3634L18.3094 18.9442C18.6383 19.06 19.0045 18.9695 19.2416 18.7139C20.2352 17.6426 20.9946 16.3496 21.4371 14.9161C21.54 14.583 21.4352 14.2206 21.1705 13.9937L19.841 12.8542C19.3172 12.4052 19.3172 11.5948 19.841 11.1458L21.1705 10.0063C21.4352 9.77941 21.54 9.41702 21.4371 9.08388C20.9946 7.65043 20.2352 6.35735 19.2416 5.28613C19.0045 5.03052 18.6383 4.94004 18.3094 5.05584L16.6603 5.63656C16.0095 5.86571 15.3077 5.46053 15.1808 4.7824L14.8587 3.06174C14.7945 2.71866 14.5326 2.44656 14.1922 2.36938C13.4863 2.20932 12.7525 2.125 12 2.125ZM10.5393 5.10431L10.7516 3.97019C11.1582 3.90755 11.575 3.875 12 3.875C12.425 3.875 12.8418 3.90755 13.2484 3.97019L13.4607 5.10435C13.785 6.83734 15.5785 7.87281 17.2415 7.28722L18.3289 6.90431C18.8503 7.55101 19.2743 8.27882 19.5791 9.06544L18.7022 9.81714C17.3635 10.9645 17.3635 13.0355 18.7022 14.1829L19.5791 14.9346C19.2743 15.7212 18.8503 16.449 18.3289 17.0957L17.2415 16.7128C15.5785 16.1272 13.785 17.1627 13.4607 18.8956L13.2484 20.0298C12.8418 20.0924 12.425 20.125 12 20.125C11.575 20.125 11.1582 20.0924 10.7516 20.0298L10.5393 18.8957C10.215 17.1627 8.42151 16.1272 6.75851 16.7128L5.67116 17.0957C5.14972 16.449 4.72568 15.7212 4.42087 14.9346L5.29785 14.1829C6.63648 13.0355 6.63648 10.9645 5.29785 9.81714L4.42087 9.06544C4.72568 8.2788 5.14972 7.55099 5.67116 6.90428L6.75851 7.28717C8.42151 7.87276 10.215 6.8373 10.5393 5.10431Z" fill="black"></path>
+                            </svg>`
 }
 
 const accentColors = [
@@ -63,7 +67,9 @@ let settingsValues = {
     mobileKeyboard: false,
     themeColor: 4,
     narrator: false,
-    textSize: 17
+    textSize: 17,
+    boldText: false,
+    capsLockNotif: true
 }
 let stats = {
     bestVerse: 1, // Based on score.
@@ -109,7 +115,7 @@ const extract = (array, outputEl) => {
         let el = document.createElement('div')
         el.className = 'character'
         if (char == ' ') {
-            txt = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: .4;">
+            txt = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: .4;" class="spaceBarSymbol">
 <path d="M2.75 10V13C2.75 13.8284 3.42157 14.5 4.25 14.5H19.75C20.5784 14.5 21.25 13.8284 21.25 13V10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `
@@ -472,7 +478,9 @@ function createModal(config) {
 
 }
 createModal({
-    title: 'Hello, world'
+    title: 'Hello, world',
+    lightDismiss: true,
+    content: `<p>Hello, world!</p>`
 })
 
 
@@ -624,6 +632,13 @@ const settingsModel = [
                 value: "mobileKeyboard",
 
                 description: 'Show touch keyboard button. Best for mobile users.'
+            },
+            {
+                type: 'toggle',
+                title: 'Caps lock warnings',
+                value: "capsLockNotif",
+
+                description: 'Enable warnings when caps lock is on.'
             }
         ]
     },
@@ -636,7 +651,14 @@ const settingsModel = [
                 title: 'Narrator <div class="textTag beta" title="This feature is experimental and is still receiving updates and new features that may be unfinished.">Beta</div>',
                 value: "narrator",
 
-                description: 'Give spoken feedback while typing.'
+                description: 'Give spoken feedback while typing.',
+                optionsButton: () => showNarratorOptions(),
+                hidden: true
+            },
+            {
+                type: 'toggle',
+                title: 'Bold text',
+                value: "boldText",
             },
             {
                 type: 'slider',
@@ -644,9 +666,15 @@ const settingsModel = [
                 value: "textSize",
                 min: 10,
                 max: 30,
-                minLabel: 'a',
-                maxLabel: 'A',
-                description: 'Set the text scale of the verse while typing'
+                minLabel: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.5 18.1374L8.46429 13.6314M8.46429 13.6314H15.5357M8.46429 13.6314L11.4741 6.72689C11.6815 6.25103 12.3185 6.25103 12.5259 6.72689L15.5357 13.6314M15.5357 13.6314L17.5 18.1374" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`,
+                maxLabel: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.5 19.207L7.82143 13.8816M7.82143 13.8816H16.1786M7.82143 13.8816L11.3785 5.72177C11.6236 5.15939 12.3764 5.15939 12.6215 5.72177L16.1786 13.8816M16.1786 13.8816L18.5 19.207" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`,
+                description: 'Adjust the text size of the keys for a more comfortable typing experience.'
             },
         ]
     },
@@ -751,9 +779,9 @@ settingsModel.forEach(category => {
 
                 valueEl.innerHTML = `
                 <div class="sliderMainCt">
-${s.minLabel}
-                <input type="range" id="${settingId}Input" min="${s.min}" max="${s.max}">
-                ${s.maxLabel}
+                    <div class="sliderLabel minLabel">${s.minLabel}</div>
+                    <input type="range" id="${settingId}Input" min="${s.min}" max="${s.max}">
+                    <div class="sliderLabel maxLabel">${s.maxLabel}</div>
                 </div>
                 <input type="number" class="sliderValueSimInp">
                 `
@@ -763,18 +791,23 @@ ${s.minLabel}
                 valueElB.value = getSettings()[s.value]
                 valueElB.title = valueElB.value
 
-                valueElB.addEventListener('input', () => {
+                valueElB.addEventListener('input', upd)
+
+                function upd() {
                     settingsValues[s.value] = valueElB.value
                     valueElB.title = valueElB.value
                     valueEl.querySelector('.sliderValueSimInp').value = valueElB.value
                     updateSettings()
-                })
+                    updateSliders()
+                }
 
                 valueEl.querySelector('.sliderValueSimInp').min = s.min
                 valueEl.querySelector('.sliderValueSimInp').max = s.max
 
                 valueEl.querySelector('.sliderValueSimInp').addEventListener('input', () => {
                     valueElB.value = valueEl.querySelector('.sliderValueSimInp').value
+                    updateSliders()
+                    upd()
                 })
 
                 valueEl.querySelector('.sliderValueSimInp').value = valueElB.value
@@ -784,6 +817,16 @@ ${s.minLabel}
                 break;
         }
         if (valueEl) setEl.append(valueEl)
+
+        if (s.optionsButton) {
+            const optionsBtn = document.createElement('button')
+            optionsBtn.className = 'actionBtn'
+            optionsBtn.innerHTML = systemIcons.settings
+            optionsBtn.title = 'Options...'
+            setEl.insertBefore(optionsBtn, valueEl)
+            optionsBtn.addEventListener('click', s.optionsButton)
+        }
+        if (s.hidden) setEl.style.display = 'none'
 
         ctView.append(setEl)
     })
@@ -828,6 +871,13 @@ function checkSettings() {
     }
 
     backspaceAllowed = getSettings().backSpacing
+    document.querySelector('main').style.setProperty('--text-size', getSettings().textSize + 'px')
+
+    if (getSettings().boldText) {
+        document.querySelector('main').classList.add('boldTextEnabled')
+    } else {
+        document.querySelector('main').classList.remove('boldTextEnabled')
+    }
 }
 function updateStats() { }
 
@@ -897,12 +947,18 @@ window.addEventListener('keyup', (e) => {
         }
     }
 })
-document.querySelectorAll('input[type="range"]').forEach(slider => {
-    function updateSlider() {
-        const valPercent = ((slider.value / (slider.max - slider.min)) * 100) - (slider.min == 10 ? 50 : 0);
-        slider.style.setProperty('background', `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`, 'important')
-    }
-    slider.addEventListener('input', updateSlider)
-    updateSlider()
-})
-showSettingsPanel()
+function updateSliders() {
+    document.querySelectorAll('input[type="range"]').forEach(slider => {
+        function updateSlider() {
+            const valPercent = ((slider.value / (slider.max - slider.min)) * 100) - (slider.min == 10 ? 50 : 0);
+            slider.style.setProperty('background', `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`, 'important')
+        }
+        slider.addEventListener('input', updateSlider)
+        updateSlider()
+    })
+}
+updateSliders()
+
+function showNarratorOptions() {
+    console.log('test');
+}
