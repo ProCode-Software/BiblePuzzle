@@ -321,6 +321,8 @@ main {
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    
+    --text-size: 17px;
 }
 
 .inputCt {
