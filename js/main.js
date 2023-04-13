@@ -891,7 +891,7 @@ settingsModel.forEach((category) => {
 
                 valueEl
                     .querySelector(".sliderValueSimInp")
-                    .addEventListener("input", () => {
+                    .addEventListener("change", () => {
                         valueElB.value = valueEl.querySelector(".sliderValueSimInp").value;
                         updateSliders();
                         upd();
