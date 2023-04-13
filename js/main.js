@@ -1009,7 +1009,7 @@ function loadStats() {
         const tr = document.createElement('tr')
         tr.innerHTML = `<td>${date.toLocaleDateString()}</td>
                                     <td>${grade.verse}</td>
-                                    <td>${grade.grade * 100}% <span style="color: var(--text-red)">(-${grade.incorrect})</span></td>`
+                                    <td>${grade.grade * 100}% <span style="color: var(--text-${grade.incorrect == 0 ? 'green' : 'red'})">(-${grade.incorrect})</span></td>`
         document.querySelector('.gradeTable').append(tr)
     })
     document.querySelector('.btn.showGradingInfo').title = `The grade shows how well you completed the test, using the grading scale below.
