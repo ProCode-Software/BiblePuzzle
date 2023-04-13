@@ -1906,3 +1906,48 @@ body.dark .typingWarning {
 .gradeTable td:hover {
     background: rgba(var(--border-color), 0.2);
 }
+.toastsFrame {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.toast {
+    display: flex;
+    background: #222630;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    padding: 12px 12px 12px 18px;
+    border-radius: 15px;
+    font-size: 16px;
+    gap: 15px;
+    box-shadow: 0 10px 20px rgba(var(--border-color), 0.7);
+    z-index: 10;
+    min-width: 350px;
+    max-width: 500px;
+    min-height: 60px;
+
+}
+.toastButtonsFrame {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+.toast button {
+    background: none;
+    color: inherit;
+    min-width: 60px;
+}
+.toast button:hover {
+    background: rgba(255,255,255, .1);
+}
+.toastTextFrame {
+    font-size: 16px;
+}
+.toastIconFrame {
+    display: none;
+}
