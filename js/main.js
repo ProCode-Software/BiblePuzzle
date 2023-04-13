@@ -1,5 +1,5 @@
 const systemIcons = {
-    "bookmark": `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    bookmark: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4.85388 5.75V20.75L12 15.1253L19.1461 20.75V5.75C19.1461 4.36929 18.0268 3.25 16.6461 3.25H7.35388C5.97317 3.25 4.85388 4.36929 4.85388 5.75Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
 </svg>
 `,
@@ -28,40 +28,48 @@ const systemIcons = {
     settings: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 8.125C9.8599 8.125 8.12501 9.8599 8.12501 12C8.12501 14.1401 9.8599 15.875 12 15.875C14.1401 15.875 15.875 14.1401 15.875 12C15.875 9.8599 14.1401 8.125 12 8.125Z" fill="black"></path>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.125C11.2475 2.125 10.5137 2.20932 9.80782 2.36938C9.46743 2.44657 9.20547 2.71867 9.14126 3.06174L8.81921 4.78236C8.69229 5.46048 7.9905 5.86566 7.33976 5.63652L5.69061 5.05581C5.36177 4.94001 4.99556 5.03048 4.75847 5.2861C3.76486 6.35733 3.00537 7.65042 2.56289 9.08388C2.46005 9.41702 2.56481 9.77941 2.82952 10.0063L4.15897 11.1458C4.68278 11.5948 4.68278 12.4052 4.15897 12.8542L2.82952 13.9937C2.56481 14.2206 2.46005 14.583 2.56289 14.9161C3.00537 16.3496 3.76486 17.6427 4.75847 18.7139C4.99556 18.9695 5.36177 19.06 5.69062 18.9442L7.33976 18.3635C7.99049 18.1343 8.69229 18.5395 8.81921 19.2176L9.14126 20.9383C9.20547 21.2813 9.46743 21.5534 9.80783 21.6306C10.5137 21.7907 11.2475 21.875 12 21.875C12.7525 21.875 13.4863 21.7907 14.1922 21.6306C14.5326 21.5534 14.7945 21.2813 14.8587 20.9383L15.1808 19.2176C15.3077 18.5395 16.0095 18.1343 16.6603 18.3634L18.3094 18.9442C18.6383 19.06 19.0045 18.9695 19.2416 18.7139C20.2352 17.6426 20.9946 16.3496 21.4371 14.9161C21.54 14.583 21.4352 14.2206 21.1705 13.9937L19.841 12.8542C19.3172 12.4052 19.3172 11.5948 19.841 11.1458L21.1705 10.0063C21.4352 9.77941 21.54 9.41702 21.4371 9.08388C20.9946 7.65043 20.2352 6.35735 19.2416 5.28613C19.0045 5.03052 18.6383 4.94004 18.3094 5.05584L16.6603 5.63656C16.0095 5.86571 15.3077 5.46053 15.1808 4.7824L14.8587 3.06174C14.7945 2.71866 14.5326 2.44656 14.1922 2.36938C13.4863 2.20932 12.7525 2.125 12 2.125ZM10.5393 5.10431L10.7516 3.97019C11.1582 3.90755 11.575 3.875 12 3.875C12.425 3.875 12.8418 3.90755 13.2484 3.97019L13.4607 5.10435C13.785 6.83734 15.5785 7.87281 17.2415 7.28722L18.3289 6.90431C18.8503 7.55101 19.2743 8.27882 19.5791 9.06544L18.7022 9.81714C17.3635 10.9645 17.3635 13.0355 18.7022 14.1829L19.5791 14.9346C19.2743 15.7212 18.8503 16.449 18.3289 17.0957L17.2415 16.7128C15.5785 16.1272 13.785 17.1627 13.4607 18.8956L13.2484 20.0298C12.8418 20.0924 12.425 20.125 12 20.125C11.575 20.125 11.1582 20.0924 10.7516 20.0298L10.5393 18.8957C10.215 17.1627 8.42151 16.1272 6.75851 16.7128L5.67116 17.0957C5.14972 16.449 4.72568 15.7212 4.42087 14.9346L5.29785 14.1829C6.63648 13.0355 6.63648 10.9645 5.29785 9.81714L4.42087 9.06544C4.72568 8.2788 5.14972 7.55099 5.67116 6.90428L6.75851 7.28717C8.42151 7.87276 10.215 6.8373 10.5393 5.10431Z" fill="black"></path>
-                            </svg>`
-}
+                            </svg>`,
+};
 
 const accentColors = [
-    'red', 'gold', 'green', 'turquoise', 'blue', 'magenta', 'black'
-]
+    "red",
+    "gold",
+    "green",
+    "turquoise",
+    "blue",
+    "magenta",
+    "black",
+];
 function createAccentColorSelectionBlock() {
-    const container = document.createElement('div')
-    container.className = 'accentColorSelectionCt'
+    const container = document.createElement("div");
+    container.className = "accentColorSelectionCt";
 
-    accentColors.forEach(color => {
-        const colorEl = document.createElement('input')
-        colorEl.type = 'radio'
-        colorEl.name = 'accentColor'
-        colorEl.value = color
-        colorEl.style.background = `var(--${color}-accent)`
-        colorEl.className = 'accentColorCircle'
-        colorEl.setAttribute('data-color', accentColors.indexOf(color))
-        container.append(colorEl)
-        const index = accentColors.indexOf(color)
+    accentColors.forEach((color) => {
+        const colorEl = document.createElement("input");
+        colorEl.type = "radio";
+        colorEl.name = "accentColor";
+        colorEl.value = color;
+        colorEl.style.background = `var(--${color}-accent)`;
+        colorEl.className = "accentColorCircle";
+        colorEl.setAttribute("data-color", accentColors.indexOf(color));
+        container.append(colorEl);
+        const index = accentColors.indexOf(color);
 
-        if (getSettings().themeColor == index) { colorEl.checked = true }
+        if (getSettings().themeColor == index) {
+            colorEl.checked = true;
+        }
 
-        colorEl.addEventListener('click', () => {
-            settingsValues.themeColor = index
-            updateSettings()
-        })
-    })
+        colorEl.addEventListener("click", () => {
+            settingsValues.themeColor = index;
+            updateSettings();
+        });
+    });
 
-    return container
+    return container;
 }
 
 let settingsValues = {
-    displayName: '',
+    displayName: "",
     darkMode: false,
     backSpacing: true,
     mobileKeyboard: false,
@@ -69,20 +77,21 @@ let settingsValues = {
     narrator: false,
     textSize: 17,
     boldText: false,
-    capsLockNotif: true
-}
+    capsLockNotif: true,
+};
 
 let stats;
-const loadedStats = localStorage.getItem('userStats')
+const loadedStats = localStorage.getItem("userStats");
 if (loadedStats) {
-    stats = JSON.parse(loadedStats)
+    stats = JSON.parse(loadedStats);
 } else {
     stats = {
         bestVerse: 0, // Based on score.
         versesCompleted: 0,
         totalCharactersTyped: 0, // correct characters
         avgCPS: 0,
-        gradebook: [ // max grades: 10
+        gradebook: [
+            // max grades: 10
             /* {
                 date: new Date(),
                 verse: '',
@@ -96,70 +105,73 @@ if (loadedStats) {
                 key: 'a',
                 incorrectHistory: [3,4,0,2,6,0,0,1] //each are verses. number of how many times incorrect in a verse. every verse is here, including ones with 0 incorrect.
             } */
-        ]
-    }
-    localStorage.setItem('userStats', JSON.stringify(stats))
+        ],
+    };
+    localStorage.setItem("userStats", JSON.stringify(stats));
 }
 
-const tkInp = document.querySelector('.touckKeyboardInp')
+const tkInp = document.querySelector(".touckKeyboardInp");
 
-if (!localStorage.getItem('userSettings')) {
-    localStorage.setItem('userSettings', JSON.stringify(settingsValues))
+if (!localStorage.getItem("userSettings")) {
+    localStorage.setItem("userSettings", JSON.stringify(settingsValues));
 }
 
 let random = Math.floor(Math.random() * randomVerses.length);
 
-let verse = `${randomVerses[random].verse} `
-let reference = randomVerses[random].ref
+let verse = `${randomVerses[random].verse} `;
+let reference = randomVerses[random].ref;
 
-const refContainer = document.querySelector('.msgRef')
-const verseContainer = document.querySelector('.msgText')
+const refContainer = document.querySelector(".msgRef");
+const verseContainer = document.querySelector(".msgText");
 
-const verseSplit = verse.split('')
-const refSplit = reference.split('')
+const verseSplit = verse.split("");
+const refSplit = reference.split("");
 
 const extract = (array, outputEl) => {
-    array.forEach(char => {
-        let txt = char
-        let el = document.createElement('div')
-        el.className = 'character'
-        if (char == ' ') {
+    array.forEach((char) => {
+        let txt = char;
+        let el = document.createElement("div");
+        el.className = "character";
+        if (char == " ") {
             txt = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: .4;" class="spaceBarSymbol">
 <path d="M2.75 10V13C2.75 13.8284 3.42157 14.5 4.25 14.5H19.75C20.5784 14.5 21.25 13.8284 21.25 13V10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
-`
-            el.style.paddingBottom = '5px'
+`;
+            el.style.paddingBottom = "5px";
         }
-        el.innerHTML = txt
-        outputEl.append(el)
-    })
-}
-extract(verseSplit, verseContainer)
-extract(refSplit, refContainer)
+        el.innerHTML = txt;
+        outputEl.append(el);
+    });
+};
+extract(verseSplit, verseContainer);
+extract(refSplit, refContainer);
 
 const timer = {
     start: () => {
-        timer.isOn = true
+        timer.isOn = true;
         function advance() {
             if (timer.isOn) {
                 setTimeout(() => {
                     if (timer.seconds == 59) {
-                        timer.minutes++
+                        timer.minutes++;
                         timer.seconds = 0;
+                    } else {
+                        timer.seconds++;
                     }
-                    else { timer.seconds++ }
-                    document.querySelector('.statTag.time > span').textContent = `${timer.getTime()}`
-                    advance()
+                    document.querySelector(
+                        ".statTag.time > span"
+                    ).textContent = `${timer.getTime()}`;
+                    advance();
                 }, 1000);
             }
         }
-        advance()
+        advance();
     },
     pause: () => {
-        timer.isOn = false
+        timer.isOn = false;
     },
     reset: () => {
-        timer.isOn = false
+        timer.isOn = false;
         timer.seconds = 0;
         timer.minutes = 0;
     },
@@ -167,25 +179,26 @@ const timer = {
     minutes: 0,
     isOn: false,
     getTime: () => {
-        return `${timer.minutes}:${timer.seconds < 10 ? 0 : ''}${timer.seconds}`
-    }
-}
-let backspaceAllowed = true
+        return `${timer.minutes}:${timer.seconds < 10 ? 0 : ""}${timer.seconds}`;
+    },
+};
+let backspaceAllowed = true;
 let incorrectChars = 0;
 let charactersTyped = 0;
-let keyboardLock = true
+let keyboardLock = true;
 let currentCt;
 let currentChar = 0;
 
-let countedKeys = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()-=+-_`~[]\\|}{;\':"<>?/., '
-countedKeys = countedKeys.split('')
+let countedKeys =
+    "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()-=+-_`~[]\\|}{;':\"<>?/., ";
+countedKeys = countedKeys.split("");
 
 function startTyping(ct, array) {
     let activeCharNum = 0;
-    currentCt = ct
-    document.title = `BiblePuzzle | ${reference}`
-    document.querySelector('footer #footerVerseRef').textContent = reference
-    ct.children[activeCharNum].classList.add('active')
+    currentCt = ct;
+    document.title = `BiblePuzzle | ${reference}`;
+    document.querySelector("footer #footerVerseRef").textContent = reference;
+    ct.children[activeCharNum].classList.add("active");
 
     const cpsTest = {
         cps: 0,
@@ -194,137 +207,139 @@ function startTyping(ct, array) {
 
         stop: () => {
             cpsTest.isSampling = false;
-            cpsTest.allTests.push(cps)
+            cpsTest.allTests.push(cps);
             console.log(cpsTest.allTests);
             cps = 0;
-            cpsTest.isSampling = undefined
-            cpsTest.start()
+            cpsTest.isSampling = undefined;
+            cpsTest.start();
         },
         start: () => {
-            cpsTest.isSampling = true
+            cpsTest.isSampling = true;
             if (cpsTest.isSampling == true) {
                 setTimeout(() => {
-                    cpsTest.stop()
-                }, 1000)
+                    cpsTest.stop();
+                }, 1000);
             }
         },
         average: () => {
-            let init = 0
-            const sum = cpsTest.allTests.reduce((prev, curr) => prev + curr, init
-            )
-            const mean = sum / cpsTest.allTests.length
+            let init = 0;
+            const sum = cpsTest.allTests.reduce((prev, curr) => prev + curr, init);
+            const mean = sum / cpsTest.allTests.length;
 
-            return mean
-        }
-    }
-    let cps = 0
-    let allCps = []
-    let cpsSampleOver = undefined
+            return mean;
+        },
+    };
+    let cps = 0;
+    let allCps = [];
+    let cpsSampleOver = undefined;
     window.onkeydown = (e) => {
-        type(e)
-    }
-    tkInp.addEventListener('input', (e) => {
-        type(e)
-    })
+        type(e);
+    };
+    tkInp.addEventListener("input", (e) => {
+        type(e);
+    });
     function type(e) {
-        charactersTyped++
+        charactersTyped++;
         if (!keyboardLock) {
             if (cpsTest.isSampling == true) {
-                cps++
+                cps++;
             }
             setTimeout(() => {
-                cpsSampleOver = true
-                allCps.push(cps)
+                cpsSampleOver = true;
+                allCps.push(cps);
                 console.log(cps);
-                cps = 0
-                cpsSampleOver = false
-            }, 1000)
+                cps = 0;
+                cpsSampleOver = false;
+            }, 1000);
             if (activeCharNum == 0) {
                 if (!timer.isOn) {
-                    timer.start()
-                    cpsTest.start()
+                    timer.start();
+                    cpsTest.start();
                 }
             }
             if (activeCharNum > 0) {
-                ct.children[activeCharNum - 1].style.borderTopRightRadius = '0px'
-                ct.children[activeCharNum - 1].style.borderBottomRightRadius = '0px'
-                ct.children[activeCharNum].style.borderTopLeftRadius = '0px'
-                ct.children[activeCharNum].style.borderBottomLeftRadius = '0px'
+                ct.children[activeCharNum - 1].style.borderTopRightRadius = "0px";
+                ct.children[activeCharNum - 1].style.borderBottomRightRadius = "0px";
+                ct.children[activeCharNum].style.borderTopLeftRadius = "0px";
+                ct.children[activeCharNum].style.borderBottomLeftRadius = "0px";
             }
             if (activeCharNum == array.length) {
-                ct.children[activeCharNum - 1].style.borderTopRightRadius = ''
-                ct.children[activeCharNum - 1].style.borderBottomRightRadius = ''
+                ct.children[activeCharNum - 1].style.borderTopRightRadius = "";
+                ct.children[activeCharNum - 1].style.borderBottomRightRadius = "";
             }
             if (countedKeys.indexOf(e.key) > -1) {
                 if (e.key == array[activeCharNum]) {
-                    ct.children[activeCharNum].classList.add('correct')
-                    ct.children[activeCharNum].classList.remove('active')
-                    stats.totalCharactersTyped++
-                    updateStats()
-                    activeCharNum++
-                    currentChar = activeCharNum
+                    ct.children[activeCharNum].classList.add("correct");
+                    ct.children[activeCharNum].classList.remove("active");
+                    stats.totalCharactersTyped++;
+                    updateStats();
+                    activeCharNum++;
+                    currentChar = activeCharNum;
                     if (activeCharNum !== array.length) {
-                        ct.children[activeCharNum].classList.add('active')
+                        ct.children[activeCharNum].classList.add("active");
                     }
                 } else {
-                    ct.children[activeCharNum].classList.add('incorrectChar')
-                    ct.children[activeCharNum].classList.remove('active')
-                    activeCharNum++
-                    incorrectChars++
-                    currentChar = activeCharNum
-                    document.querySelectorAll('.incorrect span')[0].textContent = incorrectChars
+                    ct.children[activeCharNum].classList.add("incorrectChar");
+                    ct.children[activeCharNum].classList.remove("active");
+                    activeCharNum++;
+                    incorrectChars++;
+                    currentChar = activeCharNum;
+                    document.querySelectorAll(".incorrect span")[0].textContent =
+                        incorrectChars;
                     if (incorrectChars == 1) {
-                        document.querySelectorAll('.incorrect span')[1].textContent = ''
+                        document.querySelectorAll(".incorrect span")[1].textContent = "";
                     } else {
-                        document.querySelectorAll('.incorrect span')[1].textContent = 's'
+                        document.querySelectorAll(".incorrect span")[1].textContent = "s";
                     }
                     if (activeCharNum !== array.length) {
-                        ct.children[activeCharNum].classList.add('active')
+                        ct.children[activeCharNum].classList.add("active");
                     }
                 }
                 // const d = document.createElement('div')
                 try {
                     // from here
                     ct.children[activeCharNum - 5].scrollIntoView({
-                        inline: "start", behavior: "smooth"
-                    })
+                        inline: "start",
+                        behavior: "smooth",
+                    });
                 } catch (e) { }
             }
             if (activeCharNum == array.length) {
                 if (ct == refContainer) {
-                    completeTest()
-                    stats.versesCompleted++
-                    updateStats()
-                    keyboardLock = true
+                    completeTest();
+                    stats.versesCompleted++;
+                    updateStats();
+                    keyboardLock = true;
                 } else {
-                    startTyping(refContainer, refSplit)
+                    startTyping(refContainer, refSplit);
                 }
             }
-            if (e.key == 'Backspace') {
+            if (e.key == "Backspace") {
                 if (backspaceAllowed) {
                     if (activeCharNum > 0) {
-                        activeCharNum--
-                        ct.children[activeCharNum].classList.remove('incorrectChar')
-                        ct.children[activeCharNum].classList.add('active')
-                        ct.children[activeCharNum].classList.remove('correct')
-                        ct.children[activeCharNum + 1].classList.remove('active')
-                        ct.children[activeCharNum - 1].style.borderTopRightRadius = ''
-                        ct.children[activeCharNum - 1].style.borderBottomRightRadius = ''
-                        ct.children[activeCharNum].style.borderTopRightRadius = ''
-                        ct.children[activeCharNum].style.borderBottomRightRadius = ''
+                        activeCharNum--;
+                        ct.children[activeCharNum].classList.remove("incorrectChar");
+                        ct.children[activeCharNum].classList.add("active");
+                        ct.children[activeCharNum].classList.remove("correct");
+                        ct.children[activeCharNum + 1].classList.remove("active");
+                        ct.children[activeCharNum - 1].style.borderTopRightRadius = "";
+                        ct.children[activeCharNum - 1].style.borderBottomRightRadius = "";
+                        ct.children[activeCharNum].style.borderTopRightRadius = "";
+                        ct.children[activeCharNum].style.borderBottomRightRadius = "";
                         try {
                             ct.children[activeCharNum - 5].scrollIntoView({
-                                inline: "start", behavior: "smooth"
-                            })
+                                inline: "start",
+                                behavior: "smooth",
+                            });
                         } catch (e) { }
                     }
                 }
             }
             if (getSettings().capsLockNotif) {
-                if (e.getModifierState('CapsLock')) {
-                    document.querySelector('.capsLockWarning').style.display = 'flex'
+                if (e.getModifierState("CapsLock")) {
+                    document.querySelector(".capsLockWarning").style.display = "flex";
                 } else {
-                    document.querySelector('.capsLockWarning').style.display = 'none'
+                    document.querySelector(".capsLockWarning").style.display = "none";
                 }
             }
         }
@@ -332,72 +347,82 @@ function startTyping(ct, array) {
 }
 let percent;
 
-
-const popups = document.querySelector('.popups')
+const popups = document.querySelector(".popups");
 function askForName() {
-    popups.querySelectorAll('.popup').forEach(el => el.style.display = 'none')
-    const namePopup = popups.querySelector('form.namePopup')
-    namePopup.style.display = ''
-    namePopup.addEventListener('submit', () => {
+    popups
+        .querySelectorAll(".popup")
+        .forEach((el) => (el.style.display = "none"));
+    const namePopup = popups.querySelector("form.namePopup");
+    namePopup.style.display = "";
+    namePopup.addEventListener("submit", () => {
         keyboardLock = false;
-        popups.style.display = 'none'
-        username = namePopup.querySelector('#playerName').value
-        document.querySelector('#playerNameOp').value = username;
-        settingsValues.displayName = username
-        updateSettings()
-    })
+        popups.style.display = "none";
+        username = namePopup.querySelector("#playerName").value;
+        document.querySelector("#playerNameOp").value = username;
+        settingsValues.displayName = username;
+        updateSettings();
+    });
 }
-const preloadedUserName = getSettings().displayName
-let username = preloadedUserName
+const preloadedUserName = getSettings().displayName;
+let username = preloadedUserName;
 if (!preloadedUserName) {
-    askForName()
+    askForName();
 } else {
-    settingsValues.displayName = preloadedUserName
-    popups.style.display = 'none'
-    keyboardLock = false
+    settingsValues.displayName = preloadedUserName;
+    popups.style.display = "none";
+    keyboardLock = false;
 }
 /**
- * 
+ *
  * @param {boolean} showOrHide true to show popup
  * @param {string} popupId query selector of the popup
  */
 function showPopup(showOrHide, popupId) {
-    popups.querySelectorAll('.popup').forEach(el => el.style.display = 'none')
-    popups.style.display = (showOrHide == true ? 'flex' : 'none')
+    popups
+        .querySelectorAll(".popup")
+        .forEach((el) => (el.style.display = "none"));
+    popups.style.display = showOrHide == true ? "flex" : "none";
 
-    popups.querySelector(popupId).style.display = (showOrHide == true ? 'flex' : 'none')
+    popups.querySelector(popupId).style.display =
+        showOrHide == true ? "flex" : "none";
 }
 
 function completeTest() {
-    timer.pause()
-    showPanel(true, 'completion', true)
-    const panelView = getPanelView('completion')
-    panelView.style.display = 'flex'
+    timer.pause();
+    showPanel(true, "completion", true);
+    const panelView = getPanelView("completion");
+    panelView.style.display = "flex";
 
-    const total = (charactersTyped)
-    percent = (total - incorrectChars) / total * 100
+    const total = charactersTyped;
+    percent = ((total - incorrectChars) / total) * 100;
 
-    const time = timer.getTime()
+    const time = timer.getTime();
 
-    const scoreText = panelView.querySelector('.graph-content .score')
-    const subscoreText = panelView.querySelector('.graph-content .subscore')
+    const scoreText = panelView.querySelector(".graph-content .score");
+    const subscoreText = panelView.querySelector(".graph-content .subscore");
 
-    subscoreText.innerHTML = `<span class="${Math.round(percent) >= 75 ? 'green' : (Math.round(percent) >= 50 ? 'orange' : 'red')}" style="font-weight: 600">${(charactersTyped) - incorrectChars}</span>/${charactersTyped}`
-    scoreText.textContent = `${Math.round(percent)}%`
+    subscoreText.innerHTML = `<span class="${Math.round(percent) >= 75
+            ? "green"
+            : Math.round(percent) >= 50
+                ? "orange"
+                : "red"
+        }" style="font-weight: 600">${charactersTyped - incorrectChars
+        }</span>/${charactersTyped}`;
+    scoreText.textContent = `${Math.round(percent)}%`;
 
     stats.gradebook.unshift({
         date: new Date(),
         verse: reference,
         grade: Math.round(percent) / 100,
         incorrect: incorrectChars,
-        avgCPS: 0
-    })
-    if (stats.gradebook.length > 10) {stats.gradebook = stats.gradebook.slice(0,10)}
-    updateStats()
-    
+        avgCPS: 0,
+    });
+    if (stats.gradebook.length > 10) {
+        stats.gradebook = stats.gradebook.slice(0, 10);
+    }
+    updateStats();
 
-
-    const circle = panelView.querySelector('circle#chart-score');
+    const circle = panelView.querySelector("circle#chart-score");
     const radius = circle.r.baseVal.value;
     const circumference = radius * 2 * Math.PI;
 
@@ -405,146 +430,159 @@ function completeTest() {
     circle.style.strokeDashoffset = `${circumference}`;
 
     function setProgress(pc) {
-        const offset = circumference - pc / 100 * circumference;
+        const offset = circumference - (pc / 100) * circumference;
         circle.style.strokeDashoffset = offset;
     }
 
     setProgress(percent);
 
-    const completeHeading = panelView.querySelector('.panelTitle')
+    const completeHeading = panelView.querySelector(".panelTitle");
 
     if (Math.round(percent) >= 75) {
-        completeHeading.textContent = `Congratulations, you completed the test${username !== null ? ', ' + username : ''}!`
+        completeHeading.textContent = `Congratulations, you completed the test${username !== null ? ", " + username : ""
+            }!`;
     } else if (Math.round(percent) < 75 && Math.round(percent) >= 50) {
-        completeHeading.textContent = `Good job${username !== null ? ', ' + username : ''}!`
-        circle.parentElement.classList.add('avg')
+        completeHeading.textContent = `Good job${username !== null ? ", " + username : ""
+            }!`;
+        circle.parentElement.classList.add("avg");
     } else {
-        completeHeading.textContent = `Nice try${username !== null ? ', ' + username : ''}!`
-        circle.parentElement.classList.add('low')
+        completeHeading.textContent = `Nice try${username !== null ? ", " + username : ""
+            }!`;
+        circle.parentElement.classList.add("low");
     }
-    const verseMeta = panelView.querySelector('.verseDescription')
+    const verseMeta = panelView.querySelector(".verseDescription");
 
-    const vGroup = document.createElement('div')
-    vGroup.className = 'verseTextGroup'
-    const refLab = document.createElement('div')
-    refLab.classList.add('panel-heading', 'verseReferenceLb')
-    refLab.append(document.createTextNode(reference))
+    const vGroup = document.createElement("div");
+    vGroup.className = "verseTextGroup";
+    const refLab = document.createElement("div");
+    refLab.classList.add("panel-heading", "verseReferenceLb");
+    refLab.append(document.createTextNode(reference));
 
-    const verseLab = document.createElement('p')
-    verseLab.append(document.createTextNode(verse))
+    const verseLab = document.createElement("p");
+    verseLab.append(document.createTextNode(verse));
 
-    const imgGroup = document.createElement('div')
-    imgGroup.className = 'imgGroup'
-    const img = document.createElement('img')
-    img.src = randomVerses[random].imageURL
-    img.alt = reference
-    const cap = document.createElement('caption')
-    cap.append(document.createTextNode(`Source: ${randomVerses[random]
-        .source}`))
+    const imgGroup = document.createElement("div");
+    imgGroup.className = "imgGroup";
+    const img = document.createElement("img");
+    img.src = randomVerses[random].imageURL;
+    img.alt = reference;
+    const cap = document.createElement("caption");
+    cap.append(document.createTextNode(`Source: ${randomVerses[random].source}`));
 
+    const addToJournalBtn = createButtonElement(
+        "default",
+        "Add to journal",
+        systemIcons.bookmark
+    );
+    addToJournalBtn.classList.add("addToJournalBtn");
 
-    const addToJournalBtn = createButtonElement('default', 'Add to journal', systemIcons.bookmark)
-    addToJournalBtn.classList.add('addToJournalBtn')
-
-
-    imgGroup.append(img, cap)
-    vGroup.append(refLab, verseLab, addToJournalBtn)
+    imgGroup.append(img, cap);
+    vGroup.append(refLab, verseLab, addToJournalBtn);
 
     // until implemented: coming soon
-    addToJournalBtn.remove()
+    addToJournalBtn.remove();
 
-    const typingFinalStats = panelView.querySelector('.testStats')
+    const typingFinalStats = panelView.querySelector(".testStats");
 
-    typingFinalStats.querySelector('#totalTime .cellVal').textContent = time
-    typingFinalStats.querySelector('#incChars .cellVal').textContent = incorrectChars
+    typingFinalStats.querySelector("#totalTime .cellVal").textContent = time;
+    typingFinalStats.querySelector("#incChars .cellVal").textContent =
+        incorrectChars;
 
-
-    window.onresize = () => { checkChartSize() }
+    window.onresize = () => {
+        checkChartSize();
+    };
     function checkChartSize() {
-        const graphSet = panelView.querySelector('.graph.score')
+        const graphSet = panelView.querySelector(".graph.score");
 
-        graphSet.style.width = '100%'
-        const size = graphSet.getBoundingClientRect()
+        graphSet.style.width = "100%";
+        const size = graphSet.getBoundingClientRect();
 
-        graphSet.style.height = size.width + 'px'
+        graphSet.style.height = size.width + "px";
     }
 
+    verseMeta.append(imgGroup, vGroup);
 
-    verseMeta.append(imgGroup, vGroup)
-
-    checkChartSize()
+    checkChartSize();
 }
 
-startTyping(verseContainer, verseSplit)
+startTyping(verseContainer, verseSplit);
 
 const darkTheme = () => {
-    document.body.classList.remove('light')
-    document.body.classList.add('dark')
-    localStorage.setItem('theme', 'dark')
-}
+    document.body.classList.remove("light");
+    document.body.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+};
 const lightTheme = () => {
-    document.body.classList.remove('dark')
-    document.body.classList.add('light')
-    localStorage.setItem('theme', 'light')
-}
+    document.body.classList.remove("dark");
+    document.body.classList.add("light");
+    localStorage.setItem("theme", "light");
+};
 function toggleDarkTheme() {
-    if (document.body.classList.contains('dark')) {
-        lightTheme()
-        document.querySelector('.nightBtn').classList.remove('active')
+    if (document.body.classList.contains("dark")) {
+        lightTheme();
+        document.querySelector(".nightBtn").classList.remove("active");
     } else {
-        darkTheme()
-        document.querySelector('.nightBtn').classList.add('active')
+        darkTheme();
+        document.querySelector(".nightBtn").classList.add("active");
     }
 }
 function clearProgress() {
-    if (window.confirm('Are you sure you want to clear your progress? You may get a different verse.') == true) {
-        location.reload()
+    if (
+        window.confirm(
+            "Are you sure you want to clear your progress? You may get a different verse."
+        ) == true
+    ) {
+        location.reload();
     }
 }
-function createModal(config) {
-
-}
+function createModal(config) { }
 createModal({
-    title: 'Hello, world',
+    title: "Hello, world",
     lightDismiss: true,
-    content: `<p>Hello, world!</p>`
-})
-
+    content: `<p>Hello, world!</p>`,
+});
 
 let currentPanel;
 /**
- * 
- * @param {boolean} showPanel 
- * @param {string} viewId 
+ *
+ * @param {boolean} showPanel
+ * @param {string} viewId
  * @param {boolean} lightDismiss
  */
 function showPanel(showPanel, viewId, lightDismiss) {
-    const panel = document.querySelector('main aside.panel-ct')
+    const panel = document.querySelector("main aside.panel-ct");
 
-    panel.style.display = (showPanel == true ? 'block' : 'none')
+    panel.style.display = showPanel == true ? "block" : "none";
 
     if (viewId) {
-        panel.querySelectorAll('.panel .panelView').forEach(view => view.style.display = 'none')
+        panel
+            .querySelectorAll(".panel .panelView")
+            .forEach((view) => (view.style.display = "none"));
 
-        panel.querySelector(`.panelView#${viewId}`).style.display = (showPanel == true ? 'flex' : 'none');
+        panel.querySelector(`.panelView#${viewId}`).style.display =
+            showPanel == true ? "flex" : "none";
 
         if (showPanel == true) {
-            currentPanel = viewId
-            keyboardLock = true
+            currentPanel = viewId;
+            keyboardLock = true;
         } else {
-            currentPanel = ''
-            keyboardLock = false
+            currentPanel = "";
+            keyboardLock = false;
         }
 
-        panel.addEventListener('click', (e) => {
+        panel.addEventListener("click", (e) => {
             if (lightDismiss) {
-                if (!document.elementsFromPoint(e.x, e.y).includes(panel.querySelector('.panel'))) {
-                    panel.style.display = 'none'
-                    currentPanel = ''
-                    keyboardLock = false
+                if (
+                    !document
+                        .elementsFromPoint(e.x, e.y)
+                        .includes(panel.querySelector(".panel"))
+                ) {
+                    panel.style.display = "none";
+                    currentPanel = "";
+                    keyboardLock = false;
                 }
             }
-        })
+        });
     }
 }
 /**
@@ -553,73 +591,87 @@ function showPanel(showPanel, viewId, lightDismiss) {
  * @returns {Element} The panel view element
  */
 function getPanelView(viewId) {
-    const panel = document.querySelector('main aside.panel-ct .panel')
+    const panel = document.querySelector("main aside.panel-ct .panel");
 
-    return panel.querySelector(`.panelView#${viewId}`)
+    return panel.querySelector(`.panelView#${viewId}`);
 }
 
 function playAgain() {
-    location.reload()
+    location.reload();
 }
 
 function showStats() {
-    showPanel(true, 'stats', true)
-    loadStats()
+    showPanel(true, "stats", true);
+    loadStats();
 }
 function showHelpPanel() {
-    showPanel(true, 'help', true)
+    showPanel(true, "help", true);
 }
 function showSettingsPanel() {
-    showPanel(true, 'settings', true)
+    showPanel(true, "settings", true);
 }
 
-document.querySelector('.toolbar .statsBtn').addEventListener('click', () => {
-    const e = document.querySelector('.toolbar .statsBtn')
-    if (e.classList.contains('active')) {
-        showPanel(false, 'stats')
-        e.classList.remove('active')
+document.querySelector(".toolbar .statsBtn").addEventListener("click", () => {
+    const e = document.querySelector(".toolbar .statsBtn");
+    if (e.classList.contains("active")) {
+        showPanel(false, "stats");
+        e.classList.remove("active");
     } else {
-        e.classList.add('active')
-        showPanel(true, 'stats', true)
+        e.classList.add("active");
+        showPanel(true, "stats", true);
     }
-})
-document.querySelector('.toolbar .settingsBtn').addEventListener('click', () => {
-    const e = document.querySelector('.toolbar .settingsBtn')
-    if (e.classList.contains('active')) {
-        showPanel(false, 'settings')
-        e.classList.remove('active')
+});
+document
+    .querySelector(".toolbar .settingsBtn")
+    .addEventListener("click", () => {
+        const e = document.querySelector(".toolbar .settingsBtn");
+        if (e.classList.contains("active")) {
+            showPanel(false, "settings");
+            e.classList.remove("active");
+        } else {
+            e.classList.add("active");
+            showPanel(true, "settings", true);
+        }
+    });
+document.querySelector(".toolbar .helpBtn").addEventListener("click", () => {
+    const e = document.querySelector(".toolbar .helpBtn");
+    if (e.classList.contains("active")) {
+        showPanel(false, "help");
+        e.classList.remove("active");
     } else {
-        e.classList.add('active')
-        showPanel(true, 'settings', true)
+        e.classList.add("active");
+        showPanel(true, "help", true);
     }
-})
-document.querySelector('.toolbar .helpBtn').addEventListener('click', () => {
-    const e = document.querySelector('.toolbar .helpBtn')
-    if (e.classList.contains('active')) {
-        showPanel(false, 'help')
-        e.classList.remove('active')
-    } else {
-        e.classList.add('active')
-        showPanel(true, 'help', true)
-    }
-})
+});
 
 function createButtonElement(style, text, icon) {
     /**@param {'primary'|'dangerous'|'default'|'actionButton'} style */
 
-    const button = document.createElement('button')
-    button.className = `btn${style !== 'default' ? `-${style}` : ''}`
+    const button = document.createElement("button");
+    button.className = `btn${style !== "default" ? `-${style}` : ""}`;
     button.innerHTML = `
-    ${icon ? icon : ''}
+    ${icon ? icon : ""}
     ${text}
-    `
-    return button
+    `;
+    return button;
 }
 // max 8 trouble keys. Minimum 2 mistakes to go onto trouble keys and the 8 highest ones are shown
 
-const backupButton = createButtonElement('default', 'Create backup', systemIcons.download)
-const restoreButton = createButtonElement('default', 'Import data', systemIcons.upload)
-const resetButton = createButtonElement('dangerous', 'Reset all data', systemIcons.reload)
+const backupButton = createButtonElement(
+    "default",
+    "Create backup",
+    systemIcons.download
+);
+const restoreButton = createButtonElement(
+    "default",
+    "Import data",
+    systemIcons.upload
+);
+const resetButton = createButtonElement(
+    "dangerous",
+    "Reset all data",
+    systemIcons.reload
+);
 
 const settingsModel = [
     {
@@ -627,70 +679,72 @@ const settingsModel = [
         name: "Personalization",
         settings: [
             {
-                type: 'input',
-                title: 'Display name',
-                description: 'We will refer to you using your display name. Leave blank to disable.',
-                value: "displayName"
+                type: "input",
+                title: "Display name",
+                description:
+                    "We will refer to you using your display name. Leave blank to disable.",
+                value: "displayName",
             },
             {
-                type: 'toggle',
-                title: 'Dark mode',
-                value: "darkMode"
+                type: "toggle",
+                title: "Dark mode",
+                value: "darkMode",
             },
             {
-                title: 'Theme color',
-                type: 'etc',
-                block: createAccentColorSelectionBlock()
-            }
-        ]
+                title: "Theme color",
+                type: "etc",
+                block: createAccentColorSelectionBlock(),
+            },
+        ],
     },
     {
         id: "typing",
         name: "Typing",
         settings: [
             {
-                type: 'toggle',
-                title: 'Allow backspacing',
+                type: "toggle",
+                title: "Allow backspacing",
                 value: "backSpacing",
-                description: 'Enable for a more natural typing experience.'
+                description: "Enable for a more natural typing experience.",
             },
             {
-                type: 'toggle',
-                title: 'Touch keyboard',
+                type: "toggle",
+                title: "Touch keyboard",
                 value: "mobileKeyboard",
 
-                description: 'Show touch keyboard button. Best for mobile users.'
+                description: "Show touch keyboard button. Best for mobile users.",
             },
             {
-                type: 'toggle',
-                title: 'Caps lock warnings',
+                type: "toggle",
+                title: "Caps lock warnings",
                 value: "capsLockNotif",
 
-                description: 'Enable warnings when caps lock is on.'
-            }
-        ]
+                description: "Enable warnings when caps lock is on.",
+            },
+        ],
     },
     {
         id: "accessibility",
         name: "Accessibility",
         settings: [
             {
-                type: 'toggle',
-                title: 'Narrator <div class="textTag beta" title="This feature is experimental and is still receiving updates and new features that may be unfinished.">Beta</div>',
+                type: "toggle",
+                title:
+                    'Narrator <div class="textTag beta" title="This feature is experimental and is still receiving updates and new features that may be unfinished.">Beta</div>',
                 value: "narrator",
 
-                description: 'Give spoken feedback while typing.',
+                description: "Give spoken feedback while typing.",
                 optionsButton: () => showNarratorOptions(),
-                hidden: true
+                hidden: true,
             },
             {
-                type: 'toggle',
-                title: 'Bold text',
+                type: "toggle",
+                title: "Bold text",
                 value: "boldText",
             },
             {
-                type: 'slider',
-                title: 'Text size',
+                type: "slider",
+                title: "Text size",
                 value: "textSize",
                 min: 10,
                 max: 30,
@@ -702,108 +756,111 @@ const settingsModel = [
 <path d="M5.5 19.207L7.82143 13.8816M7.82143 13.8816H16.1786M7.82143 13.8816L11.3785 5.72177C11.6236 5.15939 12.3764 5.15939 12.6215 5.72177L16.1786 13.8816M16.1786 13.8816L18.5 19.207" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `,
-                description: 'Adjust the text size of the keys for a more comfortable typing experience.'
+                description:
+                    "Adjust the text size of the keys for a more comfortable typing experience.",
             },
-        ]
+        ],
     },
     {
         id: "backupRestore",
         name: "Backup & Restore",
         settings: [
             {
-                type: 'button',
-                title: 'Export data',
+                type: "button",
+                title: "Export data",
                 button: backupButton,
-                description: 'Save a backup file to import on another device.'
+                description: "Save a backup file to import on another device.",
             },
             {
-                type: 'button',
-                title: 'Import data',
+                type: "button",
+                title: "Import data",
                 button: restoreButton,
-                description: 'If you have a backup, import it here to bring your grades and settings here.'
+                description:
+                    "If you have a backup, import it here to bring your grades and settings here.",
             },
             {
-                type: 'button',
-                title: 'Factory reset',
+                type: "button",
+                title: "Factory reset",
                 button: resetButton,
-                description: 'Reset all data, including stats and settings.',
-                dangerous: true
+                description: "Reset all data, including stats and settings.",
+                dangerous: true,
             },
-        ]
+        ],
     },
-]
+];
 
-const settingsPanel = getPanelView('settings')
-settingsModel.forEach(category => {
-    const ctView = document.createElement('div')
-    ctView.className = 'panelGroup'
-    ctView.classList.add(`${category.id}View`)
+const settingsPanel = getPanelView("settings");
+settingsModel.forEach((category) => {
+    const ctView = document.createElement("div");
+    ctView.className = "panelGroup";
+    ctView.classList.add(`${category.id}View`);
     ctView.innerHTML = `
     <div class="panelGroupTitle">${category.name}</div>
-    `
+    `;
 
-    category.settings.forEach(s => {
-        const setEl = document.createElement('div')
-        setEl.className = 'setting'
+    category.settings.forEach((s) => {
+        const setEl = document.createElement("div");
+        setEl.className = "setting";
 
-        let settingId = s.title.replaceAll(' ', '')
+        let settingId = s.title.replaceAll(" ", "");
 
-        setEl.id = settingId
+        setEl.id = settingId;
 
-        if (s.type == 'etc' || s.type == 'input' || s.type == 'slider') {
-            setEl.classList.add('vertical')
+        if (s.type == "etc" || s.type == "input" || s.type == "slider") {
+            setEl.classList.add("vertical");
         }
         setEl.innerHTML = `
             <div class="textGroup">
                 <div class="settingTitle">${s.title}</div>
                 <div class="settingDescription">${s.description}</div>
             </div>
-        `
-        if (!s.description) setEl.querySelector('.settingDescription').remove()
+        `;
+        if (!s.description) setEl.querySelector(".settingDescription").remove();
 
         let valueEl;
         switch (s.type) {
-            case 'etc':
-                valueEl = s.block
+            case "etc":
+                valueEl = s.block;
                 break;
-            case s.type = 'button':
-                setEl.append(s.button)
+            case (s.type = "button"):
+                setEl.append(s.button);
                 break;
-            case 'toggle':
-                valueEl = document.createElement('div')
-                valueEl.className = 'toggleSwitch'
+            case "toggle":
+                valueEl = document.createElement("div");
+                valueEl.className = "toggleSwitch";
 
                 if (getSettings()[s.value] == true) {
-                    valueEl.classList.add('on')
+                    valueEl.classList.add("on");
                 }
-                valueEl.addEventListener('click', () => {
-                    settingsValues[s.value] = (settingsValues[s.value] == true ? false : true)
+                valueEl.addEventListener("click", () => {
+                    settingsValues[s.value] =
+                        settingsValues[s.value] == true ? false : true;
                     if (settingsValues[s.value] == true) {
-                        valueEl.classList.add('on')
+                        valueEl.classList.add("on");
                     } else {
-                        if (valueEl.classList.contains('on')) {
-                            valueEl.classList.remove('on')
+                        if (valueEl.classList.contains("on")) {
+                            valueEl.classList.remove("on");
                         }
                     }
-                    updateSettings()
-                })
+                    updateSettings();
+                });
 
                 break;
-            case 'input':
-                valueEl = document.createElement('input')
-                valueEl.id = `${settingId}Input`
-                valueEl.type = 'text'
+            case "input":
+                valueEl = document.createElement("input");
+                valueEl.id = `${settingId}Input`;
+                valueEl.type = "text";
 
-                valueEl.value = getSettings()[s.value]
+                valueEl.value = getSettings()[s.value];
 
                 valueEl.onchange = () => {
-                    settingsValues[s.value] = valueEl.value
-                    updateSettings()
-                }
+                    settingsValues[s.value] = valueEl.value;
+                    updateSettings();
+                };
                 break;
-            case 'slider':
-                valueEl = document.createElement('div')
-                valueEl.className = 'sliderCt'
+            case "slider":
+                valueEl = document.createElement("div");
+                valueEl.className = "sliderCt";
 
                 valueEl.innerHTML = `
                 <div class="sliderMainCt">
@@ -812,111 +869,119 @@ settingsModel.forEach(category => {
                     <div class="sliderLabel maxLabel">${s.maxLabel}</div>
                 </div>
                 <input type="number" class="sliderValueSimInp">
-                `
+                `;
 
-                const valueElB = valueEl.querySelector('input[type="range"]')
+                const valueElB = valueEl.querySelector('input[type="range"]');
 
-                valueElB.value = getSettings()[s.value]
-                valueElB.title = valueElB.value
+                valueElB.value = getSettings()[s.value];
+                valueElB.title = valueElB.value;
 
-                valueElB.addEventListener('input', upd)
+                valueElB.addEventListener("input", upd);
 
                 function upd() {
-                    settingsValues[s.value] = valueElB.value
-                    valueElB.title = valueElB.value
-                    valueEl.querySelector('.sliderValueSimInp').value = valueElB.value
-                    updateSettings()
-                    updateSliders()
+                    settingsValues[s.value] = valueElB.value;
+                    valueElB.title = valueElB.value;
+                    valueEl.querySelector(".sliderValueSimInp").value = valueElB.value;
+                    updateSettings();
+                    updateSliders();
                 }
 
-                valueEl.querySelector('.sliderValueSimInp').min = s.min
-                valueEl.querySelector('.sliderValueSimInp').max = s.max
+                valueEl.querySelector(".sliderValueSimInp").min = s.min;
+                valueEl.querySelector(".sliderValueSimInp").max = s.max;
 
-                valueEl.querySelector('.sliderValueSimInp').addEventListener('input', () => {
-                    valueElB.value = valueEl.querySelector('.sliderValueSimInp').value
-                    updateSliders()
-                    upd()
-                })
+                valueEl
+                    .querySelector(".sliderValueSimInp")
+                    .addEventListener("input", () => {
+                        valueElB.value = valueEl.querySelector(".sliderValueSimInp").value;
+                        updateSliders();
+                        upd();
+                    });
 
-                valueEl.querySelector('.sliderValueSimInp').value = valueElB.value
+                valueEl.querySelector(".sliderValueSimInp").value = valueElB.value;
                 break;
             default:
-                console.error('invalid setting type');
+                console.error("invalid setting type");
                 break;
         }
-        if (valueEl) setEl.append(valueEl)
+        if (valueEl) setEl.append(valueEl);
 
         if (s.optionsButton) {
-            const optionsBtn = document.createElement('button')
-            optionsBtn.className = 'actionBtn'
-            optionsBtn.innerHTML = systemIcons.settings
-            optionsBtn.title = 'Options...'
-            setEl.insertBefore(optionsBtn, valueEl)
-            optionsBtn.addEventListener('click', s.optionsButton)
+            const optionsBtn = document.createElement("button");
+            optionsBtn.className = "actionBtn";
+            optionsBtn.innerHTML = systemIcons.settings;
+            optionsBtn.title = "Options...";
+            setEl.insertBefore(optionsBtn, valueEl);
+            optionsBtn.addEventListener("click", s.optionsButton);
         }
-        if (s.hidden) setEl.style.display = 'none'
+        if (s.hidden) setEl.style.display = "none";
 
-        ctView.append(setEl)
-    })
+        ctView.append(setEl);
+    });
 
-    settingsPanel.append(ctView)
-})
+    settingsPanel.append(ctView);
+});
 
 function updateSettings() {
-    localStorage.setItem('userSettings', JSON.stringify(settingsValues))
+    localStorage.setItem("userSettings", JSON.stringify(settingsValues));
 
-    checkSettings()
+    checkSettings();
 }
-const tkBtn = document.querySelector('.touchKeyboardBtn')
+const tkBtn = document.querySelector(".touchKeyboardBtn");
 function getSettings() {
-    return JSON.parse(localStorage.getItem('userSettings'))
+    return JSON.parse(localStorage.getItem("userSettings"));
 }
 function checkSettings() {
-    document.body.style.setProperty('--accent', `var(--${accentColors[getSettings().themeColor]}-accent)`)
+    document.body.style.setProperty(
+        "--accent",
+        `var(--${accentColors[getSettings().themeColor]}-accent)`
+    );
 
     if (getSettings().darkMode == true) {
-        darkTheme()
+        darkTheme();
     } else {
-        lightTheme()
+        lightTheme();
     }
 
     if (getSettings().mobileKeyboard == true) {
-        tkBtn.style.display = 'flex'
+        tkBtn.style.display = "flex";
 
-        tkBtn.addEventListener('click', () => {
-            tkInp.focus()
-        })
+        tkBtn.addEventListener("click", () => {
+            tkInp.focus();
+        });
 
-        tkInp.addEventListener('input', () => {
+        tkInp.addEventListener("input", () => {
             try {
                 currentCt.children[currentChar - 5].scrollIntoView({
-                    inline: "start", behavior: "smooth"
-                })
+                    inline: "start",
+                    behavior: "smooth",
+                });
             } catch (e) { }
-        })
+        });
     } else {
-        tkBtn.style.display = 'none'
+        tkBtn.style.display = "none";
     }
 
-    backspaceAllowed = getSettings().backSpacing
-    document.querySelector('main').style.setProperty('--text-size', getSettings().textSize + 'px')
+    backspaceAllowed = getSettings().backSpacing;
+    document
+        .querySelector("main")
+        .style.setProperty("--text-size", getSettings().textSize + "px");
 
     if (getSettings().boldText) {
-        document.querySelector('main').classList.add('boldTextEnabled')
+        document.querySelector("main").classList.add("boldTextEnabled");
     } else {
-        document.querySelector('main').classList.remove('boldTextEnabled')
+        document.querySelector("main").classList.remove("boldTextEnabled");
     }
 }
 function updateStats() { }
 
-checkSettings()
+checkSettings();
 
-const verseBtn = document.querySelector('#footerVerseRef')
-verseBtn.addEventListener('click', function (evt) {
-    let throttle = false
+const verseBtn = document.querySelector("#footerVerseRef");
+verseBtn.addEventListener("click", function (evt) {
+    let throttle = false;
 
     if (!throttle && evt.detail === 3) {
-        showPopup(true, '.verseListPopup')
+        showPopup(true, ".verseListPopup");
         throttle = true;
         setTimeout(function () {
             throttle = false;
@@ -924,11 +989,11 @@ verseBtn.addEventListener('click', function (evt) {
     }
 });
 
-const verseList = document.querySelector('.pverseList')
+const verseList = document.querySelector(".pverseList");
 for (let vx of randomVerses) {
-    const vxItem = document.createElement('li')
-    vxItem.className = 'verseListItem'
-    verseList.append(vxItem)
+    const vxItem = document.createElement("li");
+    vxItem.className = "verseListItem";
+    verseList.append(vxItem);
     vxItem.innerHTML = `
     <img src="${vx.imageURL}" class="verseListImg" alt="${vx.ref}">
     <div class="verseTD">
@@ -936,13 +1001,13 @@ for (let vx of randomVerses) {
             <div class="verseListItMain">${vx.verse}</div>
         </div>
         <button class="addToJournalBtn actionBtn">${systemIcons.bookmark}</button>
-        `
+        `;
 }
-document.querySelector('.nameArea').addEventListener('click', function (evt) {
-    let throttle = false
+document.querySelector(".nameArea").addEventListener("click", function (evt) {
+    let throttle = false;
 
     if (!throttle && evt.detail === 7) {
-        toggleDeveloperMode(true)
+        toggleDeveloperMode(true);
         throttle = true;
         setTimeout(function () {
             throttle = false;
@@ -951,82 +1016,112 @@ document.querySelector('.nameArea').addEventListener('click', function (evt) {
 });
 function toggleDeveloperMode(onOrOff) {
     if (onOrOff == true) {
-        if (sessionStorage.getItem('developerMode') == 'true') {
-            alert('Developer mode is already on.')
+        if (sessionStorage.getItem("developerMode") == "true") {
+            alert("Developer mode is already on.");
         } else {
-            sessionStorage.setItem('developerMode', 'true')
-            alert('Developer mode has been enabled.\nWarning: This tool is intended for developer use only and only use if you know what you\'re doing.')
+            sessionStorage.setItem("developerMode", "true");
+            alert(
+                "Developer mode has been enabled.\nWarning: This tool is intended for developer use only and only use if you know what you're doing."
+            );
         }
     } else {
-        sessionStorage.removeItem('developerMode')
-        alert('Developer mode has been disabled. Reload to take effect.')
+        sessionStorage.removeItem("developerMode");
+        alert("Developer mode has been disabled. Reload to take effect.");
     }
 }
-if (sessionStorage.getItem('developerMode') == 'true') {
-    document.querySelector('.nameArea').innerHTML += `<div class="textTag dev">DEV</div>`
+if (sessionStorage.getItem("developerMode") == "true") {
+    document.querySelector(
+        ".nameArea"
+    ).innerHTML += `<div class="textTag dev">DEV</div>`;
 }
 
-window.addEventListener('keyup', (e) => {
-    if (sessionStorage.getItem('developerMode') == 'true') {
-        if (e.key == '/') {
-            document.querySelector('.developerPanel').style.display = 'flex'
-            document.querySelector('.devCmdInput').focus()
-            document.querySelector('.devCmdInput').value = '/'
+window.addEventListener("keyup", (e) => {
+    if (sessionStorage.getItem("developerMode") == "true") {
+        if (e.key == "/") {
+            document.querySelector(".developerPanel").style.display = "flex";
+            document.querySelector(".devCmdInput").focus();
+            document.querySelector(".devCmdInput").value = "/";
         }
     }
-})
+});
 function updateSliders() {
-    document.querySelectorAll('input[type="range"]').forEach(slider => {
+    document.querySelectorAll('input[type="range"]').forEach((slider) => {
         function updateSlider() {
-            const valPercent = ((slider.value / (slider.max - slider.min)) * 100) - (slider.min == 10 ? 50 : 0);
-            slider.style.setProperty('background', `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`, 'important')
+            const valPercent =
+                (slider.value / (slider.max - slider.min)) * 100 -
+                (slider.min == 10 ? 50 : 0);
+            slider.style.setProperty(
+                "background",
+                `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`,
+                "important"
+            );
         }
-        slider.addEventListener('input', updateSlider)
-        updateSlider()
-    })
+        slider.addEventListener("input", updateSlider);
+        updateSlider();
+    });
 }
-updateSliders()
+updateSliders();
 
 function showNarratorOptions() {
-    console.log('test');
+    console.log("test");
 }
 function updateStats() {
-    localStorage.setItem('userStats', JSON.stringify(stats))
-    loadStats()
+    localStorage.setItem("userStats", JSON.stringify(stats));
+    loadStats();
 }
 function loadStats() {
-    document.querySelector('.versesCompCol .lgColumnValue').textContent = stats.versesCompleted
-    document.querySelector('.totalCharsTypedLb').textContent = stats.totalCharactersTyped
+    document.querySelector(".versesCompCol .lgColumnValue").textContent =
+        stats.versesCompleted;
+    document.querySelector(".totalCharsTypedLb").textContent =
+        stats.totalCharactersTyped;
 
-    const overallGrade = Math.round(stats.gradebook.reduce((a, c) => a + (c.grade*100),0) / stats.gradebook.length)
-    document.querySelector('.overallGradeCol .lgColumnValue').innerHTML = `${overallGrade}% <span style="color: var(--text-${overallGrade >= 80 ? 'green' : (overallGrade >= 50 ? 'orange' : 'red')})">(${calculateGradeLetter(overallGrade)})</span>`
+    const overallGrade = Math.round(
+        stats.gradebook.reduce((a, c) => a + c.grade * 100, 0) /
+        stats.gradebook.length
+    );
+    document.querySelector(
+        ".overallGradeCol .lgColumnValue"
+    ).innerHTML = `${overallGrade}% <span style="color: var(--text-${overallGrade >= 80 ? "green" : overallGrade >= 50 ? "orange" : "red"
+        })">(${calculateGradeLetter(overallGrade)})</span>`;
 
-    document.querySelector('.gradebookVerses .lgColumnValue').textContent = `${stats.gradebook.length}/10`
+    document.querySelector(
+        ".gradebookVerses .lgColumnValue"
+    ).textContent = `${stats.gradebook.length}/10`;
 
-    document.querySelector('.gradeTable').innerHTML = ''
-    stats.gradebook.forEach(grade => {
-        const date = new Date(grade.date)
-        const tr = document.createElement('tr')
-        tr.innerHTML = `<td>${date.toLocaleDateString()}</td>
+    document.querySelectorAll(".gradeTable > tr").forEach((el) => el.remove());
+    stats.gradebook.forEach((grade) => {
+        const date = new Date(grade.date);
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td title="${date.toLocaleTimeString([], {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+        })}">${date.toLocaleDateString()}</td>
                                     <td>${grade.verse}</td>
-                                    <td>${grade.grade * 100}% <span style="color: var(--text-${grade.incorrect == 0 ? 'green' : 'red'})">(-${grade.incorrect})</span></td>`
-        document.querySelector('.gradeTable').append(tr)
-    })
-    document.querySelector('.btn.showGradingInfo').title = `The grade shows how well you completed the test, using the grading scale below.
+                                    <td>${grade.grade * 100
+            }% (<span style="color: var(--text-${grade.incorrect == 0 ? "green" : "red"
+            })">-${grade.incorrect}</span>)</td>`;
+        document.querySelector(".gradeTable").append(tr);
+    });
+    document.querySelector(
+        ".btn.showGradingInfo"
+    ).title = `The grade shows how well you completed the test, using the grading scale below.
 90% - Excellent
 80% - Good
 60% - Fair
 40% - Poor
-Under 40% - Faulty`
+Under 40% - Faulty`;
 }
-loadStats()
+loadStats();
 
 function calculateGradeLetter(prompt) {
     let letter;
-    if (prompt >= 90) letter = 'Excellent'
-    else if (prompt >= 80) letter = 'Good'
-    else if (prompt >= 60) letter = 'Fair'
-    else if (prompt >= 40) letter = 'Poor'
-    else letter = 'Faulty'
-    return letter
+    if (prompt >= 90) letter = "Excellent";
+    else if (prompt >= 80) letter = "Good";
+    else if (prompt >= 60) letter = "Fair";
+    else if (prompt >= 40) letter = "Poor";
+    else letter = "Faulty";
+    return letter;
 }

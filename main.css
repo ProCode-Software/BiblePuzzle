@@ -1883,3 +1883,6 @@ body.dark input[type="range"]::-webkit-slider-thumb:not(:hover) {
 body.dark .typingWarning {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
+.gradeTable tr td:nth-child(2) {
+    font-weight: 500;
+}
