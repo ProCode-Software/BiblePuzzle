@@ -73,12 +73,12 @@ let settingsValues = {
 }
 
 let stats;
-const loadedStats = JSON.parse(localStorage.getItem('userStats'))
+const loadedStats = localStorage.getItem('userStats')
 if (loadedStats) {
-    stats = loadedStats
+    stats = JSON.parse(loadedStats)
 } else {
     stats = {
-        bestVerse: 1, // Based on score.
+        bestVerse: 0, // Based on score.
         versesCompleted: 0,
         totalCharactersTyped: 0, // correct characters
         avgCPS: 0,
@@ -98,9 +98,8 @@ if (loadedStats) {
             } */
         ]
     }
-    localStorage.setItem('userStats', stats)
+    localStorage.setItem('userStats', JSON.stringify(stats))
 }
-console.log(stats);
 
 const tkInp = document.querySelector('.touckKeyboardInp')
 
@@ -321,10 +320,12 @@ function startTyping(ct, array) {
                     }
                 }
             }
-            if (e.getModifierState('CapsLock')) {
-                document.querySelector('.capsLockWarning').style.display = 'flex'
-            } else {
-                document.querySelector('.capsLockWarning').style.display = 'none'
+            if (getSettings().capsLockNotif) {
+                if (e.getModifierState('CapsLock')) {
+                    document.querySelector('.capsLockWarning').style.display = 'flex'
+                } else {
+                    document.querySelector('.capsLockWarning').style.display = 'none'
+                }
             }
         }
     }
@@ -383,6 +384,16 @@ function completeTest() {
 
     subscoreText.innerHTML = `<span class="${Math.round(percent) >= 75 ? 'green' : (Math.round(percent) >= 50 ? 'orange' : 'red')}" style="font-weight: 600">${(charactersTyped) - incorrectChars}</span>/${charactersTyped}`
     scoreText.textContent = `${Math.round(percent)}%`
+
+    stats.gradebook.push({
+        date: new Date(),
+        verse: reference,
+        grade: Math.round(percent) / 100,
+        incorrect: incorrectChars,
+        avgCPS: 0
+    })
+    updateStats()
+    
 
 
     const circle = panelView.querySelector('circle#chart-score');
@@ -552,6 +563,7 @@ function playAgain() {
 
 function showStats() {
     showPanel(true, 'stats', true)
+    loadStats()
 }
 function showHelpPanel() {
     showPanel(true, 'help', true)
@@ -976,4 +988,55 @@ updateSliders()
 
 function showNarratorOptions() {
     console.log('test');
+}
+function updateStats() {
+    localStorage.setItem('userStats', JSON.stringify(stats))
+}
+function loadStats() {
+    document.querySelector('.versesCompCol .lgColumnValue').textContent = stats.versesCompleted
+    document.querySelector('.totalCharsTypedLb').textContent = stats.totalCharactersTyped
+
+    const overallGrade = Math.round(stats.gradebook.reduce((a, c) => a + (c.grade*100),0) / stats.gradebook.length)
+    document.querySelector('.overallGradeCol .lgColumnValue').innerHTML = `${overallGrade}% <span style="color: var(--${overallGrade >= 80 ? 'green' : (overallGrade >= 50 ? 'orange' : 'red')})">(${calculateGradeLetter(overallGrade)})</span>`
+
+    document.querySelector('.gradebookVerses .lgColumnValue').textContent = `${stats.gradebook.length}/10`
+
+    stats.gradebook.forEach(grade => {
+        const date = new Date(grade.date)
+        const tr = document.createElement('tr')
+        tr.innerHTML = `<td>${date.toLocaleDateString()}</td>
+                                    <td>${grade.verse}</td>
+                                    <td>${grade.grade * 100}% (-${grade.incorrect})</td>`
+        document.querySelector('.gradeTable').append(tr)
+    })
+    document.querySelector('.btn.showGradingInfo').title = `The grade shows how well you completed the test, using the grading scale below.
+90% - Excellent
+80% - Good
+60% - Fair
+40% - Poor
+Under 40% - Faulty`
+}
+/* {
+                date: new Date(),
+                verse: '',
+                grade: 0.0,
+                incorrect: 0,
+                avgCPS: 0
+            } */
+loadStats()
+
+/** The grade shows how well you completed the test, using the grading scale below.
+90% - Excellent
+80% - Good
+60% - Fair
+40% - Poor
+Under 40% - Faulty */
+function calculateGradeLetter(prompt) {
+    let letter;
+    if (prompt >= 90) letter = 'Excellent'
+    else if (prompt >= 80) letter = 'Good'
+    else if (prompt >= 60) letter = 'Fair'
+    else if (prompt >= 40) letter = 'Poor'
+    else letter = 'Faulty'
+    return letter
 }
