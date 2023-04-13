@@ -385,13 +385,14 @@ function completeTest() {
     subscoreText.innerHTML = `<span class="${Math.round(percent) >= 75 ? 'green' : (Math.round(percent) >= 50 ? 'orange' : 'red')}" style="font-weight: 600">${(charactersTyped) - incorrectChars}</span>/${charactersTyped}`
     scoreText.textContent = `${Math.round(percent)}%`
 
-    stats.gradebook.push({
+    stats.gradebook.unshift({
         date: new Date(),
         verse: reference,
         grade: Math.round(percent) / 100,
         incorrect: incorrectChars,
         avgCPS: 0
     })
+    if (stats.gradebook.length > 10) {stats.gradebook = stats.gradebook.slice(0,10)}
     updateStats()
     
 
@@ -991,22 +992,24 @@ function showNarratorOptions() {
 }
 function updateStats() {
     localStorage.setItem('userStats', JSON.stringify(stats))
+    loadStats()
 }
 function loadStats() {
     document.querySelector('.versesCompCol .lgColumnValue').textContent = stats.versesCompleted
     document.querySelector('.totalCharsTypedLb').textContent = stats.totalCharactersTyped
 
     const overallGrade = Math.round(stats.gradebook.reduce((a, c) => a + (c.grade*100),0) / stats.gradebook.length)
-    document.querySelector('.overallGradeCol .lgColumnValue').innerHTML = `${overallGrade}% <span style="color: var(--${overallGrade >= 80 ? 'green' : (overallGrade >= 50 ? 'orange' : 'red')})">(${calculateGradeLetter(overallGrade)})</span>`
+    document.querySelector('.overallGradeCol .lgColumnValue').innerHTML = `${overallGrade}% <span style="color: var(--text-${overallGrade >= 80 ? 'green' : (overallGrade >= 50 ? 'orange' : 'red')})">(${calculateGradeLetter(overallGrade)})</span>`
 
     document.querySelector('.gradebookVerses .lgColumnValue').textContent = `${stats.gradebook.length}/10`
 
+    document.querySelector('.gradeTable').innerHTML = ''
     stats.gradebook.forEach(grade => {
         const date = new Date(grade.date)
         const tr = document.createElement('tr')
         tr.innerHTML = `<td>${date.toLocaleDateString()}</td>
                                     <td>${grade.verse}</td>
-                                    <td>${grade.grade * 100}% (-${grade.incorrect})</td>`
+                                    <td>${grade.grade * 100}% <span style="color: var(--text-red)">(-${grade.incorrect})</span></td>`
         document.querySelector('.gradeTable').append(tr)
     })
     document.querySelector('.btn.showGradingInfo').title = `The grade shows how well you completed the test, using the grading scale below.
@@ -1016,21 +1019,8 @@ function loadStats() {
 40% - Poor
 Under 40% - Faulty`
 }
-/* {
-                date: new Date(),
-                verse: '',
-                grade: 0.0,
-                incorrect: 0,
-                avgCPS: 0
-            } */
 loadStats()
 
-/** The grade shows how well you completed the test, using the grading scale below.
-90% - Excellent
-80% - Good
-60% - Fair
-40% - Poor
-Under 40% - Faulty */
 function calculateGradeLetter(prompt) {
     let letter;
     if (prompt >= 90) letter = 'Excellent'
