@@ -1899,3 +1899,10 @@ body.dark .typingWarning {
         display: none;
     }
 }
+.gradeTable td {
+    border-radius: 8px;
+    transition: .15s;
+}
+.gradeTable td:hover {
+    background: rgba(var(--border-color), 0.2);
+}

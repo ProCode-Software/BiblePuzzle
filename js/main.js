@@ -1092,15 +1092,15 @@ function loadStats() {
     stats.gradebook.forEach((grade) => {
         const date = new Date(grade.date);
         const tr = document.createElement("tr");
-        tr.innerHTML = `<td title="${date.toLocaleTimeString([], {
+        tr.innerHTML = `<td class="verseDateTd" title="${date.toLocaleTimeString([], {
             year: "numeric",
             month: "numeric",
             day: "numeric",
             hour: "numeric",
             minute: "2-digit",
         })}">${date.toLocaleDateString()}</td>
-                                    <td>${grade.verse}</td>
-                                    <td>${grade.grade * 100
+                                    <td class="verseRefTd">${grade.verse}</td>
+                                    <td class="verseGradeTd">${grade.grade * 100
             }% (<span style="color: var(--text-${grade.incorrect == 0 ? "green" : "red"
             })">-${grade.incorrect}</span>)</td>`;
         document.querySelector(".gradeTable").append(tr);
