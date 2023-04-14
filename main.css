@@ -1934,7 +1934,7 @@ body.dark .typingWarning {
     min-width: 350px;
     max-width: 500px;
     min-height: 60px;
-    animation: toastUp .3s cubic-bezier(0, 0, 0.56, 0.91);
+    animation: toastUp .23s cubic-bezier(0, 0, 0.56, 0.91);
 }
 
 .toastButtonsFrame {
@@ -1988,4 +1988,8 @@ body.dark .toast button:hover {
 }
 #stats > * > * > * {
     user-select: text;
+}
+button:focus-visible {
+    transition: .15s;
+    outline: 2.75px solid var(--accent);
 }

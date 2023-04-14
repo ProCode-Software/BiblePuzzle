@@ -1138,11 +1138,20 @@ function showToast(text, buttons, clsName, timeout) {
     if (clsName) toast.classList.add(clsName)
     toast.innerHTML = `<div class="toastIconFrame"></div>
                     <div class="toastTextFrame">${text}</div>
-                    <div class="toastButtonsFrame">
-                        <button>Cancel</button>
-                        <button>OK</button>
-                    </div>`
+                    <div class="toastButtonsFrame"></div>`
+    if (buttons) {
+        buttons.forEach(btn => {
+            const btnEl = document.createElement('button')
+            if (btn.class) btnEl.className = btn.class
+            btnEl.innerHTML = btn.text
+            btnEl.onclick = btn.click
+            btnEl.tabIndex = 0
+
+            toast.querySelector('.toastButtonsFrame').append(btnEl)
+        })
+    }
     toastFrame.append(toast)
+
     setTimeout(() => {
         toast.classList.add('leaving')
         setTimeout(() => {
@@ -1150,3 +1159,9 @@ function showToast(text, buttons, clsName, timeout) {
         }, 200)
     }, (timeout ? timeout : 3000));
 }
+
+const helpFrame = document.querySelector('.helpFrame')
+const ss = document.createElement('link')
+ss.rel = 'stylesheet'
+ss.href = 'assets/css/md.css'
+helpFrame.contentDocument.onload = () => { helpFrame.contentDocument.head.append(ss) }
