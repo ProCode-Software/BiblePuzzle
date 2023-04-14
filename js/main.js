@@ -100,12 +100,7 @@ if (loadedStats) {
                 avgCPS: 0
             } */
         ],
-        troubleKeys: [
-            /* {
-                key: 'a',
-                incorrectHistory: [3,4,0,2,6,0,0,1] //each are verses. number of how many times incorrect in a verse. every verse is here, including ones with 0 incorrect.
-            } */
-        ],
+        troubleKeys: {}
     };
     localStorage.setItem("userStats", JSON.stringify(stats));
 }
@@ -189,6 +184,7 @@ let keyboardLock = true;
 let currentCt;
 let currentChar = 0;
 let incorrectArray = []
+let startTime
 
 let countedKeys =
     "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()-=+-_`~[]\\|}{;':\"<>?/., ";
@@ -201,38 +197,6 @@ function startTyping(ct, array) {
     document.querySelector("footer #footerVerseRef").textContent = reference;
     ct.children[activeCharNum].classList.add("active");
 
-    const cpsTest = {
-        cps: 0,
-        isSampling: undefined,
-        allTests: [],
-
-        stop: () => {
-            cpsTest.isSampling = false;
-            cpsTest.allTests.push(cps);
-            console.log(cpsTest.allTests);
-            cps = 0;
-            cpsTest.isSampling = undefined;
-            cpsTest.start();
-        },
-        start: () => {
-            cpsTest.isSampling = true;
-            if (cpsTest.isSampling == true) {
-                setTimeout(() => {
-                    cpsTest.stop();
-                }, 1000);
-            }
-        },
-        average: () => {
-            let init = 0;
-            const sum = cpsTest.allTests.reduce((prev, curr) => prev + curr, init);
-            const mean = sum / cpsTest.allTests.length;
-
-            return mean;
-        },
-    };
-    let cps = 0;
-    let allCps = [];
-    let cpsSampleOver = undefined;
     window.onkeydown = (e) => {
         type(e);
     };
@@ -242,20 +206,10 @@ function startTyping(ct, array) {
     function type(e) {
         charactersTyped++;
         if (!keyboardLock) {
-            if (cpsTest.isSampling == true) {
-                cps++;
-            }
-            setTimeout(() => {
-                cpsSampleOver = true;
-                allCps.push(cps);
-                console.log(cps);
-                cps = 0;
-                cpsSampleOver = false;
-            }, 1000);
             if (activeCharNum == 0) {
                 if (!timer.isOn) {
                     timer.start();
-                    cpsTest.start();
+                    startTime = new Date().getTime()
                 }
             }
             if (activeCharNum > 0) {
@@ -389,6 +343,13 @@ function showPopup(showOrHide, popupId) {
         showOrHide == true ? "flex" : "none";
 }
 
+function calculateCPS() {
+    const endTime = new Date().getTime()
+    const elapsedTime = (endTime - startTime) / 1000;
+    const cps = charactersTyped / elapsedTime;
+    return cps;
+}
+
 function completeTest() {
     timer.pause();
     showPanel(true, "completion", true);
@@ -399,6 +360,7 @@ function completeTest() {
     percent = ((total - incorrectChars) / total) * 100;
 
     const time = timer.getTime();
+    const avgCPS = Math.round(calculateCPS() * 10) / 10
 
     const scoreText = panelView.querySelector(".graph-content .score");
     const subscoreText = panelView.querySelector(".graph-content .subscore");
@@ -417,7 +379,7 @@ function completeTest() {
         verse: reference,
         grade: Math.round(percent) / 100,
         incorrect: incorrectChars,
-        avgCPS: 0,
+        avgCPS: avgCPS,
     });
     if (stats.gradebook.length > 10) {
         stats.gradebook = stats.gradebook.slice(0, 10);
@@ -435,10 +397,14 @@ function completeTest() {
         return occurrences;
     };
     const occurrences = countOccurrences(incorrectArray);
+    console.log('occ', occurrences);
+    console.log(Object.keys(occurrences));
 
     if (incorrectArray.length > 0) {
         Object.keys(occurrences).forEach(letter => {
+            console.log('old ' + stats.troubleKeys[letter]);
             if (!stats.troubleKeys[letter]) { stats.troubleKeys[letter] = [] }
+            console.log('new ' + stats.troubleKeys[letter]);
             stats.troubleKeys[letter].push(occurrences[letter])
         })
         console.log(occurrences);
@@ -518,6 +484,7 @@ function completeTest() {
     typingFinalStats.querySelector("#totalTime .cellVal").textContent = time;
     typingFinalStats.querySelector("#incChars .cellVal").textContent =
         incorrectChars;
+    typingFinalStats.querySelector("#avgCPS .cellVal").textContent = avgCPS
 
     window.onresize = () => {
         checkChartSize();
@@ -1115,6 +1082,12 @@ function loadStats() {
     ).innerHTML = `${overallGrade}% <span style="color: var(--text-${overallGrade >= 80 ? "green" : overallGrade >= 50 ? "orange" : "red"
     })">(${calculateGradeLetter(overallGrade)})</span>`;
 
+    if (stats.gradebook.length < 1) {
+        document.querySelector(
+            ".overallGradeCol .lgColumnValue"
+        ).innerHTML = 'N/A'
+    }
+
     document.querySelector(
         ".gradebookVerses .lgColumnValue"
     ).textContent = `${stats.gradebook.length}/10`;
@@ -1189,4 +1162,11 @@ function showToast(text, buttons, clsName, timeout) {
             toast.remove()
         }, 200)
     }, (timeout ? timeout : 3000));
+}
+/**
+ * Returns the arithmetic mean of the given array
+ * @param {Array} array The array to average
+ */
+function avg(array) {
+    return array.reduce((a, c) => a + c.grade) / array.length
 }
