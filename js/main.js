@@ -402,10 +402,10 @@ function completeTest() {
     const subscoreText = panelView.querySelector(".graph-content .subscore");
 
     subscoreText.innerHTML = `<span class="${Math.round(percent) >= 75
-            ? "green"
-            : Math.round(percent) >= 50
-                ? "orange"
-                : "red"
+        ? "green"
+        : Math.round(percent) >= 50
+            ? "orange"
+            : "red"
         }" style="font-weight: 600">${charactersTyped - incorrectChars
         }</span>/${charactersTyped}`;
     scoreText.textContent = `${Math.round(percent)}%`;
@@ -1082,7 +1082,7 @@ function loadStats() {
     document.querySelector(
         ".overallGradeCol .lgColumnValue"
     ).innerHTML = `${overallGrade}% <span style="color: var(--text-${overallGrade >= 80 ? "green" : overallGrade >= 50 ? "orange" : "red"
-        })">(${calculateGradeLetter(overallGrade)})</span>`;
+    })">(${calculateGradeLetter(overallGrade)})</span>`;
 
     document.querySelector(
         ".gradebookVerses .lgColumnValue"
@@ -1105,6 +1105,12 @@ function loadStats() {
             })">-${grade.incorrect}</span>)</td>`;
         document.querySelector(".gradeTable").append(tr);
     });
+    document.querySelectorAll(".gradeTable td").forEach(cell => {
+        cell.addEventListener('click', () => {
+            navigator.clipboard.writeText(cell.className == 'verseDateTd' ? cell.title : cell.textContent)
+            showToast('Copied to clipboard')
+        })
+    })
     document.querySelector(
         ".btn.showGradingInfo"
     ).title = `The grade shows how well you completed the test, using the grading scale below.
@@ -1124,4 +1130,23 @@ function calculateGradeLetter(prompt) {
     else if (prompt >= 40) letter = "Poor";
     else letter = "Faulty";
     return letter;
+}
+function showToast(text, buttons, clsName, timeout) {
+    const toastFrame = document.querySelector('.toastsFrame')
+    const toast = document.createElement('div')
+    toast.className = 'toast'
+    if (clsName) toast.classList.add(clsName)
+    toast.innerHTML = `<div class="toastIconFrame"></div>
+                    <div class="toastTextFrame">${text}</div>
+                    <div class="toastButtonsFrame">
+                        <button>Cancel</button>
+                        <button>OK</button>
+                    </div>`
+    toastFrame.append(toast)
+    setTimeout(() => {
+        toast.classList.add('leaving')
+        setTimeout(() => {
+            toast.remove()
+        }, 200)
+    }, (timeout ? timeout : 3000));
 }
