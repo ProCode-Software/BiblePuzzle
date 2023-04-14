@@ -188,6 +188,7 @@ let charactersTyped = 0;
 let keyboardLock = true;
 let currentCt;
 let currentChar = 0;
+let incorrectArray = []
 
 let countedKeys =
     "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()-=+-_`~[]\\|}{;':\"<>?/., ";
@@ -268,7 +269,7 @@ function startTyping(ct, array) {
                 ct.children[activeCharNum - 1].style.borderBottomRightRadius = "";
             }
             if (countedKeys.indexOf(e.key) > -1) {
-                if (e.key == array[activeCharNum]) {
+                if (e.key == array[activeCharNum]) { //correct
                     ct.children[activeCharNum].classList.add("correct");
                     ct.children[activeCharNum].classList.remove("active");
                     stats.totalCharactersTyped++;
@@ -278,11 +279,12 @@ function startTyping(ct, array) {
                     if (activeCharNum !== array.length) {
                         ct.children[activeCharNum].classList.add("active");
                     }
-                } else {
+                } else { //incorrect
                     ct.children[activeCharNum].classList.add("incorrectChar");
                     ct.children[activeCharNum].classList.remove("active");
                     activeCharNum++;
                     incorrectChars++;
+                    incorrectArray.push(e.key)
                     currentChar = activeCharNum;
                     document.querySelectorAll(".incorrect span")[0].textContent =
                         incorrectChars;
@@ -420,8 +422,37 @@ function completeTest() {
     if (stats.gradebook.length > 10) {
         stats.gradebook = stats.gradebook.slice(0, 10);
     }
+    const countOccurrences = (array) => {
+        const occurrences = {};
+        for (let i = 0; i < array.length; i++) {
+            const item = array[i];
+            if (occurrences[item]) {
+                occurrences[item]++;
+            } else {
+                occurrences[item] = 1;
+            }
+        }
+        return occurrences;
+    };
+    const occurrences = countOccurrences(incorrectArray);
+
+    if (incorrectArray.length > 0) {
+        Object.keys(occurrences).forEach(letter => {
+            if (!stats.troubleKeys[letter]) { stats.troubleKeys[letter] = [] }
+            stats.troubleKeys[letter].push(occurrences[letter])
+        })
+        console.log(occurrences);
+    } else {
+        Object.keys(stats.troubleKeys).forEach(k => {
+            stats.troubleKeys[k].push(0)
+        })
+    }
     updateStats();
 
+    /* {
+                key: 'a',
+                incorrectHistory: [3,4,0,2,6,0,0,1] //each are verses. number of how many times incorrect in a verse. every verse is here, including ones with 0 incorrect.
+            } */
     const circle = panelView.querySelector("circle#chart-score");
     const radius = circle.r.baseVal.value;
     const circumference = radius * 2 * Math.PI;
@@ -1159,9 +1190,3 @@ function showToast(text, buttons, clsName, timeout) {
         }, 200)
     }, (timeout ? timeout : 3000));
 }
-
-const helpFrame = document.querySelector('.helpFrame')
-const ss = document.createElement('link')
-ss.rel = 'stylesheet'
-ss.href = 'assets/css/md.css'
-helpFrame.contentDocument.onload = () => { helpFrame.contentDocument.head.append(ss) }
