@@ -1986,3 +1986,6 @@ body.dark .toast button:hover {
 .toast.leaving {
     animation: toastDown .2s cubic-bezier(0, 0, 0.56, 0.91);
 }
+#stats > * > * > * {
+    user-select: text;
+}
