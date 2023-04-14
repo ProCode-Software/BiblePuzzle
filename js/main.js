@@ -1106,7 +1106,9 @@ function loadStats() {
                                     <td class="verseRefTd">${grade.verse}</td>
                                     <td class="verseGradeTd">${grade.grade * 100
             }% (<span style="color: var(--text-${grade.incorrect == 0 ? "green" : "red"
-            })">-${grade.incorrect}</span>)</td>`;
+            })">-${grade.incorrect}</span>)</td>
+            <td>${grade.avgCPS}</td>
+            `;
         document.querySelector(".gradeTable").append(tr);
     });
     document.querySelectorAll(".gradeTable td").forEach(cell => {
