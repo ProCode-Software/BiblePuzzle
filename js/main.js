@@ -1104,16 +1104,16 @@ function loadStats() {
             minute: "2-digit",
         })}">${date.toLocaleDateString()}</td>
                                     <td class="verseRefTd">${grade.verse}</td>
-                                    <td class="verseGradeTd">${grade.grade * 100
+            <td class="avgCPSTd">${grade.avgCPS}</td>
+            <td class="verseGradeTd">${grade.grade * 100
             }% (<span style="color: var(--text-${grade.incorrect == 0 ? "green" : "red"
             })">-${grade.incorrect}</span>)</td>
-            <td>${grade.avgCPS}</td>
             `;
         document.querySelector(".gradeTable").append(tr);
     });
     document.querySelectorAll(".gradeTable td").forEach(cell => {
         cell.addEventListener('click', () => {
-            navigator.clipboard.writeText(cell.className == 'verseDateTd' ? cell.title : cell.textContent)
+            navigator.clipboard.writeText(cell.className == 'verseDateTd' ? cell.title : (cell.className == 'avgCPSTd' ? `${cell.textContent} chars/sec` : cell.textContent))
             showToast('Copied to clipboard')
         })
     })
@@ -1172,3 +1172,7 @@ function showToast(text, buttons, clsName, timeout) {
 function avg(array) {
     return array.reduce((a, c) => a + c.grade) / array.length
 }
+addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    return (event.returnValue = '');
+}, {capture: true})
