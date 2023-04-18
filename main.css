@@ -171,7 +171,7 @@ header>div {
 }
 
 input {
-    border-radius: 8px;
+    border-radius: 10px;
     border: 2px solid rgba(var(--border-color), 0.6);
     padding: 10px;
     outline: none;
@@ -194,13 +194,13 @@ input:hover {
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="search"]:focus {
-    border-radius: 8px 8px 4px 4px;
+    border-radius: 10px 10px 4px 4px;
     border-bottom: 3.5px solid var(--accent);
     transition: 0.15s;
 }
 
 button {
-    border-radius: 8px;
+    border-radius: 10px;
     border: none;
     padding: 6px 12px;
     outline: none;
@@ -237,7 +237,7 @@ button:hover {
     background: var(--bg-color);
     color: var(--fg-color);
     padding: 8px 10px;
-    border-radius: 10px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -297,7 +297,7 @@ svg [stroke] {
     height: calc(var(--text-size) + 22px) !important;
     width: calc(var(--text-size) + 22px) !important;
     transition: 0.2s;
-    border-radius: 7px;
+    border-radius: 9px;
     padding-inline: 3px;
     min-width: calc(var(--text-size) + 22px) !important;
     font-family: "SF Mono", "Monaco", "Consolas", monospace;
@@ -402,7 +402,6 @@ main {
     position: relative;
     margin-left: 10px;
     padding-inline: 7px;
-    border-radius: 7px;
     color: #1a5ba8;
 }
 
@@ -646,7 +645,7 @@ main {
     justify-content: center;
     background: none;
     border: none;
-    border-radius: 7px;
+    border-radius: 10px;
     width: 42px;
     height: 42px;
     padding: 6px;
@@ -1149,9 +1148,10 @@ th {
     display: inline-flex;
     gap: 8px;
     padding: 4px;
-    height: auto;
+    height: auto !important;
     color: #000;
     background: none;
+    width: auto !important;
 }
 
 .compactActionBtn svg {

@@ -689,10 +689,17 @@ const settingsModel = [
                 value: "darkMode",
             },
             {
+                title: "Theme",
+                type: 'etc',
+                description: 'Apply a theme to make BiblePuzzle your own.',
+                block: createThemeSelectionBlock({ showOptions: true }),
+                hidden: true
+            },
+            {
                 title: "Theme color",
                 type: "etc",
                 block: createAccentColorSelectionBlock(),
-            },
+            }
         ],
     },
     {
@@ -1175,4 +1182,22 @@ function avg(array) {
 addEventListener('beforeunload', (event) => {
     event.preventDefault();
     return (event.returnValue = '');
-}, {capture: true})
+}, { capture: true })
+
+function createThemeSelectionBlock(options) {
+    const ct = document.createElement('div')
+    ct.className = 'themeSelectionCt'
+    ct.innerHTML = `<div class="themeSelection"></div><div class="buttons"></div>`
+
+
+
+    if (options.showOptions) {
+        ct.querySelector('.buttons').innerHTML = `
+        <button class="btn">${systemIcons.settings}Manage themes</button>
+        `
+    } else {
+        ct.querySelector('.buttons').remove()
+    }
+
+    return ct
+}
