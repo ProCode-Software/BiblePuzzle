@@ -533,15 +533,34 @@ function clearProgress() {
         location.reload();
     }
 }
+/**
+ * @typedef ModalConfig
+ * @property {string} title
+ * @property {boolean} lightDismiss
+ * @property {string} content
+ * @property {function} settingsButton
+ * @property {function} linkButtonAction
+ * @property {string} linkButtonText
+ * @property {string} cancelButtonText
+ * @property {string} confirmButtonText
+ * @property {string} id
+ * @property {boolean} isForm
+ * @property {function} onCancel
+ * @property {function} onSubmit
+ */
+/**
+ * Creates a modal
+ * @param {ModalConfig} config 
+ */
 function createModal(config) {
-    const popup = document.createElement(config.isForm? 'form' : 'div')
+    const popup = document.createElement(config.isForm ? 'form' : 'div')
     if (config.isForm) popup.action = 'javascript:void(0)'
     popup.classList.add('popup', config.id)
     popup.innerHTML = `
     <div class="popup-header">
                 <div class="popup-title">${config.title}</div>
                 <div class="sideButtons">
-                ${config.settingsButton ? `<button class="actionBtn popupSettingsTopBtn" onclick="${config.settingsButton}">${systemIcons.settings}</button>` : ''}
+                ${config.settingsButton ? `<button class="actionBtn popupSettingsTopBtn">${systemIcons.settings}</button>` : ''}
                     <button class="closeBtn btn actionBtn">
                         <svg width="24" height="24"
                             viewBox="0 0 24 24" fill="none"
@@ -570,19 +589,21 @@ function createModal(config) {
     `
     popup.querySelector('.popupCancelBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
-        config.onCancel
+        if (config.onCancel) config.onCancel
     })
     popup.querySelector('.popupSubmitBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
-        config.onSubmit
+        if (config.onSubmit) config.onSubmit
     })
     popup.querySelector('.closeBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
-        config.onCancel
+        if (config.onCancel) config.onCancel
     })
-    popup.querySelector('.popupSettingsTopBtn').addEventListener('click', config.settingsButton)
-    popup.querySelector('.linkButton').onclick = config.linkButtonAction
-    popup.querySelector('.linkButton').href ='#'
+    if (config.settingsButton) popup.querySelector('.popupSettingsTopBtn').addEventListener('click', config.settingsButton)
+    if (config.linkButtonAction) {
+        popup.querySelector('.linkButton').onclick = config.linkButtonAction
+        popup.querySelector('.linkButton').href = '#'
+    }
     document.querySelector('.popups').append(popup)
     return popup
 }
@@ -1282,3 +1303,16 @@ function createInputElement(placeholder, clsName, type) {
 
     return inp
 }
+customizeThemeButton.addEventListener('click', () => {
+    const popup = createModal({
+        title: 'Customize theme',
+        id: 'customizeThemePopup',
+        content: `
+        <div class="panelGroup">
+    <div class="panelGroupTitle">Image</div>
+    <input type="file" name="themeImageUploadInp" class="themeImageUploadInp">
+</div>
+`
+    })
+    showPopup(true, '.customizeThemePopup')
+})
