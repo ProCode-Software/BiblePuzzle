@@ -533,12 +533,73 @@ function clearProgress() {
         location.reload();
     }
 }
-function createModal(config) { }
-createModal({
+function createModal(config) {
+    const popup = document.createElement(config.isForm? 'form' : 'div')
+    if (config.isForm) popup.action = 'javascript:void(0)'
+    popup.classList.add('popup', config.id)
+    popup.innerHTML = `
+    <div class="popup-header">
+                <div class="popup-title">${config.title}</div>
+                <div class="sideButtons">
+                ${config.settingsButton ? `<button class="actionBtn popupSettingsTopBtn" onclick="${config.settingsButton}">${systemIcons.settings}</button>` : ''}
+                    <button class="closeBtn btn actionBtn">
+                        <svg width="24" height="24"
+                            viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M5.38128 17.3812L4.76256 17.9999L6 19.2374L6.61872 18.6186L5.38128 17.3812ZM18.6187 6.61872L19.2374 6.00001L18 4.76256L17.3813 5.38128L18.6187 6.61872ZM6.61872 5.38128L6 4.76256L4.76256 6L5.38128 6.61872L6.61872 5.38128ZM17.3813 18.6186L18 19.2374L19.2374 17.9999L18.6187 17.3812L17.3813 18.6186ZM6.61872 18.6186L12.6187 12.6187L11.3812 11.3812L5.38128 17.3812L6.61872 18.6186ZM12.6187 12.6187L18.6187 6.61872L17.3813 5.38128L11.3812 11.3812L12.6187 12.6187ZM5.38128 6.61872L11.3812 12.6187L12.6187 11.3812L6.61872 5.38128L5.38128 6.61872ZM11.3812 12.6187L17.3813 18.6186L18.6187 17.3812L12.6187 11.3812L11.3812 12.6187Z"
+                                fill="black" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="popup-body">
+            ${config.content}
+            </div>
+            <div class="popup-footer">
+                <div class="sideAction">
+                    ${config.linkButtonAction ? `<a class="linkButton">${config.linkButtonText}</a>` : ''}
+                </div>
+                <div class="btnActions">
+                    <button
+                        class="btn popupCancelBtn">${config.cancelButtonText ? config.cancelButtonText : 'Cancel'}</button>
+                    <button type="submit"
+                        class="btn-primary popupSubmitBtn">${config.confirmButtonText ? config.confirmButtonText : 'OK'}</button>
+                </div>
+            </div>
+    `
+    popup.querySelector('.popupCancelBtn').addEventListener('click', () => {
+        showPopup(false, '.' + popup.classList[1])
+        config.onCancel
+    })
+    popup.querySelector('.popupSubmitBtn').addEventListener('click', () => {
+        showPopup(false, '.' + popup.classList[1])
+        config.onSubmit
+    })
+    popup.querySelector('.closeBtn').addEventListener('click', () => {
+        showPopup(false, '.' + popup.classList[1])
+        config.onCancel
+    })
+    popup.querySelector('.popupSettingsTopBtn').addEventListener('click', config.settingsButton)
+    popup.querySelector('.linkButton').onclick = config.linkButtonAction
+    popup.querySelector('.linkButton').href ='#'
+    document.querySelector('.popups').append(popup)
+    return popup
+}
+/* createModal({
     title: "Hello, world",
     lightDismiss: true,
     content: `<p>Hello, world!</p>`,
-});
+    settingsButton: () => alert('Hello, wordl!'),
+    linkButtonAction: () => alert('Hello, wordl! 0.2'),
+    linkButtonText: 'Click me',
+    cancelButtonText: 'Go back',
+    confirmButtonText: 'Let\'s go',
+    id: 'myPopup',
+    isForm: true,
+    onCancel: () => alert('Hello, cssn!'),
+    onSubmit: () => alert('Hello, me s!')
+}); */
 
 let currentPanel;
 /**
@@ -670,6 +731,11 @@ const resetButton = createButtonElement(
     "Reset all data",
     systemIcons.reload
 );
+const customizeThemeButton = createButtonElement(
+    "default",
+    "Customize theme",
+    systemIcons.settings
+)
 
 const settingsModel = [
     {
@@ -680,13 +746,19 @@ const settingsModel = [
                 type: "input",
                 title: "Display name",
                 description:
-                    "We will refer to you using your display name. Leave blank to disable.",
+                    "We will refer to you using your display name.",
                 value: "displayName",
             },
             {
                 type: "toggle",
                 title: "Dark mode",
                 value: "darkMode",
+            },
+            {
+                title: "Theme",
+                type: 'button',
+                description: 'Set a custom image and color theme.',
+                button: customizeThemeButton
             },
             {
                 title: "Theme",
@@ -1132,6 +1204,7 @@ function loadStats() {
 60% - Fair
 40% - Poor
 Under 40% - Faulty`;
+    document.querySelector('#stats .panelTitle').textContent = `${getSettings().displayName}'s Stats`
 }
 loadStats();
 
@@ -1200,4 +1273,12 @@ function createThemeSelectionBlock(options) {
     }
 
     return ct
+}
+function createInputElement(placeholder, clsName, type) {
+    const inp = document.createElement('input')
+    inp.type = (type ? type : 'text')
+    if (placeholder) inp.placeholder = placeholder
+    if (clsName) inp.className = clsName
+
+    return inp
 }
