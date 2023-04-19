@@ -29,6 +29,14 @@ const systemIcons = {
                                 <path d="M12 8.125C9.8599 8.125 8.12501 9.8599 8.12501 12C8.12501 14.1401 9.8599 15.875 12 15.875C14.1401 15.875 15.875 14.1401 15.875 12C15.875 9.8599 14.1401 8.125 12 8.125Z" fill="black"></path>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.125C11.2475 2.125 10.5137 2.20932 9.80782 2.36938C9.46743 2.44657 9.20547 2.71867 9.14126 3.06174L8.81921 4.78236C8.69229 5.46048 7.9905 5.86566 7.33976 5.63652L5.69061 5.05581C5.36177 4.94001 4.99556 5.03048 4.75847 5.2861C3.76486 6.35733 3.00537 7.65042 2.56289 9.08388C2.46005 9.41702 2.56481 9.77941 2.82952 10.0063L4.15897 11.1458C4.68278 11.5948 4.68278 12.4052 4.15897 12.8542L2.82952 13.9937C2.56481 14.2206 2.46005 14.583 2.56289 14.9161C3.00537 16.3496 3.76486 17.6427 4.75847 18.7139C4.99556 18.9695 5.36177 19.06 5.69062 18.9442L7.33976 18.3635C7.99049 18.1343 8.69229 18.5395 8.81921 19.2176L9.14126 20.9383C9.20547 21.2813 9.46743 21.5534 9.80783 21.6306C10.5137 21.7907 11.2475 21.875 12 21.875C12.7525 21.875 13.4863 21.7907 14.1922 21.6306C14.5326 21.5534 14.7945 21.2813 14.8587 20.9383L15.1808 19.2176C15.3077 18.5395 16.0095 18.1343 16.6603 18.3634L18.3094 18.9442C18.6383 19.06 19.0045 18.9695 19.2416 18.7139C20.2352 17.6426 20.9946 16.3496 21.4371 14.9161C21.54 14.583 21.4352 14.2206 21.1705 13.9937L19.841 12.8542C19.3172 12.4052 19.3172 11.5948 19.841 11.1458L21.1705 10.0063C21.4352 9.77941 21.54 9.41702 21.4371 9.08388C20.9946 7.65043 20.2352 6.35735 19.2416 5.28613C19.0045 5.03052 18.6383 4.94004 18.3094 5.05584L16.6603 5.63656C16.0095 5.86571 15.3077 5.46053 15.1808 4.7824L14.8587 3.06174C14.7945 2.71866 14.5326 2.44656 14.1922 2.36938C13.4863 2.20932 12.7525 2.125 12 2.125ZM10.5393 5.10431L10.7516 3.97019C11.1582 3.90755 11.575 3.875 12 3.875C12.425 3.875 12.8418 3.90755 13.2484 3.97019L13.4607 5.10435C13.785 6.83734 15.5785 7.87281 17.2415 7.28722L18.3289 6.90431C18.8503 7.55101 19.2743 8.27882 19.5791 9.06544L18.7022 9.81714C17.3635 10.9645 17.3635 13.0355 18.7022 14.1829L19.5791 14.9346C19.2743 15.7212 18.8503 16.449 18.3289 17.0957L17.2415 16.7128C15.5785 16.1272 13.785 17.1627 13.4607 18.8956L13.2484 20.0298C12.8418 20.0924 12.425 20.125 12 20.125C11.575 20.125 11.1582 20.0924 10.7516 20.0298L10.5393 18.8957C10.215 17.1627 8.42151 16.1272 6.75851 16.7128L5.67116 17.0957C5.14972 16.449 4.72568 15.7212 4.42087 14.9346L5.29785 14.1829C6.63648 13.0355 6.63648 10.9645 5.29785 9.81714L4.42087 9.06544C4.72568 8.2788 5.14972 7.55099 5.67116 6.90428L6.75851 7.28717C8.42151 7.87276 10.215 6.8373 10.5393 5.10431Z" fill="black"></path>
                             </svg>`,
+    drop: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21C10.1958 21 8.75435 20.4341 7.60341 19.5536C2.17573 15.4009 6.11504 7.50017 11.3909 2.99973C11.7427 2.69965 12.2573 2.69965 12.6091 2.99973C17.885 7.50017 21.8243 15.4009 16.3966 19.5536C15.2456 20.4341 13.8042 21 12 21Z" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+</svg>
+`,
+    dropFill: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21C10.1958 21 8.75435 20.4341 7.60341 19.5536C2.17573 15.4009 6.11504 7.50017 11.3909 2.99973C11.7427 2.69965 12.2573 2.69965 12.6091 2.99973C17.885 7.50017 21.8243 15.4009 16.3966 19.5536C15.2456 20.4341 13.8042 21 12 21Z" stroke="currentColor" fill="currentColor" stroke-width="1.75" stroke-linejoin="round"/>
+</svg>
+`,
 };
 
 const accentColors = [
@@ -103,6 +111,11 @@ if (loadedStats) {
         troubleKeys: {}
     };
     localStorage.setItem("userStats", JSON.stringify(stats));
+}
+let theme;
+let loadedTheme = localStorage.getItem("userTheme");
+if (loadedTheme) {
+    theme = JSON.parse(loadedTheme);
 }
 
 const tkInp = document.querySelector(".touckKeyboardInp");
@@ -589,15 +602,15 @@ function createModal(config) {
     `
     popup.querySelector('.popupCancelBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
-        if (config.onCancel) config.onCancel
+        if (config.onCancel) config.onCancel()
     })
     popup.querySelector('.popupSubmitBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
-        if (config.onSubmit) config.onSubmit
+        if (config.onSubmit) config.onSubmit()
     })
     popup.querySelector('.closeBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
-        if (config.onCancel) config.onCancel
+        if (config.onCancel) config.onCancel()
     })
     if (config.settingsButton) popup.querySelector('.popupSettingsTopBtn').addEventListener('click', config.settingsButton)
     if (config.linkButtonAction) {
@@ -924,20 +937,21 @@ settingsModel.forEach((category) => {
                 setEl.append(s.button);
                 break;
             case "toggle":
-                valueEl = document.createElement("div");
+                valueEl = document.createElement("input");
                 valueEl.className = "toggleSwitch";
+                valueEl.type = "checkbox"
 
                 if (getSettings()[s.value] == true) {
-                    valueEl.classList.add("on");
+                    valueEl.checked = true
                 }
                 valueEl.addEventListener("click", () => {
                     settingsValues[s.value] =
                         settingsValues[s.value] == true ? false : true;
                     if (settingsValues[s.value] == true) {
-                        valueEl.classList.add("on");
+                        valueEl.checked = true
                     } else {
-                        if (valueEl.classList.contains("on")) {
-                            valueEl.classList.remove("on");
+                        if (valueEl.checked == true) {
+                            valueEl.checked = false;
                         }
                     }
                     updateSettings();
@@ -1155,10 +1169,10 @@ function updateSliders() {
             );
         }
         slider.addEventListener("input", updateSlider);
+        slider.addEventListener('change', updateSlider)
         updateSlider();
     });
 }
-updateSliders();
 
 function showNarratorOptions() {
     console.log("test");
@@ -1304,15 +1318,145 @@ function createInputElement(placeholder, clsName, type) {
     return inp
 }
 customizeThemeButton.addEventListener('click', () => {
-    const popup = createModal({
-        title: 'Customize theme',
-        id: 'customizeThemePopup',
-        content: `
-        <div class="panelGroup">
-    <div class="panelGroupTitle">Image</div>
-    <input type="file" name="themeImageUploadInp" class="themeImageUploadInp">
+    if (!document.querySelector('.popups .customizeThemePopup')) {
+        const popup = createModal({
+            title: 'Customize theme',
+            id: 'customizeThemePopup',
+            confirmButtonText: 'Save',
+            onSubmit: () => updateTheme(),
+            content: `
+        <div class="popupGroup">
+    <div class="popupGroupTitleSmall">Image</div>
+    <div class="section themeImageUploadSect">
+    </div>
+    <div class="section themeImageBlurSect">
+        <label>Blur</label>
+        <input type="range" class="themeImgBlurInp" min="0"max="70" value="20">
+    </div>
+    <div class="section themeImageEffectsSect">
+    <label>Effects</label>
+    <div class="controlBtnLgCt">
+    <button class="controlBtnLg brightenBtn" title="Brighten">${systemIcons.drop}</button>
+        <button class="controlBtnLg dimBtn" title="Dim">${systemIcons.dropFill}</button>
+    </div>
+    </div>
+    <div class="toggleSwitchCt">
+    <input type="checkbox" class="toggleSwitch lightBgSwitch">
+    Light background
+</div>
+    <button class="btn">${systemIcons.delete}Reset to defaults</button>
+</div>
+        <div class="popupGroup">
+    <div class="popupGroupTitleSmall">Accent color</div>
+    <div class="section themeAccentColorSelection">
+        <ul class="accentColorList"></ul>
+    </div>
 </div>
 `
-    })
+        })
+        const getEl = (el) => document.querySelector(`.popup.customizeThemePopup .${el}`)
+        const presetColors = ['default', "#ff0047", "#c12a3f", "#ff4600", '#ff8c15', '#ffdf00', '#ffb000', '#a9ff00', '#00ff1f', '#0ec72d', '#0ba99a', '#21e4ed', '#0ebfc7', '#1576ef', '#2b00d9', '#1c008f', '#c617ff', '#9004bf', '#e300ff', '#ff00d4', '#ff78e8', '#ff78b6', '#ff288a', '#a94d0b', '#ffcca7', '#cbdbe3', '#688c9f', '#282f32', 'custom']
+
+        popup.querySelector('.themeImageUploadSect').append(createCustomFileUpload())
+
+        presetColors.forEach(color => {
+            const colorEl = document.createElement('li')
+            colorEl.className = 'colorEl'
+            colorEl.tabIndex = 0
+            if (color !== 'default' && color !== 'custom') {
+                colorEl.style.background = color
+                colorEl.textContent = 'Aa'
+            }
+            if (color == 'custom') {
+                colorEl.style.backgroundImage = 'url(assets/img/ColorPickerIcon.png)'
+                colorEl.classList.add('customAccentColorBtn')
+            }
+            if (color == 'default') {
+                colorEl.innerHTML = systemIcons.settings
+                colorEl.style.setProperty('color', 'var(--subtitle)', 'important')
+            }
+            popup.querySelector('.accentColorList').append(colorEl)
+            colorEl.addEventListener('click', () => {
+                if (popup.querySelector('.colorEl.selected')) popup.querySelector('.colorEl.selected').classList.remove('selected')
+                colorEl.classList.add('selected')
+            })
+        })
+        popup.querySelectorAll('.controlBtnLgCt button').forEach(opt => {
+            opt.addEventListener('click', () => {
+                if (popup.querySelector('.controlBtnLgCt button.selected')) popup.querySelector('.controlBtnLgCt button.selected').classList.remove('selected')
+                opt.classList.add('selected')
+            })
+        })
+
+        /** imageURL: getEl('fileImagePreview').src,
+        blur: Number(getEl('themeImgBlurInp').value),
+        darken: (getEl('controlBtnLg.selected').classList.contains('dimBtn') ? true : false),
+        lighten: (getEl('controlBtnLg.selected').classList.contains('brightenBtn') ? true : false),
+        lightBackground: (getEl('lightBgSwitch').checked ? true : false),
+        themeColor: getEl('colorEl.selected').style.background */
+
+        if (loadedTheme) {
+            getEl('fileImagePreview').src = theme.imageURL
+            getEl('themeImgBlurInp').value = theme.blur
+            for (let test of popup.querySelectorAll('.colorEl')) {
+                if (test.style.background == theme.themeColor) test.classList.add('selected')
+            }
+            getEl('lightBgSwitch').checked = theme.lightBackground
+            if (theme.lighten) getEl('brightenBtn').classList.add('selected')
+            if (theme.darken) getEl('dimBtn').classList.add('selected')
+            updateSliders()
+        }
+    }
     showPopup(true, '.customizeThemePopup')
 })
+
+function createCustomFileUpload() {
+    const ct = document.createElement('div')
+    ct.className = 'customFileUploadCt'
+    ct.innerHTML = `        <input type="file" name="image" accept=".png,.jpg,.jpeg" id="themeImgUploadCore"><button class="btn fileUploadBtn">${systemIcons.upload}Upload</button>
+            <img class="fileImagePreview">`
+    ct.querySelector('.fileUploadBtn').addEventListener('click', () => {
+        ct.querySelector('#themeImgUploadCore').click()
+    })
+    ct.querySelector('#themeImgUploadCore').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+
+        const imagePreview = ct.querySelector('.fileImagePreview');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const imageUrl = event.target.result;
+                imagePreview.src = imageUrl;
+            }
+
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = ''
+        }
+    })
+    return ct
+}
+function updateTheme() {
+    const getEl = (el) => document.querySelector(`.popup.customizeThemePopup .${el}`)
+    console.log(getEl('colorEl'));
+    let th = {
+        imageURL: getEl('fileImagePreview').src,
+        blur: Number(getEl('themeImgBlurInp').value),
+        darken: (getEl('controlBtnLg.selected').classList.contains('dimBtn') ? true : false),
+        lighten: (getEl('controlBtnLg.selected').classList.contains('brightenBtn') ? true : false),
+        lightBackground: (getEl('lightBgSwitch').checked ? true : false),
+        themeColor: getEl('colorEl.selected').style.background
+    }
+    localStorage.setItem("userTheme", JSON.stringify(th));
+    loadTheme()
+}
+function loadTheme() {
+    loadedTheme = localStorage.getItem("userTheme")
+    theme = JSON.parse(loadedTheme);
+    document.body.classList.add('themeLoaded')
+    if (theme.imageURL) document.body.style.setProperty('background', `url(${theme.imageURL})`, 'important')
+        document.body.style.setProperty('backdrop-filter', `blur(${theme.blur}px) brightness(${theme.lighten ? 1.7 : (theme.darken ? 0.7 : 1)})`, 'important')
+    if (theme.themeColor) document.body.style.setProperty('--accent', theme.themeColor, 'important')
+    if (theme.lightBackground) document.body.classList.add('lightBgTheme')
+}
+if (loadedTheme) loadTheme()
