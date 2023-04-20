@@ -17,6 +17,7 @@ body {
     -webkit-user-select: none;
     width: 100%;
     transition: all 0.15s ease-in-out;
+    background-size: cover !important;
 
     --accent: #0056f5;
     --accent-text: #004fe1;
@@ -2112,9 +2113,17 @@ label {
     border-radius: 100px;
 }
 .controlBtnLg.selected {
-    background: var(--accent);
+    background: var(--accent) !important;
+    color: #fff !important;
+}
+
+body.lightBgTheme .box {
+    background: rgb(0,0,0,.05);
+}
+body.themeLoaded:not(.lightBgTheme) .box {
+    background: rgb(255,255,255,.17);
     color: #fff;
 }
-body.lightBgTheme .box {
-    background: rgb(0,0,0,.1);
+body.themeLoaded .box {
+    backdrop-filter: blur(12px);
 }

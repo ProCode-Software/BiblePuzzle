@@ -617,6 +617,14 @@ function createModal(config) {
         popup.querySelector('.linkButton').onclick = config.linkButtonAction
         popup.querySelector('.linkButton').href = '#'
     }
+    if (config.lightDismiss) {
+        popups.addEventListener('click', (e) => {
+            if (e.target == popups) {
+                showPopup(false, '.' + popup.classList[1])
+                if (config.onCancel) config.onCancel()
+            }
+        })
+    }
     document.querySelector('.popups').append(popup)
     return popup
 }
@@ -1167,6 +1175,7 @@ function updateSliders() {
                 `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`,
                 "important"
             );
+            slider.title = slider.value
         }
         slider.addEventListener("input", updateSlider);
         slider.addEventListener('change', updateSlider)
@@ -1323,6 +1332,7 @@ customizeThemeButton.addEventListener('click', () => {
             title: 'Customize theme',
             id: 'customizeThemePopup',
             confirmButtonText: 'Save',
+            lightDismiss: true,
             onSubmit: () => updateTheme(),
             content: `
         <div class="popupGroup">
@@ -1331,20 +1341,20 @@ customizeThemeButton.addEventListener('click', () => {
     </div>
     <div class="section themeImageBlurSect">
         <label>Blur</label>
-        <input type="range" class="themeImgBlurInp" min="0"max="70" value="20">
+        <input type="range" class="themeImgBlurInp" min="0"max="70" value="20" step="5">
     </div>
     <div class="section themeImageEffectsSect">
     <label>Effects</label>
     <div class="controlBtnLgCt">
-    <button class="controlBtnLg brightenBtn" title="Brighten">${systemIcons.drop}</button>
-        <button class="controlBtnLg dimBtn" title="Dim">${systemIcons.dropFill}</button>
+    <button class="controlBtnLg brightenBtn btn" title="Brighten">${systemIcons.drop}</button>
+        <button class="controlBtnLg dimBtn btn" title="Dim">${systemIcons.dropFill}</button>
     </div>
     </div>
-    <div class="toggleSwitchCt">
+    <div class="toggleSwitchCt themeImgLightSect">
     <input type="checkbox" class="toggleSwitch lightBgSwitch">
     Light background
 </div>
-    <button class="btn">${systemIcons.delete}Reset to defaults</button>
+    <button class="btn resetThemeImgSettingsBtn">${systemIcons.delete}Reset to defaults</button>
 </div>
         <div class="popupGroup">
     <div class="popupGroupTitleSmall">Accent color</div>
@@ -1383,8 +1393,15 @@ customizeThemeButton.addEventListener('click', () => {
         })
         popup.querySelectorAll('.controlBtnLgCt button').forEach(opt => {
             opt.addEventListener('click', () => {
-                if (popup.querySelector('.controlBtnLgCt button.selected')) popup.querySelector('.controlBtnLgCt button.selected').classList.remove('selected')
-                opt.classList.add('selected')
+                if (opt.classList.contains('selected')) {
+                    opt.classList.remove('selected')
+                } else {
+                    if (popup.querySelector('.controlBtnLgCt button.selected')) {
+                        popup.querySelector('.controlBtnLgCt button.selected').classList.remove('selected')
+                    }
+                    opt.classList.add('selected')
+                }
+                opt.parentElement.setAttribute('selectedOption', (opt.parentElement.querySelector('.selected') ? opt.parentElement.querySelector('.selected').classList[1] : 'none'))
             })
         })
 
@@ -1395,6 +1412,10 @@ customizeThemeButton.addEventListener('click', () => {
         lightBackground: (getEl('lightBgSwitch').checked ? true : false),
         themeColor: getEl('colorEl.selected').style.background */
 
+        const resetThemeImgSettingsBtn = popup.querySelector('.resetThemeImgSettingsBtn')
+        const imgSettingsGroup = [getEl('themeImageBlurSect'),
+        getEl('themeImageEffectsSect'),
+        getEl('themeImgLightSect'), resetThemeImgSettingsBtn]
         if (loadedTheme) {
             getEl('fileImagePreview').src = theme.imageURL
             getEl('themeImgBlurInp').value = theme.blur
@@ -1402,10 +1423,31 @@ customizeThemeButton.addEventListener('click', () => {
                 if (test.style.background == theme.themeColor) test.classList.add('selected')
             }
             getEl('lightBgSwitch').checked = theme.lightBackground
-            if (theme.lighten) getEl('brightenBtn').classList.add('selected')
-            if (theme.darken) getEl('dimBtn').classList.add('selected')
+            if (theme.lighten) getEl('brightenBtn').click()
+            if (theme.darken) getEl('dimBtn').click()
             updateSliders()
+
+            if (!theme.imageURL) {
+                imgSettingsGroup.forEach(elm => {
+                    elm.style.display = 'none'
+                })
+            }
         }
+
+        resetThemeImgSettingsBtn.addEventListener('click', () => {
+            imgSettingsGroup.forEach(elm => {
+                elm.style.display = 'none'
+            })
+            popup.querySelector('#themeImgUploadCore').value = ''
+            getEl('fileImagePreview').src = ''
+        })
+        popup.querySelector('#themeImgUploadCore').addEventListener('change', () => {
+            if (popup.querySelector('#themeImgUploadCore').value) {
+                imgSettingsGroup.forEach(elm => {
+                    elm.style.display = ''
+                })
+            }
+        })
     }
     showPopup(true, '.customizeThemePopup')
 })
@@ -1420,32 +1462,42 @@ function createCustomFileUpload() {
     })
     ct.querySelector('#themeImgUploadCore').addEventListener('change', (e) => {
         const file = e.target.files[0];
+        console.log(file);
+        console.log(e.target.files);
+        console.log(!file);
 
         const imagePreview = ct.querySelector('.fileImagePreview');
-        if (file) {
+        if (file && ct.querySelector('#themeImgUploadCore').value !== '') {
             const reader = new FileReader();
             reader.onload = function (event) {
                 const imageUrl = event.target.result;
-                imagePreview.src = imageUrl;
+                if (event.target.result) {
+                    imagePreview.src = imageUrl;
+                } else {
+                    imagePreview.setAttribute('src', '')
+                }
             }
 
             reader.readAsDataURL(file);
         } else {
-            imagePreview.src = ''
+            imagePreview.setAttribute('src', '')
         }
     })
     return ct
 }
 function updateTheme() {
     const getEl = (el) => document.querySelector(`.popup.customizeThemePopup .${el}`)
-    console.log(getEl('colorEl'));
     let th = {
-        imageURL: getEl('fileImagePreview').src,
+        imageURL: (getEl('fileImagePreview').src ? getEl('fileImagePreview').src : ''),
         blur: Number(getEl('themeImgBlurInp').value),
-        darken: (getEl('controlBtnLg.selected').classList.contains('dimBtn') ? true : false),
-        lighten: (getEl('controlBtnLg.selected').classList.contains('brightenBtn') ? true : false),
+        darken: false,
+        lighten: false,
         lightBackground: (getEl('lightBgSwitch').checked ? true : false),
         themeColor: getEl('colorEl.selected').style.background
+    }
+    if (getEl('controlBtnLg.selected')) {
+        th.brighten = getEl('controlBtnLg.selected').classList.contains('brightenBtn') ? true : false
+        th.darken = getEl('controlBtnLg.selected').classList.contains('dimBtn') ? true : false
     }
     localStorage.setItem("userTheme", JSON.stringify(th));
     loadTheme()
@@ -1454,9 +1506,20 @@ function loadTheme() {
     loadedTheme = localStorage.getItem("userTheme")
     theme = JSON.parse(loadedTheme);
     document.body.classList.add('themeLoaded')
-    if (theme.imageURL) document.body.style.setProperty('background', `url(${theme.imageURL})`, 'important')
-        document.body.style.setProperty('backdrop-filter', `blur(${theme.blur}px) brightness(${theme.lighten ? 1.7 : (theme.darken ? 0.7 : 1)})`, 'important')
+    if (theme.imageURL) {
+        document.body.style.setProperty('background-image', `url(${theme.imageURL})`, 'important')
+        if (theme.blur) {
+            if (theme.lighten || theme.darken) {
+                document.body.style.setProperty('backdrop-filter', `brightness(${theme.lighten ? 1.5 : (theme.darken ? 0.7 : 1)}) blur(${theme.blur}px)`, 'important')
+            } else {
+                document.body.style.setProperty('backdrop-filter', `blur(${theme.blur}px)`, 'important')
+            }
+        }
+        if (theme.lightBackground) { document.body.classList.add('lightBgTheme') } else {
+            if (document.body.classList.contains('lightBgTheme')) document.body.classList.remove('lightBgTheme')
+        }
+    }
+
     if (theme.themeColor) document.body.style.setProperty('--accent', theme.themeColor, 'important')
-    if (theme.lightBackground) document.body.classList.add('lightBgTheme')
 }
 if (loadedTheme) loadTheme()
