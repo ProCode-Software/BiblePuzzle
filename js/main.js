@@ -87,7 +87,20 @@ let settingsValues = {
     boldText: false,
     capsLockNotif: true,
 };
+/**
+ * @typedef {Object} TypingStats
+ * @property {number} bestVerse - The index of the highest-scoring verse.
+ * @property {number} versesCompleted - The number of verses completed.
+ * @property {number} totalCharactersTyped - The total number of correct characters typed.
+ * @property {number} avgCPS - The average number of correct characters typed per second.
+ * @property {Array<{ date: Date, verse: string, grade: number, incorrect: number, avgCPS: number }>} gradebook - An array of objects representing completed verses.
+ * @property {Object} troubleKeys - The user's trouble keys.
+ */
 
+/**
+ * The object representing typing statistics.
+ * @type {TypingStats}
+ */
 let stats;
 const loadedStats = localStorage.getItem("userStats");
 if (loadedStats) {
@@ -1216,30 +1229,43 @@ function loadStats() {
     ).textContent = `${stats.gradebook.length}/10`;
 
     document.querySelectorAll(".gradeTable > tr").forEach((el) => el.remove());
-    stats.gradebook.forEach((grade) => {
-        const date = new Date(grade.date);
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td class="verseDateTd" title="${date.toLocaleTimeString([], {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-        })}">${date.toLocaleDateString()}</td>
+    if (stats.gradebook.length > 1) {
+        document.querySelector(".gradeTable").style.display = ''
+        stats.gradebook.forEach((grade) => {
+            const date = new Date(grade.date);
+            const tr = document.createElement("tr");
+            tr.innerHTML = `<td class="verseDateTd" title="${date.toLocaleTimeString([], {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+            })}">${date.toLocaleDateString()}</td>
                                     <td class="verseRefTd">${grade.verse}</td>
             <td class="avgCPSTd">${grade.avgCPS}</td>
             <td class="verseGradeTd">${grade.grade * 100
-            }% (<span style="color: var(--text-${grade.incorrect == 0 ? "green" : "red"
-            })">-${grade.incorrect}</span>)</td>
+                }% (<span style="color: var(--text-${grade.incorrect == 0 ? "green" : "red"
+                })">-${grade.incorrect}</span>)</td>
             `;
-        document.querySelector(".gradeTable").append(tr);
-    });
-    document.querySelectorAll(".gradeTable td").forEach(cell => {
-        cell.addEventListener('click', () => {
-            navigator.clipboard.writeText(cell.className == 'verseDateTd' ? cell.title : (cell.className == 'avgCPSTd' ? `${cell.textContent} chars/sec` : cell.textContent))
-            showToast('Copied to clipboard')
+            document.querySelector(".gradeTable").append(tr);
+        });
+        document.querySelectorAll(".gradeTable td").forEach(cell => {
+            cell.addEventListener('click', () => {
+                navigator.clipboard.writeText(cell.className == 'verseDateTd' ? cell.title : (cell.className == 'avgCPSTd' ? `${cell.textContent} chars/sec` : cell.textContent))
+                showToast('Copied to clipboard')
+            })
         })
-    })
+    } else {
+        document.querySelector(".gradeTable").style.display = 'none'
+        const fallbackFrame = document.createElement('div')
+        fallbackFrame.className = 'gradebookFallbackFrame fallbackFrame'
+        fallbackFrame.innerHTML = `
+        <img src="assets/img/illustrations/Gradebook Empty.png" alt="No grades yet" class="fallbackImg">
+        <div class="fallbackTitle">No grades in gradebook yet</div>
+        <div class="fallbackDesc">Your completed verses will show here.</div>
+        `
+        document.querySelector('.resetGradebookBtn').parentElement.insertBefore(fallbackFrame, document.querySelector('.resetGradebookBtn'))
+    }
     document.querySelector(
         ".btn.showGradingInfo"
     ).title = `The grade shows how well you completed the test, using the grading scale below.
@@ -1357,7 +1383,10 @@ customizeThemeButton.addEventListener('click', () => {
     <button class="btn resetThemeImgSettingsBtn">${systemIcons.delete}Reset to defaults</button>
 </div>
         <div class="popupGroup">
-    <div class="popupGroupTitleSmall">Accent color</div>
+    <div class="popupGroupTitleSmall">Accent color</div>    <div class="toggleSwitchCt themeImgLightSect">
+    <input type="checkbox" class="toggleSwitch useSystemAccentSwitch">
+    Use system colors
+</div>
     <div class="section themeAccentColorSelection">
         <ul class="accentColorList"></ul>
     </div>
@@ -1365,7 +1394,7 @@ customizeThemeButton.addEventListener('click', () => {
 `
         })
         const getEl = (el) => document.querySelector(`.popup.customizeThemePopup .${el}`)
-        const presetColors = ['default', "#ff0047", "#c12a3f", "#ff4600", '#ff8c15', '#ffdf00', '#ffb000', '#a9ff00', '#00ff1f', '#0ec72d', '#0ba99a', '#21e4ed', '#0ebfc7', '#1576ef', '#2b00d9', '#1c008f', '#c617ff', '#9004bf', '#e300ff', '#ff00d4', '#ff78e8', '#ff78b6', '#ff288a', '#a94d0b', '#ffcca7', '#cbdbe3', '#688c9f', '#282f32', 'custom']
+        const presetColors = ["#ff0047", "#c12a3f", "#ff4600", '#ff8c15', '#ffdf00', '#ffb000', '#a9ff00', '#00ff1f', '#0ec72d', '#0ba99a', '#21e4ed', '#0ebfc7', '#1576ef', '#2b00d9', '#1c008f', '#9004bf', '#e300ff', '#ff00d4', '#ff78e8', '#ff78b6', '#ff288a', '#a94d0b', '#ffcca7', '#cbdbe3', '#688c9f', '#282f32', 'custom']
 
         popup.querySelector('.themeImageUploadSect').append(createCustomFileUpload())
 
@@ -1496,7 +1525,7 @@ function updateTheme() {
         themeColor: getEl('colorEl.selected').style.background
     }
     if (getEl('controlBtnLg.selected')) {
-        th.brighten = getEl('controlBtnLg.selected').classList.contains('brightenBtn') ? true : false
+        th.lighten = getEl('controlBtnLg.selected').classList.contains('brightenBtn') ? true : false
         th.darken = getEl('controlBtnLg.selected').classList.contains('dimBtn') ? true : false
     }
     localStorage.setItem("userTheme", JSON.stringify(th));
@@ -1504,7 +1533,9 @@ function updateTheme() {
 }
 function loadTheme() {
     loadedTheme = localStorage.getItem("userTheme")
+
     theme = JSON.parse(loadedTheme);
+
     document.body.classList.add('themeLoaded')
     if (theme.imageURL) {
         document.body.style.setProperty('background-image', `url(${theme.imageURL})`, 'important')

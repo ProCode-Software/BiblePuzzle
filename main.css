@@ -18,6 +18,7 @@ body {
     width: 100%;
     transition: all 0.15s ease-in-out;
     background-size: cover !important;
+    background-position: center !important;
 
     --accent: #0056f5;
     --accent-text: #004fe1;
