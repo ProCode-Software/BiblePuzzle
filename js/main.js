@@ -209,7 +209,7 @@ let charactersTyped = 0;
 let keyboardLock = true;
 let currentCt;
 let currentChar = 0;
-let incorrectArray = []
+let incorrectKeysList = {}
 let startTime
 
 let countedKeys =
@@ -264,7 +264,11 @@ function startTyping(ct, array) {
                     ct.children[activeCharNum].classList.remove("active");
                     activeCharNum++;
                     incorrectChars++;
-                    incorrectArray.push(e.key)
+                    if (incorrectKeysList[e.key]) {
+                        incorrectKeysList[e.key]++
+                    } else {
+                        incorrectKeysList[e.key] = 1
+                    }
                     currentChar = activeCharNum;
                     document.querySelectorAll(".incorrect span")[0].textContent =
                         incorrectChars;
@@ -326,6 +330,13 @@ function startTyping(ct, array) {
             }
         }
     }
+
+    addEventListener('beforeunload', (event) => {
+        if (activeCharNum > 0 && !keyboardLock) {
+            event.preventDefault();
+            return (event.returnValue = '');
+        }
+    }, { capture: true })
 }
 let percent;
 
@@ -410,30 +421,15 @@ function completeTest() {
     if (stats.gradebook.length > 10) {
         stats.gradebook = stats.gradebook.slice(0, 10);
     }
-    const countOccurrences = (array) => {
-        const occurrences = {};
-        for (let i = 0; i < array.length; i++) {
-            const item = array[i];
-            if (occurrences[item]) {
-                occurrences[item]++;
-            } else {
-                occurrences[item] = 1;
-            }
-        }
-        return occurrences;
-    };
-    const occurrences = countOccurrences(incorrectArray);
-    console.log('occ', occurrences);
-    console.log(Object.keys(occurrences));
 
-    if (incorrectArray.length > 0) {
-        Object.keys(occurrences).forEach(letter => {
-            console.log('old ' + stats.troubleKeys[letter]);
-            if (!stats.troubleKeys[letter]) { stats.troubleKeys[letter] = [] }
-            console.log('new ' + stats.troubleKeys[letter]);
-            stats.troubleKeys[letter].push(occurrences[letter])
+
+    if (incorrectKeysList.length > 0) {
+        incorrectKeysList.forEach(k =>{
+            let matchingListKey = stats.troubleKeys[k]
+            if (!matchingListKey) matchingListKey = 0
+            stats.troubleKeys[k].push(k)
         })
-        console.log(occurrences);
+
     } else {
         Object.keys(stats.troubleKeys).forEach(k => {
             stats.troubleKeys[k].push(0)
@@ -1229,8 +1225,10 @@ function loadStats() {
     ).textContent = `${stats.gradebook.length}/10`;
 
     document.querySelectorAll(".gradeTable > tr").forEach((el) => el.remove());
-    if (stats.gradebook.length > 1) {
+    if (stats.gradebook.length > 0) {
+        if (document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame')) document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame').remove()
         document.querySelector(".gradeTable").style.display = ''
+        document.querySelector('.resetGradebookBtn').style.display = ''
         stats.gradebook.forEach((grade) => {
             const date = new Date(grade.date);
             const tr = document.createElement("tr");
@@ -1256,6 +1254,8 @@ function loadStats() {
             })
         })
     } else {
+        if (document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame')) document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame').remove()
+        document.querySelector('.resetGradebookBtn').style.display = 'none'
         document.querySelector(".gradeTable").style.display = 'none'
         const fallbackFrame = document.createElement('div')
         fallbackFrame.className = 'gradebookFallbackFrame fallbackFrame'
@@ -1276,6 +1276,7 @@ function loadStats() {
 Under 40% - Faulty`;
     document.querySelector('#stats .panelTitle').textContent = `${getSettings().displayName}'s Stats`
 }
+showStats()
 loadStats();
 
 function calculateGradeLetter(prompt) {
@@ -1322,10 +1323,6 @@ function showToast(text, buttons, clsName, timeout) {
 function avg(array) {
     return array.reduce((a, c) => a + c.grade) / array.length
 }
-addEventListener('beforeunload', (event) => {
-    event.preventDefault();
-    return (event.returnValue = '');
-}, { capture: true })
 
 function createThemeSelectionBlock(options) {
     const ct = document.createElement('div')

@@ -2128,3 +2128,24 @@ body.themeLoaded:not(.lightBgTheme) .box {
 body.themeLoaded .box {
     backdrop-filter: blur(12px);
 }
+.fallbackFrame {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 15px;
+}
+.fallbackImg {
+    display: flex;
+    width: 40%;
+}
+.fallbackTitle {
+    font-size: 1.1em;
+    font-weight: 550;
+}
+.fallbackDesc {
+    color: var(--subtitle);
+}
