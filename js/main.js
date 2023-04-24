@@ -94,7 +94,7 @@ let settingsValues = {
  * @property {number} totalCharactersTyped - The total number of correct characters typed.
  * @property {number} avgCPS - The average number of correct characters typed per second.
  * @property {Array<{ date: Date, verse: string, grade: number, incorrect: number, avgCPS: number }>} gradebook - An array of objects representing completed verses.
- * @property {Object} troubleKeys - The user's trouble keys.
+ * @property {Object.<string, Number[]>} troubleKeys - The user's trouble keys.
  */
 
 /**
@@ -262,13 +262,13 @@ function startTyping(ct, array) {
                 } else { //incorrect
                     ct.children[activeCharNum].classList.add("incorrectChar");
                     ct.children[activeCharNum].classList.remove("active");
+                    if (incorrectKeysList[array[activeCharNum]]) {
+                        incorrectKeysList[array[activeCharNum]]++
+                    } else {
+                        incorrectKeysList[array[activeCharNum]] = 1
+                    }
                     activeCharNum++;
                     incorrectChars++;
-                    if (incorrectKeysList[e.key]) {
-                        incorrectKeysList[e.key]++
-                    } else {
-                        incorrectKeysList[e.key] = 1
-                    }
                     currentChar = activeCharNum;
                     document.querySelectorAll(".incorrect span")[0].textContent =
                         incorrectChars;
@@ -422,19 +422,16 @@ function completeTest() {
         stats.gradebook = stats.gradebook.slice(0, 10);
     }
 
-
-    if (incorrectKeysList.length > 0) {
-        incorrectKeysList.forEach(k =>{
-            let matchingListKey = stats.troubleKeys[k]
-            if (!matchingListKey) matchingListKey = 0
-            stats.troubleKeys[k].push(k)
-        })
-
-    } else {
-        Object.keys(stats.troubleKeys).forEach(k => {
-            stats.troubleKeys[k].push(0)
-        })
-    }
+    Object.keys(stats.troubleKeys).forEach(k => {
+        const key = stats.troubleKeys[k]
+        key.push(incorrectKeysList[k] ? incorrectKeysList[k] : 0)
+    })
+    Object.keys(incorrectKeysList).forEach(k => {
+        if (!stats.troubleKeys[k]) {
+            stats.troubleKeys[k] = []
+            stats.troubleKeys[k].push(incorrectKeysList[k])
+        }
+    })
     updateStats();
 
     /* {
