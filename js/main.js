@@ -1222,8 +1222,8 @@ function loadStats() {
     ).textContent = `${stats.gradebook.length}/10`;
 
     document.querySelectorAll(".gradeTable > tr").forEach((el) => el.remove());
+    if (document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame')) document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame').remove()
     if (stats.gradebook.length > 0) {
-        if (document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame')) document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame').remove()
         document.querySelector(".gradeTable").style.display = ''
         document.querySelector('.resetGradebookBtn').style.display = ''
         stats.gradebook.forEach((grade) => {
@@ -1251,16 +1251,9 @@ function loadStats() {
             })
         })
     } else {
-        if (document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame')) document.querySelector('.resetGradebookBtn').parentElement.querySelector('.fallbackFrame').remove()
         document.querySelector('.resetGradebookBtn').style.display = 'none'
         document.querySelector(".gradeTable").style.display = 'none'
-        const fallbackFrame = document.createElement('div')
-        fallbackFrame.className = 'gradebookFallbackFrame fallbackFrame'
-        fallbackFrame.innerHTML = `
-        <img src="assets/img/illustrations/Gradebook Empty.png" alt="No grades yet" class="fallbackImg">
-        <div class="fallbackTitle">No grades in gradebook yet</div>
-        <div class="fallbackDesc">Your completed verses will show here.</div>
-        `
+        const fallbackFrame = createFallbackFrame("assets/img/illustrations/Gradebook Empty.png", "No grades in gradebook yet", "Your completed verses will show here.")
         document.querySelector('.resetGradebookBtn').parentElement.insertBefore(fallbackFrame, document.querySelector('.resetGradebookBtn'))
     }
     document.querySelector(
@@ -1271,10 +1264,58 @@ function loadStats() {
 60% - Fair
 40% - Poor
 Under 40% - Faulty`;
-    document.querySelector('#stats .panelTitle').textContent = `${getSettings().displayName}'s Stats`
+    document.querySelector('#stats .panelTitle').textContent = `${getSettings().displayName}${getLastChar(getSettings().displayName) == 's' ? '\'' : '\'s'} Stats`
+
+    const tkChart = getEl('.troubleKeyChart')
+    if (document.querySelector('.resetTroubleKeysBtn').parentElement.querySelector('.fallbackFrame')) document.querySelector('.resetTroubleKeysBtn').parentElement.querySelector('.fallbackFrame').remove()
+    if (stats.troubleKeys && Object.keys(stats.troubleKeys).length > 0) {
+        tkChart.innerHTML=''
+        let tkAvgs = {}
+        Object.keys(stats.troubleKeys).forEach(xc => {
+            const ky = stats.troubleKeys[xc]
+            if (Math.round(avg(ky)) > 1) {
+                tkAvgs[xc] = Math.round(avg(ky))
+            }
+        })
+        tkAvgs = Object.fromEntries(Object.entries(tkAvgs)
+            .sort(([, valueA], [, valueB]) => valueB - valueA)
+            .slice(0, 8));
+            console.log(tkAvgs);
+        Object.keys(tkAvgs).forEach(l => {
+            const cl = document.createElement('div')
+            cl.className = 'tkChartCol'
+            cl.title = `You missed the '${keyToText(l)}' key ${tkAvgs[l]} times per verse on average`
+            cl.innerHTML = `<div class="tkChartSymbol" style="height: calc((${tkAvgs[l]} / ${tkAvgs[Object.keys(tkAvgs)[0]]}) * var(--base))"></div><div class="tkChartCaption">${keyToText(l)}</div>`
+            tkChart.append(cl)
+        })
+
+        tkChart.style.display = ''
+    } else {
+        tkChart.style.display = 'none'
+        document.querySelector('.resetTroubleKeysBtn').style.display = 'none'
+        document.querySelector(".gradeTable").style.display = 'none'
+        const fallbackFrame = createFallbackFrame("assets/img/illustrations/Trouble Keys Empty.png", "You're typing every key correctly!", "The keys that you have the most trouble typing will show here.")
+        document.querySelector('.resetTroubleKeysBtn').parentElement.insertBefore(fallbackFrame, document.querySelector('.resetTroubleKeysBtn'))
+    }
 }
+/**
+ * Gets an element on the page
+ * @param {keyof HTMLElementTagNameMap} el 
+ * @returns {HTMLElement}
+ */
+function getEl(el) { return document.querySelector(el) }
+
 showStats()
 loadStats();
+
+function keyToText(key) {
+    let remap
+    switch (key) {
+        case ' ': remap = 'Space'; break;
+        default: remap = key; break;
+    }
+    return remap
+}
 
 function calculateGradeLetter(prompt) {
     let letter;
@@ -1284,6 +1325,13 @@ function calculateGradeLetter(prompt) {
     else if (prompt >= 40) letter = "Poor";
     else letter = "Faulty";
     return letter;
+}
+/**
+ * 
+ * @param {string} prompt
+ */
+function getLastChar(prompt) {
+    return prompt.substring(prompt.length - 1)
 }
 function showToast(text, buttons, clsName, timeout) {
     const toastFrame = document.querySelector('.toastsFrame')
@@ -1318,7 +1366,7 @@ function showToast(text, buttons, clsName, timeout) {
  * @param {Array} array The array to average
  */
 function avg(array) {
-    return array.reduce((a, c) => a + c.grade) / array.length
+    return array.reduce((a, c) => a + c) / array.length
 }
 
 function createThemeSelectionBlock(options) {
@@ -1548,3 +1596,11 @@ function loadTheme() {
     if (theme.themeColor) document.body.style.setProperty('--accent', theme.themeColor, 'important')
 }
 if (loadedTheme) loadTheme()
+function createFallbackFrame(img, title, description) {
+    const fallbackFrame = document.createElement('div')
+    fallbackFrame.className = 'gradebookFallbackFrame fallbackFrame'
+    fallbackFrame.innerHTML = `<img src="${img}" alt="${title}" class="fallbackImg">
+        <div class="fallbackTitle">${title}</div>
+        <div class="fallbackDesc">${description}</div>`
+    return fallbackFrame
+}

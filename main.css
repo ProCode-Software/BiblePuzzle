@@ -1188,8 +1188,6 @@ th {
     align-items: flex-end;
     width: 100%;
     gap: 10px;
-    /** chart height */
-    height: 140px;
     padding-block: 10px;
 }
 
@@ -1202,27 +1200,35 @@ th {
     align-items: center;
     height: 100%;
     max-width: 90px;
+    border-radius: 100px;
+    padding-block: 6px;
 }
 
 .tkChartSymbol {
-    width: 100%;
-    color: #fff;
+    width: 20px;
+    color: transparent;
     background: var(--red);
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100%;
     border-radius: 10px;
     font-size: 1.2em;
     font-weight: 500;
     padding-top: 5px;
     transition: 0.2s;
+    --base: 100px;
+    height: var(--base);
 }
 
 .tkChartCaption {
     font-weight: 500;
     font-size: 1.12em;
     color: var(--text-red);
+}
+
+.tkChartCol:hover {
+    transition: .15s;
+    box-shadow: 0 0 0 1px rgba(var(--border-color), 0.1), 0 2px 20px rgba(var(--border-color), 0.3);
 }
 
 button svg {
