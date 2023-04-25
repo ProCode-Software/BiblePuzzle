@@ -1188,6 +1188,7 @@ th {
     align-items: flex-end;
     width: 100%;
     gap: 10px;
+    justify-content: space-between;
     padding-block: 10px;
 }
 
@@ -1199,7 +1200,7 @@ th {
     gap: 10px;
     align-items: center;
     height: 100%;
-    max-width: 90px;
+    max-width: 50px;
     border-radius: 100px;
     padding-block: 6px;
 }
