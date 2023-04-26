@@ -27,6 +27,7 @@ https://ProCode-Software.github.io/BiblePuzzle/
 |Dark mode | ✅ | ❌ |
 |Bible verse practice | ✅ | ❌ |
 
+### Screenshots
 ![BiblePuzzle (Light mode)](assets/img/Screenshot_Light.png)
 Dark:
 ![BiblePuzzle (Dark mode)](assets/img/Screenshot_Dark.png)
