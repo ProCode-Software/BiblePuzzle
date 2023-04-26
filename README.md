@@ -1,7 +1,4 @@
 # BiblePuzzle
-![BiblePuzzle (Light mode)](assets/img/Screenshot_Light.png)
-Dark:
-![BiblePuzzle (Dark mode)](assets/img/Screenshot_Dark.png)
 
 **A typing game on Bible verses. It's just like Typing.com but using Bible verses.**
 
@@ -30,7 +27,11 @@ https://ProCode-Software.github.io/BiblePuzzle/
 |Dark mode | ✅ | ❌ |
 |Bible verse practice | ✅ | ❌ |
 
-Last updated:  `April 25, 2023`
+![BiblePuzzle (Light mode)](assets/img/Screenshot_Light.png)
+Dark:
+![BiblePuzzle (Dark mode)](assets/img/Screenshot_Dark.png)
+
+Last updated:  `April 26, 2023`
 
 Created by [ProCode Software](https://github.com/ProCode-Software)
 
