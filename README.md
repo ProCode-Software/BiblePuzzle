@@ -1,4 +1,7 @@
 # BiblePuzzle
+![BiblePuzzle (Light mode)](assets/img/Screenshot_Light.png)
+Dark:
+![BiblePuzzle (Dark mode)](assets/img/Screenshot_Dark.png)
 A typing game on Bible verses. It's just like Typing.com but using Bible verses.
 
 ### Play now:
@@ -11,6 +14,7 @@ https://ProCode-Software.github.io/BiblePuzzle/
 - ✝️ **Bible verse** practice to help you learn the Bible
 - 🎨 **Highly customizable** app
 - 🅰️ **Trouble keys** to help you see what keys you have trouble typing
+- ⚡ **Characters per second tracker** to see how fast you type
 - 📊 **Gradebook** showing your last typed verses
 - 🖼️ **Themes** to customize your experience
 - ♿ **Accessible** for everyone
@@ -22,3 +26,11 @@ https://ProCode-Software.github.io/BiblePuzzle/
 |Customizable interface | ✅ | ❌ |
 |Accessibility features | ✅ | ❌ |
 |Gradebook | ✅ | ❌ |
+|Dark mode | ✅ | ❌ |
+|Bible verse practice | ✅ | ❌ |
+
+Last updated:  `April 25, 2023`
+
+Created by [ProCode Software](https://github.com/ProCode-Software)
+
+https://ProCode-Software.github.io/BiblePuzzle/
