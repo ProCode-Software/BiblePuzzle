@@ -2,7 +2,8 @@
 ![BiblePuzzle (Light mode)](assets/img/Screenshot_Light.png)
 Dark:
 ![BiblePuzzle (Dark mode)](assets/img/Screenshot_Dark.png)
-A typing game on Bible verses. It's just like Typing.com but using Bible verses.
+
+**A typing game on Bible verses. It's just like Typing.com but using Bible verses.**
 
 ### Play now:
 
