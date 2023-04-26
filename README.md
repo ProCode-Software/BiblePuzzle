@@ -24,7 +24,7 @@ https://ProCode-Software.github.io/BiblePuzzle/
 | |BiblePuzzle |[Typing.com](https://typing.com)|
 |--- | --- | ---|
 |Trouble keys | ✅ | ✅ |
-|Customizable interface | ✅ | ❌ |
+|Customizable interface | ✅ | ➖ |
 |Accessibility features | ✅ | ❌ |
 |Gradebook | ✅ | ❌ |
 |Dark mode | ✅ | ❌ |
