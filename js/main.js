@@ -86,6 +86,7 @@ let settingsValues = {
     textSize: 17,
     boldText: false,
     capsLockNotif: true,
+    showSpeed: true,
 };
 /**
  * @typedef {Object} TypingStats
@@ -414,7 +415,7 @@ function completeTest() {
     stats.gradebook.unshift({
         date: new Date(),
         verse: reference,
-        grade: Math.round(percent) / 100,
+        grade: Math.round(Math.round(percent) / 100),
         incorrect: incorrectChars,
         avgCPS: avgCPS,
     });
@@ -657,6 +658,8 @@ let currentPanel;
  * @param {boolean} lightDismiss
  */
 function showPanel(showPanel, viewId, lightDismiss) {
+    //stats settings help
+    const toolbarTag = ['stats', 'settings', 'help']
     const panel = document.querySelector("main aside.panel-ct");
 
     panel.style.display = showPanel == true ? "block" : "none";
@@ -677,6 +680,8 @@ function showPanel(showPanel, viewId, lightDismiss) {
             keyboardLock = false;
         }
 
+        checkIfOpen()
+
         panel.addEventListener("click", (e) => {
             if (lightDismiss) {
                 if (
@@ -687,9 +692,21 @@ function showPanel(showPanel, viewId, lightDismiss) {
                     panel.style.display = "none";
                     currentPanel = "";
                     keyboardLock = false;
+                    checkIfOpen()
                 }
             }
         });
+    }
+    function checkIfOpen () {
+        toolbarTag.forEach(tag => {
+            const panelViewF = panel.querySelector(`.panelView#${tag}`)
+            const toolbarBtnF = document.querySelector(`.toolbarItem .${tag}Btn`)
+            if (panelViewF.style.display == 'flex' && panel.style.display == 'block') {
+                toolbarBtnF.classList.add('active')
+            } else {
+                if (toolbarBtnF.classList.contains('active')) toolbarBtnF.classList.remove('active')
+            }
+        })
     }
 }
 /**
@@ -750,10 +767,14 @@ document.querySelector(".toolbar .helpBtn").addEventListener("click", () => {
         showPanel(true, "help", true);
     }
 });
-
+/**
+ * Creates a button
+ * @param {'primary'|'dangerous'|'default'} style 
+ * @param {string} text 
+ * @param {*} icon 
+ * @returns {Element}
+ */
 function createButtonElement(style, text, icon) {
-    /**@param {'primary'|'dangerous'|'default'|'actionButton'} style */
-
     const button = document.createElement("button");
     button.className = `btn${style !== "default" ? `-${style}` : ""}`;
     button.innerHTML = `
@@ -819,7 +840,14 @@ const settingsModel = [
                 title: "Theme color",
                 type: "etc",
                 block: createAccentColorSelectionBlock(),
-            }
+            },
+            {
+                type: "toggle",
+                title: "Show speed in gradebook",
+                value: "showSpeed",
+
+                description: "Show avg. speed (chars/sec) in gradebook.",
+            },
         ],
     },
     {
@@ -1107,20 +1135,27 @@ verseBtn.addEventListener("click", function (evt) {
     let throttle = false;
 
     if (!throttle && evt.detail === 3) {
-        showPopup(true, ".verseListPopup");
+        openVLPopup()
         throttle = true;
         setTimeout(function () {
             throttle = false;
         }, 1000);
     }
 });
-
-const verseList = document.querySelector(".pverseList");
-for (let vx of randomVerses) {
-    const vxItem = document.createElement("li");
-    vxItem.className = "verseListItem";
-    verseList.append(vxItem);
-    vxItem.innerHTML = `
+function openVLPopup() {
+    if (!document.querySelector('.popups .verseListPopup')) {
+        const popup = createModal({
+            title: 'Verses',
+            content: `<ul class="pverseList"></ul>`,
+            id: 'verseListPopup',
+            lightDismiss: 'True'
+        })
+        const verseList = popup.querySelector(".pverseList");
+        for (let vx of randomVerses) {
+            const vxItem = document.createElement("li");
+            vxItem.className = "verseListItem";
+            verseList.append(vxItem);
+            vxItem.innerHTML = `
     <img src="${vx.imageURL}" class="verseListImg" alt="${vx.ref}">
     <div class="verseTD">
             <div class="verseListItTitle">${vx.ref}</div>
@@ -1128,48 +1163,10 @@ for (let vx of randomVerses) {
         </div>
         <button class="addToJournalBtn actionBtn">${systemIcons.bookmark}</button>
         `;
-}
-document.querySelector(".nameArea").addEventListener("click", function (evt) {
-    let throttle = false;
-
-    if (!throttle && evt.detail === 7) {
-        toggleDeveloperMode(true);
-        throttle = true;
-        setTimeout(function () {
-            throttle = false;
-        }, 1500);
-    }
-});
-function toggleDeveloperMode(onOrOff) {
-    if (onOrOff == true) {
-        if (sessionStorage.getItem("developerMode") == "true") {
-            alert("Developer mode is already on.");
-        } else {
-            sessionStorage.setItem("developerMode", "true");
-            alert(
-                "Developer mode has been enabled.\nWarning: This tool is intended for developer use only and only use if you know what you're doing."
-            );
-        }
-    } else {
-        sessionStorage.removeItem("developerMode");
-        alert("Developer mode has been disabled. Reload to take effect.");
-    }
-}
-if (sessionStorage.getItem("developerMode") == "true") {
-    document.querySelector(
-        ".nameArea"
-    ).innerHTML += `<div class="textTag dev">DEV</div>`;
-}
-
-window.addEventListener("keyup", (e) => {
-    if (sessionStorage.getItem("developerMode") == "true") {
-        if (e.key == "/") {
-            document.querySelector(".developerPanel").style.display = "flex";
-            document.querySelector(".devCmdInput").focus();
-            document.querySelector(".devCmdInput").value = "/";
         }
     }
-});
+    showPopup(true, '.verseListPopup')
+}
 function updateSliders() {
     document.querySelectorAll('input[type="range"]').forEach((slider) => {
         function updateSlider() {
@@ -1242,6 +1239,7 @@ function loadStats() {
                 }% (<span style="color: var(--text-${grade.incorrect == 0 ? "green" : "red"
                 })">-${grade.incorrect}</span>)</td>
             `;
+            tr.querySelector('.avgCPSTd').style.display = (getSettings().showSpeed == false ? 'none' : '')
             document.querySelector(".gradeTable").append(tr);
         });
         document.querySelectorAll(".gradeTable td").forEach(cell => {
@@ -1249,6 +1247,12 @@ function loadStats() {
                 navigator.clipboard.writeText(cell.className == 'verseDateTd' ? cell.title : (cell.className == 'avgCPSTd' ? `${cell.textContent} chars/sec` : cell.textContent))
                 showToast('Copied to clipboard')
             })
+        })
+        document.querySelectorAll('.gradeTable th').forEach(col => {
+            let tx = col.innerText.toLowerCase()
+            if(tx == 'speed') {
+                col.style.display = (getSettings().showSpeed == false ? 'none' : '')
+            }
         })
     } else {
         document.querySelector('.resetGradebookBtn').style.display = 'none'
@@ -1267,10 +1271,9 @@ Under 40% - Faulty`;
     document.querySelector('#stats .panelTitle').textContent = `${getSettings().displayName}${getLastChar(getSettings().displayName) == 's' ? '\'' : '\'s'} Stats`
 
     const tkChart = getEl('.troubleKeyChart')
-    if (document.querySelector('.resetTroubleKeysBtn').parentElement.querySelector('.fallbackFrame')) document.querySelector('.resetTroubleKeysBtn').parentElement.querySelector('.fallbackFrame').remove()
+
+    let tkAvgs = {}
     if (stats.troubleKeys && Object.keys(stats.troubleKeys).length > 0) {
-        tkChart.innerHTML=''
-        let tkAvgs = {}
         Object.keys(stats.troubleKeys).forEach(xc => {
             const ky = stats.troubleKeys[xc]
             if (Math.round(avg(ky)) > 1) {
@@ -1280,7 +1283,11 @@ Under 40% - Faulty`;
         tkAvgs = Object.fromEntries(Object.entries(tkAvgs)
             .sort(([, valueA], [, valueB]) => valueB - valueA)
             .slice(0, 8));
-            console.log(tkAvgs);
+    }
+
+    if (document.querySelector('.resetTroubleKeysBtn').parentElement.querySelector('.fallbackFrame')) document.querySelector('.resetTroubleKeysBtn').parentElement.querySelector('.fallbackFrame').remove()
+    if (stats.troubleKeys && Object.keys(stats.troubleKeys).length > 0 && Object.keys(tkAvgs).length > 0) {
+        tkChart.innerHTML = ''
         Object.keys(tkAvgs).forEach(l => {
             const cl = document.createElement('div')
             cl.className = 'tkChartCol'
@@ -1305,7 +1312,6 @@ Under 40% - Faulty`;
  */
 function getEl(el) { return document.querySelector(el) }
 
-showStats()
 loadStats();
 
 function keyToText(key) {
