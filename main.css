@@ -2210,3 +2210,6 @@ input.panelTitleInput {
 .journalMainCt .fallbackFrame {
     height: 90%;
 }
+.journalBtn {
+    display: none !important;
+}
