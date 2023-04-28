@@ -172,6 +172,10 @@ header>div {
     width: 100%;
 }
 
+input {
+    text-overflow: ellipsis;
+}
+
 input[type="text"], input[type="number"], input[type="password"] {
     border-radius: 10px;
     border: 2px solid rgba(var(--border-color), 0.6);
@@ -1471,6 +1475,11 @@ body.dark .popup {
     height: 42px;
     background: none;
     flex-shrink: 0;
+    color: inherit;
+}
+.actionBtn:not(.closeBtn) svg {
+    width: 24px;
+    height: 24px;
 }
 
 body.dark .actionBtn {
@@ -2155,4 +2164,49 @@ body.themeLoaded .box {
 }
 .fallbackDesc {
     color: var(--subtitle);
+}
+.popup.modal {
+    text-align: left;
+}
+.panelTitle {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.panelToolbarBtns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+input.panelTitleInput {
+    border: none;
+    font-weight: 550;
+    width: 100%;
+    height: 44px !important;
+    padding: 15px;
+    border: none;
+}
+.panelView {
+    padding: 28px;
+}
+::selection {
+    background: var(--accent);
+    color: #fff;
+}
+.journalMainCt {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 100%;
+    overflow-y: auto;
+    border-radius: 20px;
+}
+.panelView#journal {
+    gap: 20px;
+    padding: 20px;
+}
+.journalMainCt .fallbackFrame {
+    height: 90%;
 }

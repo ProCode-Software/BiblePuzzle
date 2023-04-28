@@ -1,4 +1,16 @@
+/**
+
+An array of objects containing random Bible verses.
+@typedef {Object} RandomVerse
+@property {string} verse - The text of the Bible verse.
+@property {string} ref - The reference for the Bible verse.
+@property {string} imageURL - The URL of an image related to the Bible verse.
+@property {string} source - The source of the Bible verse.
+*/
 const randomVerses = [
+    /**
+* @type {RandomVerse}
+*/
     {
         verse: 'For all have sinned and fall short of the glory of God, and all are justified freely by his grace through the redemption that came by Christ Jesus.',
         ref: 'Romans 3:23-24',
