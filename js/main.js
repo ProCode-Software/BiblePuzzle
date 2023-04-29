@@ -110,6 +110,28 @@ if (loadedTheme) {
     ]
 }
 */
+/**
+ * Represents a journal.
+ * @typedef {Object} Journal
+ * @property {string} name - The name of the journal.
+ * @property {Date} created - The creation date of the journal.
+ * @property {Array.<JournalItem>} items - The list of journal items.
+ */
+/**
+ * Represents an item in a journal.
+ * @typedef {Object} JournalItem
+ * @property {string} type - The type of the journal item, either "verse" or "note".
+ * @property {RandomVerse} [verse] - The verse related to the journal item, applicable only if the type is 'verse'.
+ * @property {string} [note] - The note related to the journal item, applicable only if the type is 'verse'.
+ * @property {Date} [dateCreated] - The creation date of the journal item.
+ * @property {string} [text] - The text related to the journal item, applicable only if the type is 'note'.
+ * @property {number} [color] - The color of the journal item, applicable only if the type is 'note'.
+ */
+
+/**
+ * The user's journal
+ * @type {Journal}
+ */
 let journal;
 let loadedJournal = localStorage.getItem("userJournal");
 if (loadedJournal) {
@@ -1707,6 +1729,7 @@ window.addEventListener('keyup', (e) => {
         e.stopPropagation()
         e.preventDefault()
         settingsValues['darkMode'] = !settingsValues['darkMode']
+        showToast(`Dark theme ${settingsValues['darkMode'] == true ? 'enabl' : 'disabl'}ed`)
         updateSettings()
     }
 }, { capture: true, passive: false })
@@ -1718,21 +1741,130 @@ function replaceIcons() {
     })
 }
 replaceIcons()
-
+function updateJournal() {
+    localStorage.setItem("userJournal", JSON.stringify(journal));
+    loadJournal()
+}
 function loadJournal() {
     const journalFrame = document.querySelector('.journalMainCt')
-    if (journalFrame.querySelector('.fallbackFrame')) journalFrame.querySelector('.fallbackFrame').remove()
+    journalFrame.innerHTML = ''
     if (!journal) {
         const fallbackFrame = createFallbackFrame("assets/img/illustrations/Trouble Keys Empty.png", 'Welcome to Journals!', 'Organize your verses and notes all in one place.')
         const addBtn = createButtonElement('primary', 'Add current verse', systemIcons.add)
         document.querySelector('.journalSearchBtn').style.display = 'none'
         document.querySelector('input.journalNameInp').disabled = true
         fallbackFrame.append(addBtn)
+        addBtn.addEventListener('click', () => {
+            addVerseToJournal(verseRaw)
+        })
         journalFrame.append(fallbackFrame)
     } else {
+        /* Journal object
+{
+    name: "My journal",
+    created: Date,
+    items: [
+        {
+            type: "verse",
+            verse: "John 3:16",
+            note: "My note", // null if none,
+            dateCreated: new Date()
+        },
+        {
+            type: "note",
+            text: "God <i>loves</i> us", // in HTML
+            color: 0
+        }
+    ]
+}
+*/
+        const jnNameInp = document.querySelector('input.journalNameInp')
         document.querySelector('.journalSearchBtn').style.display = ''
+        jnNameInp.disabled = false
+        jnNameInp.value = journal.name
+
+        jnNameInp.addEventListener('change', () => {
+            journal.name = jnNameInp.value
+            updateJournal()
+        })
+
+        journal.items.forEach(item => {
+            const itemEl = document.createElement('div')
+            itemEl.className = 'journalItem'
+            itemEl.classList.add(`journal${capitalize(item.type)}Item`)
+            itemEl.innerHTML = `
+            <div class="journalItemMainCt">
+            <div class="journalItemMain journal${capitalize(item.type)}Main"></div>
+            <div class="journalItemOptionsCt">
+                ${item.type == 'note' ? `<button class="actionBtn journalItemControl journalItemMoreBtn">${systemIcons.more}</button>` : ''}
+                <button class="actionBtn journalItemControl journalItemMoreBtn">
+                    ${systemIcons.more}
+                </button>
+            </div>
+            </div>
+            <div class="journalItemNoteCt">
+            <div class="journalNotePlaceholder">Add a note...</div>
+    <div class="journalItemNoteInp" placeholder="Add a note..." contenteditable="plaintext-only"></div>
+</div>
+            `
+            const noteFrame = itemEl.querySelector('.journalItemNoteInp')
+            journalFrame.append(itemEl)
+
+            let frame = itemEl.querySelector('.journalItemMain')
+            switch (item.type) {
+                case 'verse':
+                    frame.innerHTML = `
+                    <div class="journalVerseImgCt">
+                        <img src="${item.verse.imageURL}" alt="${item.verse.ref}">
+                    </div>
+                    <div class="journalVerseRef">${item.verse.ref}</div>
+                        <div class="journalVerse">${item.verse.verse}</div>
+                    `
+                    itemEl.addEventListener('click', (e) => {
+                        if (!document.elementsFromPoint(e.x, e.y).includes(itemEl.querySelector('.journalItemOptionsCt')) && !document.elementsFromPoint(e.x, e.y).includes(noteFrame)) {
+                            if (itemEl.classList.contains('expanded')) {
+                                itemEl.classList.remove('expanded')
+                            } else {
+                                itemEl.classList.add('expanded')
+                            }
+                        }
+                    })
+                    break;
+                case 'note':
+                    frame.innerHTML = item.text
+                    break;
+                default:
+                    console.error('Invalid journal item type');
+                    break;
+            }
+            function checkIfNoteIsNull() {
+                if (noteFrame.innerHTML !== '') {
+                    itemEl.querySelector('.journalNotePlaceholder').style.display = 'none'
+                } else {
+                    itemEl.querySelector('.journalNotePlaceholder').style.display = ''
+                }
+            }
+            noteFrame.addEventListener('input', checkIfNoteIsNull)
+            checkIfNoteIsNull()
+        })
     }
 }
-function addVerseToJournal(verse) {
-
+function addVerseToJournal(verseObj) {
+    try {
+        if (!journal) {
+            journal = {
+                name: "My journal",
+                created: new Date(),
+                items: []
+            }
+        }
+        journal.items.push({
+            type: 'verse',
+            verse: verseObj,
+            dateCreated: new Date()
+        })
+        updateJournal()
+    } catch (error) {
+        showToast('Unable to add verse to journal')
+    }
 }
