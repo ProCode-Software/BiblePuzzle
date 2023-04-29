@@ -1788,6 +1788,7 @@ function loadJournal() {
             updateJournal()
         })
 
+        let i = 0;
         journal.items.forEach(item => {
             const itemEl = document.createElement('div')
             itemEl.className = 'journalItem'
@@ -1844,8 +1845,14 @@ function loadJournal() {
                     itemEl.querySelector('.journalNotePlaceholder').style.display = ''
                 }
             }
-            noteFrame.addEventListener('input', checkIfNoteIsNull)
+            noteFrame.innerHTML = (item.note ? item.note : '')
+            noteFrame.addEventListener('input', () => {
+                checkIfNoteIsNull()
+                journal.items[i].note = noteFrame.innerHTML
+                updateJournal()
+            })
             checkIfNoteIsNull()
+            i++
         })
     }
 }
