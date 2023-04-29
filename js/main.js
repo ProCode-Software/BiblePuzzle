@@ -1788,7 +1788,6 @@ function loadJournal() {
             updateJournal()
         })
 
-        let i = 0;
         journal.items.forEach(item => {
             const itemEl = document.createElement('div')
             itemEl.className = 'journalItem'
@@ -1804,13 +1803,13 @@ function loadJournal() {
             </div>
             </div>
             <div class="journalItemNoteCt">
-            <div class="journalNotePlaceholder">Add a note...</div>
-    <div class="journalItemNoteInp" placeholder="Add a note..." contenteditable="plaintext-only"></div>
+    <textarea class="journalItemNoteInp" placeholder="Add a note..."></textarea>
 </div>
             `
             const noteFrame = itemEl.querySelector('.journalItemNoteInp')
             journalFrame.append(itemEl)
 
+            let nodeIndex = Array.prototype.indexOf.call(itemEl.parentNode, itemEl)
             let frame = itemEl.querySelector('.journalItemMain')
             switch (item.type) {
                 case 'verse':
@@ -1822,7 +1821,7 @@ function loadJournal() {
                         <div class="journalVerse">${item.verse.verse}</div>
                     `
                     itemEl.addEventListener('click', (e) => {
-                        if (!document.elementsFromPoint(e.x, e.y).includes(itemEl.querySelector('.journalItemOptionsCt')) && !document.elementsFromPoint(e.x, e.y).includes(noteFrame)) {
+                        if (!document.elementsFromPoint(e.x, e.y).includes(itemEl.querySelector('.journalItemOptionsCt')) && !document.elementsFromPoint(e.x, e.y).includes(noteFrame.parentElement)) {
                             if (itemEl.classList.contains('expanded')) {
                                 itemEl.classList.remove('expanded')
                             } else {
@@ -1838,21 +1837,11 @@ function loadJournal() {
                     console.error('Invalid journal item type');
                     break;
             }
-            function checkIfNoteIsNull() {
-                if (noteFrame.innerHTML !== '') {
-                    itemEl.querySelector('.journalNotePlaceholder').style.display = 'none'
-                } else {
-                    itemEl.querySelector('.journalNotePlaceholder').style.display = ''
-                }
-            }
-            noteFrame.innerHTML = (item.note ? item.note : '')
-            noteFrame.addEventListener('input', () => {
-                checkIfNoteIsNull()
-                journal.items[i].note = noteFrame.innerHTML
+            noteFrame.value = (item.note ? item.note : '')
+            noteFrame.addEventListener('change', () => {
+                journal.items[journal.items.indexOf(item)].note = noteFrame.value
                 updateJournal()
             })
-            checkIfNoteIsNull()
-            i++
         })
     }
 }
