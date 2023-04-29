@@ -527,8 +527,9 @@ function completeTest() {
     imgGroup.append(img, cap);
     vGroup.append(refLab, verseLab, addToJournalBtn);
 
-    // until implemented: coming soon
-    addToJournalBtn.remove();
+    addToJournalBtn.onclick = () => {
+        addVerseToJournal(verseRaw)
+    }
 
     const typingFinalStats = panelView.querySelector(".testStats");
 
@@ -1222,6 +1223,9 @@ function openVLPopup() {
         </div>
         <button class="addToJournalBtn actionBtn">${systemIcons.bookmark}</button>
         `;
+            vxItem.querySelector('.addToJournalBtn').onclick = () => {
+                addVerseToJournal(vx)
+            }
         }
     }
     showPopup(true, '.verseListPopup')
