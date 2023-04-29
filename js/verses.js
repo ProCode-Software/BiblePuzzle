@@ -5,7 +5,7 @@ An array of objects containing random Bible verses.
 @property {string} verse - The text of the Bible verse.
 @property {string} ref - The reference for the Bible verse.
 @property {string} imageURL - The URL of an image related to the Bible verse.
-@property {string} source - The source of the Bible verse.
+@property {string} source - The source of the verse image.
 */
 const randomVerses = [
     /**

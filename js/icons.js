@@ -91,5 +91,10 @@ const systemIcons = {
     add: `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4 12.25H20M12 20.25V4.25" stroke="#212325" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
 </svg>
-`
+`,
+    more: `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="5" cy="12.4" r="1.75" fill="#212325"/>
+<circle cx="12" cy="12.4" r="1.75" fill="#212325"/>
+<circle cx="19" cy="12.4" r="1.75" fill="#212325"/>
+</svg>`,
 };
