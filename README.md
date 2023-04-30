@@ -15,6 +15,7 @@ https://ProCode-Software.github.io/BiblePuzzle/
 - ⚡ **Characters per second tracker** to see how fast you type
 - 📊 **Gradebook** showing your last typed verses
 - 🖼️ **Themes** to customize your experience
+- 📒 Organize verses and notes with **Journals**
 - ♿ **Accessible** for everyone
 
 ## Typing.com vs BiblePuzzle
@@ -26,6 +27,7 @@ https://ProCode-Software.github.io/BiblePuzzle/
 |Gradebook | ✅ | ❌ |
 |Dark mode | ✅ | ❌ |
 |Bible verse practice | ✅ | ❌ |
+|Journal | ✅ | ❌ |
 
 ### Screenshots
 ![BiblePuzzle (Light mode)](assets/img/Screenshot_Light.png)

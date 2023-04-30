@@ -1413,7 +1413,7 @@ function showToast(text, buttons, clsName, timeout) {
     if (buttons) {
         buttons.forEach(btn => {
             const btnEl = document.createElement('button')
-            if (btn.class) btnEl.className = btn.class
+            if (btn.cls) btnEl.className = btn.cls
             btnEl.innerHTML = btn.text
             btnEl.onclick = btn.click
             btnEl.tabIndex = 0
@@ -1752,8 +1752,8 @@ function updateJournal() {
 function loadJournal() {
     const journalFrame = document.querySelector('.journalMainCt')
     journalFrame.innerHTML = ''
-    if (!journal) {
-        const fallbackFrame = createFallbackFrame("assets/img/illustrations/Trouble Keys Empty.png", 'Welcome to Journals!', 'Organize your verses and notes all in one place.')
+    if (!journal || journal.items < 1) {
+        const fallbackFrame = createFallbackFrame("assets/img/illustrations/Journal New.png", 'Welcome to Journals!', 'Organize your verses and notes all in one place.')
         const addBtn = createButtonElement('primary', 'Add current verse', systemIcons.add)
         document.querySelector('.journalSearchBtn').style.display = 'none'
         document.querySelector('input.journalNameInp').disabled = true
@@ -1847,6 +1847,10 @@ function loadJournal() {
                 updateJournal()
             })
         })
+
+        document.querySelector('.journalAddBtnSc').addEventListener('click', () => {
+            addVerseToJournal(verseRaw)
+        })
     }
 }
 function addVerseToJournal(verseObj) {
@@ -1863,6 +1867,11 @@ function addVerseToJournal(verseObj) {
             verse: verseObj,
             dateCreated: new Date()
         })
+        showToast(`Added ${verseObj.ref} to journal`, [{
+            text: 'View',
+            click: () => showJournalPanel(),
+            cls: 'showJounalToastBtn'
+        }])
         updateJournal()
     } catch (error) {
         showToast('Unable to add verse to journal')
