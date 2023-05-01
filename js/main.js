@@ -1847,11 +1847,10 @@ function loadJournal() {
                 updateJournal()
             })
         })
-
-        document.querySelector('.journalAddBtnSc').addEventListener('click', () => {
-            addVerseToJournal(verseRaw)
-        })
     }
+    document.querySelector('.journalAddBtnSc').addEventListener('click', () => {
+        addVerseToJournal(verseRaw)
+    })
 }
 function addVerseToJournal(verseObj) {
     try {
