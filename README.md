@@ -34,7 +34,7 @@ https://ProCode-Software.github.io/BiblePuzzle/
 Dark:
 ![BiblePuzzle (Dark mode)](assets/img/Screenshot_Dark.png)
 
-Last updated:  `April 26, 2023`
+Last updated:  `April 30, 2023`
 
 Created by [ProCode Software](https://github.com/ProCode-Software)
 
