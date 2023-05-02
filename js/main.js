@@ -1212,8 +1212,8 @@ function openVLPopup() {
         })
         const verseList = popup.querySelector(".pverseList");
         for (let vx of [...randomVerses].sort((a, b) => {
-            let nameA = a.ref.split(' ')
-            let nameB = b.ref.split(' ')
+            let nameA = a.ref
+            let nameB = b.ref
 
             nameA.replace(/^\d+\s/, '')
             nameB.replace(/^\d+\s/, '')
