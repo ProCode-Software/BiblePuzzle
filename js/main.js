@@ -1215,8 +1215,8 @@ function openVLPopup() {
             let nameA = a.ref
             let nameB = b.ref
 
-            nameA.replace(/^\d+\s/, '')
-            nameB.replace(/^\d+\s/, '')
+            nameA = nameA.replace(/^\d+\s/, '')
+            nameB = nameB.replace(/^\d+\s/, '')
 
             if (nameA < nameB) {
                 return -1;
