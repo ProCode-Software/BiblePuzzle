@@ -1215,8 +1215,8 @@ function openVLPopup() {
             let aSplit = a.ref.split(' ')
             let bSplit = b.ref.split(' ')
 
-            let nameA = aSplit[isNan(aSplit[0]) ? aSplit.shift() : aSplit = aSplit]
-            let nameB = bSplit[isNan(bSplit[0]) ? bSplit.shift() : bSplit = bSplit]
+            let nameA = aSplit[isNaN(aSplit[0]) ? aSplit.shift() : aSplit = aSplit]
+            let nameB = bSplit[isNaN(bSplit[0]) ? bSplit.shift() : bSplit = bSplit]
 
             if (nameA < nameB) {
                 return -1;
