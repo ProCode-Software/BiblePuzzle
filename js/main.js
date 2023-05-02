@@ -1212,10 +1212,16 @@ function openVLPopup() {
         })
         const verseList = popup.querySelector(".pverseList");
         for (let vx of [...randomVerses].sort((a, b) => {
-            if (a.ref < b.ref) {
+            let aSplit = a.ref.split(' ')
+            let bSplit = b.ref.split(' ')
+
+            let nameA = aSplit[isNan(aSplit[0]) ? aSplit.shift() : aSplit = aSplit]
+            let nameB = bSplit[isNan(bSplit[0]) ? bSplit.shift() : bSplit = bSplit]
+
+            if (nameA < nameB) {
                 return -1;
             }
-            if (a.ref > b.ref) {
+            if (nameA > nameB) {
                 return 1;
             }
             return 0;
