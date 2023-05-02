@@ -1211,7 +1211,7 @@ function openVLPopup() {
             lightDismiss: 'True'
         })
         const verseList = popup.querySelector(".pverseList");
-        for (let vx of [...randomVerses].sort((a, b) => a.name.localeCompare(b.ref))) {
+        for (let vx of [...randomVerses].sort((a, b) => a.ref.localeCompare(b.ref))) {
             const vxItem = document.createElement("li");
             vxItem.className = "verseListItem";
             verseList.append(vxItem);
