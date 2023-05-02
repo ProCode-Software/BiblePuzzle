@@ -2199,6 +2199,7 @@ selected: grid-template: "a b b" "c c c";
     border-radius: 10px;
     width: 60px;
     box-shadow: 0 8px 15px rgba(var(--shadow-color), 0.4);
+    transition: .2s ease-in-out;
 }
 
 .journalVerse {
@@ -2248,12 +2249,16 @@ selected: grid-template: "a b b" "c c c";
     width: 100%;
 }
 
-.journalItemOptionsCt {
+
+.journalItem:not(.expanded) .journalItemOptionsCt {
     display: flex;
     gap: 10px;
     align-items: center;
-
     display: none;
+}
+
+.journalItem.expanded .journalItemOptionsCt {
+    grid-area: d;
 }
 
 .journalItem:hover .journalItemOptionsCt {
@@ -2273,21 +2278,19 @@ selected: grid-template: "a b b" "c c c";
 .journalItemNoteCt {
     border-top: 1px solid rgba(var(--border-color), 0.3);
     width: 100%;
-    min-height: 42px;
     padding: 18px 15px;
-    max-height: 180px;
-    position: relative;
 }
 
 .journalItemNoteInp {
     background: transparent;
-    height: 100%;
     border: none;
     outline: none;
     font-size: 1.04em;
     width: 100%;
     overflow-y: auto;
     resize: none;
+    max-height: 150px;
+    min-height: 42px;
 }
 
 .journalNotePlaceholder {
@@ -2300,7 +2303,8 @@ selected: grid-template: "a b b" "c c c";
     display: none;
 }
 .journalItem.expanded .journalItemMain {
-    grid-template: "a b ." "c c c";
+    grid-template: "a b . d"
+        "c c c c";
 }
 .journalItem.expanded .journalVerse::after {
     display: none;
@@ -2311,4 +2315,14 @@ selected: grid-template: "a b b" "c c c";
 }
 .journalItem.expanded .journalVerseImgCt img {
     width: 50px;
+}
+.journalNoteButtons {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.journalNoteActionBtn {
+    width: 100%;
+    height: 46px;
 }

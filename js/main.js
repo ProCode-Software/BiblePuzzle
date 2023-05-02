@@ -1808,10 +1808,16 @@ function loadJournal() {
             </div>
             <div class="journalItemNoteCt">
     <textarea class="journalItemNoteInp" placeholder="Add a note..."></textarea>
+    <div class="journalNoteButtons">
+    <button class="btn journalCancelNoteBtn journalNoteActionBtn">Cancel</button>
+    <button class="btn-primary journalSaveNoteBtn journalNoteActionBtn">Save</button>
+</div>
 </div>
             `
             const noteFrame = itemEl.querySelector('.journalItemNoteInp')
             journalFrame.append(itemEl)
+
+            itemEl.querySelector('.journalNoteButtons').style.display = 'none'
 
             let nodeIndex = Array.prototype.indexOf.call(itemEl.parentNode, itemEl)
             let frame = itemEl.querySelector('.journalItemMain')
@@ -1828,8 +1834,10 @@ function loadJournal() {
                         if (!document.elementsFromPoint(e.x, e.y).includes(itemEl.querySelector('.journalItemOptionsCt')) && !document.elementsFromPoint(e.x, e.y).includes(noteFrame.parentElement)) {
                             if (itemEl.classList.contains('expanded')) {
                                 itemEl.classList.remove('expanded')
+                                itemEl.querySelector('.journalItemMainCt').append(itemEl.querySelector('.journalItemOptionsCt'))
                             } else {
                                 itemEl.classList.add('expanded')
+                                itemEl.querySelector('.journalItemMain').insertBefore(itemEl.querySelector('.journalItemOptionsCt'), itemEl.querySelector('.journalVerse'))
                             }
                         }
                     })
@@ -1842,16 +1850,33 @@ function loadJournal() {
                     break;
             }
             noteFrame.value = (item.note ? item.note : '')
-            noteFrame.addEventListener('change', () => {
+            checkNoteSize()
+            function updateNote() {
                 journal.items[journal.items.indexOf(item)].note = noteFrame.value
                 updateJournal()
+            }
+            function checkNoteSize() {
+                let lineNum = (noteFrame.value.match(/\n/g) || []).length + 1;
+                noteFrame.style.height = `${((15 * 1.04) * 1.4) * lineNum + 6}px`
+            }
+            noteFrame.addEventListener('input', () => {
+                checkNoteSize()
+                itemEl.querySelector('.journalNoteButtons').style.display = ''
             })
+            itemEl.querySelector('.journalCancelNoteBtn').onclick = () => {
+                itemEl.querySelector('.journalNoteButtons').style.display = 'none'
+                noteFrame.value = item.note !== '' ? item.note : ''
+            }
+            itemEl.querySelector('.journalSaveNoteBtn').onclick = () => {
+                itemEl.querySelector('.journalNoteButtons').style.display = 'none'
+                updateNote()
+            }
         })
     }
-    document.querySelector('.journalAddBtnSc').addEventListener('click', () => {
-        addVerseToJournal(verseRaw)
-    })
 }
+document.querySelector('.journalAddBtnSc').addEventListener('click', () => {
+    addVerseToJournal(verseRaw)
+})
 function addVerseToJournal(verseObj) {
     try {
         if (!journal) {
@@ -1861,18 +1886,55 @@ function addVerseToJournal(verseObj) {
                 items: []
             }
         }
-        journal.items.push({
-            type: 'verse',
-            verse: verseObj,
-            dateCreated: new Date()
-        })
-        showToast(`Added ${verseObj.ref} to journal`, [{
-            text: 'View',
-            click: () => showJournalPanel(),
-            cls: 'showJounalToastBtn'
-        }])
+        if (journal.items.length <= 100) {
+            journal.items.push({
+                type: 'verse',
+                verse: verseObj,
+                dateCreated: new Date()
+            })
+            showToast(`Added ${verseObj.ref} to journal`, [{
+                text: 'View',
+                click: () => {
+                    showJournalPanel()
+                    document.querySelector('.journalMainCt').scrollTo({
+                        top: document.querySelector('.journalMainCt').scrollHeight,
+                        left: 0,
+                        behavior: 'smooth'
+                    })
+                },
+                cls: 'showJounalToastBtn'
+            }])
+        } else {
+            showToast('Couldn\'t add item to journal. Your journal is full.')
+        }
         updateJournal()
     } catch (error) {
         showToast('Unable to add verse to journal')
     }
+}
+/**
+ * Creates a context menu element based on the given options and extra class.
+ *
+ * @param {Object[]} options - An array of objects representing each item in the context menu.
+ * @param {string} options.label - The label to display for the menu item.
+ * @param {string} [options.icon] - The URL or HTML content of the icon to display for the menu item.
+ * @param {function} options.click - The function to execute when the menu item is clicked.
+ * @param {string} [extraClass] - An optional additional class name to add to the context menu element.
+ * @returns {HTMLElement} - The created context menu element.
+ */
+function createContextMenuElement(options, extraClass) {
+    const ctx = document.createElement('div')
+    ctx.className = 'contextMenu'
+    if (extraClass) ctx.classList.add(extraClass)
+    for (let item in options) {
+        const itemEl = document.createElement('div')
+        if (!item.separator) {
+            itemEl.className = 'ctxItem'
+        } else {
+            itemEl.innerHTML = `${item.icon ? item.icon : '<div class="iconSpacer"></div>'} ${item.label}`
+            itemEl.onclick = item.click
+        }
+        ctx.append(itemEl)
+    }
+    return ctx
 }
