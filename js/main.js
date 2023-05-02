@@ -1212,11 +1212,11 @@ function openVLPopup() {
         })
         const verseList = popup.querySelector(".pverseList");
         for (let vx of [...randomVerses].sort((a, b) => {
-            let aSplit = a.ref.split(' ')
-            let bSplit = b.ref.split(' ')
+            let nameA = a.ref.split(' ')
+            let nameB = b.ref.split(' ')
 
-            let nameA = aSplit[isNaN(aSplit[0]) ? aSplit.shift() : aSplit = aSplit]
-            let nameB = bSplit[isNaN(bSplit[0]) ? bSplit.shift() : bSplit = bSplit]
+            nameA.replace(/^\d+\s/, '')
+            nameB.replace(/^\d+\s/, '')
 
             if (nameA < nameB) {
                 return -1;
