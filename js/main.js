@@ -247,7 +247,7 @@ countedKeys = countedKeys.split("");
 function startTyping(ct, array) {
     let activeCharNum = 0;
     currentCt = ct;
-    document.title = `BiblePuzzle | ${reference}`;
+    document.title = `${reference} | BiblePuzzle`;
     document.querySelector("footer #footerVerseRef").textContent = reference;
     ct.children[activeCharNum].classList.add("active");
 
@@ -1917,11 +1917,11 @@ function loadJournal() {
                     console.error('Invalid journal item type');
                     break;
             }
-            function checkNoteSize(el) {
+        })
+        function checkNoteSize(el) {
                 el.style.height = 'auto'
                 el.style.height = `${el.scrollHeight}px`
             }
-        })
         const addDeck = document.createElement('div')
         addDeck.className = 'journalAddItemControls'
         addDeck.innerHTML = `
@@ -1952,6 +1952,9 @@ function loadJournal() {
             let tA = newEl.querySelector('textarea')
             journalFrame.insertBefore(newEl, journalFrame.lastChild)
             tA.focus()
+            tA.addEventListener('input', () => {
+                checkNoteSize(tA)
+            })
             newEl.querySelector('.journalItemCancelNewNoteBtn').addEventListener('click', () => {
                 newEl.remove()
             })
