@@ -1191,17 +1191,7 @@ function updateStats() { }
 checkSettings();
 
 const verseBtn = document.querySelector("#footerVerseRef");
-verseBtn.addEventListener("click", function (evt) {
-    let throttle = false;
-
-    if (!throttle && evt.detail === 3) {
-        openVLPopup()
-        throttle = true;
-        setTimeout(function () {
-            throttle = false;
-        }, 1000);
-    }
-});
+verseBtn.addEventListener("dblclick", openVLPopup);
 function openVLPopup() {
     if (!document.querySelector('.popups .verseListPopup')) {
         const popup = createModal({
@@ -1613,9 +1603,6 @@ function createCustomFileUpload() {
     })
     ct.querySelector('#themeImgUploadCore').addEventListener('change', (e) => {
         const file = e.target.files[0];
-        console.log(file);
-        console.log(e.target.files);
-        console.log(!file);
 
         const imagePreview = ct.querySelector('.fileImagePreview');
         if (file && ct.querySelector('#themeImgUploadCore').value !== '') {
@@ -1793,6 +1780,7 @@ function loadJournal() {
     ]
 }
 */
+        let noteColors = ['white', 'yellow', 'pink', 'blue', 'green']
         const jnNameInp = document.querySelector('input.journalNameInp')
         document.querySelector('.journalSearchBtn').style.display = ''
         jnNameInp.disabled = false
@@ -1807,33 +1795,34 @@ function loadJournal() {
             const itemEl = document.createElement('div')
             itemEl.className = 'journalItem'
             itemEl.classList.add(`journal${capitalize(item.type)}Item`)
+            itemEl.tabIndex = 0
             itemEl.innerHTML = `
             <div class="journalItemMainCt">
             <div class="journalItemMain journal${capitalize(item.type)}Main"></div>
             <div class="journalItemOptionsCt">
-                ${item.type == 'note' ? `<button class="actionBtn journalItemControl journalItemMoreBtn">${systemIcons.more}</button>` : ''}
+            ${item.type == 'note' ? `
+            <button class="actionBtn journalItemControl journalNoteColorBtn">
+                    <div class="noteColorChip"></div>
+                </button>
+            <div style="width:100%"></div>
+            ` : ''}
                 <button class="actionBtn journalItemControl journalItemMoreBtn">
                     ${systemIcons.more}
                 </button>
             </div>
             </div>
+            ${item.type == 'verse' ? `
             <div class="journalItemNoteCt">
-    <textarea class="journalItemNoteInp" placeholder="Add a note..."></textarea>
-    <div class="journalNoteButtons">
-    <button class="btn journalCancelNoteBtn journalNoteActionBtn">Cancel</button>
-    <button class="btn-primary journalSaveNoteBtn journalNoteActionBtn">Save</button>
-</div>
+    <textarea class="journalItemNoteInp" placeholder="Add a note..."></textarea>` : ''}
 </div>
             `
-            const noteFrame = itemEl.querySelector('.journalItemNoteInp')
-            journalFrame.append(itemEl)
 
-            itemEl.querySelector('.journalNoteButtons').style.display = 'none'
-
-            let nodeIndex = Array.prototype.indexOf.call(itemEl.parentNode, itemEl)
             let frame = itemEl.querySelector('.journalItemMain')
+            journalFrame.append(itemEl)
             switch (item.type) {
                 case 'verse':
+                    const noteFrame = itemEl.querySelector('.journalItemNoteInp')
+
                     frame.innerHTML = `
                     <div class="journalVerseImgCt">
                         <img src="${item.verse.imageURL}" alt="${item.verse.ref}">
@@ -1846,48 +1835,164 @@ function loadJournal() {
                             if (itemEl.classList.contains('expanded')) {
                                 itemEl.classList.remove('expanded')
                                 itemEl.querySelector('.journalItemMainCt').append(itemEl.querySelector('.journalItemOptionsCt'))
+                                journalFrame.removeAttribute('last-element')
                             } else {
                                 itemEl.classList.add('expanded')
                                 itemEl.querySelector('.journalItemMain').insertBefore(itemEl.querySelector('.journalItemOptionsCt'), itemEl.querySelector('.journalVerse'))
+                                journalFrame.setAttribute('last-element', journal.items.indexOf(item))
                             }
                         }
                     })
+                    window.addEventListener('click', (e) => {
+                        if (!document.elementsFromPoint(e.x, e.y).includes(itemEl)) {
+                            if (itemEl.classList.contains('expanded')) {
+                                itemEl.classList.remove('expanded')
+                                itemEl.querySelector('.journalItemMainCt').append(itemEl.querySelector('.journalItemOptionsCt'))
+                                journalFrame.removeAttribute('last-element')
+                            }
+                        }
+                    })
+
+                    noteFrame.value = (item.note ? item.note : '')
+
+                    checkNoteSize(noteFrame)
+                    function updateNote(upd) {
+                        journal.items[journal.items.indexOf(item)].note = noteFrame.value
+                        if (upd == true) updateJournal()
+                    }
+                    noteFrame.addEventListener('input', () => {
+                        checkNoteSize(noteFrame)
+                        updateNote()
+                    })
+                    noteFrame.onchange = updateJournal
                     break;
                 case 'note':
-                    frame.innerHTML = item.text
+                    let noteColorIndex = journal.items[journal.items.indexOf(item)].color || 0
+                    itemEl.querySelector('.journalItemMain').innerHTML = `<textarea class="journalNoteTextArea" placeholder="Note..." readonly max-length="5000"></textarea>`
+                    let txta = itemEl.querySelector('.journalNoteTextArea')
+
+                    itemEl.style.setProperty('--bg-clr', `var(--note-${noteColors[noteColorIndex]})`)
+
+                    txta.value = (item.text ? item.text : '')
+                    checkNoteSize(txta)
+                    itemEl.addEventListener('click', (e) => {
+                        if (!document.elementsFromPoint(e.x, e.y).includes(itemEl.querySelector('.journalItemOptionsCt'))) {
+                            if (itemEl.classList.contains('expanded')) {
+                                if (!document.elementsFromPoint(e.x, e.y).includes(txta)) {
+                                    itemEl.classList.remove('expanded')
+                                    updateJournal()
+                                }
+                            } else {
+                                itemEl.classList.add('expanded')
+                            }
+                        }
+                        e.stopPropagation()
+                    })
+                    txta.oninput = () => {
+                        journal.items[journal.items.indexOf(item)].text = txta.value
+                        checkNoteSize(txta)
+                    }
+                    txta.onfocus = () => {
+                        journalFrame.setAttribute('last-element', journal.items.indexOf(item))
+                    }
+                    txta.onclick = () => {
+                        txta.readOnly = false
+                    }
+                    function hide(ev) {
+                        if (!document.elementsFromPoint(ev.x, ev.y).includes(itemEl)) {
+                            itemEl.classList.remove('expanded')
+                            updateJournal()
+                        }
+                    }
+                    itemEl.querySelector('.journalNoteColorBtn').onclick = () => {
+                        noteColorIndex++
+                        if (noteColorIndex > noteColors.length - 1) noteColorIndex = 0
+                        itemEl.style.setProperty('--note-clr', `var(--note-${noteColors[noteColorIndex]})`)
+
+                        journal.items[journal.items.indexOf(item)].color = noteColorIndex
+                        updateJournal()
+                    }
                     break;
                 default:
                     console.error('Invalid journal item type');
                     break;
             }
-            noteFrame.value = (item.note ? item.note : '')
-            checkNoteSize()
-            function updateNote() {
-                journal.items[journal.items.indexOf(item)].note = noteFrame.value
-                updateJournal()
-            }
-            function checkNoteSize() {
-                let lineNum = (noteFrame.value.match(/\n/g) || []).length + 1;
-                noteFrame.style.height = `${((15 * 1.04) * 1.4) * lineNum + 6}px`
-            }
-            noteFrame.addEventListener('input', () => {
-                checkNoteSize()
-                itemEl.querySelector('.journalNoteButtons').style.display = ''
-            })
-            itemEl.querySelector('.journalCancelNoteBtn').onclick = () => {
-                itemEl.querySelector('.journalNoteButtons').style.display = 'none'
-                noteFrame.value = item.note !== '' ? item.note : ''
-            }
-            itemEl.querySelector('.journalSaveNoteBtn').onclick = () => {
-                itemEl.querySelector('.journalNoteButtons').style.display = 'none'
-                updateNote()
+            function checkNoteSize(el) {
+                el.style.height = 'auto'
+                el.style.height = `${el.scrollHeight}px`
             }
         })
+        const addDeck = document.createElement('div')
+        addDeck.className = 'journalAddItemControls'
+        addDeck.innerHTML = `
+            <button class="btn journalAddItemCtrl journalAddVerseCtrl">${systemIcons.add}Verse</button>
+            <button class="btn journalAddItemCtrl journalAddNoteCtrl">${systemIcons.add}Note</button>
+            `
+        journalFrame.append(addDeck)
+
+        addDeck.querySelector('.journalAddVerseCtrl').onclick = () => {
+            openVLPopup()
+            showToast(`Click the ${systemIcons.bookmark} icon by a verse to add it to your journal.`, '', '', 5000)
+        }
+        addDeck.querySelector('.journalAddNoteCtrl').onclick = () => {
+            let newEl = document.createElement('div')
+            newEl.classList.add('journalNoteItem', 'journalItem', 'expanded')
+            newEl.innerHTML = `<div class="journalItemMainCt">
+            <div class="journalItemMain journalNoteMain"><textarea class="journalNoteTextArea" placeholder="Note..." max-length="5000"></textarea></div>
+            <div class="journalItemOptionsCt">
+            <div style="width:100%"></div>
+                <button class="actionBtn journalItemControl journalItemCancelNewNoteBtn">
+                    ${systemIcons.close}
+                </button>
+                <button class="actionBtn journalItemControl journalItemSubmitNewNoteBtn">
+                    ${systemIcons.checkmark}
+                </button>
+            </div>
+            </div>`
+            let tA = newEl.querySelector('textarea')
+            journalFrame.insertBefore(newEl, journalFrame.lastChild)
+            tA.focus()
+            newEl.querySelector('.journalItemCancelNewNoteBtn').addEventListener('click', () => {
+                newEl.remove()
+            })
+            newEl.querySelector('.journalItemSubmitNewNoteBtn').addEventListener('click', () => {
+                if (tA.value) {
+                    addNoteToJournal({
+                        text: tA.value,
+                        color: 0
+                    })
+                }
+                newEl.remove()
+            })
+            window.addEventListener('click', (e) => {
+                if (!document.elementsFromPoint(e.x, e.y).includes(newEl)) {
+                    newEl.remove()
+                }
+            })
+        }
+
+        if (journalFrame.hasAttribute('last-element')) {
+            journalFrame.children[Number(journalFrame.getAttribute('last-element'))].scrollIntoView()
+        }
     }
 }
 document.querySelector('.journalAddBtnSc').addEventListener('click', () => {
     addVerseToJournal(verseRaw)
 })
+document.querySelector('.journalSearchBtn').addEventListener('click', () => {
+    document.querySelector('.journalSearchBtn').parentElement.parentElement.style.display = 'none'
+    document.querySelector('.panelSearchTitleGroup').style.display = 'flex'
+    document.querySelector('.journalMainCt').setAttribute('is-searching', true)
+    document.querySelector('.journalSearchInp').focus()
+})
+document.querySelector('.journalSearchBackBtn').addEventListener('click', () => {
+    document.querySelector('.journalSearchBackBtn').parentElement.style.display = 'none'
+    document.querySelector('.journalMainCt').setAttribute('is-searching', false)
+    document.querySelector('.journalSearchBtn').parentElement.parentElement.style.display = ''
+    updateJournal()
+})
+document.querySelector('.journalSearchInp').oninput = () => { searchJournal(document.querySelector('.journalSearchInp').value) }
+
 function addVerseToJournal(verseObj) {
     try {
         if (!journal) {
@@ -1948,4 +2053,62 @@ function createContextMenuElement(options, extraClass) {
         ctx.append(itemEl)
     }
     return ctx
+}
+function searchJournal(term) {
+    const jnF = document.querySelector('.journalMainCt')
+    let resultsNum = 0;
+    jnF.querySelectorAll('.journalItem').forEach(jnItem => {
+        jnItem.style.display = ''
+        if (jnF.querySelector('.jnSearchNoRes')) jnF.querySelector('.jnSearchNoRes').remove()
+        let res;
+        const jnTitle = jnItem.querySelector('.journalVerseRef')
+        const jnVerse = jnItem.querySelector('.journalVerse')
+        const jnNote = jnItem.querySelector('.journalNoteTextArea') || jnItem.querySelector('.journalItemNoteInp')
+        let xTerm = term.toUpperCase()
+        const hasCls = (c) => jnItem.classList.contains(c)
+
+        if (hasCls('journalNoteItem')) {
+            if (jnNote.value.toUpperCase().includes(xTerm)) {
+                res = true
+            } else {
+                res = false
+            }
+        }
+        if (hasCls('journalVerseItem')) {
+            if (jnNote.value.toUpperCase().includes(xTerm) || jnVerse.textContent.toUpperCase().includes(xTerm) || jnTitle.textContent.toUpperCase().includes(xTerm)) {
+                res = true
+            } else {
+                res = false
+            }
+        }
+        if (!res) jnItem.style.display = 'none'
+        if (res == true) resultsNum++
+    })
+    if (!resultsNum) {
+        jnF.innerHTML += `<p style="width: 100%; text-align: center" class="jnSearchNoRes">No results found</p>`
+    }
+}
+function addNoteToJournal(config) {
+    try {
+        if (!journal) {
+            journal = {
+                name: "My journal",
+                created: new Date(),
+                items: []
+            }
+        }
+        if (journal.items.length <= 100) {
+            journal.items.push({
+                type: 'note',
+                text: config.text,
+                dateCreated: new Date(),
+                color: config.color
+            })
+        } else {
+            showToast('Couldn\'t add item to journal. Your journal is full.')
+        }
+        updateJournal()
+    } catch (error) {
+        showToast('Unable to add note to journal')
+    }
 }

@@ -97,4 +97,32 @@ const systemIcons = {
 <circle cx="12" cy="12.4" r="1.75" fill="#212325"/>
 <circle cx="19" cy="12.4" r="1.75" fill="#212325"/>
 </svg>`,
+    chevronLeft: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.75 4.75L7.5 12L14.75 19.25" stroke="black" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>
+`,
+    chevronRight: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.25 4.75L16.5 12L9.25 19.25" stroke="black" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>
+`,
+    chevronUp: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.75 14.75L12 7.5L19.25 14.75" stroke="black" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>
+`,
+    chevronDown: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.75 9.25L12 16.5L19.25 9.25" stroke="black" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>
+`,
+    edit: `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.286 6.61707L5.04549 16.8576C4.7412 17.1619 4.54317 17.5562 4.48081 17.982L3.92807 21.7561L7.70217 21.2034C8.12796 21.141 8.52227 20.943 8.82656 20.6387L19.0671 10.3981M15.286 6.61707L17.5156 4.38749C18.1405 3.76265 19.1535 3.76265 19.7784 4.38749L21.2967 5.90582C21.9215 6.53066 21.9215 7.54373 21.2967 8.16856L19.0671 10.3981M15.286 6.61707L19.0671 10.3981" stroke="#212325" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`,
+    close: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 17.9999L12 12M12 12L18 6M12 12L6 6M12 12L18 17.9999" stroke="black" stroke-width="1.75" stroke-linecap="square" stroke-linejoin="round"/>
+</svg>
+`,
+    checkmark: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.5 6.62L9.73566 18.3843L3 11.6487" stroke="black" stroke-width="1.75" stroke-linejoin="round"/>
+</svg>
+`
 };

@@ -40,6 +40,12 @@ body {
     --blue-accent: #0056f5;
     --magenta-accent: #ff00e5;
     --black-accent: #2c343e;
+
+    --note-white: var(--bg-color);
+    --note-pink: #ffeef9;
+    --note-yellow: #fffae2;
+    --note-green: #f4fff2;
+    --note-blue: #f2fbff;
 }
 
 body.dark {
@@ -66,6 +72,11 @@ body.dark {
     --blue-accent: #4882ed;
     --magenta-accent: #ff65f0;
     --black-accent: #5e6b7c;
+
+    --note-pink: #603953;
+    --note-yellow: #5c542b;
+    --note-green: #42623c;
+    --note-blue: #315d70;
 }
 
 body.dark .panel-ct {
@@ -1869,7 +1880,7 @@ body.dark .typingWarning {
     align-items: center;
     justify-content: space-between;
     color: #fff;
-    padding: 11px 11px 11px 23px;
+    padding: 16px 11px 16px 23px;
     border-radius: 17px;
     font-size: 16px;
     gap: 15px;
@@ -1878,6 +1889,7 @@ body.dark .typingWarning {
     min-width: 350px;
     max-width: 500px;
     min-height: 60px;
+    width: fit-content;
     animation: toastUp .23s cubic-bezier(0, 0, 0.56, 0.91);
 }
 
@@ -1885,6 +1897,7 @@ body.dark .typingWarning {
     display: flex;
     gap: 2px;
     align-items: center;
+    height: 0;
 }
 
 .toast button {
@@ -1899,6 +1912,14 @@ body.dark .typingWarning {
 
 .toastTextFrame {
     font-size: 16px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.toastTextFrame svg {
+    flex-shrink: 0;
 }
 
 .toastIconFrame {
@@ -2257,7 +2278,11 @@ selected: grid-template: "a b b" "c c c";
     display: none;
 }
 
-.journalItem.expanded .journalItemOptionsCt {
+.journalItemOptionsCt {
+    display: flex;
+}
+
+.journalVerseItem.expanded .journalItemOptionsCt {
     grid-area: d;
 }
 
@@ -2299,30 +2324,162 @@ selected: grid-template: "a b b" "c c c";
     font-size: 1.04em;
     pointer-events: none;
 }
+
 .journalItem:not(.expanded) .journalItemNoteCt {
     display: none;
 }
-.journalItem.expanded .journalItemMain {
+
+.journalVerseItem.expanded .journalItemMain {
     grid-template: "a b . d"
         "c c c c";
 }
+
 .journalItem.expanded .journalVerse::after {
     display: none;
     max-height: none;
 }
+
 .journalItem.expanded .journalVerse {
     max-height: none;
 }
+
 .journalItem.expanded .journalVerseImgCt img {
     width: 50px;
 }
+
 .journalNoteButtons {
     width: 100%;
     display: flex;
     gap: 10px;
     align-items: center;
 }
+
 .journalNoteActionBtn {
     width: 100%;
     height: 46px;
+}
+
+.journalSearchBoxGroup {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.journalSearchBoxGroup>svg {
+    position: absolute;
+    left: 10px;
+    color: var(--subtitle);
+}
+
+.journalSearchInp {
+    padding-left: 46px !important;
+    font-size: 19px !important;
+    font-weight: 500 !important;
+    width: 100%;
+}
+
+.panelSearchTitleGroup {
+    width: 100%;
+}
+
+.verticalHr {
+    width: 1px;
+    background: rgba(var(--border-color), 0.4);
+    height: 30px;
+}
+
+.journalAddItemControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgba(var(--border-color), 0.14);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 8px;
+    border-radius: 100px;
+    width: fit-content;
+}
+
+.journalAddItemCtrl {
+    border-radius: 100px;
+    height: 40px;
+    width: 100px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .0086),
+        0 4px 9px rgba(var(--shadow-color), .3);
+    background: #fff;
+    border: 1px solid rgb(var(--border-color), .2);
+}
+
+.journalAddItemCtrl:hover {
+    box-shadow: none;
+    border-color: rgb(var(--border-color), .0);
+}
+
+.journalItem:focus-visible {
+    outline: none;
+    box-shadow: 0 10px 20px rgba(var(--shadow-color), 0.4);
+    transform: scale(1.04);
+}
+
+.journalNoteTextArea {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.04em;
+    width: 100%;
+    overflow-y: auto;
+    resize: none;
+    max-height: 200px;
+    min-height: 22px;
+    display: flex;
+}
+
+.journalNoteItem .journalItemMain {
+    display: flex;
+}
+
+.journalNoteItem .journalItemMainCt {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.journalNoteItem .journalItemOptionsCt {
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.journalItemOptionsCt {
+    gap: 10px !important;
+}
+
+.journalNoteItem:not(.expanded) .journalNoteMain {
+    max-height: 70px !important;
+    overflow: hidden;
+    align-items: flex-start;
+}
+
+.journalNoteItem:not(.expanded) textarea {
+    overflow: hidden;
+}
+
+.noteColorChip {
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgba(var(--border-color), 0.45);
+    border-radius: 100px;
+    background: var(--bg-clr);
+}
+
+.journalNoteItem .actionBtn:hover {
+    background: rgba(97, 102, 112, 0.03);
+}
+
+.journalNoteItem {
+    background: var(--bg-clr) !important;
+}
+
+textarea {
+    color: inherit;
 }

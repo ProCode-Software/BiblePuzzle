@@ -506,16 +506,24 @@
                                             icon="settings"></i></button>
                             </div>
                         </div>
-                        <div
-                            class="panelTitle panelSearchTitleGroup" style="display: none">
+                        <div class="panelTitle panelSearchTitleGroup"
+                            style="display: none">
                             <button
                                 class="actionBtn panelToolbarBtn journalSearchBackBtn"><i
                                     class="icon"
                                     icon="chevronLeft"></i></button>
-                                <input type="text" class="journalSearchInp panelTitleInput" placeholder="Search your journal">
-                                <!--User is able to search journal items with matching verses or notes-->
+                                                                <div class="verticalHr"></div>
+                            <div
+                                class="journalSearchBoxGroup">
+                                <i class="icon"
+                                    icon="search"></i>
+                                <input type="text"
+                                    class="journalSearchInp panelTitleInput"
+                                    placeholder="Search your journal">
+                            </div>
+                            <!--User is able to search journal items with matching verses or notes-->
                         </div>
-                        <div class="journalMainCt"></div>
+                        <div class="journalMainCt" is-searching="false"></div>
                     </div>
                 </div>
             </aside>
