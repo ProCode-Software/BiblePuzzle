@@ -10,6 +10,7 @@ const accentColors = [
     "magenta",
     "black",
 ];
+const bpurl = 'procode-software.github.io/BiblePuzzle'
 function createAccentColorSelectionBlock() {
     const container = document.createElement("div");
     container.className = "accentColorSelectionCt";
@@ -1907,7 +1908,8 @@ function loadJournal() {
             const moreCtxmenu = createContextMenuElement([
                 {
                     label: 'Copy',
-                    icon: systemIcons.copy
+                    icon: systemIcons.copy,
+                    click: () => copyVerse(item)
                 },
                 {
                     label: 'Add note below',
@@ -1922,24 +1924,45 @@ function loadJournal() {
             ], 'journalItemContextMenu')
             ctxMoreBtn.append(moreCtxmenu)
 
+            /**
+             * Copies a note or verse to the clipboard
+             * @param {JournalItem} tx The journal item to copy
+             */
+            function copyVerse(tx) {
+                try {
+                    navigator.clipboard.writeText(tx.type == 'verse' ? `"${tx.verse.verse.replaceAll('"', "'")}" - ${tx.verse.ref} \nfrom BiblePuzzle (${bpurl})` : tx.text)
+                    showToast('Copied item to clipboard')
+                } catch(error) {
+                    showToast('Unable to copy item')
+                }
+            }
             function deleteNote() {
                 let res = true
                 let timeout = 5000;
-                itemEl.style.display = 'none'
-                showToast('Item deleted from journal', [{
-                    text: 'Undo',
-                    click: () => {
-                        res = false
-                        itemEl.style.display = ''
-                        getEl('.deleteJnItemToast').remove()
-                    }
-                }], 'deleteJnItemToast', timeout)
-                setTimeout(() => {
-                    if (res == true) {
-                        journal.items.splice(itemIndex, 1)
-                        updateJournal()
-                    }
-                }, timeout);
+                try {
+                    itemEl.style.display = 'none'
+                    showToast('Item deleted from journal', [{
+                        text: 'Undo',
+                        click: () => {
+                            res = false
+                            itemEl.style.display = ''
+                            getEl('.deleteJnItemToast').remove()
+                        }
+                    }], 'deleteJnItemToast', timeout)
+                    setTimeout(() => {
+                        if (res == true) {
+                            journal.items.splice(itemIndex, 1)
+                            updateJournal()
+                        }
+                    }, timeout);
+                } catch (error) {
+                    showToast('Couldn\'t delete item from journal', [
+                        {
+                            text: 'Try again',
+                            click: () => deleteNote()
+                        }
+                    ])
+                }
             }
         })
         function checkNoteSize(el) {
