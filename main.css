@@ -1202,6 +1202,7 @@ th {
     max-width: 50px;
     border-radius: 100px;
     padding-block: 6px;
+    transition: .2s;
 }
 
 .tkChartSymbol {
@@ -2266,7 +2267,7 @@ selected: grid-template: "a b b" "c c c";
     padding: 15px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
 }
 
@@ -2482,4 +2483,51 @@ selected: grid-template: "a b b" "c c c";
 
 textarea {
     color: inherit;
+}
+.journalItemMoreBtn {
+    position: relative;
+}
+.contextMenu {
+    position: absolute;
+    top: calc(100% + 6px);
+    background: #ffffffdd;
+    border: 1px solid rgba(var(--border-color), 0.3);
+    box-shadow: 0 10px 20px rgba(var(--shadow-color), 0.4);
+    padding: 8px;
+    border-radius: 20px;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    font-weight: 400;
+    font-size: 15px;
+    display: none;
+    backdrop-filter: blur(10px);
+}
+body.dark .contextMenu {
+    background: #1f2637df;
+}
+.journalItemMoreBtn .contextMenu {
+    right: 0;
+}
+.ctxItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    transition: .15s;
+    gap: 10px;
+}
+.ctxItem:hover {
+    background: rgb(var(--border-color), .2);
+}
+.ctxItem svg {
+    width: 22px !important;
+    height: 22px !important;
+    flex-shrink: 0;
+}
+.journalItemMoreBtn:focus-within .contextMenu {
+    display: flex;
 }

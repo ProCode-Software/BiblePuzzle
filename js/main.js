@@ -1,6 +1,6 @@
-/**
- * @requires verses.js
- */
+
+/// <reference path="verses.js"/>
+/// <reference path="icons.js"/>
 const accentColors = [
     "red",
     "gold",
@@ -1403,6 +1403,17 @@ function calculateGradeLetter(prompt) {
 function getLastChar(prompt) {
     return prompt.substring(prompt.length - 1)
 }
+/**
+ * Display a toast message with optional buttons for user interaction.
+ *
+ * @param {string} text - The message text to display in the toast.
+ * @param {Object[]} [buttons] - Optional buttons to display below the message.
+ * @param {string} [buttons[].text] - The text to display on the button.
+ * @param {string} [buttons[].cls] - Optional CSS class to apply to the button element.
+ * @param {function} [buttons[].click] - The function to call when the button is clicked.
+ * @param {string} [clsName] - Optional CSS class to apply to the toast element.
+ * @param {number} [timeout] - Optional time in milliseconds to display the toast before automatically dismissing it.
+ */
 function showToast(text, buttons, clsName, timeout) {
     const toastFrame = document.querySelector('.toastsFrame')
     const toast = document.createElement('div')
@@ -1747,6 +1758,9 @@ function updateJournal() {
     localStorage.setItem("userJournal", JSON.stringify(journal));
     loadJournal()
 }
+function updateJournalNoRefresh() {
+    localStorage.setItem("userJournal", JSON.stringify(journal));
+}
 function loadJournal() {
     const journalFrame = document.querySelector('.journalMainCt')
     journalFrame.innerHTML = ''
@@ -1761,25 +1775,6 @@ function loadJournal() {
         })
         journalFrame.append(fallbackFrame)
     } else {
-        /* Journal object
-{
-    name: "My journal",
-    created: Date,
-    items: [
-        {
-            type: "verse",
-            verse: "John 3:16",
-            note: "My note", // null if none,
-            dateCreated: new Date()
-        },
-        {
-            type: "note",
-            text: "God <i>loves</i> us", // in HTML
-            color: 0
-        }
-    ]
-}
-*/
         let noteColors = ['white', 'yellow', 'pink', 'blue', 'green']
         const jnNameInp = document.querySelector('input.journalNameInp')
         document.querySelector('.journalSearchBtn').style.display = ''
@@ -1788,7 +1783,7 @@ function loadJournal() {
 
         jnNameInp.addEventListener('change', () => {
             journal.name = jnNameInp.value
-            updateJournal()
+            updateJournalNoRefresh()
         })
 
         journal.items.forEach(item => {
@@ -1816,6 +1811,7 @@ function loadJournal() {
     <textarea class="journalItemNoteInp" placeholder="Add a note..."></textarea>` : ''}
 </div>
             `
+            let itemIndex = journal.items.indexOf(item)
 
             let frame = itemEl.querySelector('.journalItemMain')
             journalFrame.append(itemEl)
@@ -1835,11 +1831,9 @@ function loadJournal() {
                             if (itemEl.classList.contains('expanded')) {
                                 itemEl.classList.remove('expanded')
                                 itemEl.querySelector('.journalItemMainCt').append(itemEl.querySelector('.journalItemOptionsCt'))
-                                journalFrame.removeAttribute('last-element')
                             } else {
                                 itemEl.classList.add('expanded')
                                 itemEl.querySelector('.journalItemMain').insertBefore(itemEl.querySelector('.journalItemOptionsCt'), itemEl.querySelector('.journalVerse'))
-                                journalFrame.setAttribute('last-element', journal.items.indexOf(item))
                             }
                         }
                     })
@@ -1848,7 +1842,6 @@ function loadJournal() {
                             if (itemEl.classList.contains('expanded')) {
                                 itemEl.classList.remove('expanded')
                                 itemEl.querySelector('.journalItemMainCt').append(itemEl.querySelector('.journalItemOptionsCt'))
-                                journalFrame.removeAttribute('last-element')
                             }
                         }
                     })
@@ -1858,13 +1851,13 @@ function loadJournal() {
                     checkNoteSize(noteFrame)
                     function updateNote(upd) {
                         journal.items[journal.items.indexOf(item)].note = noteFrame.value
-                        if (upd == true) updateJournal()
+                        if (upd == true) updateJournalNoRefresh()
                     }
                     noteFrame.addEventListener('input', () => {
                         checkNoteSize(noteFrame)
                         updateNote()
                     })
-                    noteFrame.onchange = updateJournal
+                    noteFrame.onchange = updateJournalNoRefresh
                     break;
                 case 'note':
                     let noteColorIndex = journal.items[journal.items.indexOf(item)].color || 0
@@ -1880,7 +1873,7 @@ function loadJournal() {
                             if (itemEl.classList.contains('expanded')) {
                                 if (!document.elementsFromPoint(e.x, e.y).includes(txta)) {
                                     itemEl.classList.remove('expanded')
-                                    updateJournal()
+                                    updateJournalNoRefresh()
                                 }
                             } else {
                                 itemEl.classList.add('expanded')
@@ -1892,17 +1885,8 @@ function loadJournal() {
                         journal.items[journal.items.indexOf(item)].text = txta.value
                         checkNoteSize(txta)
                     }
-                    txta.onfocus = () => {
-                        journalFrame.setAttribute('last-element', journal.items.indexOf(item))
-                    }
                     txta.onclick = () => {
                         txta.readOnly = false
-                    }
-                    function hide(ev) {
-                        if (!document.elementsFromPoint(ev.x, ev.y).includes(itemEl)) {
-                            itemEl.classList.remove('expanded')
-                            updateJournal()
-                        }
                     }
                     itemEl.querySelector('.journalNoteColorBtn').onclick = () => {
                         noteColorIndex++
@@ -1910,18 +1894,58 @@ function loadJournal() {
                         itemEl.style.setProperty('--note-clr', `var(--note-${noteColors[noteColorIndex]})`)
 
                         journal.items[journal.items.indexOf(item)].color = noteColorIndex
-                        updateJournal()
+                        itemEl.style.setProperty('--bg-clr', `var(--note-${noteColors[noteColorIndex]})`)
+                        updateJournalNoRefresh()
                     }
                     break;
                 default:
                     console.error('Invalid journal item type');
                     break;
             }
+
+            const ctxMoreBtn = itemEl.querySelector('.journalItemMoreBtn')
+            const moreCtxmenu = createContextMenuElement([
+                {
+                    label: 'Copy',
+                    icon: systemIcons.copy
+                },
+                {
+                    label: 'Add note below',
+                    icon: systemIcons.settings,
+                    click: () => createNote(itemIndex + 1)
+                },
+                {
+                    label: 'Delete',
+                    icon: systemIcons.delete,
+                    click: () => deleteNote()
+                },
+            ], 'journalItemContextMenu')
+            ctxMoreBtn.append(moreCtxmenu)
+
+            function deleteNote() {
+                let res = true
+                let timeout = 5000;
+                itemEl.style.display = 'none'
+                showToast('Item deleted from journal', [{
+                    text: 'Undo',
+                    click: () => {
+                        res = false
+                        itemEl.style.display = ''
+                        getEl('.deleteJnItemToast').remove()
+                    }
+                }], 'deleteJnItemToast', timeout)
+                setTimeout(() => {
+                    if (res == true) {
+                        journal.items.splice(itemIndex, 1)
+                        updateJournal()
+                    }
+                }, timeout);
+            }
         })
         function checkNoteSize(el) {
-                el.style.height = 'auto'
-                el.style.height = `${el.scrollHeight}px`
-            }
+            el.style.height = 'auto'
+            el.style.height = `${el.scrollHeight}px`
+        }
         const addDeck = document.createElement('div')
         addDeck.className = 'journalAddItemControls'
         addDeck.innerHTML = `
@@ -1934,7 +1958,11 @@ function loadJournal() {
             openVLPopup()
             showToast(`Click the ${systemIcons.bookmark} icon by a verse to add it to your journal.`, '', '', 5000)
         }
-        addDeck.querySelector('.journalAddNoteCtrl').onclick = () => {
+        /**
+         * Add a note to the journal
+         * @param {number} [index] 
+         */
+        function createNote(index) {
             let newEl = document.createElement('div')
             newEl.classList.add('journalNoteItem', 'journalItem', 'expanded')
             newEl.innerHTML = `<div class="journalItemMainCt">
@@ -1950,7 +1978,7 @@ function loadJournal() {
             </div>
             </div>`
             let tA = newEl.querySelector('textarea')
-            journalFrame.insertBefore(newEl, journalFrame.lastChild)
+            journalFrame.insertBefore(newEl, (journalFrame.children[index] || journalFrame.lastChild))
             tA.focus()
             tA.addEventListener('input', () => {
                 checkNoteSize(tA)
@@ -1964,6 +1992,12 @@ function loadJournal() {
                         text: tA.value,
                         color: 0
                     })
+                    if (index) {
+                        const tx = journal.items[journal.items.length - 1]
+                        journal.items.splice(journal.items.length - 1, 1)
+                        journal.items.splice(index, 0, tx)
+                        updateJournal()
+                    }
                 }
                 newEl.remove()
             })
@@ -1973,9 +2007,8 @@ function loadJournal() {
                 }
             })
         }
-
-        if (journalFrame.hasAttribute('last-element')) {
-            journalFrame.children[Number(journalFrame.getAttribute('last-element'))].scrollIntoView()
+        addDeck.querySelector('.journalAddNoteCtrl').onclick = () => {
+            createNote()
         }
     }
 }
@@ -1986,6 +2019,7 @@ document.querySelector('.journalSearchBtn').addEventListener('click', () => {
     document.querySelector('.journalSearchBtn').parentElement.parentElement.style.display = 'none'
     document.querySelector('.panelSearchTitleGroup').style.display = 'flex'
     document.querySelector('.journalMainCt').setAttribute('is-searching', true)
+    document.querySelector('.journalAddItemControls').style.display = 'none'
     document.querySelector('.journalSearchInp').focus()
 })
 document.querySelector('.journalSearchBackBtn').addEventListener('click', () => {
@@ -2045,16 +2079,18 @@ function createContextMenuElement(options, extraClass) {
     const ctx = document.createElement('div')
     ctx.className = 'contextMenu'
     if (extraClass) ctx.classList.add(extraClass)
-    for (let item in options) {
+    options.forEach(item => {
         const itemEl = document.createElement('div')
-        if (!item.separator) {
-            itemEl.className = 'ctxItem'
+        if (item.separator) {
+            itemEl.className = 'hr'
         } else {
+            itemEl.className = 'ctxItem'
             itemEl.innerHTML = `${item.icon ? item.icon : '<div class="iconSpacer"></div>'} ${item.label}`
             itemEl.onclick = item.click
+            itemEl.id = camelCase(item.label)
         }
         ctx.append(itemEl)
-    }
+    })
     return ctx
 }
 function searchJournal(term) {
@@ -2114,4 +2150,15 @@ function addNoteToJournal(config) {
     } catch (error) {
         showToast('Unable to add note to journal')
     }
+}
+/**
+ * Converts the given string into camelCase
+ * @param {string} str 
+ * @returns {string}
+ */
+function camelCase(str) {
+    const camelCaseStr = str.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
+        return index === 0 ? word.toLowerCase() : word.toUpperCase();
+    }).replace(/\s+/g, '');
+    return camelCaseStr
 }
