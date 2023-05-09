@@ -154,13 +154,27 @@ header>div {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 99;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgb(174 198 215 / 30%);
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     display: none;
+    animation: popupsOpen .25s cubic-bezier(0.05, 0.49, 0.61, 0.97);
+}
+
+@keyframes popupsOpen {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+body.dark .popups {
+    background: rgba(78, 103, 118, 0.4);
+    /** rgba(0, 0, 0, 0.4) **/
 }
 
 .popups .popup {
@@ -169,7 +183,9 @@ header>div {
     padding: 0px;
     border-radius: 18px;
     border: 1px solid rgba(var(--border-color), 0.3);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); */
+    box-shadow: 0 4px 3px -2px rgba(121, 164, 194, 0.3),
+        0 15px 40px rgb(92 128 153 / 30%);
     text-align: center;
     width: 85%;
     max-width: 500px;
@@ -178,6 +194,10 @@ header>div {
     align-items: flex-start;
     padding: 0px;
     gap: 20px;
+}
+
+body.dark .popup {
+    box-shadow: 0 4px 3px -2px rgb(65 81 96 / 30%), 0 15px 40px rgb(21 25 28 / 40%);
 }
 
 .popup-header,
@@ -462,7 +482,6 @@ main {
         opacity: 1;
     }
 }
-
 
 .nameArea {
     display: flex;
@@ -1202,7 +1221,7 @@ th {
     max-width: 50px;
     border-radius: 100px;
     padding-block: 6px;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .tkChartSymbol {
@@ -1228,8 +1247,9 @@ th {
 }
 
 .tkChartCol:hover {
-    transition: .15s;
-    box-shadow: 0 0 0 1px rgba(var(--shadow-color), 0.1), 0 2px 20px rgba(var(--shadow-color), 0.3);
+    transition: 0.15s;
+    box-shadow: 0 0 0 1px rgba(var(--shadow-color), 0.1),
+        0 2px 20px rgba(var(--shadow-color), 0.3);
 }
 
 button svg {
@@ -1858,7 +1878,7 @@ body.dark .typingWarning {
 
 .gradeTable td {
     border-radius: 8px;
-    transition: .15s;
+    transition: 0.15s;
 }
 
 .gradeTable td:hover {
@@ -1891,7 +1911,7 @@ body.dark .typingWarning {
     max-width: 500px;
     min-height: 60px;
     width: fit-content;
-    animation: toastUp .23s cubic-bezier(0, 0, 0.56, 0.91);
+    animation: toastUp 0.23s cubic-bezier(0, 0, 0.56, 0.91);
 }
 
 .toastButtonsFrame {
@@ -1908,7 +1928,7 @@ body.dark .typingWarning {
 }
 
 .toast button:hover {
-    background: rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .toastTextFrame {
@@ -1953,7 +1973,7 @@ body.dark .toast button:hover {
 }
 
 .toast.leaving {
-    animation: toastDown .2s cubic-bezier(0, 0, 0.56, 0.91);
+    animation: toastDown 0.2s cubic-bezier(0, 0, 0.56, 0.91);
 }
 
 #stats>*>*>* {
@@ -1961,7 +1981,7 @@ body.dark .toast button:hover {
 }
 
 button:focus-visible {
-    transition: .15s;
+    transition: 0.15s;
     outline: 2.75px solid var(--accent);
 }
 
@@ -1987,7 +2007,7 @@ input[type="file"] {
 
 input {
     font-size: inherit;
-    transition: .15s;
+    transition: 0.15s;
     margin: 0;
 }
 
@@ -2074,7 +2094,7 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: .15s;
+    transition: 0.15s;
     font-size: 1.1em;
     font-weight: 500;
 }
@@ -2092,7 +2112,8 @@ label {
 
 .colorEl:hover {
     color: #fff;
-    box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.03), 0 5px 10px rgba(var(--border-color), 0.5);
+    box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.03),
+        0 5px 10px rgba(var(--border-color), 0.5);
 }
 
 .customAccentColorBtn {
@@ -2111,11 +2132,11 @@ label {
 }
 
 body.lightBgTheme .box {
-    background: rgb(0, 0, 0, .05);
+    background: rgb(0, 0, 0, 0.05);
 }
 
 body.themeLoaded:not(.lightBgTheme) .box {
-    background: rgb(255, 255, 255, .17);
+    background: rgb(255, 255, 255, 0.17);
     color: #fff;
 }
 
@@ -2221,7 +2242,7 @@ selected: grid-template: "a b b" "c c c";
     border-radius: 10px;
     width: 60px;
     box-shadow: 0 8px 15px rgba(var(--shadow-color), 0.4);
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
 }
 
 .journalVerse {
@@ -2235,7 +2256,7 @@ selected: grid-template: "a b b" "c c c";
 }
 
 .journalVerse::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -2260,7 +2281,7 @@ selected: grid-template: "a b b" "c c c";
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .journalItemMainCt {
@@ -2270,7 +2291,6 @@ selected: grid-template: "a b b" "c c c";
     gap: 15px;
     width: 100%;
 }
-
 
 .journalItem:not(.expanded) .journalItemOptionsCt {
     display: flex;
@@ -2289,12 +2309,12 @@ selected: grid-template: "a b b" "c c c";
 
 .journalItem:hover .journalItemOptionsCt {
     display: flex;
-    animation: fadeIn .3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .journalItem:not(.expanded):hover {
     transform: scale(1.04);
-    transition: .2s;
+    transition: 0.2s;
     background: rgb(var(--bg-color));
     box-shadow: 0 10px 20px rgba(var(--shadow-color), 0.1);
     z-index: 9999;
@@ -2331,7 +2351,8 @@ selected: grid-template: "a b b" "c c c";
 }
 
 .journalVerseItem.expanded .journalItemMain {
-    grid-template: "a b . d"
+    grid-template:
+        "a b . d"
         "c c c c";
 }
 
@@ -2407,15 +2428,15 @@ selected: grid-template: "a b b" "c c c";
     border-radius: 100px;
     height: 40px;
     width: 100px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .0086),
-        0 4px 9px rgba(var(--shadow-color), .3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0086),
+        0 4px 9px rgba(var(--shadow-color), 0.3);
     background: #fff;
-    border: 1px solid rgb(var(--border-color), .2);
+    border: 1px solid rgb(var(--border-color), 0.2);
 }
 
 .journalAddItemCtrl:hover {
     box-shadow: none;
-    border-color: rgb(var(--border-color), .0);
+    border-color: rgb(var(--border-color), 0);
 }
 
 .journalItem:focus-visible {
@@ -2484,50 +2505,74 @@ selected: grid-template: "a b b" "c c c";
 textarea {
     color: inherit;
 }
+
 .journalItemMoreBtn {
     position: relative;
 }
+
 .contextMenu {
     position: absolute;
     top: calc(100% + 6px);
     background: #ffffffdd;
-    border: 1px solid rgba(var(--border-color), 0.3);
-    box-shadow: 0 10px 20px rgba(var(--shadow-color), 0.4);
+    /* border: 1px solid rgba(var(--border-color), 0.3); */
+    box-shadow: 0 4px 4px -2px rgba(171, 202, 226, 0.1), 0 10px 20px rgba(var(--shadow-color), 0.5), 0 10px 50px rgba(204, 222, 234, 0.15);
     padding: 8px;
     border-radius: 20px;
-    min-width: 250px;
+    min-width: 230px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     z-index: 9999;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 16px;
     display: none;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) saturate(1.3);
+    animation: ctx .14s cubic-bezier(0, 0.4, 0.17, 1);
+    transform-origin: top;
 }
+@keyframes ctx {
+    from {
+        opacity: 0;
+        padding-top: 0;
+    }
+}
+@keyframes ctxItem {
+    from {
+        margin-top: -40px;
+    }
+}
+
 body.dark .contextMenu {
     background: #1f2637df;
 }
+
 .journalItemMoreBtn .contextMenu {
     right: 0;
 }
+
 .ctxItem {
     width: 100%;
     display: flex;
     align-items: center;
     padding: 12px;
     border-radius: 12px;
-    transition: .15s;
+    transition: 0.15s;
     gap: 10px;
 }
-.ctxItem:hover {
-    background: rgb(var(--border-color), .2);
+.ctxItem:first-child {
+    animation: ctxItem .15s ease-out;
 }
+
+.ctxItem:hover {
+    background: rgb(var(--border-color), 0.2);
+}
+
 .ctxItem svg {
     width: 22px !important;
     height: 22px !important;
     flex-shrink: 0;
 }
+
 .journalItemMoreBtn:focus-within .contextMenu {
     display: flex;
 }

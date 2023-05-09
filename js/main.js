@@ -38,6 +38,20 @@ function createAccentColorSelectionBlock() {
 
     return container;
 }
+/**
+ * @typedef {Object} SettingsValues
+ * @property {string} displayName - The display name for the user.
+ * @property {boolean} darkMode - Whether or not to use dark mode.
+ * @property {boolean} backSpacing - Whether or not to enable back spacing.
+ * @property {boolean} mobileKeyboard - Whether or not to use a mobile keyboard.
+ * @property {number} themeColor - The selected theme color.
+ * @property {boolean} narrator - Whether or not to enable the narrator.
+ * @property {number} textSize - The selected text size.
+ * @property {boolean} boldText - Whether or not to use bold text.
+ * @property {boolean} capsLockNotif - Whether or not to show caps lock notification.
+/**
+ * @property {SettingsValues} settingsValues
+ */
 let settingsValues = {
     displayName: "",
     darkMode: false,
@@ -48,7 +62,6 @@ let settingsValues = {
     textSize: 17,
     boldText: false,
     capsLockNotif: true,
-    showSpeed: true,
 };
 /**
  * @typedef {Object} TypingStats
@@ -373,18 +386,29 @@ function startTyping(ct, array) {
 }
 let percent;
 
+/**
+ * Generates a random number
+ * @param {Number} max 
+ */
+function randomNumber(max) {
+    if (!max) max = 100
+    return Math.floor((Math.random()) * (max + 1))
+}
+
 const popups = document.querySelector(".popups");
 function askForName() {
+    let generatedUsername = `Player${randomNumber(9999)}`
     popups
         .querySelectorAll(".popup")
         .forEach((el) => (el.style.display = "none"));
     const namePopup = popups.querySelector("form.namePopup");
+    popups.style.display = 'flex'
     namePopup.style.display = "";
+    document.querySelector("#playerName").placeholder = generatedUsername
     namePopup.addEventListener("submit", () => {
         keyboardLock = false;
         popups.style.display = "none";
-        username = namePopup.querySelector("#playerName").value;
-        document.querySelector("#playerNameOp").value = username;
+        username = namePopup.querySelector("#playerName").value || generatedUsername;
         settingsValues.displayName = username;
         updateSettings();
     });
@@ -447,9 +471,9 @@ function completeTest() {
     stats.gradebook.unshift({
         date: new Date(),
         verse: reference,
-        grade: Math.round(Math.round(percent) / 100),
+        grade: Math.round(Math.round(percent) / 100) || 0,
         incorrect: incorrectChars,
-        avgCPS: avgCPS,
+        avgCPS: avgCPS || 0,
     });
     if (stats.gradebook.length > 10) {
         stats.gradebook = stats.gradebook.slice(0, 10);
@@ -597,6 +621,7 @@ function clearProgress() {
  * @property {function} onCancel
  * @property {function} onSubmit
  * @property {['submit'|'cancel', string[]]} buttonClasses
+ * @property {boolean} removeOnClose
  */
 /**
  * Creates a modal
@@ -640,14 +665,17 @@ function createModal(config) {
     popup.querySelector('.popupCancelBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
         if (config.onCancel) config.onCancel()
+        closeAction()
     })
     popup.querySelector('.popupSubmitBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
         if (config.onSubmit) config.onSubmit()
+        closeAction()
     })
     popup.querySelector('.closeBtn').addEventListener('click', () => {
         showPopup(false, '.' + popup.classList[1])
         if (config.onCancel) config.onCancel()
+        closeAction()
     })
     if (config.settingsButton) popup.querySelector('.popupSettingsTopBtn').addEventListener('click', config.settingsButton)
     if (config.linkButtonAction) {
@@ -669,6 +697,11 @@ function createModal(config) {
         })
     }
     document.querySelector('.popups').append(popup)
+
+    function closeAction() {
+        if (config.removeOnClose) popup.remove()
+    }
+
     return popup
 }
 /* createModal({
@@ -895,13 +928,6 @@ const settingsModel = [
                 title: "Theme color",
                 type: "etc",
                 block: createAccentColorSelectionBlock(),
-            },
-            {
-                type: "toggle",
-                title: "Show speed in gradebook",
-                value: "showSpeed",
-
-                description: "Show avg. speed (chars/sec) in gradebook.",
             },
         ],
     },
@@ -1142,10 +1168,15 @@ function updateSettings() {
     checkSettings();
 }
 const tkBtn = document.querySelector(".touchKeyboardBtn");
+/**
+ * 
+ * @returns {SettingsValues} The settings values in localstorage.
+ */
 function getSettings() {
     return JSON.parse(localStorage.getItem("userSettings"));
 }
 function checkSettings() {
+    username = getSettings().displayName
     document.body.style.setProperty(
         "--accent",
         `var(--${accentColors[getSettings().themeColor]}-accent)`
@@ -1186,8 +1217,9 @@ function checkSettings() {
     } else {
         document.querySelector("main").classList.remove("boldTextEnabled");
     }
+
+    document.querySelector('#DisplaynameInput').value = getSettings().displayName
 }
-function updateStats() { }
 
 checkSettings();
 
@@ -1304,7 +1336,6 @@ function loadStats() {
                 }% (<span style="color: var(--text-${grade.incorrect == 0 ? "green" : "red"
                 })">-${grade.incorrect}</span>)</td>
             `;
-            tr.querySelector('.avgCPSTd').style.display = (getSettings().showSpeed == false ? 'none' : '')
             document.querySelector(".gradeTable").append(tr);
         });
         document.querySelectorAll(".gradeTable td").forEach(cell => {
@@ -1312,12 +1343,6 @@ function loadStats() {
                 navigator.clipboard.writeText(cell.className == 'verseDateTd' ? cell.title : (cell.className == 'avgCPSTd' ? `${cell.textContent} chars/sec` : cell.textContent))
                 showToast('Copied to clipboard')
             })
-        })
-        document.querySelectorAll('.gradeTable th').forEach(col => {
-            let tx = col.innerText.toLowerCase()
-            if (tx == 'speed') {
-                col.style.display = (getSettings().showSpeed == false ? 'none' : '')
-            }
         })
     } else {
         document.querySelector('.resetGradebookBtn').style.display = 'none'
@@ -1365,7 +1390,6 @@ Under 40% - Faulty`;
     } else {
         tkChart.style.display = 'none'
         document.querySelector('.resetTroubleKeysBtn').style.display = 'none'
-        document.querySelector(".gradeTable").style.display = 'none'
         const fallbackFrame = createFallbackFrame("assets/img/illustrations/Trouble Keys Empty.png", "You're typing every key correctly!", "The keys that you have the most trouble typing will show here.")
         document.querySelector('.resetTroubleKeysBtn').parentElement.insertBefore(fallbackFrame, document.querySelector('.resetTroubleKeysBtn'))
     }
@@ -1708,11 +1732,11 @@ function confirmModal(title, content, submitText, cls, lightDismiss, btnClasses)
             id: cls,
             lightDismiss: lightDismiss || false,
             onSubmit: () => {
-                popups.querySelector(`.popup.${cls}`).remove();
                 resolve(true);
             },
-            onCancel: () => { resolve(false); popups.querySelector(`.popup.${cls}`).remove(); },
-            buttonClasses: btnClasses
+            onCancel: () => { resolve(false) },
+            buttonClasses: btnClasses,
+            removeOnClose: true
         });
         modal.classList.add('modal')
 
@@ -1809,7 +1833,7 @@ function loadJournal() {
             </div>
             ${item.type == 'verse' ? `
             <div class="journalItemNoteCt">
-    <textarea class="journalItemNoteInp" placeholder="Add a note..."></textarea>` : ''}
+    <textarea class="journalItemNoteInp" placeholder="Add a note..." maxLength="2000"></textarea>` : ''}
 </div>
             `
             let itemIndex = journal.items.indexOf(item)
@@ -1862,7 +1886,7 @@ function loadJournal() {
                     break;
                 case 'note':
                     let noteColorIndex = journal.items[journal.items.indexOf(item)].color || 0
-                    itemEl.querySelector('.journalItemMain').innerHTML = `<textarea class="journalNoteTextArea" placeholder="Note..." readonly max-length="5000"></textarea>`
+                    itemEl.querySelector('.journalItemMain').innerHTML = `<textarea class="journalNoteTextArea" placeholder="Note..." readonly maxLength="5000"></textarea>`
                     let txta = itemEl.querySelector('.journalNoteTextArea')
 
                     itemEl.style.setProperty('--bg-clr', `var(--note-${noteColors[noteColorIndex]})`)
@@ -1989,7 +2013,7 @@ function loadJournal() {
             let newEl = document.createElement('div')
             newEl.classList.add('journalNoteItem', 'journalItem', 'expanded')
             newEl.innerHTML = `<div class="journalItemMainCt">
-            <div class="journalItemMain journalNoteMain"><textarea class="journalNoteTextArea" placeholder="Note..." max-length="5000"></textarea></div>
+            <div class="journalItemMain journalNoteMain"><textarea class="journalNoteTextArea" placeholder="Note..." maxLength="5000"></textarea></div>
             <div class="journalItemOptionsCt">
             <div style="width:100%"></div>
                 <button class="actionBtn journalItemControl journalItemCancelNewNoteBtn">
