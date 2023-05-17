@@ -14,7 +14,6 @@ https://ProCode-Software.github.io/BiblePuzzle/
 - 🅰️ **Trouble keys** to help you see what keys you have trouble typing
 - ⚡ **Characters per second tracker** to see how fast you type
 - 📊 **Gradebook** showing your last typed verses
-- 🖼️ **Themes** to customize your experience
 - 📒 Organize verses and notes with **Journals**
 - ♿ **Accessible** for everyone
 
@@ -34,7 +33,7 @@ https://ProCode-Software.github.io/BiblePuzzle/
 Dark:
 ![BiblePuzzle (Dark mode)](assets/img/Screenshot_Dark.png)
 
-Last updated:  `April 30, 2023`
+Last updated:  `May 16, 2023`
 
 Created by [ProCode Software](https://github.com/ProCode-Software)
 
