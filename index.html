@@ -502,18 +502,20 @@
                                 class="actionBtn panelToolbarBtn journalSearchBackBtn"><i
                                     class="icon"
                                     icon="chevronLeft"></i></button>
-                                                                <div class="verticalHr"></div>
+                            <div class="verticalHr"></div>
                             <div
                                 class="journalSearchBoxGroup">
                                 <i class="icon"
                                     icon="search"></i>
                                 <input type="text"
                                     class="journalSearchInp panelTitleInput"
-                                    placeholder="Search your journal" maxlength="100">
+                                    placeholder="Search your journal"
+                                    maxlength="100">
                             </div>
                             <!--User is able to search journal items with matching verses or notes-->
                         </div>
-                        <div class="journalMainCt" is-searching="false"></div>
+                        <div class="journalMainCt"
+                            is-searching="false"></div>
                     </div>
                 </div>
             </aside>
@@ -625,7 +627,7 @@
     <script src="js/icons.js"></script>
     <script src="js/verses.js"></script>
     <script src="js/main.js"></script>
-    <script>updateSliders()</script>
+    <script>updateSliders(); replaceIcons()</script>
 </body>
 
 </html>

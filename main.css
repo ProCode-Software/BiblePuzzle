@@ -168,10 +168,12 @@ header>div {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
 }
+
 body.dark .popups {
     background: rgba(78, 103, 118, 0.4);
     /** rgba(0, 0, 0, 0.4) **/
@@ -1980,7 +1982,9 @@ body.dark .toast button:hover {
     user-select: text;
 }
 
-button:focus-visible {
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible {
     transition: 0.15s;
     outline: 2.75px solid var(--accent);
 }
@@ -2518,7 +2522,7 @@ textarea {
     box-shadow: 0 4px 4px -2px rgba(171, 202, 226, 0.1), 0 10px 20px rgba(var(--shadow-color), 0.5), 0 10px 50px rgba(204, 222, 234, 0.15);
     padding: 8px;
     border-radius: 20px;
-    min-width: 230px;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -2530,12 +2534,14 @@ textarea {
     animation: ctx .14s cubic-bezier(0, 0.4, 0.17, 1);
     transform-origin: top;
 }
+
 @keyframes ctx {
     from {
         opacity: 0;
         padding-top: 0;
     }
 }
+
 @keyframes ctxItem {
     from {
         margin-top: -40px;
@@ -2559,6 +2565,7 @@ body.dark .contextMenu {
     transition: 0.15s;
     gap: 10px;
 }
+
 .ctxItem:first-child {
     animation: ctxItem .15s ease-out;
 }
@@ -2575,4 +2582,274 @@ body.dark .contextMenu {
 
 .journalItemMoreBtn:focus-within .contextMenu {
     display: flex;
+}
+
+.journalMoreOptionsBtn:focus-within .contextMenu {
+    display: flex;
+}
+
+.journalMoreOptionsBtn {
+    position: relative;
+}
+
+.journalMoreOptionsBtn .contextMenu {
+    right: 0;
+    z-index: 10001;
+}
+
+.ctxItem.ctxDangerous {
+    color: var(--text-red);
+}
+
+.cbox {
+    appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(var(--border-color), .8);
+    border-radius: 8px;
+    background: none;
+    position: relative;
+}
+
+.cbox:checked,
+.cbox:indeterminate {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+}
+
+.cbox:not(:checked):not(:indeterminate)::after {
+    background: none;
+}
+
+.cbox:checked::after,
+.cbox:indeterminate::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.5 6.62L9.73566 18.3843L3 11.6487' stroke='white' stroke-width='4.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    transition: .15s;
+}
+
+.cbox:indeterminate::after {
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 24 24' fill='' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.05768 12.775H21.5577' stroke='white' stroke-width='4.25' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+}
+
+.expander {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    text-align: left;
+    margin: 0;
+}
+
+.expander summary {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 10px;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 1.06em;
+    transition: .15s;
+    margin: 0;
+    position: relative;
+    border-radius: 15px;
+    background: rgb(var(--bg-color), 1);
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.expander summary::after {
+    content: '';
+    background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.75 9.25L12 16.5L19.25 9.25' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    width: 22px;
+    height: 22px;
+    right: 15px;
+    position: absolute;
+    transition: .3s ease-in-out;
+}
+
+.expander[open] summary::after {
+    transform: rotateX(-180deg);
+}
+
+.expander summary:hover {
+    background: rgba(var(--border-color), 0.2);
+}
+
+.exportCatList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-inline: 10px;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.exportCatList .exportItem {
+    display: grid;
+    grid-template: "a b b" "a c c";
+    column-gap: 12px;
+    row-gap: 10px;
+    transition: .15s;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.exportCatList .exportItem:hover {
+    background: rgba(var(--border-color), 0.2);
+}
+
+.exportItemVerseRef {
+    grid-area: b;
+}
+
+.exportItemContent {
+    grid-area: c;
+}
+
+.exportItem .cbox {
+    grid-area: a;
+}
+
+.exportItemVerseRef {
+    font-size: 1.05em;
+    font-weight: 500;
+}
+
+.journalExportPopup .popup-body {
+    padding-inline: 15px;
+    gap: 18px;
+}
+
+.exportJournalExCount {
+    padding: 0 12px;
+    padding-block: 6px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid rgba(var(--border-color), 0.3);
+}
+
+.exportJournalExCount .t {
+    color: var(--subtitle);
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+.expander[open]>div,
+.expander[open]>ul {
+    animation: detailsUp .3s ease-in;
+}
+
+@keyframes detailsUp {
+    from {
+        max-height: 50px;
+        overflow: hidden;
+    }
+
+    to {
+        max-height: 600px;
+        overflow: hidden;
+    }
+}
+
+.exportCatList {
+    padding-left: 20px;
+}
+
+.chip {
+    background: rgba(var(--border-color), 0.3);
+    border-radius: 100px;
+    padding: 8px 16px;
+    text-overflow: ellipsis;
+    max-width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chip svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: var(--subtitle);
+}
+
+.chip.primary {
+    color: #fff;
+    background: var(--accent);
+}
+
+.chip>span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.exportItem:not(:has(.exportItemVerseRef)) {
+    display: flex;
+}
+
+.cbox {
+    flex-shrink: 0;
+}
+
+.expander:not([open]) .exportCatList {
+    display: none !important;
+}
+
+.troubleKeyChart:not(:has(:nth-child(4))) {
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.contextMenu:not(:last-child) {
+    display: none !important;
+}
+
+[disabled] {
+    cursor: not-allowed;
+    opacity: .5;
+}
+.journalImportSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+.ijupZone {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+.filePreviewZone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.05em;
+}
+.filePreviewZone img {
+    width: 28px;
+}
+.journalNameInp[disabled] {
+    opacity: 1 !important;
 }
