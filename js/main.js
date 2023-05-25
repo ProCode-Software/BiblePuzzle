@@ -38,6 +38,17 @@ function createAccentColorSelectionBlock() {
     return container;
 }
 /**
+ * Returns the verse object from the given reference.
+ * Returns `undefined` if the reference is not in BiblePuzzle.
+ * @param {string} refr
+ * @returns {RandomVerse} the verse object
+ */
+function getVerseFromReference(refr) {
+    return randomVerses[
+        randomVerses.map((m) => m.ref.toLowerCase()).indexOf(refr.toLowerCase())
+    ];
+}
+/**
  * @typedef {Object} SettingsValues
  * @property {string} displayName - The display name for the user.
  * @property {boolean} darkMode - Whether or not to use dark mode.
@@ -61,6 +72,11 @@ let settingsValues = {
     textSize: 17,
     boldText: false,
     capsLockNotif: true,
+    timed: false,
+    narratorOptions: {
+        voice: 0,
+        speed: 1,
+    },
 };
 /**
  * @typedef {Object} TypingStats
@@ -160,8 +176,7 @@ if (!localStorage.getItem("userSettings")) {
 let random = Math.floor(Math.random() * randomVerses.length);
 
 const toolbarTags = ["settings", "stats", "journal", "reset", "help"].reverse();
-let tagIndex = 0;
-toolbarTags.forEach((tag) => {
+toolbarTags.forEach((tag, tagIndex) => {
     const tl = document.createElement("li");
     tl.className = "toolbarItem";
     const titles = [
@@ -180,8 +195,6 @@ toolbarTags.forEach((tag) => {
 
     tl.append(btn);
     document.querySelector("ul.toolbar").append(tl);
-
-    tagIndex++;
 });
 
 let verse = `${randomVerses[random].verse} `;
@@ -213,11 +226,11 @@ const extract = (array, outputEl) => {
 extract(verseSplit, verseContainer);
 extract(refSplit, refContainer);
 
-const timer = {
+/* const timer = {
     start: () => {
-        timer.isOn = true;
+        timer.isRunning = true;
         function advance() {
-            if (timer.isOn) {
+            if (timer.isRunning) {
                 setTimeout(() => {
                     if (timer.seconds == 59) {
                         timer.minutes++;
@@ -235,20 +248,76 @@ const timer = {
         advance();
     },
     pause: () => {
-        timer.isOn = false;
+        timer.isRunning = false;
     },
     reset: () => {
-        timer.isOn = false;
+        timer.isRunning = false;
         timer.seconds = 0;
         timer.minutes = 0;
     },
     seconds: 0,
     minutes: 0,
-    isOn: false,
+    isRunning: false,
     getTime: () => {
         return `${timer.minutes}:${timer.seconds < 10 ? 0 : ""}${timer.seconds}`;
     },
+}; */
+
+// Timer object
+function Timer() {
+    this.startTime = null;
+    this.elapsedTime = 0;
+    this.timerInterval = null;
+    this.seconds = 0;
+    this.isRunning = false;
+    this.minutes = 0;
+}
+
+// Start the timer
+Timer.prototype.start = function () {
+    if (!this.isRunning) {
+        this.startTime = new Date() - this.elapsedTime;
+        this.isRunning = true;
+        this.timerInterval = setInterval(() => {
+            const currentTime = new Date();
+            this.elapsedTime = currentTime - this.startTime;
+            this.seconds = Math.floor(this.elapsedTime / 1000);
+            this.minutes = Math.floor(this.seconds / 60);
+            document.querySelector(
+                ".statTag.time > span"
+            ).textContent = `${timer.getTime()}`;
+        }, 10); // Update elapsed time every 10 milliseconds
+    }
 };
+
+Timer.prototype.reset = function () {
+    clearInterval(this.timerInterval);
+    this.startTime = null;
+    this.stopTime = null;
+    this.elapsedTime = 0;
+    this.isRunning = false;
+    this.seconds = 0;
+    this.minutes = 0;
+};
+
+// Pause the timer
+Timer.prototype.pause = function () {
+    if (this.isRunning) {
+        clearInterval(this.timerInterval);
+        this.isRunning = false;
+    }
+};
+
+// Get the elapsed time as a formatted string (e.g., "1:12")
+Timer.prototype.getTime = function () {
+    let minutesString = String(this.minutes);
+    let secondsString = String(this.seconds % 60).padStart(2, "0");
+    return minutesString + ":" + secondsString;
+};
+
+// Usage
+const timer = new Timer();
+
 // Variables
 let backspaceAllowed = true;
 let incorrectChars = 0;
@@ -272,6 +341,9 @@ function startTyping(ct, array) {
     document.title = `${reference} | BiblePuzzle`;
     document.querySelector("footer #footerVerseRef").textContent = reference;
     ct.children[activeCharNum].classList.add("active");
+    if (currentCt == verseContainer) {
+        ttsSpeak(`Start typing by typing the "${keyToTextType(array[activeCharNum])}" key`);
+    }
 
     window.onkeydown = (e) => {
         type(e);
@@ -283,7 +355,7 @@ function startTyping(ct, array) {
         charactersTyped++;
         if (!keyboardLock) {
             if (activeCharNum == 0) {
-                if (!timer.isOn) {
+                if (!timer.isRunning) {
                     if (!e.ctrlKey && !e.altKey && !e.metaKey) {
                         timer.start();
                         startTime = new Date().getTime();
@@ -309,6 +381,9 @@ function startTyping(ct, array) {
                         stats.totalCharactersTyped++;
                         updateStats();
                         activeCharNum++;
+
+                        ttsSpeak(`Type the "${keyToTextType(array[activeCharNum])}" key`, true);
+
                         currentChar = activeCharNum;
                         if (activeCharNum !== array.length) {
                             ct.children[activeCharNum].classList.add("active");
@@ -325,6 +400,9 @@ function startTyping(ct, array) {
                         activeCharNum++;
                         incorrectChars++;
                         currentChar = activeCharNum;
+
+                        ttsSpeak(`Oops, you typed the "${keyToTextType(e.key)}" key. Now type the "${keyToTextType(array[activeCharNum])}" key`, true);
+
                         document.querySelectorAll(".incorrect span")[0].textContent =
                             incorrectChars;
                         if (incorrectChars == 1) {
@@ -474,6 +552,18 @@ function completeTest() {
     const panelView = getPanelView("completion");
     panelView.style.display = "flex";
 
+    let words;
+
+    if (Math.round(percent) >= 75) {
+        words = `Well done`;
+    } else if (Math.round(percent) < 75 && Math.round(percent) >= 50) {
+        words = `Good job`;
+    } else {
+        words = `Nice try`;
+    }
+
+    ttsSpeak(`${words}, you typed ${charactersTyped} keys and scored ${Math.round(percent)}%!`, true)
+
     const total = charactersTyped;
     percent = ((total - incorrectChars) / total) * 100;
 
@@ -491,6 +581,7 @@ function completeTest() {
         }" style="font-weight: 600">${charactersTyped - incorrectChars
         }</span>/${charactersTyped}`;
     scoreText.textContent = `${Math.round(percent)}%`;
+
 
     stats.gradebook.unshift({
         date: new Date(),
@@ -805,12 +896,13 @@ function showPanel(showPanel, viewId, lightDismiss) {
 
         checkIfOpen();
 
-        panel.addEventListener("click", (e) => {
+        window.addEventListener("click", (e) => {
             if (lightDismiss) {
                 if (
-                    !document
+                    e.target === panel
+                    /* !document
                         .elementsFromPoint(e.x, e.y)
-                        .includes(panel.querySelector(".panel"))
+                        .includes(panel.querySelector(".panel")) */
                 ) {
                     panel.style.display = "none";
                     panelVisible = false;
@@ -877,6 +969,20 @@ document.querySelector(".toolbar .statsBtn").addEventListener("click", () => {
         showStats();
     }
 });
+
+function ttsSpeak(txt, cancel) {
+    if (getSettings().narrator) {
+        let voices = speechSynthesis.getVoices()
+        if (cancel) {
+            speechSynthesis.cancel();
+        }
+        const utterance = new SpeechSynthesisUtterance(txt);
+        utterance.voice = voices[getSettings().narratorOptions.voice];
+        utterance.rate = +getSettings().narratorOptions.speed;
+        speechSynthesis.speak(utterance);
+    }
+}
+
 document
     .querySelector(".toolbar .settingsBtn")
     .addEventListener("click", () => {
@@ -1012,6 +1118,13 @@ const settingsModel = [
 
                 description: "Enable warnings when caps lock is on.",
             },
+            {
+                type: "toggle",
+                title: "Timed mode",
+                value: "timed",
+
+                description: "Challenge yourself by typing within a time limit.",
+            },
         ],
     },
     {
@@ -1026,7 +1139,6 @@ const settingsModel = [
 
                 description: "Give spoken feedback while typing.",
                 optionsButton: () => showNarratorOptions(),
-                hidden: true,
             },
             {
                 type: "toggle",
@@ -1278,6 +1390,10 @@ function checkSettings() {
     }
 
     document.querySelector("#DisplaynameInput").value = getSettings().displayName;
+
+    if (getSettings().narrator == true) {
+        ttsSpeak("Narrator is on.");
+    }
 }
 
 checkSettings();
@@ -1327,8 +1443,7 @@ function updateSliders() {
     document.querySelectorAll('input[type="range"]').forEach((slider) => {
         function updateSlider() {
             const valPercent =
-                (slider.value / (slider.max - slider.min)) * 100 -
-                (slider.min == 10 ? 50 : 0);
+                ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
             slider.style.setProperty(
                 "background",
                 `linear-gradient(to right, var(--accent) ${valPercent}%, var(--slider-bg) ${valPercent}%)`,
@@ -1343,8 +1458,117 @@ function updateSliders() {
 }
 
 function showNarratorOptions() {
-    console.log("test");
+    const modal = createModal({
+        removeOnClose: true,
+        title: "Narrator settings",
+        id: "narratorSettings",
+        content: `
+            <div class="formGroup">
+    <label>Voice</label>
+    <select class="narrVoiceOptions" class="dropdownList" style='width:100%'></select>
+</div>
+<div class="formGroup">
+    <label>Speed</label>
+    <div class="sliderCt">
+    <input type="range" name="speed" class="narrVoiceSpeed" min="0.25" max="2" step="0.05" list="stepList" value="1">
+    <input type="number" class="sliderValueSimInp">
+    </div>
+</div>
+<datalist id="steplist">
+    <option>1</option>
+</datalist>
+<div class="formGroup">
+    <button class="btn-primary narrTestVoiceBtn">${systemIcons.play}Test</button>
+</div>`,
+        linkButtonText: "Reset to defaults",
+        linkButtonAction: () => {
+            settingsValues.narratorOptions.voice = 0
+            settingsValues.narratorOptions.speed = 1;
+            updateSettings();
+            modal.remove()
+            showNarratorOptions()
+        },
+    });
+
+    const selectEl = modal.querySelector(".narrVoiceOptions");
+
+    function populateVoices() {
+        selectEl.innerHTML = "";
+        let voices = speechSynthesis.getVoices();
+        let sortedVoices = voices.slice().sort((a, b) => {
+            if (a.lang === navigator.language) {
+                return -1;
+            } else if (b.lang === navigator.language) {
+                return 1;
+            } else {
+                return a.lang.localeCompare(b.lang);
+            }
+        });
+        for (const v of sortedVoices) {
+            let voiceIndex = speechSynthesis.getVoices().slice().indexOf(v);
+            const opt = document.createElement("option");
+            opt.textContent = `${v.name}${v.default ? ` (Default)` : ""}`;
+            opt.setAttribute("voiceId", v.voiceURI);
+            opt.value = v.voiceURI;
+            opt.selected = getSettings().narratorOptions.voice == voiceIndex;
+            selectEl.append(opt);
+        }
+    }
+    if (speechSynthesis.onvoiceschanged !== undefined)
+        speechSynthesis.onvoiceschanged = populateVoices;
+    populateVoices();
+    modal.querySelector(".narrVoiceSpeed").value =
+        getSettings().narratorOptions.speed;
+
+    let speedSlider = modal.querySelector(".narrVoiceSpeed"),
+        lb = modal.querySelector(".sliderValueSimInp");
+
+    speedSlider.addEventListener("input", upd);
+    function upd() {
+        speedSlider.title = speedSlider.value;
+        lb.value = speedSlider.value;
+        updateSliders();
+    }
+    lb.min = speedSlider.min;
+    lb.max = speedSlider.max;
+    lb.addEventListener("change", () => {
+        speedSlider.value = lb.value;
+        updateSliders();
+        upd();
+    });
+    lb.value = speedSlider.value;
+
+    function setNarrOptions() {
+        let voices = speechSynthesis.getVoices();
+        settingsValues.narratorOptions.voice = voices
+            .slice()
+            .findIndex((v) => v.voiceURI == selectEl.selectedOptions[0].value);
+        settingsValues.narratorOptions.speed =
+            +modal.querySelector(".narrVoiceSpeed").value;
+        updateSettings();
+    }
+
+    modal
+        .querySelector(".popupSubmitBtn")
+        .addEventListener("click", setNarrOptions);
+
+    modal.querySelector(".narrTestVoiceBtn").addEventListener("click", () => {
+        speechSynthesis.cancel();
+        let voices = speechSynthesis.getVoices();
+        const utterance = new SpeechSynthesisUtterance(
+            "This is a test of the Narrator feature in BiblePuzzle. You have chosen how you want the narrator voice to be read aloud to you."
+        );
+        utterance.voice = voices
+            .slice()
+            .find((v) => v.voiceURI == selectEl.selectedOptions[0].value);
+        utterance.rate = +modal.querySelector(".narrVoiceSpeed").value;
+        speechSynthesis.speak(utterance);
+    });
+    updateSliders();
+
+    showPopup(true, ".narratorSettings");
 }
+
 function updateStats() {
     localStorage.setItem("userStats", JSON.stringify(stats));
     loadStats();
@@ -2069,14 +2293,15 @@ function loadJournal() {
             journalFrame.append(itemEl);
             switch (item.type) {
                 case "verse":
+                    let vobj = getVerseFromReference(item.verse);
                     const noteFrame = itemEl.querySelector(".journalItemNoteInp");
 
                     frame.innerHTML = `
                     <div class="journalVerseImgCt">
-                        <img src="${item.verse.imageURL}" alt="${item.verse.ref}">
+                        <img src="${vobj.imageURL}" alt="${vobj.ref}">
                     </div>
-                    <div class="journalVerseRef">${item.verse.ref}</div>
-                        <div class="journalVerse">${item.verse.verse}</div>
+                    <div class="journalVerseRef">${vobj.ref}</div>
+                        <div class="journalVerse">${vobj.verse}</div>
                     `;
                     itemEl.addEventListener("click", (e) => {
                         if (
@@ -2216,9 +2441,10 @@ function loadJournal() {
              */
             function copyVerse(tx) {
                 try {
+                    let vobj = getVerseFromReference(tx.verse);
                     navigator.clipboard.writeText(
                         tx.type == "verse"
-                            ? `"${tx.verse.verse.replaceAll('"', "'")}" - ${tx.verse.ref
+                            ? `"${vobj.verse.replaceAll('"', "'")}" - ${vobj.ref
                             } \nfrom BiblePuzzle (${bpurl})`
                             : tx.text
                     );
@@ -2431,7 +2657,7 @@ function addItemToJournal(item) {
             journal.items.push(item);
 
             if (item.type == "verse") {
-                showToast(`Added ${item.verse.ref} to journal`, [
+                showToast(`Added ${getVerseFromReference(item.verse).ref} to journal`, [
                     {
                         text: "View",
                         click: () => {
@@ -2534,7 +2760,7 @@ function searchJournal(term) {
 function addVerseToJournal(verseObj) {
     addItemToJournal({
         type: "verse",
-        verse: verseObj,
+        verse: verseObj.ref,
         dateCreated: new Date(),
     });
 }
@@ -2561,18 +2787,20 @@ function camelCase(str) {
 }
 function deleteJournal() {
     confirmModal(
-        `Delete ${journal.items.length} item${journal.items.length !== 1 ? 's' : ''} from journal`,
-        `Are you sure you want to permanently delete ${journal.items.length} item${journal.items.length !== 1 ? 's' : ''} from your journal? This can't be undone.`,
+        `Delete ${journal.items.length} item${journal.items.length !== 1 ? "s" : ""
+        } from journal`,
+        `Are you sure you want to permanently delete ${journal.items.length} item${journal.items.length !== 1 ? "s" : ""
+        } from your journal? This can't be undone.`,
         "Delete",
         "deleteJournal",
         true,
         ["submit", ["btn-dangerous"]]
     ).then((c) => {
         if (c) {
-            localStorage.removeItem('userJournal')
-            showPanel(false)
-            journal = ''
-            loadJournal()
+            localStorage.removeItem("userJournal");
+            showPanel(false);
+            journal = "";
+            loadJournal();
         }
     });
 }
@@ -2607,23 +2835,23 @@ function importExportJournal(action, format) {
             id: "journalUploadPopup",
         });
 
-        const inp = px.querySelector('.journalUpload')
-        px.querySelector('.popupSubmitBtn').disabled = true
+        const inp = px.querySelector(".journalUpload");
+        px.querySelector(".popupSubmitBtn").disabled = true;
 
         inp.onchange = () => {
-            const f = inp.files[0]
+            const f = inp.files[0];
             if (f) {
-                px.querySelector('.filePreviewZone').style.display = 'flex'
-                px.querySelector('.filePreviewZone .file').textContent = f.name
+                px.querySelector(".filePreviewZone").style.display = "flex";
+                px.querySelector(".filePreviewZone .file").textContent = f.name;
             } else {
-                px.querySelector('.filePreviewZone').style.display = 'none'
+                px.querySelector(".filePreviewZone").style.display = "none";
             }
-            px.querySelector('.popupSubmitBtn').disabled = f ? false : true
-        }
-        px.querySelector('.popupSubmitBtn').addEventListener('click', () => {
-            let file = inp.files[0]
-            importJournalFile(file)
-        })
+            px.querySelector(".popupSubmitBtn").disabled = f ? false : true;
+        };
+        px.querySelector(".popupSubmitBtn").addEventListener("click", () => {
+            let file = inp.files[0];
+            importJournalFile(file);
+        });
 
         showPopup(true, ".journalUploadPopup");
     } else {
@@ -2632,46 +2860,52 @@ function importExportJournal(action, format) {
     }
 
     /**
-     * 
+     *
      * @param {File} file File to import
      */
     function importJournalFile(file) {
         try {
-            const fr = new FileReader()
+            const fr = new FileReader();
 
             fr.onload = function (e) {
                 const txt = e.target.result;
-                let parsed = JSON.parse(txt)
+                let parsed = JSON.parse(txt);
                 if (e.target.result) {
                     if (!journal) {
                         journal = {
-                            name: parsed.name || 'My journal',
+                            name: parsed.name || "My journal",
                             created: new Date(parsed.created) || new Date(),
                             items: [],
                         };
                     }
-                    journal.items = journal.items.concat(parsed.items)
-                    showToast(`Added ${parsed.items.length} item${parsed.items.length !== 1 ? 's' : ''} to journal`, [
-                        {
-                            text: "View",
-                            click: () => {
-                                showJournalPanel();
-                                document.querySelector(".journalMainCt").scrollTo({
-                                    top: document.querySelector(".journalMainCt").scrollHeight,
-                                    left: 0,
-                                    behavior: "smooth",
-                                });
+                    journal.items = journal.items.concat(parsed.items);
+                    showToast(
+                        `Added ${parsed.items.length} item${parsed.items.length !== 1 ? "s" : ""
+                        } to journal`,
+                        [
+                            {
+                                text: "View",
+                                click: () => {
+                                    showJournalPanel();
+                                    document.querySelector(".journalMainCt").scrollTo({
+                                        top: document.querySelector(".journalMainCt").scrollHeight,
+                                        left: 0,
+                                        behavior: "smooth",
+                                    });
+                                },
+                                cls: "showJounalToastBtn",
                             },
-                            cls: "showJounalToastBtn",
-                        },
-                    ]);
-                    updateJournal()
+                        ]
+                    );
+                    updateJournal();
                 }
             };
 
-            fr.readAsText(file)
+            fr.readAsText(file);
         } catch (error) {
-            showToast('Unable to import items to journal. This may be caused by an invalid JSON file.')
+            showToast(
+                "Unable to import items to journal. This may be caused by an invalid JSON file."
+            );
         }
     }
 
@@ -2732,11 +2966,13 @@ function importExportJournal(action, format) {
             newItem.innerHTML = `
             <input type="checkbox" checked class="cbox exportItemCbox">
             ${item.type == "verse"
-                    ? `<div class="exportItemVerseRef">${item.verse.ref}</div>`
+                    ? `<div class="exportItemVerseRef">${getVerseFromReference(item.verse).ref
+                    }</div>`
                     : ""
                 }
             <div class="exportItemContent">${item.type == "verse"
-                    ? `<div class="chip">${systemIcons.note}<span>${item.verse.verse}</span></div>`
+                    ? `<div class="chip">${systemIcons.note}<span>${getVerseFromReference(item.verse).verse
+                    }</span></div>`
                     : `${item.text.substring(0, 120)}${item.text.length > 120 ? "\u2026" : ""
                     }`
                 }</div>
@@ -2884,15 +3120,18 @@ function importExportJournal(action, format) {
                     created: journal.created,
                     items: journalExportedItems,
                 };
-            } else if (format == 'text') {
-                outline = `${journal.name} - Exported from BiblePuzzle (https://procode-software.github.io/BiblePuzzle)`
-                journalExportedItems.forEach(sb => {
-                    if (sb.type == 'verse') {
-                        outline += '\n\n' + `"${sb.verse.verse}" - ${sb.verse.ref}${sb.note ? '\n\t' + `${sb.note}` : ''}`
-                    } else if (sb.type == 'note') {
-                        outline += '\n\n' + `Note: ${sb.text}`
+            } else if (format == "text") {
+                outline = `${journal.name} - Exported from BiblePuzzle (https://procode-software.github.io/BiblePuzzle)`;
+                journalExportedItems.forEach((sb) => {
+                    if (sb.type == "verse") {
+                        outline +=
+                            "\n\n" +
+                            `"${getVerseFromReference(sb.verse).verse}" - ${getVerseFromReference(sb.verse).ref
+                            }${sb.note ? "\n\t" + `${sb.note}` : ""}`;
+                    } else if (sb.type == "note") {
+                        outline += "\n\n" + `Note: ${sb.text}`;
                     }
-                })
+                });
             }
 
             const date = new Date();
@@ -2972,4 +3211,121 @@ function createFile(extension, content, fileName, download) {
     }
 
     return url;
+}
+/**
+ * Returns the file extension of the given file name
+ * @param {string} fileName
+ */
+function getFileExtension(fileName) {
+    const split = fileName.split(".");
+    return split[split.length - 1];
+}
+window.addEventListener("beforeunload", (e) => {
+    speechSynthesis.cancel();
+});
+function keyToTextType(key) {
+    let remap;
+    switch (key) {
+        case " ":
+            remap = "Space";
+            break;
+        case `"`:
+            remap = "Double quote";
+            break;
+        case `'`:
+            remap = "Apostrophe";
+            break;
+        case `/`:
+            remap = "Slash";
+            break;
+        case `.`:
+            remap = "Period";
+            break;
+        case `&`:
+            remap = "Ampersand";
+            break;
+        case `{`:
+            remap = "Left brace";
+            break;
+        case `}`:
+            remap = "Right brace";
+            break;
+        case `[`:
+            remap = "Left bracket";
+            break;
+        case `]`:
+            remap = "Right bracket";
+            break;
+        case `(`:
+            remap = "Left parenthesis";
+            break;
+        case `)`:
+            remap = "Right parenthesis";
+            break;
+        case `<`:
+            remap = "Less than";
+            break;
+        case `>`:
+            remap = "Greater than";
+            break;
+        case `?`:
+            remap = "Question mark";
+            break;
+        case `!`:
+            remap = "Exclamation mark";
+            break;
+        case `,`:
+            remap = "Comma";
+            break;
+        case `\\`:
+            remap = "Backslash";
+            break;
+        case `+`:
+            remap = "Plus";
+            break;
+        case `-`:
+            remap = "Hyphen";
+            break;
+        case `_`:
+            remap = "Underscore";
+            break;
+        case `^`:
+            remap = "Caret";
+            break;
+        case `\``:
+            remap = "Backtick";
+            break;
+        case `~`:
+            remap = "Tilde";
+            break;
+        case `:`:
+            remap = "Colon";
+            break;
+        case `;`:
+            remap = "Semicolon";
+            break;
+        default:
+            remap = `${isCapital(key) ? 'Capital ' : ''}${key}`;
+            break;
+    }
+    return remap;
+}
+/**
+ * 
+ * @param {string} key 
+ * @returns {boolean}
+ */
+function isCapital(key) {
+    if (key.toUpperCase() == key && isLetter(key)) {
+        return true
+    } else {
+        return false
+    }
+}
+function isLetter(key) {
+    if (key.toUpperCase() == key && key.toLowerCase() == key) {
+        return false
+    } else {
+        return true
+    }
 }

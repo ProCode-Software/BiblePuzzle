@@ -2,9 +2,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: "Inter var", "Inter", "Inter V", -apple-system,
-        BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-        "Open Sans", "Helvetica Neue", system-ui, sans-serif;
+    font-family: var(--body-font);
 }
 
 body {
@@ -46,6 +44,11 @@ body {
     --note-yellow: #fffae2;
     --note-green: #f4fff2;
     --note-blue: #f2fbff;
+
+    --title-font: inherit;
+    --body-font: "Inter var", "Inter", "Inter V", -apple-system,
+        BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+        "Open Sans", "Helvetica Neue", system-ui, sans-serif;
 }
 
 body.dark {
@@ -90,6 +93,8 @@ body.dark .panel {
 
 body.dark input:focus,
 body.dark input:hover,
+body.dark select:focus,
+body.dark select:hover,
 body.dark .btn {
     background: #384657;
     border-color: #384657;
@@ -99,7 +104,7 @@ body.dark .btn:hover {
     background: #2e3947;
 }
 
-body.dark input:focus {
+body.dark input:focus, body.dark select:focus {
     border-bottom-color: var(--accent);
 }
 
@@ -215,7 +220,8 @@ input {
 
 input[type="text"],
 input[type="number"],
-input[type="password"] {
+input[type="password"],
+select {
     border-radius: 10px;
     border: 2px solid rgba(var(--border-color), 0.6);
     padding: 10px;
@@ -235,7 +241,8 @@ input[type="number"]:focus,
 input[type="password"]:hover,
 input[type="password"]:focus,
 input[type="search"]:hover,
-input[type="search"]:focus {
+input[type="search"]:focus,
+select:hover, select:focus {
     background: #f9faff;
     border-color: #f9faff;
     transition: 0.15s;
@@ -245,7 +252,8 @@ input[type="search"]:focus {
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="search"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+select:focus {
     border-radius: 10px 10px 4px 4px;
     border-bottom: 3.5px solid var(--accent);
     transition: 0.15s;
@@ -1674,6 +1682,7 @@ input[type="range"] {
 
 ::-webkit-slider-runnable-track {
     -webkit-appearance: none;
+    appearance: none;
     height: 5px;
 }
 
@@ -2829,27 +2838,93 @@ strong {
     cursor: not-allowed;
     opacity: .5;
 }
+
 .journalImportSection {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 10px;
 }
+
 .ijupZone {
     display: flex;
     align-items: center;
     gap: 12px;
     width: 100%;
 }
+
 .filePreviewZone {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 1.05em;
 }
+
 .filePreviewZone img {
     width: 28px;
 }
+
 .journalNameInp[disabled] {
     opacity: 1 !important;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    padding-left: 12px;
+    color: inherit;
+}
+select, select:hover, select:focus {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.75 9.25L12 16.5L19.25 9.25' stroke='black' stroke-width='1.75' stroke-linecap='square' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+}
+body.dark select, body.dark select:hover, body.dark select:focus {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.75 9.25L12 16.5L19.25 9.25' stroke='white' stroke-width='1.75' stroke-linecap='square' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+}
+option {
+    background: rgb(var(--bg-color), 1);
+}
+option:hover {
+    background: var(--accent);
+}
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.popup.narratorSettings .formGroup:last-child {
+    flex-direction: row;
+}
+.narrVoiceSpeed {
+    position: relative;
+}
+.narrVoiceSpeed::before {
+    position: absolute;
+    left: 42.857142857142854%;
+    width: 1px;
+    content: '';
+    height: 16px;
+    z-index: -1;
+    background: rgba(var(--border-color), 1);
+}
+.linkButton {
+    color: var(--accent-text);
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-decoration: none;
+    transition: .15s;
+}
+.linkButton, .linkButton:visited, .linkButton:hover, .linkButton:active {
+    color: var(--accent-text);
+}
+.linkButton:hover {
+    background: rgba(var(--border-color), 0.2);
 }
