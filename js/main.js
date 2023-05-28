@@ -324,7 +324,6 @@ let incorrectChars = 0;
 let charactersTyped = 0;
 let keyboardLock = true;
 let currentCt;
-let currentChar = 0;
 let incorrectKeysList = {};
 let startTime;
 let warnWhenClose = true;
@@ -341,9 +340,7 @@ function startTyping(ct, array) {
     document.title = `${reference} | BiblePuzzle`;
     document.querySelector("footer #footerVerseRef").textContent = reference;
     ct.children[activeCharNum].classList.add("active");
-    if (currentCt == verseContainer) {
-        ttsSpeak(`Start typing by typing the "${keyToTextType(array[activeCharNum])}" key`);
-    }
+    ttsSpeak(`${array == verseSplit ? 'Start' : 'Continue'} typing by typing the "${keyToTextType(array[activeCharNum])}" key`);
 
     window.onkeydown = (e) => {
         type(e);
@@ -382,9 +379,11 @@ function startTyping(ct, array) {
                         updateStats();
                         activeCharNum++;
 
-                        ttsSpeak(`Type the "${keyToTextType(array[activeCharNum])}" key`, true);
+                        if (activeCharNum < array.length) {
+                            ttsSpeak(`Type the "${keyToTextType(array[activeCharNum])}" key`, true);
+                        }
 
-                        currentChar = activeCharNum;
+
                         if (activeCharNum !== array.length) {
                             ct.children[activeCharNum].classList.add("active");
                         }
@@ -399,9 +398,10 @@ function startTyping(ct, array) {
                         }
                         activeCharNum++;
                         incorrectChars++;
-                        currentChar = activeCharNum;
 
-                        ttsSpeak(`Oops, you typed the "${keyToTextType(e.key)}" key. Now type the "${keyToTextType(array[activeCharNum])}" key`, true);
+                        console.log(e.key, array[activeCharNum]);
+
+                        ttsSpeak(`Oops, you typed the "${keyToTextType(e.key)}" key.${activeCharNum < array.length ? ` Now type the "${keyToTextType(array[activeCharNum])}" key` : ``}`, true);
 
                         document.querySelectorAll(".incorrect span")[0].textContent =
                             incorrectChars;
@@ -554,6 +554,14 @@ function completeTest() {
 
     let words;
 
+
+    const total = charactersTyped;
+    percent = ((total - incorrectChars) / total) * 100;
+
+    const time = timer.getTime();
+    const avgCPS = Math.round(calculateCPS() * 10) / 10;
+
+
     if (Math.round(percent) >= 75) {
         words = `Well done`;
     } else if (Math.round(percent) < 75 && Math.round(percent) >= 50) {
@@ -563,12 +571,6 @@ function completeTest() {
     }
 
     ttsSpeak(`${words}, you typed ${charactersTyped} keys and scored ${Math.round(percent)}%!`, true)
-
-    const total = charactersTyped;
-    percent = ((total - incorrectChars) / total) * 100;
-
-    const time = timer.getTime();
-    const avgCPS = Math.round(calculateCPS() * 10) / 10;
 
     const scoreText = panelView.querySelector(".graph-content .score");
     const subscoreText = panelView.querySelector(".graph-content .subscore");
@@ -1365,15 +1367,6 @@ function checkSettings() {
         tkBtn.addEventListener("click", () => {
             tkInp.focus();
         });
-
-        tkInp.addEventListener("input", () => {
-            try {
-                currentCt.children[currentChar - 5].scrollIntoView({
-                    inline: "start",
-                    behavior: "smooth",
-                });
-            } catch (e) { }
-        });
     } else {
         tkBtn.style.display = "none";
     }
@@ -1456,6 +1449,7 @@ function updateSliders() {
         updateSlider();
     });
 }
+
 
 function showNarratorOptions() {
     const modal = createModal({
